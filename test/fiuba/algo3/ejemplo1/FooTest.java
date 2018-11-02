@@ -17,7 +17,7 @@ public class FooTest {
 	public void test01(){
         Foo foo = new Foo();
         String result = foo.doBar();
-        Assert.assertEquals("Bari", result);
+        Assert.assertEquals("Bar", result);
 	}
 
 
