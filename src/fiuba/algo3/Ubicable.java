@@ -1,4 +1,4 @@
 package fiuba.algo3;
 
-public class Tablero {
+public class Ubicable {
 }
