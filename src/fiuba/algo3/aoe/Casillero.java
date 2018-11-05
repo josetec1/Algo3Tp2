@@ -1,4 +1,4 @@
-package fiuba.algo3;
+package fiuba.algo3.aoe;
 
 public class Casillero {
 

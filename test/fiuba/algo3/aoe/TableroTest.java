@@ -1,9 +1,7 @@
-package fiuba.algo3;
+package fiuba.algo3.aoe;
 
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -56,15 +54,41 @@ public class TableroTest {
 
         Assert.assertThat( tablero.puedoColocar(unaPosicion,tamanioObjeto), is( false ) );
     }
+
+    @Test
+    public void test04PuedoColocarDebeDarFalseSiElCasilleroNoPerteneceAlTablero() {
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        Coordenada unaPosicion = new Coordenada(4,3);
+        Coordenada otraPosicion = new Coordenada(3,4);
+
+        Assert.assertThat( tablero.puedoColocar(unaPosicion,tamanioObjeto), is( false ) );
+        Assert.assertThat( tablero.puedoColocar(otraPosicion,tamanioObjeto), is( false ) );
+
+    }
+
+    @Test
+    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior() {
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        Ubicable unElemento = new UbicableFicticio();
+        Coordenada unaPosicion = new Coordenada(1,2);
+        Dimension tamanioObjeto = new Dimension(1,1);
+        tablero.agregar(unElemento,unaPosicion,tamanioObjeto);
+        tablero.retirar(unaPosicion,tamanioObjeto);
+
+
+        Assert.assertThat( tablero.puedoColocar(unaPosicion,tamanioObjeto), is( true ) );
+    }
+
+
 /*
-    @Test
-    public void test04PuedoColocarDebeDarFalseSiElCasilleroNoPerteneceAlTablero() {Assert.assertThat( true, is( false ) );}
-
-    @Test
-    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior() {Assert.assertThat( true, is( false ) );}
-
-
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test
@@ -110,6 +134,9 @@ public class TableroTest {
         Assert.assertThat( true, is( false ) );
     }
 
+    public void test10QuitarDebeLanzarExcepcionSiElCasilleroEstaFueraDelTablero(){
+        Assert.assertThat( true, is( false ) );
+    }
 */
 }
 

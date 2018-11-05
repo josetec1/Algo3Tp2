@@ -1,4 +1,4 @@
-package fiuba.algo3;
+package fiuba.algo3.aoe;
 
 import java.util.HashMap;
 
@@ -66,5 +66,8 @@ private Casillero getCasillero (Coordenada unaPosicion) {
     }
 
 
+    public Ubicable retirar(Coordenada unaPosicion, Dimension tamanioObjeto) {
 
+        return this.getCasillero(unaPosicion).quitar();
+    }
 }

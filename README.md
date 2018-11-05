@@ -1,6 +1,11 @@
 # Algo3Tp2
 Trabajo Practico Numero 2 Algoritmos 3
 
+## Pokemon
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2bc54b6684cc40eb8248b9dbba11d462)](https://app.codacy.com/app/josetec1/Pokemon?utm_source=github.com&utm_medium=referral&utm_content=josetec1/Algo3Tp2&utm_campaign=Badge_Grade_Dashboard)
+[![Build Status](https://travis-ci.org/josetec1/Algo3Tp2.svg?branch=master)](https://travis-ci.org/josetec1/Algo3Tp2) [![codecov](https://codecov.io/gh/josetec1/Algo3Tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/josetec1/Algo3Tp2)
+
 # Definición de pruebas
 Nombrar correctamente los archivos de pruebas
 Al momento de definir un nuevo archivo que contendrá pruebas, ya sean unitarias o de integración, el patrón del nuevo archivo deberá ser *Test.java; además de ubicarse en <directorio del proyecto>/test/. A modo de ejemplo: <mi proyecto>/test/<paquete>/MiNuevoArchivoTest.java.

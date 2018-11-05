@@ -1,6 +1,4 @@
-package fiuba.algo3;
-
-import fiuba.algo3.Ubicable;
+package fiuba.algo3.aoe;
 
 public class UbicableFicticio implements Ubicable {
 }
