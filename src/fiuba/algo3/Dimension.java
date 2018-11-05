@@ -1,6 +1,4 @@
-package fiuba.algo3.Tablero;
-
-import fiuba.algo3.Tablero.Coordenada;
+package fiuba.algo3;
 
 public class Dimension extends Coordenada {
 

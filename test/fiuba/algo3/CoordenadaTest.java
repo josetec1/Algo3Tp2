@@ -1,4 +1,4 @@
-package fiuba.algo3.Tablero;
+package fiuba.algo3;
 
 
 import org.junit.Assert;
@@ -16,4 +16,6 @@ public class CoordenadaTest {
         Assert.assertEquals(unaCoordenada.getY(),4);
 
     }
+
+
 }

@@ -1,4 +1,4 @@
 package fiuba.algo3;
 
-public class Ubicable {
+public interface Ubicable {
 }
