@@ -1,15 +1,16 @@
 # Algo3Tp2
-Trabajo Practico Numero 2 - Algoritmos 3 - Grupo XX
+Trabajo Practico Numero 2 - Algoritmos 3 - Grupo XXI
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2bc54b6684cc40eb8248b9dbba11d462)](https://app.codacy.com/app/josetec1/Algo3Tp2?utm_source=github.com&utm_medium=referral&utm_content=josetec1/Algo3Tp2&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/josetec1/Algo3Tp2.svg?branch=master)](https://travis-ci.org/josetec1/Algo3Tp2) [![codecov](https://codecov.io/gh/josetec1/Algo3Tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/josetec1/Algo3Tp2)
 
 # Integrantes:
-1) Nombre padron
-1) Nombre padron
-1) Nombre padron
-1) Rodriguez José 89786
+1) Gonzalez Mauricio 100948  
+2) Jarmolinski Arian 94727
+3) Rodriguez José  89786
+4) Sartori Agustin 100541
+
 
 # Definición de pruebas
 Nombrar correctamente los archivos de pruebas
