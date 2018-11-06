@@ -1,8 +1,9 @@
 package fiuba.algo3.aoe;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.ExpectedException;
 import static org.hamcrest.CoreMatchers.is;
 
 public class TableroTest {
@@ -88,7 +89,6 @@ public class TableroTest {
     }
 
 
-/*
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test
@@ -101,7 +101,7 @@ public class TableroTest {
         Ubicable unObjeto = new UbicableFicticio();
         Tablero tablero = new Tablero( tamanioTablero);
 
-        //thrown.expect(FueraDeTableroException.class);
+        thrown.expect(FueraDeTableroException.class);
         tablero.agregar(unObjeto,posicionFueraDeTablero, tamanioObjeto);
 
         }
@@ -112,32 +112,74 @@ public class TableroTest {
         Dimension tamanioTablero= new Dimension(3,3);
         Dimension tamanioObjeto = new Dimension(1,1);
 
-        Coordenada posicionFueraDeTablero = new Coordenada(3,4);
+        Coordenada unaPosicion = new Coordenada(3,3);
         Ubicable unObjeto = new UbicableFicticio();
         Tablero tablero = new Tablero( tamanioTablero);
 
-        //thrown.expect(FueraDeTableroException.class);
-        tablero.agregar(unObjeto,posicionFueraDeTablero, tamanioObjeto);
+        tablero.agregar(unObjeto,unaPosicion, tamanioObjeto); //agrego primera vez
 
+        thrown.expect(CasilleroOcupadoException.class);
+        tablero.agregar(unObjeto,unaPosicion, tamanioObjeto);
     }
 
 
 
     @Test
-    public void test08QuitarDevuelveElElementoAgregadoPreviamente() {
-            Assert.assertThat(true, is(false));
+    public void test08RetirarDevuelveElElementoAgregadoPreviamente() {
 
-        }
+        Dimension tamanioTablero= new Dimension(3,3);
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        Coordenada unaPosicion = new Coordenada(3,3);
+        Ubicable unObjeto = new UbicableFicticio();
+        Ubicable otroObjeto = new UbicableFicticio();
+        Ubicable objetoRecuperado;
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        tablero.agregar(unObjeto,unaPosicion, tamanioObjeto);
+        objetoRecuperado = tablero.retirar(unaPosicion,tamanioObjeto);
+
+        Assert.assertSame(unObjeto, objetoRecuperado  );
+        Assert.assertNotSame(otroObjeto, objetoRecuperado );
+
+    }
 
     @Test
-    public void test09QuitarDebeLanzarExcepcionSiElCasilleroEstaVacio(){
-        Assert.assertThat( true, is( false ) );
+    public void test09RetirarDebeLanzarExcepcionSiElCasilleroEstaVacio(){
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        Coordenada unaPosicion = new Coordenada(3,3);
+
+        Tablero tablero = new Tablero( tamanioTablero);
+
+
+
+        thrown.expect(CasilleroVacioException.class);
+        tablero.retirar(unaPosicion,tamanioObjeto);
+    }
+    @Test
+    public void test10RetirarDebeLanzarExcepcionSiElCasilleroEstaFueraDelTablero(){
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        Coordenada posicionFueraDeTablero = new Coordenada(3,4);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        thrown.expect(FueraDeTableroException.class);
+        tablero.retirar(posicionFueraDeTablero,tamanioObjeto);
     }
 
-    public void test10QuitarDebeLanzarExcepcionSiElCasilleroEstaFueraDelTablero(){
-        Assert.assertThat( true, is( false ) );
-    }
-*/
+    //@Test
+    //public void test11MoverDebeLanzarExcepcionSiElOrigenEstaFueraDelTablero(){}
+   // public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){}
+   // public void test13MoverDebeLanzarExcepcionSiElOrigenEstaVacio(){}
+   // public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){}
+
+   // public void test15MoverQuitaElElementoDelOrigenYLoDejaEnElDestino(){}
+
 }
 
 

@@ -41,16 +41,17 @@ public class Tablero {
     }
 
 
-private boolean existeCasillero (Coordenada unaPosicion){
+    private boolean existeCasillero (Coordenada unaPosicion){
         return tablero.containsKey(unaPosicion);
     }
-private Casillero getCasillero (Coordenada unaPosicion) {
+
+    private Casillero getCasillero (Coordenada unaPosicion)
+    {
+        if ( !existeCasillero(unaPosicion)) {throw new FueraDeTableroException();}
         return tablero.get(unaPosicion);
     }
 
     public void agregar(Ubicable unObjeto, Coordenada posicion, Dimension unTamanio) {
-
-      if ( !existeCasillero(posicion)) {throw new FueraDeTableroException();}
 
       Casillero casillero = this.getCasillero(posicion);
       casillero.colocar(unObjeto);
