@@ -125,22 +125,22 @@ public class TableroTest {
 
 
     @Test
-    public void test08RetirarDevuelveElElementoAgregadoPreviamente() {
+    public void test08RetirarQuitaDelTableroElElementoAgregadoPreviamente() {
 
         Dimension tamanioTablero= new Dimension(3,3);
         Dimension tamanioObjeto = new Dimension(1,1);
 
         Coordenada unaPosicion = new Coordenada(3,3);
         Ubicable unObjeto = new UbicableFicticio();
-        Ubicable otroObjeto = new UbicableFicticio();
-        Ubicable objetoRecuperado;
+
+
         Tablero tablero = new Tablero( tamanioTablero);
 
         tablero.agregar(unObjeto,unaPosicion, tamanioObjeto);
-        objetoRecuperado = tablero.retirar(unaPosicion,tamanioObjeto);
+        tablero.retirar(unaPosicion,tamanioObjeto);
 
-        Assert.assertSame(unObjeto, objetoRecuperado  );
-        Assert.assertNotSame(otroObjeto, objetoRecuperado );
+        Assert.assertThat( tablero.puedoColocar(unaPosicion,tamanioObjeto), is( true ) );
+
 
     }
 
@@ -172,14 +172,98 @@ public class TableroTest {
         tablero.retirar(posicionFueraDeTablero,tamanioObjeto);
     }
 
+    @Test
+    public void test11MoverDebeLanzarExcepcionSiElOrigenEstaFueraDelTablero(){
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+
+        Coordenada origenFueraDeTablero = new Coordenada(5,5);
+        Coordenada posicionDestino = new Coordenada(3,3);
+
+
+        thrown.expect(FueraDeTableroException.class);
+        tablero.mover(origenFueraDeTablero,posicionDestino);
+
+
+    }
+    @Test
+   public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
+       Dimension tamanioTablero= new Dimension(3,3);
+       Tablero tablero = new Tablero( tamanioTablero);
+
+       Ubicable unElemento = new UbicableFicticio();
+       Dimension tamanioObjeto = new Dimension(1,1);
+       Coordenada origen = new Coordenada(1,1);
+       Coordenada destinoFueraDeTablero = new Coordenada(9,9);
+       tablero.agregar(unElemento,origen,tamanioObjeto);
+
+       thrown.expect(FueraDeTableroException.class);
+       tablero.mover(origen,destinoFueraDeTablero);
+   }
+
+    @Test
+    public void test13MoverDebeLanzarExcepcionSiElOrigenEstaVacio(){
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        Ubicable unElemento = new UbicableFicticio();
+        Dimension tamanioObjeto = new Dimension(1,1);
+        Coordenada origenVacio = new Coordenada(2,1);
+        Coordenada destino = new Coordenada(2,2);
+
+
+        thrown.expect(CasilleroVacioException.class);
+        tablero.mover(origenVacio,destino);
+    }
+
+    @Test
+   public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        Ubicable unElemento = new UbicableFicticio();
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        Coordenada origen = new Coordenada(2,1);
+
+        Coordenada otroOrigen = new Coordenada(2,2);
+        Coordenada destinoOcupado = new Coordenada(2,2);
+
+        tablero.agregar(unElemento,origen,tamanioObjeto);
+        tablero.agregar(unElemento,otroOrigen,tamanioObjeto);
+
+
+       thrown.expect(CasilleroOcupadoException.class);
+        tablero.mover(origen,destinoOcupado);
+    }
+
+
+    @Test
+    public void test15MoverQuitaElElementoDelOrigenYLoDejaEnElDestino(){
+
+        Dimension tamanioTablero= new Dimension(3,3);
+        Tablero tablero = new Tablero( tamanioTablero);
+
+        Ubicable unElemento = new UbicableFicticio();
+        Coordenada posicionOrigen = new Coordenada(1,2);
+        Coordenada posicionDestino = new Coordenada(3,3);
+        Dimension tamanioObjeto = new Dimension(1,1);
+
+        tablero.agregar(unElemento,posicionOrigen,tamanioObjeto);
+
+        tablero.mover(posicionOrigen,posicionDestino);
+
+        Assert.assertThat( tablero.puedoColocar(posicionOrigen,tamanioObjeto), is( true ) );
+        Assert.assertThat( tablero.puedoColocar(posicionDestino,tamanioObjeto), is( false ) );
+
+    }
+
+
     //@Test
-    //public void test11MoverDebeLanzarExcepcionSiElOrigenEstaFueraDelTablero(){}
-   // public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){}
-   // public void test13MoverDebeLanzarExcepcionSiElOrigenEstaVacio(){}
-   // public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){}
-
-   // public void test15MoverQuitaElElementoDelOrigenYLoDejaEnElDestino(){}
-
+    //public void test16MoverDebeLanzarExcepcionSiSeIntentaMoverElementosDeDimensionMayorAUno(){
+    // }
 }
 
 

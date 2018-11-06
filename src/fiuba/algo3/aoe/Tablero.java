@@ -67,8 +67,22 @@ public class Tablero {
     }
 
 
-    public Ubicable retirar(Coordenada unaPosicion, Dimension tamanioObjeto) {
+    private Ubicable sacar(Coordenada unaPosicion, Dimension tamanioObjeto) {
 
         return this.getCasillero(unaPosicion).quitar();
+    }
+
+    public void retirar(Coordenada unaPosicion, Dimension tamanioObjeto) {
+
+        sacar(unaPosicion, tamanioObjeto);
+    }
+
+    public void mover(Coordenada posicionOrigen, Coordenada posicionDestino) {
+
+        Dimension tamanio = new Dimension(1,1);
+
+        Ubicable elemento = sacar(posicionOrigen,tamanio);
+        agregar(elemento,posicionDestino,tamanio);
+
     }
 }
