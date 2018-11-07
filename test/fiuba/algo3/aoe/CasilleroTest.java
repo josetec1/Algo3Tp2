@@ -1,102 +1,49 @@
 package fiuba.algo3.aoe;
 
+
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 
 public class CasilleroTest {
 
+
+@Test
+    public void test01AlCrearUnCasilleroDevuelveLosValoresConQueSeCreo (){
+
+        Casillero unaCasillero = new Casillero(3,4);
+
+        Assert.assertEquals(unaCasillero.getX(),3);
+        Assert.assertEquals(unaCasillero.getY(),4);
+
+    }
     @Test
-    public void test01ElCasilleroSeCreaConEstadoVacio() {
+    public void test02DDosCacillerosConLasMismasComponentesSonElMismoCasillero() {
+        Casillero casillero1 = new Casillero( 2, 2 );
+        Casillero casillero2 = new Casillero( 2, 2 );
+        Casillero casillero3 = new Casillero( 3, 2 );  // != x
+        Casillero casillero4 = new Casillero( 2, 3 );  // != y
 
-        Casillero unCasillero = new Casillero();
-        Assert.assertThat( unCasillero.estaVacio(), is( true ) );
-
+        Assert.assertThat(casillero1, is(casillero2) );
+        Assert.assertThat(casillero1, is( not(casillero3) ) );
+        Assert.assertThat(casillero1, is( not(casillero4) ) );
     }
 
     @Test
-    public void test02estaVacioDebeDarFalseLuegoDeColocarUnElemento() {
+    public void test03EqualsDeUnMismoCasilleroDebeDarTrue() {
+        Casillero casillero1 = new Casillero( 2, 2 );
 
-        Casillero unCasillero = new Casillero();
-        Ubicable unElemento = new UbicableFicticio();
 
-        unCasillero.colocar(unElemento);
-
-        Assert.assertThat( unCasillero.estaVacio(), is( false ) );
-
+        Assert.assertEquals(casillero1,(casillero1));
     }
 
     @Test
-    public void test03estaVacioDebeDarTrueLuegoDeQuitarUnElementoPreviamenteColocado() {
-
-        Casillero unCasillero = new Casillero();
-        Ubicable unElemento = new UbicableFicticio();
-
-        unCasillero.colocar(unElemento);
-        unCasillero.quitar();
-        Assert.assertThat( unCasillero.estaVacio(), is( true ) );
-
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-    @Test
-    public void test04AlColocarDebeLanzarExcepcionSiElCasilleroEstaOcupado() {
-
-        Casillero unCasillero = new Casillero();
-        Ubicable unElemento = new UbicableFicticio();
-        unCasillero.colocar(unElemento);
-
-        thrown.expect(CasilleroOcupadoException.class);
-        unCasillero.colocar(unElemento);
-
+    public void test04EqualsDeUnCasilleroConNullDebeDarFalse() {
+        Casillero casillero1 = new Casillero( 2, 2 );
+        Assert.assertNotEquals(casillero1,null);
     }
 
 
-    @Test
-    public void test05QuitarDebeLanzarExcepcionSiElCasilleroEstaVacio() {
-
-        Casillero unCasillero = new Casillero();
-
-        thrown.expect(CasilleroVacioException.class);
-        unCasillero.quitar();
-    }
-
-    @Test
-    public void test06QuitarDevuelveElElementoPreviamenteColocado() {
-
-        Casillero unCasillero = new Casillero();
-        Ubicable unElemento = new UbicableFicticio();
-        Ubicable otroElemento = new UbicableFicticio();
-        Ubicable elementoRecuperado;
-
-        unCasillero.colocar(unElemento);
-        elementoRecuperado= unCasillero.quitar();
-
-        Assert.assertSame(unElemento, elementoRecuperado  );
-        Assert.assertNotSame(otroElemento, elementoRecuperado );
-    }
-
-    @Test
-    public void test07SeDebePoderAgregarUnElementoLuegoDeQuitarOtroPreviamenteAgregado() {
-
-        Casillero unCasillero = new Casillero();
-        Ubicable unElemento = new UbicableFicticio();
-        Ubicable otroElemento = new UbicableFicticio();
-        Ubicable elementoRecuperado;
-
-        unCasillero.colocar(unElemento);
-        unCasillero.quitar();
-        unCasillero.colocar(otroElemento);
-        elementoRecuperado= unCasillero.quitar();
-
-        Assert.assertNotSame(unElemento, elementoRecuperado );
-        Assert.assertSame(otroElemento, elementoRecuperado  );
-
-    }
 }
-
-

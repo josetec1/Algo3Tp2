@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe;
 
-public class Dimension extends Coordenada {
+//TODO esta clase no sirve mas hay que eliminarla
+public class Dimension extends Casillero {
 
     public Dimension(int x, int y) {
         super(x, y);
