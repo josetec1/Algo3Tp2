@@ -1,5 +1,8 @@
 package fiuba.algo3.aoe;
 
+import Ubicables.Ubicable;
+import Ubicables.Unidades.movimiento.Direccion;
+
 import java.util.HashMap;
 
 
@@ -11,7 +14,7 @@ public class Tablero {
     private int alto;
 
 
-    public Tablero (Dimension tamanio){
+    public Tablero (int alturaMaxima, int alturaMinima,int anchoMinimo){
 
         //TODO validar el tamanio minimo, negativos, etc
 
@@ -24,7 +27,7 @@ public class Tablero {
     public boolean puerdoColocar (Posicion unaPosicion){return false;}
     public void colocar (Ubicable unElemento){}
     public void remover (Posicion unaPosicion) {}
-    public void mover (Posicion origen, Posicion destino){}
+    public void mover (Posicion origen, Direccion direccion){}
 
 /*
     private void inicializarTablero (){
