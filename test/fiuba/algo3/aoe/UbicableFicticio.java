@@ -4,7 +4,10 @@ package fiuba.algo3.aoe;
 public class UbicableFicticio implements Ubicable {
 
     @Override
-    public Posicion getPosicion() {
+    public Posicion getPosicion() {return null;}
+
+    @Override
+    public Posicion colocarEnPosicion(Posicion posicion) {
         return null;
     }
 }
