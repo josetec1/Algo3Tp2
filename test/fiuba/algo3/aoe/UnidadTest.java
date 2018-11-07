@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class UnidadTest {
 
     @Test
-    public void test01AlCrearUnCasilleroDevuelveLosValoresConQueSeCreo (){
+    public void test01AlCrearUnaUnidadDevuelveLosValoresConQueSeCreo (){
 
         Unidad unAldeano = new Aldeano();
 
