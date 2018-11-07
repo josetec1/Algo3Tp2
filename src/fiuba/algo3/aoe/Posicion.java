@@ -4,7 +4,7 @@ public class Posicion {
 
 
     public boolean seSuperponeCon (Posicion otraPosicion){return false;}
-    public boolean estaDentroDe (Posicion otraPosicion) {return false;}
+    public boolean contieneA (Posicion otraPosicion) {return false;}
     public void agregar (Casillero unCasillero) {}
 
 
