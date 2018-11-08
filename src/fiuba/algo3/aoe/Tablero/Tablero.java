@@ -25,7 +25,6 @@ public class Tablero {
     }
 
 
-
     public Boolean puedoColocar(Posicion unaPosicion) {
 
        if(!this.estaDentroDeTablero (unaPosicion)){return false;}
@@ -34,7 +33,7 @@ public class Tablero {
 
     }
 
-    private boolean estaLibre (Posicion unaPosicion){
+    private Boolean estaLibre (Posicion unaPosicion){
         for (Ubicable elemento : this.tablero){
             if  (elemento.getPosicion().seSuperponeCon(unaPosicion)){return false;}
         }
@@ -42,13 +41,9 @@ public class Tablero {
 
     }
 
-    private boolean estaDentroDeTablero (Posicion unaPosicion){
+    private Boolean estaDentroDeTablero (Posicion unaPosicion){
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
-
-
-
-
 
 
     public void colocar (Ubicable unElemento){
@@ -67,68 +62,16 @@ public class Tablero {
 
     }
 
+
     //TODO Falta implementar
+    //antes de usar este metodo tuvo que haber llamado a puedo colocar.
+    public void trasladar (Ubicable unElemento, Posicion destino){
+        this.remover(unElemento);
+        this.colocar(unElemento);
+
+    }
+
+    //no usaria este metodo
     public void mover (Posicion origen, Direccion direccion){}
 
-/*
-    private void inicializarTablero (){
-
-        tablero = new HashMap<>(ancho*alto);
-        Casillero unaCasillero;
-        Posicion unCasillero;
-
-        for (int i = 1; i <= this.ancho; ++i) {
-
-            for (int j = 1; j <= this.alto; ++j) {
-                unaCasillero = new Casillero(i,j);
-                unCasillero = new Posicion();
-
-                tablero.put(unaCasillero,unCasillero);
-
-                //System.out.println(i+","+j);
-            }
-        }
-    }
-
-
-    private boolean existeCasillero (Casillero unaPosicion){
-        return tablero.containsKey(unaPosicion);
-    }
-
-    private Posicion getCasillero (Casillero unaPosicion)
-    {
-        if ( !existeCasillero(unaPosicion)) {throw new FueraDeTableroException();}
-        return tablero.get(unaPosicion);
-    }
-
-    public void agregar(Ubicable unObjeto, Casillero posicion, Dimension unTamanio) {
-
-      Posicion casillero = this.getCasillero(posicion);
-      casillero.colocar(unObjeto);
-
-    }
-
-
-
-
-    private Ubicable sacar(Casillero unaPosicion, Dimension tamanioObjeto) {
-
-        return this.getCasillero(unaPosicion).quitar();
-    }
-
-    public void retirar(Casillero unaPosicion, Dimension tamanioObjeto) {
-
-        sacar(unaPosicion, tamanioObjeto);
-    }
-
-    //esto antes de sacar tiene que ver si va a poder colocar
-    public void mover(Casillero posicionOrigen, Casillero posicionDestino) {
-
-        Dimension tamanio = new Dimension(1,1);
-
-        Ubicable elemento = sacar(posicionOrigen,tamanio);
-        agregar(elemento,posicionDestino,tamanio);
-
-    }
-    */
 }

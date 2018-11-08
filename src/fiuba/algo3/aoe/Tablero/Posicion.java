@@ -10,13 +10,13 @@ public class Posicion {
 
     }
 
-    //sobrecarga
+    //sobrecarga con Casillero
     public Posicion(Casillero unCasillero){
 
         this.agregar(unCasillero);
     }
 
-    //sobrecarga 2
+    //sobrecarga directa con int
     public Posicion(int x, int y){
 
         this.agregar(new Casillero(x,y));

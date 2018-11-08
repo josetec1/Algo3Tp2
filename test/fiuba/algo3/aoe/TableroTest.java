@@ -101,27 +101,13 @@ public class TableroTest {
 
  /*   @Test
     public void test09RemoverDebeLanzarExcepcionSiLaPosicionEstaVacia(){
-
-        Dimension tamanioTablero= new Dimension(3,3);
-        Dimension tamanioObjeto = new Dimension(1,1);
-
-        Casillero unaPosicion = new Casillero(3,3);
-
-        Tablero tablero = new Tablero( tamanioTablero);
-
-
-
-        thrown.expect(CasilleroVacioException.class);
+         thrown.expect(CasilleroVacioException.class);
         tablero.retirar(unaPosicion,tamanioObjeto);
     }
     @Test
     public void test10RemoverDebeLanzarExcepcionSiElLaPosicionEstaFueraDelTablero(){
 
-        Dimension tamanioTablero= new Dimension(3,3);
-        Dimension tamanioObjeto = new Dimension(1,1);
 
-        Casillero posicionFueraDeTablero = new Casillero(3,4);
-        Tablero tablero = new Tablero( tamanioTablero);
 
         thrown.expect(FueraDeTableroException.class);
         tablero.retirar(posicionFueraDeTablero,tamanioObjeto);
@@ -129,13 +115,6 @@ public class TableroTest {
 
     @Test
     public void test11MoverDebeLanzarExcepcionSiElOrigenEstaFueraDelTablero(){
-        Dimension tamanioTablero= new Dimension(3,3);
-        Tablero tablero = new Tablero( tamanioTablero);
-
-
-        Casillero origenFueraDeTablero = new Casillero(5,5);
-        Casillero posicionDestino = new Casillero(3,3);
-
 
         thrown.expect(FueraDeTableroException.class);
         tablero.mover(origenFueraDeTablero,posicionDestino);
@@ -144,14 +123,7 @@ public class TableroTest {
     }
     @Test
    public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
-       Dimension tamanioTablero= new Dimension(3,3);
-       Tablero tablero = new Tablero( tamanioTablero);
 
-       Ubicable unElemento = new UbicableFicticio();
-       Dimension tamanioObjeto = new Dimension(1,1);
-       Casillero origen = new Casillero(1,1);
-       Casillero destinoFueraDeTablero = new Casillero(9,9);
-       tablero.agregar(unElemento,origen,tamanioObjeto);
 
        thrown.expect(FueraDeTableroException.class);
        tablero.mover(origen,destinoFueraDeTablero);
@@ -159,13 +131,6 @@ public class TableroTest {
 
     @Test
     public void test13MoverDebeLanzarExcepcionSiElOrigenEstaVacio(){
-        Dimension tamanioTablero= new Dimension(3,3);
-        Tablero tablero = new Tablero( tamanioTablero);
-
-        Ubicable unElemento = new UbicableFicticio();
-        Dimension tamanioObjeto = new Dimension(1,1);
-        Casillero origenVacio = new Casillero(2,1);
-        Casillero destino = new Casillero(2,2);
 
 
         thrown.expect(CasilleroVacioException.class);
@@ -175,22 +140,7 @@ public class TableroTest {
     @Test
    public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
 
-        Dimension tamanioTablero= new Dimension(3,3);
-        Tablero tablero = new Tablero( tamanioTablero);
-
-        Ubicable unElemento = new UbicableFicticio();
-        Dimension tamanioObjeto = new Dimension(1,1);
-
-        Casillero origen = new Casillero(2,1);
-
-        Casillero otroOrigen = new Casillero(2,2);
-        Casillero destinoOcupado = new Casillero(2,2);
-
-        tablero.agregar(unElemento,origen,tamanioObjeto);
-        tablero.agregar(unElemento,otroOrigen,tamanioObjeto);
-
-
-       thrown.expect(CasilleroOcupadoException.class);
+        thrown.expect(CasilleroOcupadoException.class);
         tablero.mover(origen,destinoOcupado);
     }
 
@@ -198,17 +148,6 @@ public class TableroTest {
     @Test
     public void test15MoverQuitaElElementoDelOrigenYLoDejaEnElDestino(){
 
-        Dimension tamanioTablero= new Dimension(3,3);
-        Tablero tablero = new Tablero( tamanioTablero);
-
-        Ubicable unElemento = new UbicableFicticio();
-        Casillero posicionOrigen = new Casillero(1,2);
-        Casillero posicionDestino = new Casillero(3,3);
-        Dimension tamanioObjeto = new Dimension(1,1);
-
-        tablero.agregar(unElemento,posicionOrigen,tamanioObjeto);
-
-        tablero.mover(posicionOrigen,posicionDestino);
 
         Assert.assertThat( tablero.puedoColocar(posicionOrigen,tamanioObjeto), is( true ) );
         Assert.assertThat( tablero.puedoColocar(posicionDestino,tamanioObjeto), is( false ) );
