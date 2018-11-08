@@ -22,15 +22,18 @@ public class Posicion {
     }
 
 
+    //
     public boolean seSuperponeCon (Posicion otraPosicion) {
 
         Casillero otroCasillero;   //obtenerla lista de casilleros
-        Iterator<Casillero> it;
+        Iterator<Casillero> itDeOtraPosicion;
 
         for (Casillero miCasillero : this.casilleros) { //con mi lista de casilleros y el iterador de la otra. los comparo
-            it = otraPosicion.getIterador();
-            while (it.hasNext()) {
-                otroCasillero = it.next();
+
+            itDeOtraPosicion = otraPosicion.getIterador();
+
+            while (itDeOtraPosicion.hasNext()) {
+                otroCasillero = itDeOtraPosicion.next();
                 if (miCasillero.equals(otroCasillero)) return true;
             }
         }
@@ -39,6 +42,14 @@ public class Posicion {
 
     public void agregar (Casillero unCasillero) {
         this.casilleros.add(unCasillero);
+    }
+//TODO implementar
+    public boolean estasDentroDe (int Ancho, int Alto) {
+        // para cada una de las posiciones calcular si esta dentro de los limites
+        // ejemplo 10 x 15 tablero
+        // coordenada 10,16
+
+        return false;
     }
 
 
