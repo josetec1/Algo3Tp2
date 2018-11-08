@@ -39,7 +39,7 @@ public class TableroTest {
     }
 
     @Test
-    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupada() {
+    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupada() throws FueraDeTableroException, PosicionOcupadaException {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
@@ -50,7 +50,7 @@ public class TableroTest {
     }
 
     @Test
-    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior() {
+    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior() throws FueraDeTableroException, PosicionOcupadaException {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
@@ -77,7 +77,7 @@ public class TableroTest {
       }
 
     @Test
-    public void test07AgregarDebeLanzarExcepcionSiIntentoColocarEnUnaPosicionOcupada() {
+    public void test07AgregarDebeLanzarExcepcionSiIntentoColocarEnUnaPosicionOcupada(){
 
         Tablero tablero = new Tablero( 10,10);
 

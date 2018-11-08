@@ -1,11 +1,14 @@
 package fiuba.algo3.aoe;
 
+import Ubicables.Unidades.movimiento.*;
 import fiuba.algo3.aoe.Tablero.Casillero;
 import fiuba.algo3.aoe.Tablero.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -104,6 +107,119 @@ public class PosicionTest {
 
     }
 
+    @Test
+    public void test09CalcularPosicionSiguienteDireccionDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(3,5);
+        Posicion posicion = new Posicion(casillero);
+        DireccionDerecha direccionNueva = new DireccionDerecha();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test10CalcularPosicionSiguienteDireccionArribaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(4,4);
+        Posicion posicion = new Posicion(casillero);
+        DireccionArriba direccionNueva = new DireccionArriba();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test11CalcularPosicionSiguienteDireccionIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(4,6);
+        Posicion posicion = new Posicion(casillero);
+        DireccionAbajo direccionNueva = new DireccionAbajo();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test12CalcularPosicionSiguienteDireccionAbajoDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(4,6);
+        Posicion posicion = new Posicion(casillero);
+        DireccionAbajo direccionNueva = new DireccionAbajo();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test13CalcularPosicionSiguienteDireccionArribaDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(3,4);
+        Posicion posicion = new Posicion(casillero);
+        DireccionArribaDerecha direccionNueva = new DireccionArribaDerecha();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test14CalcularPosicionSiguienteDireccionArribaIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(5,4);
+        Posicion posicion = new Posicion(casillero);
+        DireccionArribaIzquierda direccionNueva = new DireccionArribaIzquierda();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test15CalcularPosicionSiguienteDireccionAbajoIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(5,6);
+        Posicion posicion = new Posicion(casillero);
+        DireccionAbajoIzquierda direccionNueva = new DireccionAbajoIzquierda();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
+
+    @Test
+    public void test15CalcularPosicionSiguienteDireccionAbajoDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(3,6);
+        Posicion posicion = new Posicion(casillero);
+        DireccionAbajoDerecha direccionNueva = new DireccionAbajoDerecha();
+        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+
+        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
+        for (Casillero casilleroActual : casillerosNuevos) {
+            Assert.assertEquals(casilleroActual.getY(), 5);
+            Assert.assertEquals(casilleroActual.getX(), 4);
+        }
+    }
 }
+
+
 
 

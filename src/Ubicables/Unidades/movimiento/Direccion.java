@@ -1,9 +1,7 @@
 package Ubicables.Unidades.movimiento;
 
-import fiuba.algo3.aoe.Tablero.Posicion;
+import fiuba.algo3.aoe.Tablero.Casillero;
 
-public class Direccion {
-
-  public Posicion calcularPosicionSiguente(Posicion posicion){
-      return posicion;}
+public interface Direccion {
+    Casillero calcularSiguienteCasillero ( int x, int y );
 }

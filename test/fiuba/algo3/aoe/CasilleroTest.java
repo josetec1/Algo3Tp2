@@ -43,7 +43,7 @@ public class CasilleroTest {
     @Test
     public void test04EqualsDeUnCasilleroConNullDebeDarFalse() {
         Casillero casillero1 = new Casillero( 2, 2 );
-        Assert.assertNotEquals(casillero1,null);
+        Assert.assertNotSame(casillero1,null);
     }
 
 

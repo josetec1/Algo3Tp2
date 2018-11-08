@@ -1,5 +1,7 @@
 package fiuba.algo3.aoe.Tablero;
 
+import Ubicables.Unidades.movimiento.Direccion;
+
 import java.util.*;
 
 public class Posicion {
@@ -25,6 +27,10 @@ public class Posicion {
     private Iterator<Casillero> getIterador(){
         return casilleros.iterator();
 
+    }
+
+    public ArrayList <Casillero> getCasilleros(){
+        return this.casilleros;
     }
 
 
@@ -57,8 +63,14 @@ public class Posicion {
                if (!miCasillero.estaDentroDe(ancho,alto)) {return false;}
         }
         return true;
+    }
 
-
+    public Posicion calcularPosicionSiguiente( Direccion direccion){
+        Posicion nuevaPosicion = new Posicion();
+        for(Casillero casilleroActual : this.casilleros){
+            nuevaPosicion.agregar(direccion.calcularSiguienteCasillero(casilleroActual.getX(),casilleroActual.getY()));
+        }
+        return nuevaPosicion;
     }
 
 

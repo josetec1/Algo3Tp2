@@ -46,7 +46,7 @@ public class Tablero {
     }
 
 
-    public void colocar (Ubicable unElemento){
+    public void colocar (Ubicable unElemento) throws PosicionOcupadaException, FueraDeTableroException {
 
         Posicion posicion = unElemento.getPosicion();
 
@@ -65,7 +65,7 @@ public class Tablero {
 
     //TODO Falta implementar
     //antes de usar este metodo tuvo que haber llamado a puedo colocar.
-    public void trasladar (Ubicable unElemento, Posicion destino){
+    public void trasladar (Ubicable unElemento, Posicion destino) throws FueraDeTableroException, PosicionOcupadaException {
         this.remover(unElemento);
         this.colocar(unElemento);
 
