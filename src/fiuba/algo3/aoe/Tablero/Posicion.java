@@ -1,4 +1,4 @@
-package fiuba.algo3.aoe;
+package fiuba.algo3.aoe.Tablero;
 
 import java.util.LinkedList;
 

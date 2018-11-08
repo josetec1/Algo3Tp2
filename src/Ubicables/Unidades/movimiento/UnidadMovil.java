@@ -1,7 +1,8 @@
 package Ubicables.Unidades.movimiento;
 
-import Ubicables.Ubicable;
-import fiuba.algo3.aoe.Posicion;
+
+import fiuba.algo3.aoe.Tablero.*;
+import fiuba.algo3.aoe.Ubicable.Ubicable;
 
 public class UnidadMovil implements Ubicable {
     private Posicion posicion;

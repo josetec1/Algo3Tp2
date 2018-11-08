@@ -1,6 +1,7 @@
 package Ubicables.Unidades.movimiento;
 
-import fiuba.algo3.aoe.Posicion;
+
+import fiuba.algo3.aoe.Tablero.*;
 
 class Movimiento {
 

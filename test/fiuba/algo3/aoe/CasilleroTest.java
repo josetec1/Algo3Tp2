@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe;
 
 
+import fiuba.algo3.aoe.Tablero.Casillero;
 import org.junit.Assert;
 import org.junit.Test;
 

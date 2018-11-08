@@ -1,9 +1,11 @@
-package fiuba.algo3.aoe;
+package fiuba.algo3.aoe.Tablero;
 
-import Ubicables.Ubicable;
+
 import Ubicables.Unidades.movimiento.Direccion;
-
+import fiuba.algo3.aoe.Ubicable.Ubicable;
+import fiuba.algo3.aoe.Tablero.*;
 import java.util.HashMap;
+
 
 
 public class Tablero {
