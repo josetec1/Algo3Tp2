@@ -20,11 +20,11 @@ public class TableroTest {
     }
 
 /*
-    @Test
+     @Test
     public void test01AlCrearElTableroLosCasillerosSeEncuentranVacios() {
 
-        Dimension tamanioTablero= new Dimension(3,5);
-        Tablero tablero = new Tablero( tamanioTablero);
+
+        Tablero tablero = new Tablero( 10,15);
 
         Casillero unaPosicion = new Casillero(1,2);
         Casillero otraPosicion = new Casillero(2,2);

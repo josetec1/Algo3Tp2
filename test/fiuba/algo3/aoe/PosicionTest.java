@@ -1,5 +1,7 @@
 package fiuba.algo3.aoe;
 
+import fiuba.algo3.aoe.Tablero.Casillero;
+import fiuba.algo3.aoe.Tablero.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,14 +13,64 @@ public class PosicionTest {
 
 
     @Test
-    public void test01Vacio() {
+    public void test01DosPosicionesVaciasNoSeSuperponen() {
+            Posicion unaPosicion = new Posicion();
+            Posicion otraPosicion = new Posicion();
 
-
-        Assert.assertThat( true, is( true ) );
+        Assert.assertFalse(unaPosicion.seSuperponeCon(otraPosicion) );
 
     }
 
+    @Test
+    public void test02SeSuperponeConDebeDarFalseSiLaOtraPosicionEstaVacia() {
+        Casillero unCasillero = new Casillero(4,5);
+        Posicion unaPosicion = new Posicion(unCasillero);
+        Posicion otraPosicion = new Posicion();
 
+        Assert.assertFalse(unaPosicion.seSuperponeCon(otraPosicion) );
+
+    }
+
+    @Test
+    public void test03SeSuperponeConDebeDarTrueSiLaOtraPosicionTieneLaMismaPosicion() {
+        Casillero unCasillero = new Casillero(4,5);
+        Casillero otroCasillero = new Casillero (4,5);
+        Posicion unaPosicion = new Posicion(unCasillero);
+        Posicion otraPosicion = new Posicion();
+        otraPosicion.agregar(otroCasillero);
+
+        Assert.assertTrue(unaPosicion.seSuperponeCon(otraPosicion) );
+
+    }
+    @Test
+    public void test05AgregarPermiteAgregarCasillerosRepetidos() {
+        Casillero unCasillero = new Casillero(4,5);
+        Casillero otroCasillero = new Casillero (4,5);
+        Posicion unaPosicion = new Posicion(unCasillero);
+        Posicion otraPosicion = new Posicion(unCasillero);
+        unaPosicion.agregar(otroCasillero);
+
+        Assert.assertTrue(unaPosicion.seSuperponeCon(otraPosicion) );
+
+    }
+
+    @Test
+    public void test06SiUnaPosicionTieneUnCasilleroQueEstaEnOtraPosicionSeSuperponen() {
+        Casillero casilleroUno = new Casillero(4,5);
+        Casillero casilleroDos = new Casillero (3,5);
+        Casillero casilleroTres = new Casillero (6,6);
+
+        Posicion unaPosicion = new Posicion(casilleroUno);
+        unaPosicion.agregar(casilleroDos);
+
+        Posicion posicionSuperpuesta = new Posicion(casilleroDos);  //superpone
+
+        Posicion posicionNoSuperpuesta= new Posicion(casilleroTres); //no
+
+        Assert.assertTrue(unaPosicion.seSuperponeCon(posicionSuperpuesta) );
+        Assert.assertFalse(unaPosicion.seSuperponeCon(posicionNoSuperpuesta) );
+
+    }
 
 
 

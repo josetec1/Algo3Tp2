@@ -1,55 +1,45 @@
 package fiuba.algo3.aoe.Tablero;
 
-import java.util.LinkedList;
-
+import java.util.*;
 
 public class Posicion {
-    private LinkedList <Casillero> casilleros;
+
+    private ArrayList<Casillero> casilleros;
 
     public Posicion(){
-        this.casilleros = new LinkedList<Casillero>();
-    }
-    public LinkedList<Casillero> obtenerCasilleros(){
-        return casilleros;
+        this.casilleros = new ArrayList<>();
     }
 
-    public boolean seSuperponeCon (Posicion otraPosicion){return false;}
+    //sobrecarga
+    public Posicion(Casillero unCasillero){
+        this.casilleros = new ArrayList<>();
+        this.agregar(unCasillero);
+    }
+
+    private Iterator<Casillero> getIterador(){
+        return casilleros.iterator();
+
+    }
 
 
-    public boolean contieneA (Posicion otraPosicion) {return false;}
+    public boolean seSuperponeCon (Posicion otraPosicion) {
+
+        Casillero otroCasillero;   //obtenerla lista de casilleros
+        Iterator<Casillero> it;
+
+        for (Casillero miCasillero : this.casilleros) { //con mi lista de casilleros y el iterador de la otra. los comparo
+            it = otraPosicion.getIterador();
+            while (it.hasNext()) {
+                otroCasillero = it.next();
+                if (miCasillero.equals(otroCasillero)) return true;
+            }
+        }
+        return false;
+    }
 
     public void agregar (Casillero unCasillero) {
         this.casilleros.add(unCasillero);
     }
 
 
-  /*  private Boolean libre;
-    private Ubicable elemento;
-
-    public Posicion(){
-        this.libre = true;
-    }
-
-
-    public Boolean estaVacio() {
-        return libre;
-    }
-
-    public void colocar(Ubicable unElemento) {
-
-        if  (!this.estaVacio()) {throw new CasilleroOcupadoException();}
-
-        this.libre = false ;
-        elemento = unElemento;
-
-    }
-
-    public Ubicable quitar() {
-
-        if  (this.estaVacio()) {throw new CasilleroVacioException();}
-
-        this.libre = true;
-        return elemento;
-    }
-    */
 }

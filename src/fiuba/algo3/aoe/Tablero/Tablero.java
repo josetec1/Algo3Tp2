@@ -3,26 +3,25 @@ package fiuba.algo3.aoe.Tablero;
 
 import Ubicables.Unidades.movimiento.Direccion;
 import fiuba.algo3.aoe.Ubicable.Ubicable;
-import fiuba.algo3.aoe.Tablero.*;
-import java.util.HashMap;
 
+import java.util.*;
 
 
 public class Tablero {
 
-    private HashMap <Casillero, Posicion> tablero;
+    private ArrayList<Ubicable> tablero;
 
     private int ancho;
     private int alto;
 
 
-    public Tablero (int alturaMaxima, int alturaMinima,int anchoMinimo){
+    public Tablero (int anchoMaximo, int altoMaximo){
 
         //TODO validar el tamanio minimo, negativos, etc
-
-      //  ancho = tamanio.getX();
-      //  alto = tamanio.getY();
-       // this.inicializarTablero ();
+      tablero = new ArrayList<>();
+      ancho = anchoMaximo;
+      alto = altoMaximo;
+     // this.inicializarTablero ();
 
     }
 
