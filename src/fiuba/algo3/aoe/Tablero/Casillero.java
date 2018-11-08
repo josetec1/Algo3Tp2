@@ -21,6 +21,23 @@ public class Casillero {
         return y;
     }
 
+    public boolean estaDentroDe (int ancho,int alto){
+       /*
+        Tamaño      10*15  es
+                        1:1                   1:15
+                        10:1                  10:15
+        x <=ancho x >0
+        y<= ancho y >0
+
+        */
+       boolean coordenadaX, coordenadaY;
+
+        coordenadaX = ((this.x<= ancho) && (this.x> 0));
+        coordenadaY = ((this.y<= alto) && (this.y> 0));
+        return (coordenadaX && coordenadaY);
+
+    }
+
 /*
     @Override
     public String toString(){

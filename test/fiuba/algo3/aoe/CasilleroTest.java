@@ -47,4 +47,89 @@ public class CasilleroTest {
     }
 
 
+    @Test
+    public void test05estaDentroDeDebeDarFalseSiElCasilleroTieneValoresNegativos() {
+        Casillero casillero1 = new Casillero( -1, 0 );
+        Casillero casillero2 = new Casillero( 0,-1);
+        Casillero casillero3 = new Casillero( -1,-1);
+
+       Assert.assertFalse(casillero1.estaDentroDe(10,15));
+       Assert.assertFalse(casillero2.estaDentroDe(10,15));
+       Assert.assertFalse(casillero3.estaDentroDe(10,15));
+    }
+
+    @Test
+    public void test06estaDentroDeDebeDarFalseSiElCasilleroTieneValoresCero() {
+        Casillero casillero1 = new Casillero( 0, 1 );
+        Casillero casillero2 = new Casillero( 1, 0 );
+        Casillero casillero3 = new Casillero( 0, 0 );
+
+        Assert.assertFalse(casillero1.estaDentroDe(10,15));
+        Assert.assertFalse(casillero2.estaDentroDe(10,15));
+        Assert.assertFalse(casillero3.estaDentroDe(10,15));
+
+    }
+
+    @Test
+    public void test07estaDentroDeDebeDarTruSiEstaLosLimitesSuperioresDeLosValoresPasados() {
+        Casillero casillero1 = new Casillero( 10, 1 );
+        Casillero casillero2 = new Casillero( 1, 15 );
+        Casillero casillero3 = new Casillero( 10, 15 );
+
+        Assert.assertTrue(casillero1.estaDentroDe(10,15));
+        Assert.assertTrue(casillero2.estaDentroDe(10,15));
+        Assert.assertTrue(casillero3.estaDentroDe(10,15));
+
+    }
+
+    @Test
+    public void test08estaDentroDeDebeDarTrueSiEstaLosLimitesinferioresDeLosValoresPasados() {
+        Casillero casillero1 = new Casillero( 1, 2 );
+        Casillero casillero2 = new Casillero( 2, 1 );
+        Casillero casillero3 = new Casillero( 1, 1 );
+
+        Assert.assertTrue(casillero1.estaDentroDe(10,15));
+        Assert.assertTrue(casillero2.estaDentroDe(10,15));
+        Assert.assertTrue(casillero3.estaDentroDe(10,15));
+
+    }
+
+    @Test
+    public void test09estaDentroDeDebeDarFalseSiElCasilleroTieneAlgunaComponenteFueraDeLosLimites() {
+        Casillero casillero1 = new Casillero( 11, 1 );
+        Casillero casillero2 = new Casillero( 1, 16 );
+        Casillero casillero3 = new Casillero( 11, 16 );
+
+        Assert.assertFalse(casillero1.estaDentroDe(10,15));
+        Assert.assertFalse(casillero2.estaDentroDe(10,15));
+        Assert.assertFalse(casillero3.estaDentroDe(10,15));
+
+    }
+
+    @Test
+    public void test10estaDentroDeDebeDarFalseSiAlgunoDeLosLimitesVale0() {
+        Casillero casillero1 = new Casillero( 1, 1 );
+        Casillero casillero2 = new Casillero( 1, 1 );
+        Casillero casillero3 = new Casillero( 1, 1 );
+
+        Assert.assertFalse(casillero1.estaDentroDe(0,15));
+        Assert.assertFalse(casillero2.estaDentroDe(10,0));
+        Assert.assertFalse(casillero3.estaDentroDe(0,0));
+
+    }
+
+    @Test
+    public void test11estaDentroDeDebeDarTrueParaValoresUno() {
+        Casillero casillero1 = new Casillero( 1, 1 );
+        Casillero casillero2 = new Casillero( 1, 1 );
+        Casillero casillero3 = new Casillero( 1, 1 );
+
+        Assert.assertTrue(casillero1.estaDentroDe(1,1));
+        Assert.assertTrue(casillero2.estaDentroDe(1,1));
+        Assert.assertTrue(casillero3.estaDentroDe(1,1));
+
+    }
+
+
+
 }

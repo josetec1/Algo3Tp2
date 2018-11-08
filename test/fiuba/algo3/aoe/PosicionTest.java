@@ -72,6 +72,38 @@ public class PosicionTest {
 
     }
 
+    @Test
+    public void test07estaDentroDeDebeDarTrueSiCadaUnoDeLosCasillerosEstaDentroDeLosLimites() {
+        Casillero casilleroUno = new Casillero(1,10);
+        Casillero casilleroDos = new Casillero (2,5);
+        Casillero casilleroTres = new Casillero (10,10);
+
+        Posicion unaPosicion = new Posicion(casilleroUno);
+        unaPosicion.agregar(casilleroDos);
+        unaPosicion.agregar(casilleroTres);
+
+
+        Assert.assertTrue(unaPosicion.estasDentroDe(10,10) );
+
+
+    }
+
+    @Test
+    public void test08estaDentroDeDebeDarFalseSiAlgunoDeLosCasillerosNoEstaDentroDeLosLimites() {
+        Casillero casilleroUno = new Casillero(2,10);
+        Casillero casilleroFueraDeLimite = new Casillero (15,1);
+        Casillero casilleroFueraDeLimite2 = new Casillero (10,15);
+
+        Posicion unaPosicion = new Posicion(casilleroUno);
+        unaPosicion.agregar(casilleroFueraDeLimite);
+        unaPosicion.agregar(casilleroFueraDeLimite2);
+
+
+        Assert.assertFalse(unaPosicion.estasDentroDe(10,10) );
+
+
+    }
+
 
 
 

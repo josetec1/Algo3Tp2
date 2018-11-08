@@ -43,13 +43,16 @@ public class Posicion {
     public void agregar (Casillero unCasillero) {
         this.casilleros.add(unCasillero);
     }
-//TODO implementar
-    public boolean estasDentroDe (int Ancho, int Alto) {
-        // para cada una de las posiciones calcular si esta dentro de los limites
-        // ejemplo 10 x 15 tablero
-        // coordenada 10,16
 
-        return false;
+    public boolean estasDentroDe (int ancho, int alto) {
+        // para cada una de las posiciones calcular si esta dentro de los limites
+
+        for (Casillero miCasillero : this.casilleros) {
+               if (!miCasillero.estaDentroDe(ancho,alto)) {return false;}
+        }
+        return true;
+
+
     }
 
 
