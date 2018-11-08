@@ -16,18 +16,58 @@ public class Tablero {
 
 
     public Tablero (int anchoMaximo, int altoMaximo){
-
-        //TODO validar el tamanio minimo, negativos, etc
-      tablero = new ArrayList<>();
-      ancho = anchoMaximo;
-      alto = altoMaximo;
+      //TODO validar el tamanio minimo, negativos, etc
+      this.tablero = new ArrayList<>();
+      this.ancho = anchoMaximo;
+      this.alto = altoMaximo;
      // this.inicializarTablero ();
 
     }
 
-    public boolean puerdoColocar (Posicion unaPosicion){return false;}
-    public void colocar (Ubicable unElemento){}
-    public void remover (Posicion unaPosicion) {}
+
+
+    public Boolean puedoColocar(Posicion unaPosicion) {
+
+       if(!this.estaDentroDeTablero (unaPosicion)){return false;}
+
+        return this.estaLibre(unaPosicion);
+
+    }
+
+    private boolean estaLibre (Posicion unaPosicion){
+        for (Ubicable elemento : this.tablero){
+            if  (elemento.getPosicion().seSuperponeCon(unaPosicion)){return false;}
+        }
+        return  true;
+
+    }
+
+    private boolean estaDentroDeTablero (Posicion unaPosicion){
+        return unaPosicion.estasDentroDe(this.ancho,this.alto);
+    }
+
+
+
+
+
+
+    public void colocar (Ubicable unElemento){
+
+        Posicion posicion = unElemento.getPosicion();
+
+        if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
+        if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
+
+        this.tablero.add (unElemento);
+    }
+
+//TODO Falta implementar
+    public void remover (Ubicable unElemento) {
+        this.tablero.remove(unElemento);
+
+    }
+
+    //TODO Falta implementar
     public void mover (Posicion origen, Direccion direccion){}
 
 /*
@@ -68,13 +108,7 @@ public class Tablero {
 
     }
 
-    public Boolean puedoColocar(Casillero unaPosicion, Dimension tamanioObjeto) {
 
-        if (this.existeCasillero(unaPosicion)){
-            return  this.getCasillero(unaPosicion).estaVacio();
-        }
-        return false;
-    }
 
 
     private Ubicable sacar(Casillero unaPosicion, Dimension tamanioObjeto) {

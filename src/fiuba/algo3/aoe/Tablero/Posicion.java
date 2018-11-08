@@ -4,16 +4,22 @@ import java.util.*;
 
 public class Posicion {
 
-    private ArrayList<Casillero> casilleros;
+    private ArrayList<Casillero> casilleros=new ArrayList<>();
 
     public Posicion(){
-        this.casilleros = new ArrayList<>();
+
     }
 
     //sobrecarga
     public Posicion(Casillero unCasillero){
-        this.casilleros = new ArrayList<>();
+
         this.agregar(unCasillero);
+    }
+
+    //sobrecarga 2
+    public Posicion(int x, int y){
+
+        this.agregar(new Casillero(x,y));
     }
 
     private Iterator<Casillero> getIterador(){
