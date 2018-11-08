@@ -64,6 +64,8 @@ public class TableroTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    /*
     @Test
     public void test06AgregarDebeLanzarExcepcionSiIntentoColocarFueraDelTablero() {
 
@@ -75,8 +77,8 @@ public class TableroTest {
         tablero.colocar(elemento);
 
       }
-
-    @Test
+*/
+/*    @Test
     public void test07AgregarDebeLanzarExcepcionSiIntentoColocarEnUnaPosicionOcupada(){
 
         Tablero tablero = new Tablero( 10,10);
@@ -95,7 +97,7 @@ public class TableroTest {
         tablero.colocar(elementoSuperpuesto);
     }
 
-
+*/
 
 
 
