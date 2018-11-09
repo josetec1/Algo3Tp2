@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Tablero {
 
-    private ArrayList<Ubicable> tablero;
+    private ArrayList<Ubicable> ubicables;
 
     private int ancho;
     private int alto;
@@ -18,7 +18,7 @@ public class Tablero {
 
     public Tablero (int anchoMaximo, int altoMaximo){
       //TODO validar el tamanio minimo, negativos, etc
-      this.tablero = new ArrayList<>();
+      this.ubicables = new ArrayList<>();
       this.ancho = anchoMaximo;
       this.alto = altoMaximo;
 
@@ -35,7 +35,7 @@ public class Tablero {
     }
 
     private Boolean estaLibre (Posicion unaPosicion){
-        for (Ubicable elemento : this.tablero){
+        for (Ubicable elemento : this.ubicables){
             if  (elemento.getPosicion().seSuperponeCon(unaPosicion)){return false;}
         }
         return  true;
@@ -47,32 +47,27 @@ public class Tablero {
     }
 
 
-    public void colocar (Ubicable unElemento) throws Posicion.PosicionOcupadaException, FueraDeTableroException {
-
-        Posicion posicion = unElemento.getPosicion();
+    public void colocar (Ubicable unElemento, Posicion posicion) throws Posicion.PosicionOcupadaException, FueraDeTableroException {
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
         if(!this.estaLibre(posicion)) {throw new Posicion.PosicionOcupadaException();}
-
-        this.tablero.add (unElemento);
+        unElemento.colocarEn(posicion);
+        this.ubicables.add (unElemento);
     }
 
 //TODO Falta implementar
     public void remover (Ubicable unElemento) {
-        this.tablero.remove(unElemento);
+        this.ubicables.remove(unElemento);
 
     }
-
 
     //TODO Falta implementar
     //antes de usar este metodo tuvo que haber llamado a puedo colocar.
-    public void trasladar (Ubicable unElemento, Posicion destino) throws FueraDeTableroException, Posicion.PosicionOcupadaException {
-        this.remover(unElemento);
-        this.colocar(unElemento);
-
+    public void trasladar (Ubicable unElemento, Direccionable direccion) throws FueraDeTableroException, Posicion.PosicionOcupadaException {
+        Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
+        if (this.puedoColocar(destino)){
+            this.colocar(unElemento,destino);
+        }
     }
-
-    //no usaria este metodo
-    public void mover (Posicion origen, Direccionable direccionable ){}
 
 }
