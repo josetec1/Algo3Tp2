@@ -1,24 +1,20 @@
 package fiuba.algo3.edificios;
 
+import fiuba.algo3.aoe.Ubicable.Ubicable;
+
 public abstract class Edificio {
 
-    private int costo;
     private int vidaTotal;
     private int vidaActual;
 
 
-    public Edificio(int unaVida, int unCosto) {
-        this.vidaTotal = unaVida;
-        this.vidaActual = unaVida;
-        this.costo = unCosto;
+    public Edificio(int unaVida) {
+        vidaTotal = unaVida;
+        vidaActual = unaVida;
     }
 
     public int vidaTotal() {
         return vidaTotal;
-    }
-
-    public int costo() {
-        return costo;
     }
 
     public int vidaActual() {
@@ -30,10 +26,9 @@ public abstract class Edificio {
         if(vidaActual<0) vidaActual = 0;
     }
 
-    public void aumentarVida(int unaCantidad) {
+    protected void aumentarVida(int unaCantidad) {
         vidaActual += unaCantidad;
         if(vidaActual > vidaTotal) vidaActual = vidaTotal;
-        ;
     }
 
     public abstract void repararse();

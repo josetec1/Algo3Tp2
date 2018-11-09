@@ -9,7 +9,7 @@ public class EdificioTest {
     @Test
     public void test001CrearUnaPlazaCentral (){
 
-        Edificio unaPlazaCentral = new PlazaCentral();
+        EdificioConstruible unaPlazaCentral = new PlazaCentral();
 
         Assert.assertEquals(unaPlazaCentral.vidaTotal(),450);
         Assert.assertEquals(unaPlazaCentral.costo(),100);
@@ -19,7 +19,7 @@ public class EdificioTest {
     @Test
     public void test002CrearUnCuartel (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
         Assert.assertEquals(unCuartel.costo(),50);
@@ -38,7 +38,7 @@ public class EdificioTest {
     @Test
     public void test004DisminuirVidaDelCuartelUnaVez (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
@@ -59,7 +59,7 @@ public class EdificioTest {
     @Test
     public void test006DisminuirVidaDelCuartelDosVeces (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
         unCuartel.disminuirVida(40);
 
@@ -70,7 +70,7 @@ public class EdificioTest {
     @Test
     public void test007RepararCuartelSinDanio (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.repararse();
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
@@ -80,7 +80,7 @@ public class EdificioTest {
     @Test
     public void test008RepararCuartelAlMaximoDeVida (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(20);
         unCuartel.repararse();
 
@@ -91,7 +91,7 @@ public class EdificioTest {
     @Test
     public void test009RepararCuartelMenorAlMaximoDeVida (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(60);
         unCuartel.repararse();
 
@@ -102,7 +102,7 @@ public class EdificioTest {
     @Test
     public void test010RepararPlazaCentralMenorAlMaximoDeVida (){
 
-        Edificio unaPlazaCentral = new PlazaCentral();
+        EdificioConstruible unaPlazaCentral = new PlazaCentral();
         unaPlazaCentral.disminuirVida(100);
         unaPlazaCentral.repararse();
 
@@ -124,11 +124,50 @@ public class EdificioTest {
     @Test
     public void test012DestruirCuartelVidaActualSiempreMayorOIgualQueCero (){
 
-        Edificio unCuartel = new Cuartel();
+        EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(500);
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
         Assert.assertEquals(unCuartel.vidaActual(),0);
     }
+
+    @Test
+    public void test013CuartelEstaEnConstruccion () {
+
+        EdificioConstruible unCuartel = new Cuartel();
+
+        Assert.assertTrue(unCuartel.estaEnConstruccion());
+    }
+
+    @Test
+    public void test014CuartelEstaEnConstruccionLuegoDeConstruirseUnaVez () {
+
+        EdificioConstruible unCuartel = new Cuartel();
+        unCuartel.construir();
+
+        Assert.assertTrue(unCuartel.estaEnConstruccion());
+    }
+
+    @Test
+    public void test014CuartelEstaEnConstruccionLuegoDeConstruirseDosVeces () {
+
+        EdificioConstruible unCuartel = new Cuartel();
+        unCuartel.construir();
+        unCuartel.construir();
+
+        Assert.assertTrue(unCuartel.estaEnConstruccion());
+    }
+
+    @Test
+    public void test015CuartelLuegoDeConstruirseYaNoEstaEnConstruccion () {
+
+        EdificioConstruible unCuartel = new Cuartel();
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
+
+        Assert.assertFalse(unCuartel.estaEnConstruccion());
+    }
+
 
 }
