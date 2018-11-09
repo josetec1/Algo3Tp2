@@ -39,7 +39,7 @@ public class TableroTest {
     }
 
     @Test
-    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupada() throws FueraDeTableroException, PosicionOcupadaException {
+    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupada()  {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
@@ -50,7 +50,7 @@ public class TableroTest {
     }
 
     @Test
-    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior() throws FueraDeTableroException, PosicionOcupadaException {
+    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior()  {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
@@ -64,8 +64,6 @@ public class TableroTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    /*
     @Test
     public void test06AgregarDebeLanzarExcepcionSiIntentoColocarFueraDelTablero() {
 
@@ -77,8 +75,8 @@ public class TableroTest {
         tablero.colocar(elemento);
 
       }
-*/
-/*    @Test
+
+   @Test
     public void test07AgregarDebeLanzarExcepcionSiIntentoColocarEnUnaPosicionOcupada(){
 
         Tablero tablero = new Tablero( 10,10);
@@ -97,15 +95,18 @@ public class TableroTest {
         tablero.colocar(elementoSuperpuesto);
     }
 
-*/
 
 
-
- /*   @Test
+/*
+    @Test
     public void test09RemoverDebeLanzarExcepcionSiLaPosicionEstaVacia(){
-         thrown.expect(CasilleroVacioException.class);
+
+        thrown.expect(CasilleroVacioException.class);
         tablero.retirar(unaPosicion,tamanioObjeto);
     }
+
+
+  /*
     @Test
     public void test10RemoverDebeLanzarExcepcionSiElLaPosicionEstaFueraDelTablero(){
 

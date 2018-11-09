@@ -19,43 +19,26 @@ public class Casillero {
 
     public int getY() {
         return y;
-    }
+   }
 
     public boolean estaDentroDe (int ancho,int alto){
-       /*
+       /* EJEMPLO DE COMO SE RESUELVE ESTE ESCENARIO
         Tamaño      10*15  es
                         1:1                   1:15
                         10:1                  10:15
         x <=ancho x >0
         y<= ancho y >0
+        ##############################################*/
 
-        */
        boolean coordenadaX, coordenadaY;
 
-        coordenadaX = ((this.x<= ancho) && (this.x> 0));
-        coordenadaY = ((this.y<= alto) && (this.y> 0));
-        return (coordenadaX && coordenadaY);
+       coordenadaX = ((this.x<= ancho) && (this.x> 0));
+       coordenadaY = ((this.y<= alto) && (this.y> 0));
+       return (coordenadaX && coordenadaY);
 
     }
 
-/*
-    @Override
-    public String toString(){
-        return getX() + " " + getY();
-    }
-    */
 
-//sobreescritura de metodos para poder usar la coordenada como key valida en el HashMap
-   /*
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + x;
-        result = prime * result + y;
-        return result;
-    }*/
-    //sobreescritura de metodos para poder usar la coordenada como key valida en el HashMap
 
     @Override
     public boolean equals(Object obj) {
@@ -73,3 +56,21 @@ public class Casillero {
         return true;
     }
 }
+/*
+    @Override
+    public String toString(){
+        return getX() + " " + getY();
+    }
+    */
+
+//sobreescritura de metodos para poder usar la coordenada como key valida en el HashMap
+   /*
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
+    }*/
+//sobreescritura de metodos para poder usar la coordenada como key valida en el HashMap

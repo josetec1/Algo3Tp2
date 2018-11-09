@@ -107,117 +107,175 @@ public class PosicionTest {
 
     }
 
+
     @Test
-    public void test09CalcularPosicionSiguienteDireccionDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test09CalcularPosicionSiguienteConDireccionDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+
         Casillero casillero = new Casillero(3,5);
-        Posicion posicion = new Posicion(casillero);
-        DireccionDerecha direccionNueva = new DireccionDerecha();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionDerecha();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
+
     }
 
+
     @Test
-    public void test10CalcularPosicionSiguienteDireccionArribaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test10CalcularPosicionSiguienteConDireccionArribaDebeDevolverPosicionConCasilleroEnX4Y5(){
+
+
         Casillero casillero = new Casillero(4,4);
-        Posicion posicion = new Posicion(casillero);
-        DireccionArriba direccionNueva = new DireccionArriba();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionArriba();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
+    }
+
+
+    @Test
+    public void test11CalcularPosicionSiguienteConDireccionIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+        Casillero casillero = new Casillero(5,5);
+        Posicion posicionOriginal = new Posicion(casillero);
+
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionIzquierda();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+       Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+       Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
 
     @Test
-    public void test11CalcularPosicionSiguienteDireccionIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test12CalcularPosicionSiguienteConDireccionAbajoDebeDevolverPosicionConCasilleroEnX4Y5(){
         Casillero casillero = new Casillero(4,6);
-        Posicion posicion = new Posicion(casillero);
-        DireccionAbajo direccionNueva = new DireccionAbajo();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionAbajo();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
 
     @Test
-    public void test12CalcularPosicionSiguienteDireccionAbajoDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(4,6);
-        Posicion posicion = new Posicion(casillero);
-        DireccionAbajo direccionNueva = new DireccionAbajo();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
-
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
-    }
-
-    @Test
-    public void test13CalcularPosicionSiguienteDireccionArribaDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test13CalcularPosicionSiguienteConDireccionArribaDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
         Casillero casillero = new Casillero(3,4);
-        Posicion posicion = new Posicion(casillero);
-        DireccionArribaDerecha direccionNueva = new DireccionArribaDerecha();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionArribaDerecha();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
 
     @Test
-    public void test14CalcularPosicionSiguienteDireccionArribaIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test14CalcularPosicionSiguienteConDireccionArribaIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
         Casillero casillero = new Casillero(5,4);
-        Posicion posicion = new Posicion(casillero);
-        DireccionArribaIzquierda direccionNueva = new DireccionArribaIzquierda();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionArribaIzquierda();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
 
     @Test
-    public void test15CalcularPosicionSiguienteDireccionAbajoIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test15CalcularPosicionSiguienteConDireccionAbajoIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
         Casillero casillero = new Casillero(5,6);
-        Posicion posicion = new Posicion(casillero);
-        DireccionAbajoIzquierda direccionNueva = new DireccionAbajoIzquierda();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionAbajoIzquierda();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
 
     @Test
-    public void test15CalcularPosicionSiguienteDireccionAbajoDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
+    public void test15CalcularPosicionSiguienteConDireccionAbajoDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
         Casillero casillero = new Casillero(3,6);
-        Posicion posicion = new Posicion(casillero);
-        DireccionAbajoDerecha direccionNueva = new DireccionAbajoDerecha();
-        Posicion posicionNueva = posicion.calcularPosicionSiguiente(direccionNueva);
+        Posicion posicionOriginal = new Posicion(casillero);
 
-        List<Casillero> casillerosNuevos = posicionNueva.getCasilleros();
-        for (Casillero casilleroActual : casillerosNuevos) {
-            Assert.assertEquals(casilleroActual.getY(), 5);
-            Assert.assertEquals(casilleroActual.getX(), 4);
-        }
+        Casillero casilleroSiguiente = new Casillero(4,5);
+        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+
+        Direccion direccionNueva = new DireccionAbajoDerecha();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionOriginal));
     }
+
+    @Test
+    public void test16CalcularPosicionSiguienteConVariosElementosSeAplicaACadaUno(){
+        // Ejemplo
+        // posicion  1.1  y 2.1  al desplzarlas deberia quedar
+        // posicion  2.1 y 3.1
+        // 1.1 no superpone.
+        // 2.1 y 3.1 si
+
+        Casillero casillero = new Casillero(1,1);
+        Casillero casillero2 = new Casillero(2,1);
+        Casillero casillero3 = new Casillero(3,1);
+
+        Posicion posicionOriginal = new Posicion(casillero);
+                 posicionOriginal.agregar(casillero2);
+
+        Posicion posicionEsperada = new Posicion(casillero2);
+        posicionEsperada.agregar(casillero3);
+
+        Posicion posicionNoVaAEstar = new Posicion(casillero);
+
+        Posicion posicionSiVaAEstar = new Posicion(casillero3);
+        Posicion posicionSiVaAEstar2 = new Posicion(casillero2);
+
+        Direccion direccionNueva = new DireccionDerecha();
+
+        Posicion posicionCalculada = posicionOriginal.calcularPosicionSiguiente(direccionNueva);
+
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionSiVaAEstar));
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionSiVaAEstar2));
+
+        Assert.assertFalse(posicionCalculada.seSuperponeCon(posicionNoVaAEstar));
+        Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
+    }
+
 }
 
 

@@ -28,11 +28,11 @@ public class Posicion {
         return casilleros.iterator();
 
     }
-
+/*
     public ArrayList <Casillero> getCasilleros(){
         return this.casilleros;
     }
-
+*/
 
     //
     public boolean seSuperponeCon (Posicion otraPosicion) {
@@ -66,9 +66,13 @@ public class Posicion {
     }
 
     public Posicion calcularPosicionSiguiente( Direccion direccion){
+
         Posicion nuevaPosicion = new Posicion();
+        Casillero casilleroNuevo;
+
         for(Casillero casilleroActual : this.casilleros){
-            nuevaPosicion.agregar(direccion.calcularSiguienteCasillero(casilleroActual.getX(),casilleroActual.getY()));
+            casilleroNuevo = direccion.calcularSiguienteCasillero(casilleroActual);
+             nuevaPosicion.agregar(casilleroNuevo);
         }
         return nuevaPosicion;
     }

@@ -20,7 +20,7 @@ public class Tablero {
       this.tablero = new ArrayList<>();
       this.ancho = anchoMaximo;
       this.alto = altoMaximo;
-     // this.inicializarTablero ();
+
 
     }
 
