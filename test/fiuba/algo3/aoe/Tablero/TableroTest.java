@@ -1,6 +1,6 @@
 package fiuba.algo3.aoe.Tablero;
 
-import fiuba.algo3.aoe.Ubicables.UbicableFicticio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
@@ -41,45 +41,45 @@ public class TableroTest {
     }
 
     @Test
-    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupada()  {
+    public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorUnidad()  {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Ubicable elemento = new UbicableFicticio(posicion);
-        tablero.colocar(elemento);
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicion);
 
         Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
     }
 
     @Test
-    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarElElementoAnterior()  {
+    public void test05PuedoColocarDebeDarTrueLuegoDeQuitarUnidadAnterior()  {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Ubicable elemento = new UbicableFicticio(posicion);
-        tablero.colocar(elemento);
+        Ubicable elemento = new UnidadMovil();
+        Assert.assertEquals( tablero.puedoColocar(posicion), true );
+        tablero.colocar(elemento,posicion);
+        Assert.assertEquals(tablero.puedoColocar(posicion), false);
         tablero.remover(elemento);
-
-        Assert.assertThat( tablero.puedoColocar(posicion), is( true ) );
+        Assert.assertEquals( tablero.puedoColocar(posicion),  true  );
     }
 
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test
-    public void test06AgregarDebeLanzarExcepcionSiIntentoColocarFueraDelTablero() {
+    public void test06AgregarDebeLanzarExcepcionSiIntentoColocarUnidadFueraDelTablero() {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Ubicable elemento = new UbicableFicticio(posicionFueraDeTablero);
-
+        Ubicable elemento = new UnidadMovil();
+        elemento.colocarEn(posicionFueraDeTablero);
         thrown.expect(FueraDeTableroException.class);
-        tablero.colocar(elemento);
-
+        tablero.colocar(elemento,posicionFueraDeTablero);
       }
 
    @Test
-    public void test07AgregarDebeLanzarExcepcionSiIntentoColocarEnUnaPosicionOcupada(){
+    public void test07AgregarDebeLanzarExcepcionSiIntentoColocarUnidadEnUnaPosicionOcupada(){
 
         Tablero tablero = new Tablero( 10,10);
 
@@ -89,12 +89,28 @@ public class TableroTest {
         Posicion posicionSuperpuesta = new Posicion(6,6);
 
 
-        Ubicable elemento = new UbicableFicticio(unaPosicion);
-        Ubicable elementoSuperpuesto = new UbicableFicticio(posicionSuperpuesta);
-        tablero.colocar(elemento);
+        Ubicable elemento = new UnidadMovil();
+        elemento.colocarEn(unaPosicion);
+        Ubicable elementoSuperpuesto = new UnidadMovil();
+        elementoSuperpuesto.colocarEn(posicionSuperpuesta);
+        tablero.colocar(elemento,unaPosicion);
 
         thrown.expect(Posicion.PosicionOcupadaException.class);
-        tablero.colocar(elementoSuperpuesto);
+        tablero.colocar(elementoSuperpuesto,posicionSuperpuesta);
+    }
+
+    @Test
+    public void test08PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorPosicionVariosCasilleros()  {
+
+        Tablero tablero = new Tablero( 10,10);
+        Posicion posicion = new Posicion(1,1);
+        posicion.agregar(new Casillero(1,2));
+        posicion.agregar(new Casillero(2,2));
+        posicion.agregar(new Casillero(2,1));
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicion);
+
+        Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
     }
 
 
