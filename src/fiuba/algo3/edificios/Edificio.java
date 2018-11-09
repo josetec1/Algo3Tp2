@@ -1,6 +1,6 @@
 package fiuba.algo3.edificios;
 
-public class Edificio {
+public abstract class Edificio {
 
     private int costo;
     private int vidaTotal;
@@ -27,5 +27,14 @@ public class Edificio {
 
     public void disminuirVida(int unaCantidad) {
         vidaActual -= unaCantidad;
+        if(vidaActual<0) vidaActual = 0;
     }
+
+    public void aumentarVida(int unaCantidad) {
+        vidaActual += unaCantidad;
+        if(vidaActual > vidaTotal) vidaActual = vidaTotal;
+        ;
+    }
+
+    public abstract void repararse();
 }
