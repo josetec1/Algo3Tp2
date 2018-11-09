@@ -15,4 +15,8 @@ private Posicion posicion;
 
     @Override
     public Posicion getPosicion() {return posicion;}
+
+    public void colocarEn ( Posicion posicion ) {
+
+    }
 }
