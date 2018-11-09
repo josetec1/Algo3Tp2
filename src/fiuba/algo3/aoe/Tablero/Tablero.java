@@ -1,8 +1,9 @@
 package fiuba.algo3.aoe.Tablero;
 
 
-import Ubicables.Unidades.movimiento.Direccion;
-import fiuba.algo3.aoe.Ubicable.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
 
 import java.util.*;
 
@@ -25,7 +26,7 @@ public class Tablero {
     }
 
 
-    public Boolean puedoColocar(Posicion unaPosicion) {
+    public Boolean puedoColocar( Posicion unaPosicion) {
 
        if(!this.estaDentroDeTablero (unaPosicion)){return false;}
 
@@ -46,12 +47,12 @@ public class Tablero {
     }
 
 
-    public void colocar (Ubicable unElemento) throws PosicionOcupadaException, FueraDeTableroException {
+    public void colocar (Ubicable unElemento) throws Posicion.PosicionOcupadaException, FueraDeTableroException {
 
         Posicion posicion = unElemento.getPosicion();
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
-        if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
+        if(!this.estaLibre(posicion)) {throw new Posicion.PosicionOcupadaException();}
 
         this.tablero.add (unElemento);
     }
@@ -65,13 +66,13 @@ public class Tablero {
 
     //TODO Falta implementar
     //antes de usar este metodo tuvo que haber llamado a puedo colocar.
-    public void trasladar (Ubicable unElemento, Posicion destino) throws FueraDeTableroException, PosicionOcupadaException {
+    public void trasladar (Ubicable unElemento, Posicion destino) throws FueraDeTableroException, Posicion.PosicionOcupadaException {
         this.remover(unElemento);
         this.colocar(unElemento);
 
     }
 
     //no usaria este metodo
-    public void mover (Posicion origen, Direccion direccion){}
+    public void mover (Posicion origen, Direccionable direccionable ){}
 
 }
