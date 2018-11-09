@@ -66,13 +66,13 @@ public class Posicion {
         return true;
     }
 
-    public Posicion calcularPosicionSiguiente( Direccionable direccionable ){
+    public Posicion calcularPosicionSiguiente( Direccionable direccion ){
 
         Posicion nuevaPosicion = new Posicion();
         Casillero casilleroNuevo;
 
         for(Casillero casilleroActual : this.casilleros){
-            casilleroNuevo = direccionable.calcularSiguienteCasillero(casilleroActual);
+            casilleroNuevo = direccion.calcularSiguienteCasillero(casilleroActual);
              nuevaPosicion.agregar(casilleroNuevo);
         }
         return nuevaPosicion;
