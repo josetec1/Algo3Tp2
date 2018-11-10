@@ -1,7 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Posicion;
 
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
-import fiuba.algo3.aoe.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
