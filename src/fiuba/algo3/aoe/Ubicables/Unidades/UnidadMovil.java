@@ -16,8 +16,8 @@ public class UnidadMovil implements Ubicable {
         this.posicion = posicion;
     }
 
-    public Posicion obtenerPosicionDeAvance( Direccionable direccion ){
+    public Posicion obtenerPosicionDeAvance( Direccionable direccionable ){
 
-        return this.posicion.calcularPosicionSiguiente(direccion);
+        return this.posicion.calcularPosicionSiguiente(direccionable);
     }
 }
