@@ -7,6 +7,7 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -98,7 +99,7 @@ public class TableroTest {
         elementoSuperpuesto.colocarEn(posicionSuperpuesta);
         tablero.colocar(elemento,unaPosicion);
 
-        thrown.expect(Posicion.PosicionOcupadaException.class);
+        thrown.expect(PosicionOcupadaException.class);
         tablero.colocar(elementoSuperpuesto,posicionSuperpuesta);
     }
 
@@ -207,7 +208,7 @@ public class TableroTest {
         Ubicable elemento2 = new UnidadMovil();
         tablero.colocar(elemento2,posicionDestino);
 
-        thrown.expect(Posicion.PosicionOcupadaException.class);
+        thrown.expect(PosicionOcupadaException.class);
         tablero.mover(elemento,derecha);
     }
 

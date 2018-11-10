@@ -4,6 +4,7 @@ package fiuba.algo3.aoe.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 
 import java.util.*;
 
@@ -50,7 +51,7 @@ public class Tablero {
     public void colocar (Ubicable unElemento, Posicion posicion)  {
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
-        if(!this.estaLibre(posicion)) {throw new Posicion.PosicionOcupadaException();}
+        if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
 
         unElemento.colocarEn(posicion);
         this.ubicables.add (unElemento);

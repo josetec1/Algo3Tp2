@@ -78,7 +78,4 @@ public class Posicion {
         return nuevaPosicion;
     }
 
-
-    public static class PosicionOcupadaException extends RuntimeException {
-    }
 }
