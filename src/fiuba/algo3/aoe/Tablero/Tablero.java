@@ -15,9 +15,9 @@ public class Tablero {
     private int ancho;
     private int alto;
 
-
+    //TODO: validar el tamanio minimo, negativos, etc
     public Tablero (int anchoMaximo, int altoMaximo){
-      //TODO validar el tamanio minimo, negativos, etc
+
       this.ubicables = new ArrayList<>();
       this.ancho = anchoMaximo;
       this.alto = altoMaximo;
@@ -46,28 +46,40 @@ public class Tablero {
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
-
-    public void colocar (Ubicable unElemento, Posicion posicion) throws Posicion.PosicionOcupadaException, FueraDeTableroException {
+    // Recibe un ubicable y una posicion, luego de colocarlo, le setea la posicion al ubicable
+    public void colocar (Ubicable unElemento, Posicion posicion)  {
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
         if(!this.estaLibre(posicion)) {throw new Posicion.PosicionOcupadaException();}
+
         unElemento.colocarEn(posicion);
         this.ubicables.add (unElemento);
     }
 
-//TODO Falta implementar
+
     public void remover (Ubicable unElemento) {
+        if(!this.estaEnElTablero (unElemento)) {throw new NoExisteElementoException();}
+
         this.ubicables.remove(unElemento);
 
     }
 
-    //TODO Falta implementar
-    //antes de usar este metodo tuvo que haber llamado a puedo colocar.
-    public void trasladar (Ubicable unElemento, Direccionable direccion) throws FueraDeTableroException, Posicion.PosicionOcupadaException {
+    private Boolean estaEnElTablero (Ubicable unElemento){
+        return this.ubicables.contains(unElemento);
+    }
+
+
+    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
+    //(previamente haber llamado a puedo colocar)
+    // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
+    public void mover (Ubicable unElemento, Direccionable direccion) {
+
+        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+
         Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
-        if (this.puedoColocar(destino)){
-            this.colocar(unElemento,destino);
-        }
+        this.remover(unElemento);
+        this.colocar(unElemento,destino);
+
     }
 
 }

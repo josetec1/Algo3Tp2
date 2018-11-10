@@ -1,5 +1,8 @@
 package fiuba.algo3.aoe.Tablero;
 
+import fiuba.algo3.aoe.Ubicables.Direccion.DireccionAbajo;
+import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -113,70 +116,102 @@ public class TableroTest {
         Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
     }
 
-
-
-/*
     @Test
-    public void test09RemoverDebeLanzarExcepcionSiLaPosicionEstaVacia(){
+    public void test09RemoverDebeLanzarExcepcionSiElElementoNoFueColocadoPreviamente(){
 
-        thrown.expect(CasilleroVacioException.class);
-        tablero.retirar(unaPosicion,tamanioObjeto);
-    }
-
-
-  /*
-    @Test
-    public void test10RemoverDebeLanzarExcepcionSiElLaPosicionEstaFueraDelTablero(){
+        Tablero tablero = new Tablero( 10,10);
+        Ubicable elemento= new UnidadMovil();
 
 
+        thrown.expect(NoExisteElementoException.class);
+        tablero.remover(elemento);
 
-        thrown.expect(FueraDeTableroException.class);
-        tablero.retirar(posicionFueraDeTablero,tamanioObjeto);
     }
 
     @Test
-    public void test11MoverDebeLanzarExcepcionSiElOrigenEstaFueraDelTablero(){
+    public void test10RemoverRemueveElElementoColocadoPreviamente(){
 
-        thrown.expect(FueraDeTableroException.class);
-        tablero.mover(origenFueraDeTablero,posicionDestino);
+        Tablero tablero = new Tablero( 10,10);
 
+        Posicion unaPosicion = new Posicion(3,3);
+        Ubicable elemento= new UnidadMovil();
+
+        tablero.colocar(elemento,unaPosicion);
+
+        tablero.remover(elemento);
+        Assert.assertThat( tablero.puedoColocar(unaPosicion), is( true ) );
 
     }
+
+
+
     @Test
    public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
+        Tablero tablero = new Tablero( 10,10);
+        Posicion posicion = new Posicion(10,10);
+
+
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicion);
+        Direccionable derecha = new DireccionDerecha();
+
 
 
        thrown.expect(FueraDeTableroException.class);
-       tablero.mover(origen,destinoFueraDeTablero);
+       tablero.mover(elemento,derecha);
    }
 
     @Test
-    public void test13MoverDebeLanzarExcepcionSiElOrigenEstaVacio(){
+    public void test13AlMoverLaPosicionOriginalQuedaLibreYElDestinoOcupado(){
+        Tablero tablero = new Tablero( 10,10);
+        Posicion posicionInicial = new Posicion(9,10);
 
+        Posicion posicionDestino = new Posicion(10,10);
 
-        thrown.expect(CasilleroVacioException.class);
-        tablero.mover(origenVacio,destino);
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicionInicial);
+        Direccionable derecha = new DireccionDerecha();
+
+        tablero.mover(elemento,derecha);
+
+        Assert.assertThat( tablero.puedoColocar(posicionInicial), is( true ) );
+        Assert.assertThat( tablero.puedoColocar(posicionDestino), is( false ) );
+
+    }
+
+    @Test
+    public void test14MoverDebeLanzarExcepcionSiElElementoNoFueAgregadoPreviamente(){
+        Tablero tablero = new Tablero( 10,10);
+
+       // Posicion unaPosicion = new Posicion(3,3);
+        Ubicable elemento= new UnidadMovil();
+
+       // tablero.colocar(elemento,unaPosicion);
+        Direccionable direccion = new DireccionAbajo();
+        thrown.expect(NoExisteElementoException.class);
+        tablero.mover(elemento, direccion);
+
     }
 
     @Test
    public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
+        Tablero tablero = new Tablero( 10,10);
+        Direccionable derecha = new DireccionDerecha();
 
-        thrown.expect(CasilleroOcupadoException.class);
-        tablero.mover(origen,destinoOcupado);
+        Posicion posicionInicial = new Posicion(9,10);
+        Posicion posicionDestino = new Posicion(10,10);
+
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicionInicial);
+
+        Ubicable elemento2 = new UnidadMovil();
+        tablero.colocar(elemento2,posicionDestino);
+
+        thrown.expect(Posicion.PosicionOcupadaException.class);
+        tablero.mover(elemento,derecha);
     }
 
 
-    @Test
-    public void test15MoverQuitaElElementoDelOrigenYLoDejaEnElDestino(){
-
-
-        Assert.assertThat( tablero.puedoColocar(posicionOrigen,tamanioObjeto), is( true ) );
-        Assert.assertThat( tablero.puedoColocar(posicionDestino,tamanioObjeto), is( false ) );
-
-    }
-
-
-*/
 }
 
 
