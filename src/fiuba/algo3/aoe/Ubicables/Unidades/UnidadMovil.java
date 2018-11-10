@@ -8,7 +8,6 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 public class UnidadMovil implements Ubicable {
     private Posicion posicion;
 
-
     public Posicion getPosicion() {
         return this.posicion;
     }
@@ -17,8 +16,8 @@ public class UnidadMovil implements Ubicable {
         this.posicion = posicion;
     }
 
-    public Posicion obtenerPosicionSiguiente( Direccionable direccionable ){
+    public Posicion obtenerPosicionDeAvance( Direccionable direccion ){
 
-        return this.posicion.calcularPosicionSiguiente(direccionable);
+        return this.posicion.calcularPosicionSiguiente(direccion);
     }
 }
