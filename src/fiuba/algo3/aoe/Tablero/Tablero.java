@@ -69,7 +69,8 @@ public class Tablero {
         return this.ubicables.contains(unElemento);
     }
 
-
+    //VERSION ANTERIOR DE MOVER
+/*
     // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
     //(previamente haber llamado a puedo colocar)
     // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
@@ -78,6 +79,19 @@ public class Tablero {
         if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
 
         Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
+        this.remover(unElemento);
+        this.colocar(unElemento,destino);
+
+    }
+*/
+    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
+    //(previamente haber llamado a puedo colocar)
+    // quita el elemento pasado y luego lo coloca en la posicion de destino
+    public void mover (Ubicable unElemento, Posicion destino) {
+
+        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+
+
         this.remover(unElemento);
         this.colocar(unElemento,destino);
 

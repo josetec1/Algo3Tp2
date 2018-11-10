@@ -145,7 +145,7 @@ public class TableroTest {
     }
 
 
-
+/*
     @Test
    public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Tablero tablero = new Tablero( 10,10);
@@ -161,7 +161,22 @@ public class TableroTest {
        thrown.expect(FueraDeTableroException.class);
        tablero.mover(elemento,derecha);
    }
+*/
 
+@Test
+    public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
+        Tablero tablero = new Tablero( 10,10);
+        Posicion posicion = new Posicion(10,10);
+
+
+        Posicion posicionDestino =new Posicion (11,10);
+
+        Ubicable elemento = new UnidadMovil();
+        tablero.colocar(elemento,posicion);
+
+        thrown.expect(FueraDeTableroException.class);
+        tablero.mover(elemento,posicionDestino);
+}
     @Test
     public void test13AlMoverLaPosicionOriginalQuedaLibreYElDestinoOcupado(){
         Tablero tablero = new Tablero( 10,10);
@@ -171,9 +186,9 @@ public class TableroTest {
 
         Ubicable elemento = new UnidadMovil();
         tablero.colocar(elemento,posicionInicial);
-        Direccionable derecha = new DireccionDerecha();
 
-        tablero.mover(elemento,derecha);
+
+        tablero.mover(elemento,posicionDestino);
 
         Assert.assertThat( tablero.puedoColocar(posicionInicial), is( true ) );
         Assert.assertThat( tablero.puedoColocar(posicionDestino), is( false ) );
@@ -184,20 +199,20 @@ public class TableroTest {
     public void test14MoverDebeLanzarExcepcionSiElElementoNoFueAgregadoPreviamente(){
         Tablero tablero = new Tablero( 10,10);
 
-       // Posicion unaPosicion = new Posicion(3,3);
+        Posicion unaPosicion = new Posicion(3,3);
         Ubicable elemento= new UnidadMovil();
 
-       // tablero.colocar(elemento,unaPosicion);
-        Direccionable direccion = new DireccionAbajo();
+
+
         thrown.expect(NoExisteElementoException.class);
-        tablero.mover(elemento, direccion);
+        tablero.mover(elemento, unaPosicion);
 
     }
 
     @Test
    public void test14MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
         Tablero tablero = new Tablero( 10,10);
-        Direccionable derecha = new DireccionDerecha();
+
 
         Posicion posicionInicial = new Posicion(9,10);
         Posicion posicionDestino = new Posicion(10,10);
@@ -209,7 +224,7 @@ public class TableroTest {
         tablero.colocar(elemento2,posicionDestino);
 
         thrown.expect(PosicionOcupadaException.class);
-        tablero.mover(elemento,derecha);
+        tablero.mover(elemento,posicionDestino);
     }
 
 
