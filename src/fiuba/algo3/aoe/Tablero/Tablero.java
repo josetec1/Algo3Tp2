@@ -48,10 +48,12 @@ public class Tablero {
     }
 
     // Recibe un ubicable y una posicion, luego de colocarlo, le setea la posicion al ubicable
+    // el ubicable tiene no puede estar agregado previamente
     public void colocar (Ubicable unElemento, Posicion posicion)  {
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
         if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
+        if (this.estaEnElTablero(unElemento)){throw new ElElementoYaExisteException();}
 
         unElemento.colocarEn(posicion);
         this.ubicables.add (unElemento);
@@ -74,7 +76,7 @@ public class Tablero {
     // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
     //(previamente haber llamado a puedo colocar)
     // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
-    public void mover (Ubicable unElemento, Direccionable direccion) {
+    public void moverElemento (Ubicable unElemento, Direccionable direccion) {
 
         if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
 
@@ -87,7 +89,7 @@ public class Tablero {
     // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
     //(previamente haber llamado a puedo colocar)
     // quita el elemento pasado y luego lo coloca en la posicion de destino
-    public void mover (Ubicable unElemento, Posicion destino) {
+    public void moverElemento(Ubicable unElemento, Posicion destino) {
 
         if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
 

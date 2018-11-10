@@ -22,10 +22,12 @@ public class UnidadMovil implements Ubicable {
         return this.posicion.calcularPosicionSiguiente(direccionable);
     }
 
+    //TODO: si no se puede mover por que la posicion esta ocupada, tendria que hacer algo, retornar un bool
+    // y usar eso para volvera intentar otra cosa, o enviar un mensaje "ahi no me puedo mover"
     public void mover( Tablero tablero, Direccionable direccion){
         Posicion destino = this.obtenerPosicionDeAvance(direccion);
         if (tablero.puedoColocar(destino)){
-            tablero.colocar(this,destino);
+            tablero.moverElemento(this,destino);
         }
     }
 }
