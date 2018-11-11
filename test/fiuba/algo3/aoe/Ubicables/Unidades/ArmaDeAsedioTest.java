@@ -15,7 +15,8 @@ public class ArmaDeAsedioTest {
     public void test01SeCreaCorrectamenteArmaDeAsedio(){
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
 
-        Assert.assertEquals(armaDeAsedio.vidaTotal(), 150);
+        Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);
+        Assert.assertEquals(armaDeAsedio.getVidaActual(), 150);
         Assert.assertEquals(armaDeAsedio.costo(),200);
     }
 
@@ -23,18 +24,18 @@ public class ArmaDeAsedioTest {
     public void test02Disminuir50VidaArmaDeAsedioDevuelve100DeVida(){
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
         armaDeAsedio.disminuirVida(50);
-        Assert.assertEquals(armaDeAsedio.vidaTotal(), 100);
+        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
     }
 
     @Test
     public void test03Disminuir50VidaArmaDeAsedioCrearNuevaArmaDeAsedioDevuelve150DeVida(){
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
         armaDeAsedio.disminuirVida(50);
-        Assert.assertEquals(armaDeAsedio.vidaTotal(), 100);
+        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
 
         ArmaDeAsedio admaDeAsedioSecundaria = new ArmaDeAsedio();
-        Assert.assertEquals(armaDeAsedio.vidaTotal(), 100);
-        Assert.assertEquals(admaDeAsedioSecundaria.vidaTotal(), 150);
+        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
+        Assert.assertEquals(admaDeAsedioSecundaria.getVidaActual(), 150);
 
     }
 
