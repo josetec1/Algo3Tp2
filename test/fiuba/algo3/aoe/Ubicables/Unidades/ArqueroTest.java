@@ -14,13 +14,14 @@ public class ArqueroTest {
     public void test01SeCreaCorrectamenteArquero(){
         Arquero arquero1 = new Arquero();
 
-        Assert.assertEquals(arquero1.vidaTotal(), 75);
+        Assert.assertEquals(arquero1.getVidaMaxima(), 75);
+        Assert.assertEquals(arquero1.getVidaActual(), 75);
         Assert.assertEquals(arquero1.costo(),75);
     }
 
 
     @Test
-    public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
+    public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
         Ubicable arquero1 = new Arquero();
         Posicion origen = new Posicion(2,5);
@@ -33,7 +34,7 @@ public class ArqueroTest {
 
 
     @Test
-    public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
+    public void test03MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
         UnidadMovil arquero1 = new Arquero();
         Direccionable direccion = new DireccionDerecha();
@@ -49,7 +50,14 @@ public class ArqueroTest {
         Assert.assertThat(tablero.puedoColocar(calculada), is(false) ); // la posicion en el tablero esta ocupada
         Assert.assertThat(tablero.puedoColocar(origen), is(true) ); // el origen esta libre
 
-
     }
+
+    @Test
+    public void test04Disminuir50VidaArmaDeAsedioDevuelve25DeVida(){
+        Arquero arquero = new Arquero();
+        arquero.disminuirVida(50);
+        Assert.assertEquals(arquero.getVidaActual(), 25);
+    }
+
 
 }
