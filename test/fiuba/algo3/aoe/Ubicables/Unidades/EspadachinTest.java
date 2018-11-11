@@ -15,7 +15,8 @@ public class EspadachinTest {
     public void test01SeCreaCorrectamenteEspadachin(){
         Espadachin espadachin1 = new Espadachin();
 
-        Assert.assertEquals(espadachin1.vidaTotal(), 100);
+        Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
+        Assert.assertEquals(espadachin1.getVidaActual(), 100);
         Assert.assertEquals(espadachin1.costo(),50);
     }
 
@@ -51,6 +52,13 @@ public class EspadachinTest {
         Assert.assertThat(tablero.puedoColocar(origen), is(true) ); // el origen esta libre
 
 
+    }
+
+    @Test
+    public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
+        Espadachin espadachin = new Espadachin();
+        espadachin.disminuirVida(50);
+        Assert.assertEquals(espadachin.getVidaActual(), 50);
     }
 
 }
