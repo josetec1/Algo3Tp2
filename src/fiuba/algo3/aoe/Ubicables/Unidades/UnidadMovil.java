@@ -6,8 +6,12 @@ import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public class UnidadMovil implements Ubicable {
+public abstract class UnidadMovil implements Ubicable {
     private Posicion posicion;
+    private String jugador;
+
+
+    public abstract int costo();
 
     public Posicion getPosicion() {
         return this.posicion;
