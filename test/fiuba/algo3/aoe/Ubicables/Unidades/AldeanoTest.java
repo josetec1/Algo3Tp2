@@ -10,17 +10,19 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 
 public class AldeanoTest {
+
     @Test
     public void test01SeCreaCorrectamenteAldeano(){
         Aldeano aldeano = new Aldeano();
 
-        Assert.assertEquals(aldeano.vidaTotal(), 50);
+        Assert.assertEquals(aldeano.getVidaMaxima(), 50);
+        Assert.assertEquals(aldeano.getVidaActual(), 50);
         Assert.assertEquals(aldeano.costo(),25);
     }
 
 
     @Test
-    public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
+    public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
         Ubicable aldeano1 = new Aldeano();
         Posicion origen = new Posicion(2,5);
@@ -31,9 +33,8 @@ public class AldeanoTest {
 
     }
 
-
     @Test
-    public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
+    public void test03MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
         UnidadMovil aldeano1 = new Aldeano();
         Direccionable direccion = new DireccionDerecha();
@@ -50,6 +51,13 @@ public class AldeanoTest {
         Assert.assertThat(tablero.puedoColocar(origen), is(true) ); // el origen esta libre
 
 
+    }
+
+    @Test
+    public void test04AldenoDisminuir25VidaDevuelveVida25(){
+        Aldeano aldeano = new Aldeano();
+        aldeano.disminuirVida(25);
+        Assert.assertEquals(aldeano.getVidaActual(),25);
     }
 
 }
