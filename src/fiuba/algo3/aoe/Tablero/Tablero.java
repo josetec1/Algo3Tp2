@@ -43,7 +43,7 @@ public class Tablero {
 
     }
 
-    private Boolean estaDentroDeTablero (Posicion unaPosicion){
+    public Boolean estaDentroDeTablero ( Posicion unaPosicion ){
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
