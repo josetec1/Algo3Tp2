@@ -15,8 +15,8 @@ public class EspadachinTest {
     public void test01SeCreaCorrectamenteEspadachin(){
         Espadachin espadachin1 = new Espadachin();
 
-        Assert.assertEquals(espadachin1.vidaTotal(), 50);
-        Assert.assertEquals(espadachin1.costo(),25);
+        Assert.assertEquals(espadachin1.vidaTotal(), 100);
+        Assert.assertEquals(espadachin1.costo(),50);
     }
 
 

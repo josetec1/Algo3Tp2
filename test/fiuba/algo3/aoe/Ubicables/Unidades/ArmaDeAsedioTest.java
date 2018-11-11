@@ -15,8 +15,8 @@ public class ArmaDeAsedioTest {
     public void test01SeCreaCorrectamenteArmaDeAsedio(){
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
 
-        Assert.assertEquals(armaDeAsedio.vidaTotal(), 50);
-        Assert.assertEquals(armaDeAsedio.costo(),25);
+        Assert.assertEquals(armaDeAsedio.vidaTotal(), 150);
+        Assert.assertEquals(armaDeAsedio.costo(),200);
     }
 
     @Test

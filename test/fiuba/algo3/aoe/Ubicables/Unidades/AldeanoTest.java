@@ -14,8 +14,8 @@ public class AldeanoTest {
     public void test01SeCreaCorrectamenteAldeano(){
         Aldeano aldeano = new Aldeano();
 
-        Assert.assertEquals(aldeano.vidaTotal(), 150);
-        Assert.assertEquals(aldeano.costo(),200);
+        Assert.assertEquals(aldeano.vidaTotal(), 50);
+        Assert.assertEquals(aldeano.costo(),25);
     }
 
 
