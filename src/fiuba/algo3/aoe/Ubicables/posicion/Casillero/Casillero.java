@@ -73,4 +73,3 @@ public class Casillero {
         result = prime * result + y;
         return result;
     }*/
-//sobreescritura de metodos para poder usar la coordenada como key valida en el HashMap

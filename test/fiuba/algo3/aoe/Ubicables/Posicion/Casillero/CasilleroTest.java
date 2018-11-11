@@ -16,20 +16,20 @@ public class CasilleroTest {
 
         Casillero unaCasillero = new Casillero(3,4);
 
-       // Assert.assertEquals(unaCasillero.getX(),3);
-        //Assert.assertEquals(unaCasillero.getY(),4);
+      Assert.assertEquals(unaCasillero.getX(),3);
+      Assert.assertEquals(unaCasillero.getY(),4);
 
     }
     @Test
     public void test02DDosCacillerosConLasMismasComponentesSonElMismoCasillero() {
         Casillero casillero1 = new Casillero( 2, 2 );
         Casillero casillero2 = new Casillero( 2, 2 );
-        Casillero casillero3 = new Casillero( 3, 2 );  // != x
-        Casillero casillero4 = new Casillero( 2, 3 );  // != y
+        Casillero casilleroConXDistinta = new Casillero( 3, 2 );  // != x
+        Casillero CasilleroConYDistinta = new Casillero( 2, 3 );  // != y
 
         Assert.assertThat(casillero1, is(casillero2) );
-        Assert.assertThat(casillero1, is( not(casillero3) ) );
-        Assert.assertThat(casillero1, is( not(casillero4) ) );
+        Assert.assertThat(casillero1, is( not(casilleroConXDistinta) ) );
+        Assert.assertThat(casillero1, is( not(CasilleroConYDistinta) ) );
     }
 
     @Test
