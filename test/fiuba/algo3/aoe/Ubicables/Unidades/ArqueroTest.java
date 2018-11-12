@@ -22,7 +22,7 @@ public class ArqueroTest {
         Assert.assertEquals(arquero1.getCosto(),75);
     }
 
-
+/*
     @Test
     public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
@@ -56,7 +56,7 @@ public class ArqueroTest {
         Assert.assertThat(tablero.puedoColocar(origen), is(true) ); // el origen esta libre
 
     }
-
+*/
     @Test
     public void test04Disminuir50VidaArmaDeAsedioDevuelve25DeVida(){
         Tablero tablero = new Tablero(10,10);

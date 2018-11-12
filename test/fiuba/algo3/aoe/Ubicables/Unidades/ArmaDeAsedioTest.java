@@ -45,7 +45,7 @@ public class ArmaDeAsedioTest {
 
     }
 
-
+/*
     @Test
     public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
@@ -80,5 +80,5 @@ public class ArmaDeAsedioTest {
 
 
     }
-
+*/
 }

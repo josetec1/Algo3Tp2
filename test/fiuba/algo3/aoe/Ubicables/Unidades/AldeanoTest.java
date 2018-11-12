@@ -24,7 +24,7 @@ public class AldeanoTest {
         Assert.assertEquals(aldeano.getCosto(),25);
     }
 
-
+/*
     @Test
     public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
@@ -58,7 +58,7 @@ public class AldeanoTest {
 
 
     }
-
+*/
     @Test
     public void test04AldenoDisminuir25VidaDevuelveVida25(){
         Tablero tablero = new Tablero(10,10);
@@ -74,7 +74,8 @@ public class AldeanoTest {
         Jugador jugador = new Jugador("Mauricio",tablero);
         Jugador jugador2 = new Jugador("Juan",tablero);
         Aldeano aldeano = new Aldeano(jugador);
-        Assert.assertEquals(aldeano.perteneceAJugador(jugador2),false);
+        Assert.assertThat (aldeano.perteneceAJugador(jugador2),is(false));
+
     }
 
 }

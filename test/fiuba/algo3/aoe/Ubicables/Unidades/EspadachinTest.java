@@ -23,7 +23,7 @@ public class EspadachinTest {
         Assert.assertEquals(espadachin1.getCosto(),50);
     }
 
-
+/*
     @Test
     public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
@@ -57,7 +57,7 @@ public class EspadachinTest {
 
 
     }
-
+*/
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
         Tablero tablero = new Tablero(20,20);
