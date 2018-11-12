@@ -7,8 +7,7 @@ public interface Ubicable {
 
      Posicion getPosicion ();
 
-     int costo();
-
      void colocarEn(Posicion posicion);
 
+     int getCosto();
 }
