@@ -46,9 +46,16 @@ public class CasilleroTest {
         Assert.assertNotSame(casillero1,null);
     }
 
+    @Test
+    public void test05EqualsDeUnCasilleroConOtroTipoDeObjetosDebeDarFalse() {
+        Casillero casillero1 = new Casillero( 2, 2 );
+        String otroTipoDeObjeto = "Maradona" ;
+        Assert.assertNotSame(casillero1,otroTipoDeObjeto);
+    }
+
 
     @Test
-    public void test05estaDentroDeDebeDarFalseSiElCasilleroTieneValoresNegativos() {
+    public void test06estaDentroDeDebeDarFalseSiElCasilleroTieneValoresNegativos() {
         Casillero casillero1 = new Casillero( -1, 0 );
         Casillero casillero2 = new Casillero( 0,-1);
         Casillero casillero3 = new Casillero( -1,-1);
@@ -59,7 +66,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test06estaDentroDeDebeDarFalseSiElCasilleroTieneValoresCero() {
+    public void test07estaDentroDeDebeDarFalseSiElCasilleroTieneValoresCero() {
         Casillero casillero1 = new Casillero( 0, 1 );
         Casillero casillero2 = new Casillero( 1, 0 );
         Casillero casillero3 = new Casillero( 0, 0 );
@@ -71,7 +78,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test07estaDentroDeDebeDarTrueSiEstaLosLimitesSuperioresDeLosValoresPasados() {
+    public void test08estaDentroDeDebeDarTrueSiEstaLosLimitesSuperioresDeLosValoresPasados() {
         Casillero casillero1 = new Casillero( 10, 1 );
         Casillero casillero2 = new Casillero( 1, 15 );
         Casillero casillero3 = new Casillero( 10, 15 );
@@ -83,7 +90,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test08estaDentroDeDebeDarTrueSiEstaLosLimitesinferioresDeLosValoresPasados() {
+    public void test09estaDentroDeDebeDarTrueSiEstaLosLimitesinferioresDeLosValoresPasados() {
         Casillero casillero1 = new Casillero( 1, 2 );
         Casillero casillero2 = new Casillero( 2, 1 );
         Casillero casillero3 = new Casillero( 1, 1 );
@@ -95,7 +102,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test09estaDentroDeDebeDarFalseSiElCasilleroTieneAlgunaComponenteFueraDeLosLimites() {
+    public void test10estaDentroDeDebeDarFalseSiElCasilleroTieneAlgunaComponenteFueraDeLosLimites() {
         Casillero casillero1 = new Casillero( 11, 1 );
         Casillero casillero2 = new Casillero( 1, 16 );
         Casillero casillero3 = new Casillero( 11, 16 );
@@ -107,7 +114,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test10estaDentroDeDebeDarFalseSiAlgunoDeLosLimitesVale0() {
+    public void test11estaDentroDeDebeDarFalseSiAlgunoDeLosLimitesVale0() {
         Casillero casillero1 = new Casillero( 1, 1 );
         Casillero casillero2 = new Casillero( 1, 1 );
         Casillero casillero3 = new Casillero( 1, 1 );
@@ -119,7 +126,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void test11estaDentroDeDebeDarTrueParaValoresUno() {
+    public void test12estaDentroDeDebeDarTrueParaValoresUno() {
         Casillero casillero1 = new Casillero( 1, 1 );
         Casillero casillero2 = new Casillero( 1, 1 );
         Casillero casillero3 = new Casillero( 1, 1 );

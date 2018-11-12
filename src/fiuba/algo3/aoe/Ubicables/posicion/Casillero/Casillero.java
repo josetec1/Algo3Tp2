@@ -42,17 +42,14 @@ public class Casillero {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Casillero other = (Casillero) obj;
-        if (x != other.x)
-            return false;
-        if (y != other.y)
-            return false;
+       if (this == obj)  {return true;}
+       if (obj == null)  {return false;}
+       if (getClass() != obj.getClass()) {return false;}  //si me pasaste cualquier cosa
+
+
+       Casillero other = (Casillero) obj; // ahora comparo componente por componente
+        if ((this.x != other.x) ||(this.y != other.y)) {  return false;}
+
         return true;
     }
 }
