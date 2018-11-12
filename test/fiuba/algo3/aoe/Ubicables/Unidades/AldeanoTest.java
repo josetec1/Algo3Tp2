@@ -1,9 +1,11 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import javafx.scene.control.Tab;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,18 +15,21 @@ public class AldeanoTest {
 
     @Test
     public void test01SeCreaCorrectamenteAldeano(){
-        Aldeano aldeano = new Aldeano();
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Aldeano aldeano = new Aldeano(jugador);
 
         Assert.assertEquals(aldeano.getVidaMaxima(), 50);
         Assert.assertEquals(aldeano.getVidaActual(), 50);
         Assert.assertEquals(aldeano.getCosto(),25);
     }
 
-/*
+
     @Test
     public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
-        Ubicable aldeano1 = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable aldeano1 = new Aldeano(jugador);
         Posicion origen = new Posicion(2,5);
         tablero.colocar(aldeano1,origen);
         Assert.assertThat(tablero.puedoColocar(origen), is(false) );
@@ -36,7 +41,8 @@ public class AldeanoTest {
     @Test
     public void test03MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
-        UnidadMovil aldeano1 = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        UnidadMovil aldeano1 = new Aldeano(jugador);
         Direccionable direccion = new DireccionDerecha();
 
         Posicion origen = new Posicion(2,5);
@@ -52,12 +58,23 @@ public class AldeanoTest {
 
 
     }
-*/
+
     @Test
     public void test04AldenoDisminuir25VidaDevuelveVida25(){
-        Aldeano aldeano = new Aldeano();
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Aldeano aldeano = new Aldeano(jugador);
         aldeano.disminuirVida(25);
         Assert.assertEquals(aldeano.getVidaActual(),25);
+    }
+
+    @Test
+    public void test06AldeanoPerteneceAJugadorJuanDevuelveFalse(){
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador2 = new Jugador("Juan",tablero);
+        Aldeano aldeano = new Aldeano(jugador);
+        Assert.assertEquals(aldeano.perteneceAJugador(jugador2),false);
     }
 
 }

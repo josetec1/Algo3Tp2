@@ -32,13 +32,16 @@ public class EdificioTest {
     }
 
     @Test
-    public void test003CrearUnCastillo (){
+    public void test003CrearUnCastilloDisMinuirVida50YRepararDevuelvenVida965(){
 
         Edificio unCastillo = Castillo.getInstancia();
 
         Assert.assertEquals(unCastillo.getVidaMaxima(),1000);
         Assert.assertEquals(unCastillo.getVidaActual(),1000);
-
+        unCastillo.disminuirVida(50);
+        Assert.assertEquals(unCastillo.getVidaActual(),950);
+        unCastillo.reparar();
+        Assert.assertEquals(unCastillo.getVidaActual(),965);
     }
 
 

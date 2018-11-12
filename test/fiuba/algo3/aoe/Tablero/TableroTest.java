@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Tablero;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
@@ -47,7 +48,8 @@ public class TableroTest {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,posicion);
 
         Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
@@ -58,7 +60,8 @@ public class TableroTest {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         Assert.assertEquals( tablero.puedoColocar(posicion), true );
         tablero.colocar(elemento,posicion);
         Assert.assertEquals(tablero.puedoColocar(posicion), false);
@@ -74,7 +77,8 @@ public class TableroTest {
 
         Tablero tablero = new Tablero( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         //elemento.colocarEn(posicionFueraDeTablero);
         thrown.expect(FueraDeTableroException.class);
         tablero.colocar(elemento,posicionFueraDeTablero);
@@ -90,9 +94,9 @@ public class TableroTest {
 
         Posicion posicionSuperpuesta = new Posicion(6,6);
 
-
-        Ubicable elemento = new Aldeano();
-        Ubicable elementoSuperpuesto = new Aldeano();
+       Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elementoSuperpuesto = new Aldeano(jugador);
         tablero.colocar(elemento,unaPosicion);
 
         thrown.expect(PosicionOcupadaException.class);
@@ -107,8 +111,8 @@ public class TableroTest {
         Posicion unaPosicion = new Posicion(3,3);
         Posicion otraPosicion = new Posicion(4,4);
 
-
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,unaPosicion);
 
         thrown.expect(ElElementoYaExisteException.class);
@@ -122,7 +126,8 @@ public class TableroTest {
         posicion.agregar(new Casillero(1,2));
         posicion.agregar(new Casillero(2,2));
         posicion.agregar(new Casillero(2,1));
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,posicion);
 
         Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
@@ -132,7 +137,8 @@ public class TableroTest {
     public void test10RemoverDebeLanzarExcepcionSiElElementoNoFueColocadoPreviamente(){
 
         Tablero tablero = new Tablero( 10,10);
-        Ubicable elemento= new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento= new Aldeano(jugador);
 
 
         thrown.expect(NoExisteElementoException.class);
@@ -144,9 +150,9 @@ public class TableroTest {
     public void test11RemoverRemueveElElementoColocadoPreviamente(){
 
         Tablero tablero = new Tablero( 10,10);
-
+        Jugador jugador = new Jugador("Mauricio",tablero);
         Posicion unaPosicion = new Posicion(3,3);
-        Ubicable elemento= new Aldeano();
+        Ubicable elemento= new Aldeano(jugador);
 
         tablero.colocar(elemento,unaPosicion);
 
@@ -178,11 +184,12 @@ public class TableroTest {
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
 
 
         Posicion posicionDestino =new Posicion (11,10);
 
-        Ubicable elemento = new Aldeano();
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,posicion);
 
         thrown.expect(FueraDeTableroException.class);
@@ -195,8 +202,8 @@ public class TableroTest {
         Posicion posicionInicial = new Posicion(9,10);
 
         Posicion posicionDestino = new Posicion(10,10);
-
-        Ubicable elemento = new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,posicionInicial);
 
 
@@ -212,7 +219,8 @@ public class TableroTest {
         Tablero tablero = new Tablero( 10,10);
 
         Posicion unaPosicion = new Posicion(3,3);
-        Ubicable elemento= new Aldeano();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento= new Aldeano(jugador);
 
 
 
@@ -228,11 +236,11 @@ public class TableroTest {
 
         Posicion posicionInicial = new Posicion(9,10);
         Posicion posicionDestino = new Posicion(10,10);
-
-        Ubicable elemento = new Aldeano();
+       Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable elemento = new Aldeano(jugador);
         tablero.colocar(elemento,posicionInicial);
 
-        Ubicable elemento2 = new Aldeano();
+        Ubicable elemento2 = new Aldeano(jugador);
         tablero.colocar(elemento2,posicionDestino);
 
         thrown.expect(PosicionOcupadaException.class);
@@ -241,11 +249,13 @@ public class TableroTest {
 
    @Test
    public void test16EstaEnTableroDevuelveTrueSiUbicableEstaEnElTablero(){
-        Ubicable aldeano = new Aldeano();
-        Tablero tablero = new Tablero(10,10);
-        Posicion posicion = new Posicion(1,1);
-        aldeano.colocarEn(posicion);
-        Assert.assertThat(tablero.estaDentroDeTablero(posicion),is(true));
+
+       Tablero tablero = new Tablero(10,10);
+       Posicion posicion = new Posicion(1,1);
+       Jugador jugador = new Jugador("Mauricio",tablero);
+       Ubicable aldeano = new Aldeano(jugador);
+       aldeano.colocarEn(posicion);
+       Assert.assertThat(tablero.estaDentroDeTablero(posicion),is(true));
 
    }
 

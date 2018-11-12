@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
@@ -16,7 +17,8 @@ public class UbicableTest {
     @Test
     public void test01AlColocarUnUbicableEnelTableroCambiaLaPosicionDelUbicableYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
-        Ubicable lanzaPiedras = new ArmaDeAsedio();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable lanzaPiedras = new ArmaDeAsedio(jugador);
         Posicion origen = new Posicion(2,5);
         tablero.colocar(lanzaPiedras,origen);
         Assert.assertThat(tablero.puedoColocar(origen), is(false) );
@@ -29,7 +31,8 @@ public class UbicableTest {
     @Test
     public void test02MoverCambiaLaPosicionEnElTableroYElUbicableQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
-        UnidadMovil lanzaPiedras = new ArmaDeAsedio();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        UnidadMovil lanzaPiedras = new ArmaDeAsedio(jugador);
         Direccionable direccion = new DireccionDerecha();
 
         Posicion origen = new Posicion(2,5);

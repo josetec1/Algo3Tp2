@@ -23,16 +23,16 @@ public class EspadachinTest {
         Assert.assertEquals(espadachin1.getCosto(),50);
     }
 
-/*
+
     @Test
     public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
-        Ubicable espadachin1 = new Espadachin();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable espadachin1 = new Espadachin(jugador);
         Posicion origen = new Posicion(2,5);
         tablero.colocar(espadachin1,origen);
         Assert.assertThat(tablero.puedoColocar(origen), is(false) );
         Assert.assertThat(espadachin1.getPosicion(), is(origen) );
-
 
     }
 
@@ -40,7 +40,8 @@ public class EspadachinTest {
     @Test
     public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
-        UnidadMovil espadachin1 = new Espadachin();
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        UnidadMovil espadachin1 = new Espadachin(jugador);
         Direccionable direccion = new DireccionDerecha();
 
         Posicion origen = new Posicion(2,5);
@@ -56,7 +57,7 @@ public class EspadachinTest {
 
 
     }
-*/
+
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
         Tablero tablero = new Tablero(20,20);

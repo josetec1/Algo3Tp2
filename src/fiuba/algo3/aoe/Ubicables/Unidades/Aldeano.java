@@ -1,16 +1,18 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil {
 
-    public Aldeano(){
+    public Aldeano( Jugador jugador ){
         this.vidaMaxima = 50;
         this.vidaActual = 50;
         this.costo = 25;
+        this.jugador = jugador;
     }
 
     public int getVidaMaxima(){
