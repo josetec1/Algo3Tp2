@@ -1,31 +1,33 @@
 package fiuba.algo3.aoe.Tablero;
 
 
-import Ubicables.Unidades.movimiento.Direccion;
-import fiuba.algo3.aoe.Ubicable.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 
 import java.util.*;
 
 
 public class Tablero {
 
-    private ArrayList<Ubicable> tablero;
+    private ArrayList<Ubicable> ubicables;
 
     private int ancho;
     private int alto;
 
-
+    //TODO: validar el tamanio minimo, negativos, etc
     public Tablero (int anchoMaximo, int altoMaximo){
-      //TODO validar el tamanio minimo, negativos, etc
-      this.tablero = new ArrayList<>();
+
+      this.ubicables = new ArrayList<>();
       this.ancho = anchoMaximo;
       this.alto = altoMaximo;
-     // this.inicializarTablero ();
+
 
     }
 
 
-    public Boolean puedoColocar(Posicion unaPosicion) {
+    public Boolean puedoColocar( Posicion unaPosicion) {
 
        if(!this.estaDentroDeTablero (unaPosicion)){return false;}
 
@@ -34,44 +36,67 @@ public class Tablero {
     }
 
     private Boolean estaLibre (Posicion unaPosicion){
-        for (Ubicable elemento : this.tablero){
+        for (Ubicable elemento : this.ubicables){
             if  (elemento.getPosicion().seSuperponeCon(unaPosicion)){return false;}
         }
         return  true;
 
     }
 
-    private Boolean estaDentroDeTablero (Posicion unaPosicion){
+    public Boolean estaDentroDeTablero ( Posicion unaPosicion ){
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
-
-    public void colocar (Ubicable unElemento) throws PosicionOcupadaException, FueraDeTableroException {
-
-        Posicion posicion = unElemento.getPosicion();
+    // Recibe un ubicable y una posicion, luego de colocarlo, le setea la posicion al ubicable
+    // el ubicable tiene no puede estar agregado previamente
+    public void colocar (Ubicable unElemento, Posicion posicion)  {
 
         if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
         if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
+        if (this.estaEnElTablero(unElemento)){throw new ElElementoYaExisteException();}
 
-        this.tablero.add (unElemento);
+        unElemento.colocarEn(posicion);
+        this.ubicables.add (unElemento);
     }
 
-//TODO Falta implementar
+
     public void remover (Ubicable unElemento) {
-        this.tablero.remove(unElemento);
+        if(!this.estaEnElTablero (unElemento)) {throw new NoExisteElementoException();}
+
+        this.ubicables.remove(unElemento);
 
     }
 
+    private Boolean estaEnElTablero (Ubicable unElemento){
+        return this.ubicables.contains(unElemento);
+    }
 
-    //TODO Falta implementar
-    //antes de usar este metodo tuvo que haber llamado a puedo colocar.
-    public void trasladar (Ubicable unElemento, Posicion destino) throws FueraDeTableroException, PosicionOcupadaException {
+    //VERSION ANTERIOR DE MOVER
+/*
+    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
+    //(previamente haber llamado a puedo colocar)
+    // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
+    public void moverElemento (Ubicable unElemento, Direccionable direccion) {
+
+        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+
+        Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
         this.remover(unElemento);
-        this.colocar(unElemento);
+        this.colocar(unElemento,destino);
 
     }
+*/
+    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
+    //(previamente haber llamado a puedo colocar)
+    // quita el elemento pasado y luego lo coloca en la posicion de destino
+    public void moverElemento(Ubicable unElemento, Posicion destino) {
 
-    //no usaria este metodo
-    public void mover (Posicion origen, Direccion direccion){}
+        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+
+
+        this.remover(unElemento);
+        this.colocar(unElemento,destino);
+
+    }
 
 }
