@@ -1,47 +1,20 @@
-package fiuba.algo3.aoe.Ubicables.Unidades;
+package fiuba.algo3.aoe.Ubicables;
+
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 
-public class ArmaDeAsedioTest {
+public class UbicableTest {
 
     @Test
-    public void test01SeCreaCorrectamenteArmaDeAsedio(){
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
-
-        Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);
-        Assert.assertEquals(armaDeAsedio.getVidaActual(), 150);
-        Assert.assertEquals(armaDeAsedio.costo(),200);
-    }
-
-    @Test
-    public void test02Disminuir50VidaArmaDeAsedioDevuelve100DeVida(){
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
-        armaDeAsedio.disminuirVida(50);
-        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
-    }
-
-    @Test
-    public void test03Disminuir50VidaArmaDeAsedioCrearNuevaArmaDeAsedioDevuelve150DeVida(){
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
-        armaDeAsedio.disminuirVida(50);
-        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
-
-        ArmaDeAsedio admaDeAsedioSecundaria = new ArmaDeAsedio();
-        Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
-        Assert.assertEquals(admaDeAsedioSecundaria.getVidaActual(), 150);
-
-    }
-
-/*
-    @Test
-    public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
+    public void test01AlColocarUnUbicableEnelTableroCambiaLaPosicionDelUbicableYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
         Ubicable lanzaPiedras = new ArmaDeAsedio();
         Posicion origen = new Posicion(2,5);
@@ -54,7 +27,7 @@ public class ArmaDeAsedioTest {
 
 
     @Test
-    public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
+    public void test02MoverCambiaLaPosicionEnElTableroYElUbicableQuedaConLaNuevaPosicion(){
         Tablero tablero = new Tablero(10,10);
         UnidadMovil lanzaPiedras = new ArmaDeAsedio();
         Direccionable direccion = new DireccionDerecha();
@@ -72,5 +45,4 @@ public class ArmaDeAsedioTest {
 
 
     }
-*/
 }

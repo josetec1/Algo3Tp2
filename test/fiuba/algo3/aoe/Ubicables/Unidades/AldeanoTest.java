@@ -20,7 +20,7 @@ public class AldeanoTest {
         Assert.assertEquals(aldeano.costo(),25);
     }
 
-
+/*
     @Test
     public void test02AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
         Tablero tablero = new Tablero(10,10);
@@ -52,7 +52,7 @@ public class AldeanoTest {
 
 
     }
-
+*/
     @Test
     public void test04AldenoDisminuir25VidaDevuelveVida25(){
         Aldeano aldeano = new Aldeano();
