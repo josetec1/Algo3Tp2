@@ -7,7 +7,7 @@ public class PlazaCentral extends EdificioConstruible {
     }
 
     @Override
-    public void repararse() {
+    public void reparar() {
         aumentarVida(25);
     }
 }

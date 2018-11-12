@@ -31,5 +31,5 @@ public abstract class Edificio {
         if(vidaActual > vidaTotal) vidaActual = vidaTotal;
     }
 
-    public abstract void repararse();
+    public abstract void reparar();
 }
