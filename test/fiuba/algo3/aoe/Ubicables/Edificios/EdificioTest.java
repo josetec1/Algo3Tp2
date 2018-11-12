@@ -56,17 +56,6 @@ public class EdificioTest {
 
     }
 
-    /*@Test
-    public void test005DisminuirVidaDelCastilloUnaVez (){
-
-        Edificio unCastillo = Castillo.getInstancia();
-        Assert.assertEquals(unCastillo.getVidaActual(),1000);
-        unCastillo.disminuirVida(40);
-
-        Assert.assertEquals(unCastillo.getVidaMaxima(),1000);
-        Assert.assertEquals(unCastillo.getVidaActual(),960);
-    }
-*/
     @Test
     public void test006DisminuirVidaDelCuartelDosVeces (){
 
@@ -136,18 +125,6 @@ public class EdificioTest {
         Edificio unCuartel = new Cuartel();
         Assert.assertTrue(unCuartel.estaEnConstruccion());
     }
-
-
-    /*@Test
-    public void test015CuartelLuegoDeConstruirseYaNoEstaEnConstruccion () {
-
-        Edificio unCuartel = new Cuartel();
-        unCuartel.construir();
-        unCuartel.construir();
-        unCuartel.construir();
-
-        Assert.assertFalse(unCuartel.estaEnConstruccion());
-    }*/
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
