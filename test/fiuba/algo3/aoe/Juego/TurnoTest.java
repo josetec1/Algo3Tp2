@@ -15,7 +15,7 @@ public class TurnoTest {
     @Test
     public void test01CrearTurnoInicializaTurnoConNumero1JugadorActualDevuelveMauricio(){
 
-        List<Jugador> jugadores = new ArrayList <Jugador>();
+        List<Jugador> jugadores = new ArrayList <>();
         Tablero tablero = new Tablero(20,20);
         Jugador jugador1 = new Jugador("Mauricio",tablero);
         Jugador jugador2 = new Jugador("Jose",tablero);
@@ -23,12 +23,13 @@ public class TurnoTest {
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
         Assert.assertEquals(turno.getJugadorActual().getNombre(),"Mauricio");
+        Assert.assertEquals(turno.getJugadorActual(),jugador1);
     }
 
     @Test
     public void test03CrearTurnoInicializaTurnoConNumero1DevuelveNumeroActual1(){
 
-        List<Jugador> jugadores = new ArrayList <Jugador>();
+        List<Jugador> jugadores = new ArrayList <>();
         Tablero tablero = new Tablero(20,20);
         Jugador jugador1 = new Jugador("Mauricio",tablero);
         Jugador jugador2 = new Jugador("Jose",tablero);
@@ -42,7 +43,7 @@ public class TurnoTest {
     @Test
     public void test02SePasaTurnoYRecibeComoJugadorActualJose(){
 
-        List<Jugador> jugadores = new ArrayList <Jugador>();
+        List<Jugador> jugadores = new ArrayList <>();
         Tablero tablero = new Tablero(20,20);
         Jugador jugador1 = new Jugador("Mauricio",tablero);
         Jugador jugador2 = new Jugador("Jose",tablero);
@@ -59,7 +60,7 @@ public class TurnoTest {
     @Test
     public void test04InicializarTurnoConListaDeJugadoresVaciaLanzajugadoresInvalidosExeption(){
 
-        List<Jugador> jugadores = new ArrayList <Jugador>();
+        List<Jugador> jugadores = new ArrayList <>();
         Tablero tablero = new Tablero(20,20);
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
@@ -69,12 +70,26 @@ public class TurnoTest {
     public void test05InicializarTurnoConListaDeJugadoresConUnJugadorLanzajugadoresInvalidosExeption(){
         Tablero tablero = new Tablero(20,20);
         Jugador jugador1 = new Jugador("Mauricio",tablero);
-        List<Jugador> jugadores = new ArrayList <Jugador>();
+        List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
     }
 
+    @Test
+    public void test06InicializarTurnoConListaDeJugadoresDeMasDeDosJugadoresLanzajugadoresInvalidosExeption(){
+        Tablero tablero = new Tablero(20,20);
+        Jugador jugador1 = new Jugador("Mauricio",tablero);
+        Jugador jugador2 = new Jugador("Maradona",tablero);
+        Jugador jugadorQueSobra = new Jugador("Messi",tablero);
+        List<Jugador> jugadores = new ArrayList <>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        jugadores.add(jugadorQueSobra);
+
+        thrown.expect(JugadoresInvalidosException.class);
+        Turno turno = new Turno(jugadores);
+    }
 
 
 }
