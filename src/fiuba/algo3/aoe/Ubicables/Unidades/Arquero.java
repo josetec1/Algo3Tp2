@@ -1,9 +1,10 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
+import fiuba.algo3.aoe.Tablero.Tablero;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+
 public class Arquero extends UnidadMovil {
-    private int vidaMaxima;
-    private int costo;
-    private int vidaActual;
 
     public Arquero(){
         this.vidaActual = 75;
@@ -15,10 +16,6 @@ public class Arquero extends UnidadMovil {
         return this.vidaMaxima;
     }
 
-    public int costo(){
-        return this.costo;
-    }
-
     public int getVidaActual(){
         return this.vidaActual;
     }
@@ -28,4 +25,10 @@ public class Arquero extends UnidadMovil {
         this.vidaActual -= vida;
     }
 
+    public void mover( Tablero tablero, Direccionable direccion){
+        Posicion destino = this.obtenerPosicionDeAvance(direccion);
+        if (tablero.puedoColocar(destino)){
+            tablero.moverElemento(this,destino);
+        }
+    }
 }

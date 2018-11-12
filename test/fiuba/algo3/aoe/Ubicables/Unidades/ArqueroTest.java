@@ -16,7 +16,7 @@ public class ArqueroTest {
 
         Assert.assertEquals(arquero1.getVidaMaxima(), 75);
         Assert.assertEquals(arquero1.getVidaActual(), 75);
-        Assert.assertEquals(arquero1.costo(),75);
+        Assert.assertEquals(arquero1.getCosto(),75);
     }
 
 /*

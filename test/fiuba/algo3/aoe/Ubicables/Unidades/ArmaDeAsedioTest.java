@@ -17,7 +17,7 @@ public class ArmaDeAsedioTest {
 
         Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 150);
-        Assert.assertEquals(armaDeAsedio.costo(),200);
+        Assert.assertEquals(armaDeAsedio.getCosto(),200);
     }
 
     @Test

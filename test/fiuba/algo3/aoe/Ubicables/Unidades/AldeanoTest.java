@@ -17,7 +17,7 @@ public class AldeanoTest {
 
         Assert.assertEquals(aldeano.getVidaMaxima(), 50);
         Assert.assertEquals(aldeano.getVidaActual(), 50);
-        Assert.assertEquals(aldeano.costo(),25);
+        Assert.assertEquals(aldeano.getCosto(),25);
     }
 
 /*
