@@ -24,10 +24,10 @@ public class Jugador {
 
     public void agregarUbicable( Ubicable ubicable, Posicion posicion ) {
 
-        if (this.hayOroSuficiente(ubicable.costo())) {
+        if (this.hayOroSuficiente(ubicable.getCosto())) {
             if (this.tablero.puedoColocar(posicion)) {
                 tablero.colocar(ubicable, posicion);
-                this.descontarOro(ubicable.costo());
+                this.descontarOro(ubicable.getCosto());
             }
         }
     }

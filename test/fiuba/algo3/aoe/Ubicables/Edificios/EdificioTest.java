@@ -1,7 +1,12 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Tablero.Tablero;
+import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class EdificioTest {
 
@@ -9,132 +14,115 @@ public class EdificioTest {
     @Test
     public void test001CrearUnaPlazaCentral (){
 
-        EdificioConstruible unaPlazaCentral = new PlazaCentral();
+        PlazaCentral unaPlazaCentral = new PlazaCentral();
 
-        Assert.assertEquals(unaPlazaCentral.vidaTotal(),450);
-        Assert.assertEquals(unaPlazaCentral.costo(),100);
+        Assert.assertEquals(unaPlazaCentral.getVidaMaxima(),450);
+        Assert.assertEquals(unaPlazaCentral.getCosto(),100);
 
     }
 
     @Test
     public void test002CrearUnCuartel (){
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
 
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.costo(),50);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getCosto(),50);
 
     }
 
     @Test
     public void test003CrearUnCastillo (){
 
-        Edificio unCastillo = new Castillo();
+        Edificio unCastillo = Castillo.getInstancia();
 
-        Assert.assertEquals(unCastillo.vidaTotal(),1000);
+        Assert.assertEquals(unCastillo.getVidaMaxima(),1000);
+        Assert.assertEquals(unCastillo.getVidaActual(),1000);
 
     }
+
 
     @Test
     public void test004DisminuirVidaDelCuartelUnaVez (){
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
 
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),220);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getVidaActual(),220);
 
     }
 
-    @Test
+    /*@Test
     public void test005DisminuirVidaDelCastilloUnaVez (){
 
-        Edificio unCastillo = new Castillo();
+        Edificio unCastillo = Castillo.getInstancia();
+        Assert.assertEquals(unCastillo.getVidaActual(),1000);
         unCastillo.disminuirVida(40);
 
-        Assert.assertEquals(unCastillo.vidaTotal(),1000);
-        Assert.assertEquals(unCastillo.vidaActual(),960);
+        Assert.assertEquals(unCastillo.getVidaMaxima(),1000);
+        Assert.assertEquals(unCastillo.getVidaActual(),960);
     }
-
+*/
     @Test
     public void test006DisminuirVidaDelCuartelDosVeces (){
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
         unCuartel.disminuirVida(40);
 
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),180);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getVidaActual(),180);
     }
 
     @Test
     public void test007RepararCuartelSinDanio (){
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
+        thrown.expect(EdificioSinDaniarException.class);
         unCuartel.reparar();
-
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),250);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getVidaActual(),250);
     }
 
-    @Test
-    public void test008RepararCuartelAlMaximoDeVida (){
-
-        EdificioConstruible unCuartel = new Cuartel();
-        unCuartel.disminuirVida(20);
-        unCuartel.reparar();
-
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),250);
-    }
 
     @Test
     public void test009RepararCuartelMenorAlMaximoDeVida (){
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(60);
+
         unCuartel.reparar();
 
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),240);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getVidaActual(),240);
     }
 
     @Test
     public void test010RepararPlazaCentralMenorAlMaximoDeVida (){
 
-        EdificioConstruible unaPlazaCentral = new PlazaCentral();
+        Edificio unaPlazaCentral = new PlazaCentral();
         unaPlazaCentral.disminuirVida(100);
         unaPlazaCentral.reparar();
 
-        Assert.assertEquals(unaPlazaCentral.vidaTotal(),450);
-        Assert.assertEquals(unaPlazaCentral.vidaActual(),375);
+        Assert.assertEquals(unaPlazaCentral.getVidaMaxima(),450);
+        Assert.assertEquals(unaPlazaCentral.getVidaActual(),375);
     }
 
     @Test
-    public void test011RepararCastilloMenorAlMaximoDeVida (){
+    public void test012DestruirCuartelgetVidaActualSiempreMayorOIgualQueCero (){
 
-        Edificio unCastillo = new Castillo();
-        unCastillo.disminuirVida(100);
-        unCastillo.reparar();
-
-        Assert.assertEquals(unCastillo.vidaTotal(),1000);
-        Assert.assertEquals(unCastillo.vidaActual(),915);
-    }
-
-    @Test
-    public void test012DestruirCuartelVidaActualSiempreMayorOIgualQueCero (){
-
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(500);
 
-        Assert.assertEquals(unCuartel.vidaTotal(),250);
-        Assert.assertEquals(unCuartel.vidaActual(),0);
+        Assert.assertEquals(unCuartel.getVidaMaxima(),250);
+        Assert.assertEquals(unCuartel.getVidaActual(),0);
     }
 
     @Test
     public void test013CuartelEstaEnConstruccion () {
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
 
         Assert.assertTrue(unCuartel.estaEnConstruccion());
     }
@@ -142,32 +130,55 @@ public class EdificioTest {
     @Test
     public void test014CuartelEstaEnConstruccionLuegoDeConstruirseUnaVez () {
 
-        EdificioConstruible unCuartel = new Cuartel();
-        unCuartel.construir();
-
+        Edificio unCuartel = new Cuartel();
         Assert.assertTrue(unCuartel.estaEnConstruccion());
     }
 
-    @Test
-    public void test014CuartelEstaEnConstruccionLuegoDeConstruirseDosVeces () {
 
-        EdificioConstruible unCuartel = new Cuartel();
-        unCuartel.construir();
-        unCuartel.construir();
-
-        Assert.assertTrue(unCuartel.estaEnConstruccion());
-    }
-
-    @Test
+    /*@Test
     public void test015CuartelLuegoDeConstruirseYaNoEstaEnConstruccion () {
 
-        EdificioConstruible unCuartel = new Cuartel();
+        Edificio unCuartel = new Cuartel();
         unCuartel.construir();
         unCuartel.construir();
         unCuartel.construir();
 
         Assert.assertFalse(unCuartel.estaEnConstruccion());
+    }*/
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void test016CastilloGetCostoLanzaUnidadNoConstruiBleException () {
+
+        Edificio castillo = Castillo.getInstancia();
+        thrown.expect(EdificioNoConstruibleSinCostoException.class);
+        castillo.getCosto();
     }
 
+    @Test
+    public void test017CastilloGetPosicionDevuelvePosicionEsperada() {
+        Tablero tablero = new Tablero(20,20);
+        Edificio castillo = Castillo.getInstancia();
+        Posicion posicion = new Posicion(1,1);
+        posicion.agregar(new Casillero(1,2));
+        posicion.agregar(new Casillero(1,3));
+        posicion.agregar(new Casillero(1,4));
+        posicion.agregar(new Casillero(2,2));
+        posicion.agregar(new Casillero(2,1));
+        posicion.agregar(new Casillero(2,3));
+        posicion.agregar(new Casillero(2,4));
+        posicion.agregar(new Casillero(3,1));
+        posicion.agregar(new Casillero(3,2));
+        posicion.agregar(new Casillero(3,3));
+        posicion.agregar(new Casillero(3,4));
+        posicion.agregar(new Casillero(4,1));
+        posicion.agregar(new Casillero(4,2));
+        posicion.agregar(new Casillero(4,3));
+        posicion.agregar(new Casillero(4,4));
+        tablero.colocar(castillo,posicion);
+        Assert.assertEquals(castillo.getPosicion(),posicion);
+    }
 
 }

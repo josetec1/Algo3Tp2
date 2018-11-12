@@ -1,13 +1,24 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
-public class PlazaCentral extends EdificioConstruible {
+public class PlazaCentral extends Edificio {
 
-    PlazaCentral(){
-        super(450,100, 3);
+    public PlazaCentral(){
+        this.costo = 100;
+        this.vidaMaxima = 450;
+        this.vidaActual = 450;
+        this.turnosParaLaConstruccion = 3;
+        this.estado = "En Construccion";
     }
 
-    @Override
-    public void reparar() {
-        aumentarVida(25);
+    public void reparar(){
+        if (this.estaDaniado()){
+            this.vidaActual += 25;
+        }
+        else{throw new EdificioSinDaniarException();}
+        if (this.vidaActual> this.vidaMaxima){
+            this.vidaActual = this.vidaMaxima;
+        }
     }
+
 }
+

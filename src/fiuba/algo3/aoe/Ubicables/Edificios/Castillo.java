@@ -1,14 +1,34 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
-public class Castillo extends Edificio {
-    private int costo = 0;
+public class Castillo extends Edificio{
 
-    public Castillo() {
-        super(1000);
+    private static Castillo INSTANCE = new Castillo();
+
+    private Castillo(){
+       costo = 0;
+       vidaActual = 1000;
+       vidaMaxima = 1000;
+       String estado = "En Construccion";
+
     }
 
-    @Override
-    public void reparar() {
-        aumentarVida(15);
+    public static Castillo getInstancia(){
+        return INSTANCE;
     }
+
+    public int getCosto(){
+        throw new EdificioNoConstruibleSinCostoException();
+    }
+
+
+    public void reparar(){
+        if(this.estaDaniado()){
+            this.vidaActual += 15;
+        }
+        if (this.vidaActual > vidaMaxima){
+            vidaActual = vidaMaxima;
+        }
+
+    };
+
 }

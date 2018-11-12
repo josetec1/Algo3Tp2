@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioNoConstruibleSinCostoException;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
@@ -47,23 +48,13 @@ public class JugadorTest {
     public void test04JugadorCon200OroAgregarEspadachinDevuelveOro150(){
         Posicion posicion = new Posicion(1,1);
         Tablero tablero = new Tablero(20,20);
-        Ubicable espadachin0 = new Espadachin();
-        Jugador jugador= new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Ubicable espadachin0 = new Espadachin(jugador);
         jugador.sumarOro(200);
         jugador.agregarUbicable(espadachin0,posicion);
         Assert.assertEquals(jugador.getOro(),150);
     }
 
-    @Test
-    public void test05JugadorCon1000OroAgregarEspadachinDevuelveOro150(){
-        Posicion posicion = new Posicion(1,1);
-        Tablero tablero = new Tablero(20,20);
-        Ubicable castillo = new Castillo();
-        Jugador jugador= new Jugador("Mauricio",tablero);
-        jugador.sumarOro(1000);
-        jugador.agregarUbicable(castillo,posicion);
-        Assert.assertEquals(jugador.getOro(),1000);
-    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

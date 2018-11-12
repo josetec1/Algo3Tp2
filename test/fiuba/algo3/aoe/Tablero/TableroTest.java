@@ -174,7 +174,7 @@ public class TableroTest {
    }
 */
 
-@Test
+    @Test
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Tablero tablero = new Tablero( 10,10);
         Posicion posicion = new Posicion(10,10);
@@ -187,7 +187,8 @@ public class TableroTest {
 
         thrown.expect(FueraDeTableroException.class);
         tablero.moverElemento(elemento,posicionDestino);
-}
+    }
+
     @Test
     public void test13AlMoverLaPosicionOriginalQuedaLibreYElDestinoOcupado(){
         Tablero tablero = new Tablero( 10,10);
@@ -220,7 +221,7 @@ public class TableroTest {
 
     }
 
-    @Test
+   @Test
    public void test15MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
         Tablero tablero = new Tablero( 10,10);
 
@@ -236,17 +237,17 @@ public class TableroTest {
 
         thrown.expect(PosicionOcupadaException.class);
         tablero.moverElemento(elemento,posicionDestino);
-    }
+   }
 
-    @Test
-    public void test16EstaEnTableroDevuelveTrueSiUbicableEstaEnElTablero(){
+   @Test
+   public void test16EstaEnTableroDevuelveTrueSiUbicableEstaEnElTablero(){
         Ubicable aldeano = new Aldeano();
         Tablero tablero = new Tablero(10,10);
         Posicion posicion = new Posicion(1,1);
         aldeano.colocarEn(posicion);
         Assert.assertThat(tablero.estaDentroDeTablero(posicion),is(true));
 
-    }
+   }
 
 }
 

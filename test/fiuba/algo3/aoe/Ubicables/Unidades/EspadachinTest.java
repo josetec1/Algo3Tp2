@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
@@ -13,11 +14,13 @@ import static org.hamcrest.core.Is.is;
 public class EspadachinTest {
     @Test
     public void test01SeCreaCorrectamenteEspadachin(){
-        Espadachin espadachin1 = new Espadachin();
+        Tablero tablero = new Tablero(20,20);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Espadachin espadachin1 = new Espadachin(jugador);
 
         Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
         Assert.assertEquals(espadachin1.getVidaActual(), 100);
-        Assert.assertEquals(espadachin1.costo(),50);
+        Assert.assertEquals(espadachin1.getCosto(),50);
     }
 
 /*
@@ -56,7 +59,9 @@ public class EspadachinTest {
 */
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
-        Espadachin espadachin = new Espadachin();
+        Tablero tablero = new Tablero(20,20);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Espadachin espadachin = new Espadachin(jugador);
         espadachin.disminuirVida(50);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
     }

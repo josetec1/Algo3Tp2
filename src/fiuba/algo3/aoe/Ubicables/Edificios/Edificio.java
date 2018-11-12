@@ -4,45 +4,49 @@ import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public abstract class Edificio implements Ubicable {
-    private int costo;
-    private int vidaTotal;
-    private int vidaActual;
-    private Posicion posicion;
+    protected int vidaMaxima;
+    protected int vidaActual;
+    protected Posicion posicion;
+    protected int costo;
+    protected String estado;
+    protected int turnosParaLaConstruccion;
 
-    public Edificio(int unaVida) {
-        vidaTotal = unaVida;
-        vidaActual = unaVida;
-    }
-
-    public int costo(){
+    public int getCosto () {
         return this.costo;
     }
 
-    public void colocarEn(Posicion posicion){
+    public void colocarEn ( Posicion posicion ) {
         this.posicion = posicion;
     }
 
-    public Posicion getPosicion(){
+    public Posicion getPosicion () {
         return this.posicion;
     }
 
-    public int vidaTotal() {
-        return vidaTotal;
+    public int getVidaMaxima () {
+        return this.vidaMaxima;
     }
 
-    public int vidaActual() {
-        return vidaActual;
+    public int getVidaActual () {
+        return this.vidaActual;
     }
 
-    public void disminuirVida(int unaCantidad) {
-        vidaActual -= unaCantidad;
-        if(vidaActual<0) vidaActual = 0;
+    public void disminuirVida ( int unaCantidad ) {
+        this.vidaActual = this.vidaActual - unaCantidad;
+        if (this.vidaActual < 0) {
+            this.vidaActual = 0;
+        }
     }
 
-    protected void aumentarVida(int unaCantidad) {
-        vidaActual += unaCantidad;
-        if(vidaActual > vidaTotal) vidaActual = vidaTotal;
+    public abstract void reparar ();
+
+    public boolean estaEnConstruccion (){
+        return this.estado == "En Construccion";
     }
 
-    public abstract void reparar();
+    public boolean estaDaniado () {
+        return (this.vidaActual < this.vidaMaxima && this.vidaActual > 0);
+    }
+
+
 }
