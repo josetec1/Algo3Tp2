@@ -8,7 +8,7 @@ public class Castillo extends Edificio {
     }
 
     @Override
-    public void repararse() {
+    public void reparar() {
         aumentarVida(15);
     }
 }

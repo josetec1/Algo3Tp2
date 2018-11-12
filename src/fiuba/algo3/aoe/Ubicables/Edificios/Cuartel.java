@@ -7,7 +7,7 @@ public class Cuartel extends EdificioConstruible {
     }
 
     @Override
-    public void repararse(){
+    public void reparar(){
         aumentarVida(50);
     }
 

@@ -71,7 +71,7 @@ public class EdificioTest {
     public void test007RepararCuartelSinDanio (){
 
         EdificioConstruible unCuartel = new Cuartel();
-        unCuartel.repararse();
+        unCuartel.reparar();
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
         Assert.assertEquals(unCuartel.vidaActual(),250);
@@ -82,7 +82,7 @@ public class EdificioTest {
 
         EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(20);
-        unCuartel.repararse();
+        unCuartel.reparar();
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
         Assert.assertEquals(unCuartel.vidaActual(),250);
@@ -93,7 +93,7 @@ public class EdificioTest {
 
         EdificioConstruible unCuartel = new Cuartel();
         unCuartel.disminuirVida(60);
-        unCuartel.repararse();
+        unCuartel.reparar();
 
         Assert.assertEquals(unCuartel.vidaTotal(),250);
         Assert.assertEquals(unCuartel.vidaActual(),240);
@@ -104,7 +104,7 @@ public class EdificioTest {
 
         EdificioConstruible unaPlazaCentral = new PlazaCentral();
         unaPlazaCentral.disminuirVida(100);
-        unaPlazaCentral.repararse();
+        unaPlazaCentral.reparar();
 
         Assert.assertEquals(unaPlazaCentral.vidaTotal(),450);
         Assert.assertEquals(unaPlazaCentral.vidaActual(),375);
@@ -115,7 +115,7 @@ public class EdificioTest {
 
         Edificio unCastillo = new Castillo();
         unCastillo.disminuirVida(100);
-        unCastillo.repararse();
+        unCastillo.reparar();
 
         Assert.assertEquals(unCastillo.vidaTotal(),1000);
         Assert.assertEquals(unCastillo.vidaActual(),915);
