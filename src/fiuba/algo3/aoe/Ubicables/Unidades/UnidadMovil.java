@@ -14,7 +14,6 @@ public abstract class UnidadMovil implements Ubicable {
     protected int costo;
     protected int vidaActual;
 
-
     public int getCosto(){
         return this.costo;
     }

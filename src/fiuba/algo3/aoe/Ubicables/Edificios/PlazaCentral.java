@@ -15,6 +15,7 @@ public class PlazaCentral extends Edificio {
         this.vidaActual = 450;
         this.estado = new EstadoEnConstruccion(3);
         this.jugador = jugador;
+        jugador.agregarEdificio(this);
     }
 
     public void reparar(){

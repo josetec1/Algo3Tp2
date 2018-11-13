@@ -1,14 +1,22 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
 
     private String nombre;
     private Mapa mapa;
     private int oro;
+    private List<UnidadMovil> unidades = new ArrayList<UnidadMovil>();
+    private List<Edificio> edificios = new ArrayList<Edificio>();
 
 
     public Jugador(String nombre, Mapa mapa){
@@ -45,5 +53,24 @@ public class Jugador {
 
     public void sumarOro(int oro) {
         this.oro += oro;
+    }
+
+
+    public void agregarEdificio(Edificio unEdificio) {
+
+        edificios.add(unEdificio);
+    }
+
+    public int cantidadEdificios() {
+        return edificios.size();
+    }
+
+    public void agregarUnidad(UnidadMovil unaUnidad) {
+
+        unidades.add(unaUnidad);
+    }
+
+    public int cantidadUnidades() {
+        return unidades.size();
     }
 }

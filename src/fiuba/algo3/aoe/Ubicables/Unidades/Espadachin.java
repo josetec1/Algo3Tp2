@@ -8,10 +8,12 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 public class Espadachin extends UnidadMovil{
 
     public Espadachin( Jugador jugador ){
+
         this.jugador = jugador;
         this.vidaActual = 100;
         this.vidaMaxima = 100;
         this.costo = 50;
+        jugador.agregarUnidad(this);
     }
 
     public int getVidaMaxima(){return this.vidaMaxima;}
