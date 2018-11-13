@@ -4,6 +4,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil {
@@ -13,6 +14,7 @@ public class Aldeano extends UnidadMovil {
         this.vidaActual = 50;
         this.costo = 25;
         this.jugador = jugador;
+        jugador.agregarUnidad(this);
     }
 
     public int getVidaMaxima(){
@@ -30,5 +32,9 @@ public class Aldeano extends UnidadMovil {
 
     public void disminuirVida( int vida){
         this.vidaActual-= vida;
+    }
+
+    public void construirCastillo(Posicion posicion) {
+        new Castillo(this.jugador);
     }
 }

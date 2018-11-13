@@ -14,7 +14,9 @@ public class Castillo extends Edificio{
        vidaActual = 1000;
        vidaMaxima = 1000;
        this.jugador = jugador;
+
        this.estado = new EstadoNormal();
+       this.jugador.agregarEdificio(this);
 
     }
 

@@ -2,7 +2,11 @@ package fiuba.algo3.aoe.Jugador;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
@@ -79,6 +83,91 @@ public class JugadorTest {
         jugador1.sumarOro(300);
         Assert.assertFalse(jugador1.hayOroSuficiente(500));
     }
+
+    @Test
+    public void test09HayOroSuficienteDevuelveFalseSiSeQuiereGastar500YSeTieneOro300(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        jugador1.sumarOro(300);
+        Assert.assertFalse(jugador1.hayOroSuficiente(500));
+    }
+
+    @Test
+    public void test10CrearEdificioCastillo(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),0);
+
+        new Castillo(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),1);
+    }
+
+    @Test
+    public void test11CrearEdificioPlazaCentral(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),0);
+
+        new PlazaCentral(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),1);
+    }
+
+    @Test
+    public void test12CrearEdificioCuartel(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),0);
+
+        new Cuartel(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadEdificios(),1);
+    }
+
+    @Test
+    public void test13CrearUnidadMovilAldeanoJugadorTieneUnaUnidad(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),0);
+
+        new Aldeano(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),1);
+    }
+
+    @Test
+    public void test14CrearDosAldeanosJugadorTieneDosUnidades(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),0);
+
+        new Aldeano(jugador1);
+        new Aldeano(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),2);
+    }
+
+    @Test
+    public void test15CrearUnEspadachinJugadorDebeTenerUnaUnidad(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),0);
+
+        new Espadachin(jugador1);
+
+        Assert.assertEquals(jugador1.cantidadUnidades(),1);
+    }
+
+
+
+
 
 
 }

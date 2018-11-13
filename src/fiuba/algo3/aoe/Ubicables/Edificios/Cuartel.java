@@ -17,6 +17,7 @@ public class Cuartel extends Edificio {
         this.vidaActual = 250;
         this.jugador = jugador;
         this.estado = new EstadoEnConstruccion(3);
+        jugador.agregarEdificio(this);
     }
 
     public void reparar(){

@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -70,6 +71,17 @@ public class AldeanoTest {
         Jugador jugador2 = new Jugador("Juan", mapa);
         Aldeano aldeano = new Aldeano(jugador);
         Assert.assertThat (aldeano.perteneceAJugador(jugador2),is(false));
+
+    }
+
+    @Test
+    public void test07AldeanoCreaCastillo(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+        Aldeano aldeano = new Aldeano(jugador);
+
+        aldeano.construirCastillo(new Posicion(2,3));
+        Assert.assertEquals(jugador.cantidadEdificios(),1);
 
     }
 
