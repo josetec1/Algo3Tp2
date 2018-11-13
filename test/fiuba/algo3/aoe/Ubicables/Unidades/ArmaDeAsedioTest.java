@@ -40,8 +40,8 @@ public class ArmaDeAsedioTest {
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
         armaDeAsedio.disminuirVida(50);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
-        ArmaDeAsedio admaDeAsedioSecundaria = new ArmaDeAsedio(jugador);
-        Assert.assertEquals(admaDeAsedioSecundaria.getVidaActual(), 150);
+        ArmaDeAsedio armaDeAsedioSecundaria = new ArmaDeAsedio(jugador);
+        Assert.assertEquals(armaDeAsedioSecundaria.getVidaActual(), 150);
 
     }
 

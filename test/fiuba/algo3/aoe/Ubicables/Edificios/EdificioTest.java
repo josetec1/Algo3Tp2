@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
@@ -262,7 +263,7 @@ public class EdificioTest {
 
 
     @Test
-    public void test0252CrearCastilloRepararLanzaEdificioSinDaniarException(){
+    public void test025CrearCastilloRepararLanzaEdificioSinDaniarException(){
         Tablero tablero = new Tablero(20,20);
         Jugador jugador = new Jugador("Mauricio",tablero);
         Edificio castillo = new Castillo(jugador);
@@ -280,7 +281,7 @@ public class EdificioTest {
     }
 
     @Test
-    public void test26EdificioDeJugadorMauricioPerteneceAJugadorMauricio(){
+    public void test027EdificioDeJugadorMauricioPerteneceAJugadorMauricio(){
         Tablero mockedTablero = mock(Tablero.class);
         Jugador jugador = new Jugador("Mauricio",mockedTablero);
         Edificio cuartel = new Cuartel(jugador);
@@ -288,14 +289,14 @@ public class EdificioTest {
     }
 
     @Test
-    public void test27CastilloCreaArmaDeAsedio(){
+    public void test028CastilloCreaArmaDeAsedio(){
         Castillo castillo = new Castillo((mock(Jugador.class)));
         Ubicable unidad =  castillo.construirArmaDeAsedio();
         Assert.assertEquals(unidad instanceof ArmaDeAsedio,true);
     }
 
     @Test
-    public void test27CuartelCreaArquero(){
+    public void test029CuartelCreaArquero(){
         Tablero tablero = new Tablero(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         Cuartel cuartel = new Cuartel(jugador);
@@ -304,12 +305,21 @@ public class EdificioTest {
     }
 
     @Test
-    public void test27CuartelCreaEspadachin(){
+    public void test030CuartelCreaEspadachin(){
         Tablero tablero = new Tablero(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         Cuartel cuartel = new Cuartel(jugador);
         Ubicable unidad = cuartel.construirEspadachin();
         Assert.assertEquals(unidad instanceof Espadachin,true);
+    }
+
+    @Test
+    public void test031PlazaCentralCreaAldeano(){
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
+        Ubicable unidad = plazaCentral.construirAldeano();
+        Assert.assertEquals(unidad instanceof Aldeano,true);
     }
 
 }
