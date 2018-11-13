@@ -42,21 +42,29 @@ public abstract class Edificio implements Ubicable, ObservadorTurno {
         }
     }
     public void aumentarVida(int unaCantidad){
-        vidaActual += unaCantidad;
         if (vidaActual>=vidaMaxima){
             vidaActual = vidaMaxima;
             this.estado = new EstadoNormal();
+            return;
         }
+        vidaActual += unaCantidad;
     }
 
     public abstract void reparar ();
 
     public void construir(){
-        this.estado.construir(this);
+        try {
+            this.estado.construir(this);
+        }catch (EdificioConstruidoException e){
+            this.estado = new EstadoNormal();
+        }
     }
 
     public boolean estaEnConstruccion (){
         return this.estado.enConstruccion();
+    }
+    public boolean estaEnReparacion (){
+        return this.estado.enReparacion();
     }
 
     public boolean estaDaniado () {

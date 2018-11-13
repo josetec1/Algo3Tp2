@@ -46,6 +46,8 @@ public class Turno {
     }
 */
     public void pasarTurno () {
+        jugadorActual.recolectarOro();
+
         this.numeroDeTurno += 1;
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
         this.jugadorActual= this.it.next();
