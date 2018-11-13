@@ -1,19 +1,19 @@
 package fiuba.algo3.aoe.Jugadores;
 
-import fiuba.algo3.aoe.Tablero.Tablero;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Jugador {
 
     private String nombre;
-    private Tablero tablero;
+    private Mapa mapa;
     private int oro;
 
 
-    public Jugador(String nombre,Tablero tablero){
+    public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
-        this.tablero = tablero;
+        this.mapa = mapa;
         this.oro = 0;
     }
 
@@ -25,8 +25,8 @@ public class Jugador {
     public void agregarUbicable( Ubicable ubicable, Posicion posicion ) {
 
         if (this.hayOroSuficiente(ubicable.getCosto())) {
-            if (this.tablero.puedoColocar(posicion)) {
-                tablero.colocar(ubicable, posicion);
+            if (this.mapa.puedoColocar(posicion)) {
+                mapa.colocar(ubicable, posicion);
                 this.descontarOro(ubicable.getCosto());
             }
         }

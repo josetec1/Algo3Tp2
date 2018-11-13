@@ -1,7 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Direccion;
 
-import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 
 public interface Direccionable {
-    Casillero calcularSiguienteCasillero (Casillero unCasillero );
+    Cuadrante calcularSiguienteCasillero (Cuadrante unCuadrante);
 }

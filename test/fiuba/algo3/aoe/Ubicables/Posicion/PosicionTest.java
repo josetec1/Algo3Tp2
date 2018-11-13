@@ -1,7 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Posicion;
 
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
-import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +22,8 @@ public class PosicionTest {
 
     @Test
     public void test02SeSuperponeConDebeDarFalseSiLaOtraPosicionEstaVacia() {
-        Casillero unCasillero = new Casillero(4,5);
-        Posicion unaPosicion = new Posicion(unCasillero);
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Posicion unaPosicion = new Posicion(unCuadrante);
         Posicion otraPosicion = new Posicion();
 
         Assert.assertFalse(unaPosicion.seSuperponeCon(otraPosicion) );
@@ -32,22 +32,22 @@ public class PosicionTest {
 
     @Test
     public void test03SeSuperponeConDebeDarTrueSiLaOtraPosicionTieneLaMismaPosicion() {
-        Casillero unCasillero = new Casillero(4,5);
-        Casillero otroCasillero = new Casillero (4,5);
-        Posicion unaPosicion = new Posicion(unCasillero);
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Cuadrante otroCuadrante = new Cuadrante(4,5);
+        Posicion unaPosicion = new Posicion(unCuadrante);
         Posicion otraPosicion = new Posicion();
-        otraPosicion.agregar(otroCasillero);
+        otraPosicion.agregar(otroCuadrante);
 
         Assert.assertTrue(unaPosicion.seSuperponeCon(otraPosicion) );
 
     }
     @Test
     public void test05AgregarPermiteAgregarCasillerosRepetidos() {
-        Casillero unCasillero = new Casillero(4,5);
-        Casillero otroCasillero = new Casillero (4,5);
-        Posicion unaPosicion = new Posicion(unCasillero);
-        Posicion otraPosicion = new Posicion(unCasillero);
-        unaPosicion.agregar(otroCasillero);
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Cuadrante otroCuadrante = new Cuadrante(4,5);
+        Posicion unaPosicion = new Posicion(unCuadrante);
+        Posicion otraPosicion = new Posicion(unCuadrante);
+        unaPosicion.agregar(otroCuadrante);
 
         Assert.assertTrue(unaPosicion.seSuperponeCon(otraPosicion) );
 
@@ -55,16 +55,16 @@ public class PosicionTest {
 
     @Test
     public void test06SiUnaPosicionTieneUnCasilleroQueEstaEnOtraPosicionSeSuperponen() {
-        Casillero casilleroUno = new Casillero(4,5);
-        Casillero casilleroDos = new Casillero (3,5);
-        Casillero casilleroTres = new Casillero (6,6);
+        Cuadrante cuadranteUno = new Cuadrante(4,5);
+        Cuadrante cuadranteDos = new Cuadrante(3,5);
+        Cuadrante cuadranteTres = new Cuadrante(6,6);
 
-        Posicion unaPosicion = new Posicion(casilleroUno);
-        unaPosicion.agregar(casilleroDos);
+        Posicion unaPosicion = new Posicion(cuadranteUno);
+        unaPosicion.agregar(cuadranteDos);
 
-        Posicion posicionSuperpuesta = new Posicion(casilleroDos);  //superpone
+        Posicion posicionSuperpuesta = new Posicion(cuadranteDos);  //superpone
 
-        Posicion posicionNoSuperpuesta= new Posicion(casilleroTres); //no
+        Posicion posicionNoSuperpuesta= new Posicion(cuadranteTres); //no
 
         Assert.assertTrue(unaPosicion.seSuperponeCon(posicionSuperpuesta) );
         Assert.assertFalse(unaPosicion.seSuperponeCon(posicionNoSuperpuesta) );
@@ -73,13 +73,13 @@ public class PosicionTest {
 
     @Test
     public void test07estaDentroDeDebeDarTrueSiCadaUnoDeLosCasillerosEstaDentroDeLosLimites() {
-        Casillero casilleroUno = new Casillero(1,10);
-        Casillero casilleroDos = new Casillero (2,5);
-        Casillero casilleroTres = new Casillero (10,10);
+        Cuadrante cuadranteUno = new Cuadrante(1,10);
+        Cuadrante cuadranteDos = new Cuadrante(2,5);
+        Cuadrante cuadranteTres = new Cuadrante(10,10);
 
-        Posicion unaPosicion = new Posicion(casilleroUno);
-        unaPosicion.agregar(casilleroDos);
-        unaPosicion.agregar(casilleroTres);
+        Posicion unaPosicion = new Posicion(cuadranteUno);
+        unaPosicion.agregar(cuadranteDos);
+        unaPosicion.agregar(cuadranteTres);
 
 
         Assert.assertTrue(unaPosicion.estasDentroDe(10,10) );
@@ -89,13 +89,13 @@ public class PosicionTest {
 
     @Test
     public void test08estaDentroDeDebeDarFalseSiAlgunoDeLosCasillerosNoEstaDentroDeLosLimites() {
-        Casillero casilleroUno = new Casillero(2,10);
-        Casillero casilleroFueraDeLimite = new Casillero (15,1);
-        Casillero casilleroFueraDeLimite2 = new Casillero (10,15);
+        Cuadrante cuadranteUno = new Cuadrante(2,10);
+        Cuadrante cuadranteFueraDeLimite = new Cuadrante(15,1);
+        Cuadrante cuadranteFueraDeLimite2 = new Cuadrante(10,15);
 
-        Posicion unaPosicion = new Posicion(casilleroUno);
-        unaPosicion.agregar(casilleroFueraDeLimite);
-        unaPosicion.agregar(casilleroFueraDeLimite2);
+        Posicion unaPosicion = new Posicion(cuadranteUno);
+        unaPosicion.agregar(cuadranteFueraDeLimite);
+        unaPosicion.agregar(cuadranteFueraDeLimite2);
 
 
         Assert.assertFalse(unaPosicion.estasDentroDe(10,10) );
@@ -107,11 +107,11 @@ public class PosicionTest {
     @Test
     public void test09CalcularPosicionSiguienteConDireccionDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
 
-        Casillero casillero = new Casillero(3,5);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(3,5);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionDerecha();
 
@@ -127,11 +127,11 @@ public class PosicionTest {
     public void test10CalcularPosicionSiguienteConDireccionArribaDebeDevolverPosicionConCasilleroEnX4Y5(){
 
 
-        Casillero casillero = new Casillero(2,0);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(4,4);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(2,1);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionArriba();
 
@@ -144,11 +144,11 @@ public class PosicionTest {
 
     @Test
     public void test11CalcularPosicionSiguienteConDireccionIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(5,5);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(5,5);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionIzquierda();
 
@@ -160,11 +160,11 @@ public class PosicionTest {
 
     @Test
     public void test12CalcularPosicionSiguienteConDireccionAbajoDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(4,1);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(4,6);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,0);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionAbajo();
 
@@ -176,11 +176,11 @@ public class PosicionTest {
 
     @Test
     public void test13CalcularPosicionSiguienteConDireccionArribaDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(3,4);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(3,4);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionArribaDerecha();
 
@@ -192,11 +192,11 @@ public class PosicionTest {
 
     @Test
     public void test14CalcularPosicionSiguienteConDireccionArribaIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(5,4);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(5,4);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionArribaIzquierda();
 
@@ -208,11 +208,11 @@ public class PosicionTest {
 
     @Test
     public void test15CalcularPosicionSiguienteConDireccionAbajoIzquierdaDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(5,6);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(5,6);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionAbajoIzquierda();
 
@@ -224,11 +224,11 @@ public class PosicionTest {
 
     @Test
     public void test15CalcularPosicionSiguienteConDireccionAbajoDerechaDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(3,6);
-        Posicion posicionOriginal = new Posicion(casillero);
+        Cuadrante cuadrante = new Cuadrante(3,6);
+        Posicion posicionOriginal = new Posicion(cuadrante);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
-        Posicion posicionEsperada = new Posicion(casilleroSiguiente);
+        Cuadrante cuadranteSiguiente = new Cuadrante(4,5);
+        Posicion posicionEsperada = new Posicion(cuadranteSiguiente);
 
         Direccionable direccionableNueva = new DireccionAbajoDerecha();
 
@@ -246,20 +246,20 @@ public class PosicionTest {
         // 1.1 no superpone.
         // 2.1 y 3.1 si
 
-        Casillero casillero = new Casillero(1,1);
-        Casillero casillero2 = new Casillero(2,1);
-        Casillero casillero3 = new Casillero(3,1);
+        Cuadrante cuadrante = new Cuadrante(1,1);
+        Cuadrante cuadrante2 = new Cuadrante(2,1);
+        Cuadrante cuadrante3 = new Cuadrante(3,1);
 
-        Posicion posicionOriginal = new Posicion(casillero);
-                 posicionOriginal.agregar(casillero2);
+        Posicion posicionOriginal = new Posicion(cuadrante);
+                 posicionOriginal.agregar(cuadrante2);
 
-        Posicion posicionEsperada = new Posicion(casillero2);
-        posicionEsperada.agregar(casillero3);
+        Posicion posicionEsperada = new Posicion(cuadrante2);
+        posicionEsperada.agregar(cuadrante3);
 
-        Posicion posicionNoVaAEstar = new Posicion(casillero);
+        Posicion posicionNoVaAEstar = new Posicion(cuadrante);
 
-        Posicion posicionSiVaAEstar = new Posicion(casillero3);
-        Posicion posicionSiVaAEstar2 = new Posicion(casillero2);
+        Posicion posicionSiVaAEstar = new Posicion(cuadrante3);
+        Posicion posicionSiVaAEstar2 = new Posicion(cuadrante2);
 
         Direccionable direccionableNueva = new DireccionDerecha();
 

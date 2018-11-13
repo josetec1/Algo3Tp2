@@ -5,7 +5,7 @@
 #####Opcion uno.
  
 Tablero se modela como una posicion con todos los casilleros
-y para saber si una posicion esta dentro de los limites del tablero:
+y para saber si una posicion esta dentro de los limites del mapa:
 
 `PosicionDeTablero.contiene (posicionDeObjetoAAgregar)`
  

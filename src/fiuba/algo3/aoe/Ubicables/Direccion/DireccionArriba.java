@@ -1,13 +1,13 @@
 package fiuba.algo3.aoe.Ubicables.Direccion;
 
-import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 
 public class DireccionArriba implements Direccionable {
 
-    public Casillero calcularSiguienteCasillero(Casillero unCasillero){
-        int x=unCasillero.getX();
-        int y = unCasillero.getY();
-        return new Casillero(x,y+1);
+    public Cuadrante calcularSiguienteCasillero(Cuadrante unCuadrante){
+        int x= unCuadrante.getX();
+        int y = unCuadrante.getY();
+        return new Cuadrante(x,y+1);
 
     }
 

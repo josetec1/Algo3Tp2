@@ -1,7 +1,6 @@
-package fiuba.algo3.aoe.Tablero;
+package fiuba.algo3.aoe.Mapa;
 
 
-import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
@@ -9,7 +8,7 @@ import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 import java.util.*;
 
 
-public class Tablero {
+public class Mapa {
 
     private ArrayList<Ubicable> ubicables;
 
@@ -17,7 +16,7 @@ public class Tablero {
     private int alto;
 
     //TODO: validar el tamanio minimo, negativos, etc
-    public Tablero (int anchoMaximo, int altoMaximo){
+    public Mapa(int anchoMaximo, int altoMaximo){
 
       this.ubicables = new ArrayList<>();
       this.ancho = anchoMaximo;

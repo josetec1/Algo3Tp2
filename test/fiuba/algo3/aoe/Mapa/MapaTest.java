@@ -1,9 +1,8 @@
-package fiuba.algo3.aoe.Tablero;
+package fiuba.algo3.aoe.Mapa;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
-import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
@@ -13,7 +12,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import static org.hamcrest.CoreMatchers.is;
 
-public class TableroTest {
+public class MapaTest {
 //TODO: que no se pueda crear con numeros negativos y definir el tamanio minimo, que debe ser para que entren el castillo y la ciudad
 
 
@@ -21,52 +20,52 @@ public class TableroTest {
     @Test
     public void test01AlCrearElTableroPuedoColocarDeberiaDarTrueSiLaPosicionPerteneceAlTablero() {
 
-         Tablero tablero = new Tablero( 10,10);
+         Mapa mapa = new Mapa( 10,10);
          Posicion posicionDentroDeTablero = new Posicion(1,1);
 
-        Assert.assertThat( tablero.puedoColocar(posicionDentroDeTablero), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(posicionDentroDeTablero), is( true ) );
    }
 
     @Test
     public void test02AlCrearElTableroPuedoColocarDeberiaDarFalseSiLaPosicionNoPerteneceAlTablero() {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Assert.assertFalse( tablero.puedoColocar(posicionFueraDeTablero) );
+        Assert.assertFalse( mapa.puedoColocar(posicionFueraDeTablero) );
     }
 
     @Test
     public void test03PuedoColocarDebeDarTrueSiLaPosicionNoEstaOcupada() {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Assert.assertThat( tablero.puedoColocar(posicion), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(posicion), is( true ) );
     }
 
     @Test
     public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorUnidad()  {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,posicion);
+        mapa.colocar(elemento,posicion);
 
-        Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicion), is( false ) );
     }
 
     @Test
     public void test05PuedoColocarDebeDarTrueLuegoDeQuitarUnidadAnterior()  {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        Assert.assertEquals( tablero.puedoColocar(posicion), true );
-        tablero.colocar(elemento,posicion);
-        Assert.assertEquals(tablero.puedoColocar(posicion), false);
-        tablero.remover(elemento);
-        Assert.assertEquals( tablero.puedoColocar(posicion),  true  );
+        Assert.assertEquals( mapa.puedoColocar(posicion), true );
+        mapa.colocar(elemento,posicion);
+        Assert.assertEquals(mapa.puedoColocar(posicion), false);
+        mapa.remover(elemento);
+        Assert.assertEquals( mapa.puedoColocar(posicion),  true  );
     }
 
 
@@ -75,89 +74,89 @@ public class TableroTest {
     @Test
     public void test06AgregarDebeLanzarExcepcionSiIntentoColocarUnidadFueraDelTablero() {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
         //elemento.colocarEn(posicionFueraDeTablero);
         thrown.expect(FueraDeTableroException.class);
-        tablero.colocar(elemento,posicionFueraDeTablero);
+        mapa.colocar(elemento,posicionFueraDeTablero);
       }
 
    @Test
     public void test07AgregarDebeLanzarExcepcionSiIntentoColocarUnidadEnUnaPosicionOcupada(){
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
 
         Posicion unaPosicion = new Posicion(3,3);
-        unaPosicion.agregar(new Casillero(6,6));
+        unaPosicion.agregar(new Cuadrante(6,6));
 
         Posicion posicionSuperpuesta = new Posicion(6,6);
 
-       Jugador jugador = new Jugador("Mauricio",tablero);
+       Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
         Ubicable elementoSuperpuesto = new Aldeano(jugador);
-        tablero.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento,unaPosicion);
 
         thrown.expect(PosicionOcupadaException.class);
-        tablero.colocar(elementoSuperpuesto,posicionSuperpuesta);
+        mapa.colocar(elementoSuperpuesto,posicionSuperpuesta);
     }
 
     @Test
     public void test08AgregarDebeLanzarExcepcionSiIntentoColocarUnUbicableAgregadoPreviamente(){
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
 
         Posicion unaPosicion = new Posicion(3,3);
         Posicion otraPosicion = new Posicion(4,4);
 
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento,unaPosicion);
 
         thrown.expect(ElElementoYaExisteException.class);
-        tablero.colocar(elemento,otraPosicion);
+        mapa.colocar(elemento,otraPosicion);
     }
     @Test
     public void test09PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorPosicionVariosCasilleros()  {
 
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        posicion.agregar(new Casillero(1,2));
-        posicion.agregar(new Casillero(2,2));
-        posicion.agregar(new Casillero(2,1));
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        posicion.agregar(new Cuadrante(1,2));
+        posicion.agregar(new Cuadrante(2,2));
+        posicion.agregar(new Cuadrante(2,1));
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,posicion);
+        mapa.colocar(elemento,posicion);
 
-        Assert.assertThat( tablero.puedoColocar(posicion), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicion), is( false ) );
     }
 
     @Test
     public void test10RemoverDebeLanzarExcepcionSiElElementoNoFueColocadoPreviamente(){
 
-        Tablero tablero = new Tablero( 10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa( 10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento= new Aldeano(jugador);
 
 
         thrown.expect(NoExisteElementoException.class);
-        tablero.remover(elemento);
+        mapa.remover(elemento);
 
     }
 
     @Test
     public void test11RemoverRemueveElElementoColocadoPreviamente(){
 
-        Tablero tablero = new Tablero( 10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa( 10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Posicion unaPosicion = new Posicion(3,3);
         Ubicable elemento= new Aldeano(jugador);
 
-        tablero.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento,unaPosicion);
 
-        tablero.remover(elemento);
-        Assert.assertThat( tablero.puedoColocar(unaPosicion), is( true ) );
+        mapa.remover(elemento);
+        Assert.assertThat( mapa.puedoColocar(unaPosicion), is( true ) );
 
     }
 
@@ -165,7 +164,7 @@ public class TableroTest {
 /*
     @Test
    public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
-        Tablero tablero = new Tablero( 10,10);
+        Mapa tablero = new Mapa( 10,10);
         Posicion posicion = new Posicion(10,10);
 
 
@@ -182,80 +181,80 @@ public class TableroTest {
 
     @Test
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
 
 
         Posicion posicionDestino =new Posicion (11,10);
 
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,posicion);
+        mapa.colocar(elemento,posicion);
 
         thrown.expect(FueraDeTableroException.class);
-        tablero.moverElemento(elemento,posicionDestino);
+        mapa.moverElemento(elemento,posicionDestino);
     }
 
     @Test
     public void test13AlMoverLaPosicionOriginalQuedaLibreYElDestinoOcupado(){
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
         Posicion posicionInicial = new Posicion(9,10);
 
         Posicion posicionDestino = new Posicion(10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,posicionInicial);
+        mapa.colocar(elemento,posicionInicial);
 
 
-        tablero.moverElemento(elemento,posicionDestino);
+        mapa.moverElemento(elemento,posicionDestino);
 
-        Assert.assertThat( tablero.puedoColocar(posicionInicial), is( true ) );
-        Assert.assertThat( tablero.puedoColocar(posicionDestino), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicionInicial), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(posicionDestino), is( false ) );
 
     }
 
     @Test
     public void test14MoverDebeLanzarExcepcionSiElElementoNoFueAgregadoPreviamente(){
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
 
         Posicion unaPosicion = new Posicion(3,3);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento= new Aldeano(jugador);
 
 
 
         thrown.expect(NoExisteElementoException.class);
-        tablero.moverElemento(elemento, unaPosicion);
+        mapa.moverElemento(elemento, unaPosicion);
 
     }
 
    @Test
    public void test15MoverDebeLanzarExcepcionSiElDestinoEstaOcupado(){
-        Tablero tablero = new Tablero( 10,10);
+        Mapa mapa = new Mapa( 10,10);
 
 
         Posicion posicionInicial = new Posicion(9,10);
         Posicion posicionDestino = new Posicion(10,10);
-       Jugador jugador = new Jugador("Mauricio",tablero);
+       Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
-        tablero.colocar(elemento,posicionInicial);
+        mapa.colocar(elemento,posicionInicial);
 
         Ubicable elemento2 = new Aldeano(jugador);
-        tablero.colocar(elemento2,posicionDestino);
+        mapa.colocar(elemento2,posicionDestino);
 
         thrown.expect(PosicionOcupadaException.class);
-        tablero.moverElemento(elemento,posicionDestino);
+        mapa.moverElemento(elemento,posicionDestino);
    }
 
    @Test
    public void test16EstaEnTableroDevuelveTrueSiUbicableEstaEnElTablero(){
 
-       Tablero tablero = new Tablero(10,10);
+       Mapa mapa = new Mapa(10,10);
        Posicion posicion = new Posicion(1,1);
-       Jugador jugador = new Jugador("Mauricio",tablero);
+       Jugador jugador = new Jugador("Mauricio", mapa);
        Ubicable aldeano = new Aldeano(jugador);
        aldeano.colocarEn(posicion);
-       Assert.assertThat(tablero.estaDentroDeTablero(posicion),is(true));
+       Assert.assertThat(mapa.estaDentroDeTablero(posicion),is(true));
 
    }
 

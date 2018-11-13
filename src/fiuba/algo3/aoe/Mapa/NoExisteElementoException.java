@@ -1,4 +1,4 @@
-package fiuba.algo3.aoe.Tablero;
+package fiuba.algo3.aoe.Mapa;
 
 public class NoExisteElementoException extends RuntimeException {
 }

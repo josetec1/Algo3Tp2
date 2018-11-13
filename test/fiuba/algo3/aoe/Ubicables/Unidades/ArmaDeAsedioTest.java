@@ -1,11 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Tablero.Tablero;
-import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
-import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-import javafx.scene.control.Tab;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,8 +10,8 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test01SeCreaCorrectamenteArmaDeAsedio(){
-        Tablero tablero = new Tablero(10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
 
         Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);
@@ -26,8 +21,8 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test02Disminuir50VidaArmaDeAsedioDevuelve100DeVida(){
-        Tablero tablero = new Tablero(10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
         armaDeAsedio.disminuirVida(50);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
@@ -35,8 +30,8 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test03Disminuir50VidaArmaDeAsedioCrearNuevaArmaDeAsedioDevuelve150DeVida(){
-        Tablero tablero = new Tablero(10,10);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
         armaDeAsedio.disminuirVida(50);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
@@ -48,7 +43,7 @@ public class ArmaDeAsedioTest {
 /*
     @Test
     public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
-        Tablero tablero = new Tablero(10,10);
+        Mapa tablero = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         Ubicable lanzaPiedras = new ArmaDeAsedio(jugador);
         Posicion origen = new Posicion(2,5);
@@ -62,7 +57,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
-        Tablero tablero = new Tablero(10,10);
+        Mapa tablero = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         UnidadMovil lanzaPiedras = new ArmaDeAsedio(jugador);
         Direccionable direccion = new DireccionDerecha();

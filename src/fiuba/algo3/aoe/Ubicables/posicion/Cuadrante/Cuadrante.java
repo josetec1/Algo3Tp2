@@ -1,11 +1,11 @@
-package fiuba.algo3.aoe.Ubicables.posicion.Casillero;
+package fiuba.algo3.aoe.Ubicables.posicion.Cuadrante;
 
-public class Casillero {
+public class Cuadrante {
 
     private int x;
     private int y;
 
-   public Casillero(int x, int y){
+   public Cuadrante(int x, int y){
 
        this.x = x;
        this.y = y;
@@ -32,8 +32,8 @@ public class Casillero {
 
        boolean coordenadaX, coordenadaY;
 
-       coordenadaX = ((this.x<= ancho) && (this.x>= 0));
-       coordenadaY = ((this.y<= alto) && (this.y>= 0));
+       coordenadaX = ((this.x<= ancho) && (this.x> 0));
+       coordenadaY = ((this.y<= alto) && (this.y> 0));
        return (coordenadaX && coordenadaY);
 
     }
@@ -47,7 +47,7 @@ public class Casillero {
        if (getClass() != obj.getClass()) {return false;}  //si me pasaste cualquier cosa
 
 
-       Casillero other = (Casillero) obj; // ahora comparo componente por componente
+       Cuadrante other = (Cuadrante) obj; // ahora comparo componente por componente
         if ((this.x != other.x) ||(this.y != other.y)) {  return false;}
 
         return true;

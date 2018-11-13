@@ -1,11 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Tablero.Tablero;
-import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
-import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,8 +10,8 @@ import static org.hamcrest.core.Is.is;
 public class EspadachinTest {
     @Test
     public void test01SeCreaCorrectamenteEspadachin(){
-        Tablero tablero = new Tablero(20,20);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa(20,20);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Espadachin espadachin1 = new Espadachin(jugador);
 
         Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
@@ -26,7 +22,7 @@ public class EspadachinTest {
 /*
     @Test
     public void test200AlColocarUnaPiezaEnelTableroCambiaLaPosicionDeLaPiezaYEnElTablero(){
-        Tablero tablero = new Tablero(10,10);
+        Mapa tablero = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         Ubicable espadachin1 = new Espadachin(jugador);
         Posicion origen = new Posicion(2,5);
@@ -39,7 +35,7 @@ public class EspadachinTest {
 
     @Test
     public void test201MoverCambiaLaPosicionEnElTableroYLaUnidadQuedaConLaNuevaPosicion(){
-        Tablero tablero = new Tablero(10,10);
+        Mapa tablero = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio",tablero);
         UnidadMovil espadachin1 = new Espadachin(jugador);
         Direccionable direccion = new DireccionDerecha();
@@ -60,8 +56,8 @@ public class EspadachinTest {
 */
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
-        Tablero tablero = new Tablero(20,20);
-        Jugador jugador = new Jugador("Mauricio",tablero);
+        Mapa mapa = new Mapa(20,20);
+        Jugador jugador = new Jugador("Mauricio", mapa);
         Espadachin espadachin = new Espadachin(jugador);
         espadachin.disminuirVida(50);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
