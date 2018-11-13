@@ -2,6 +2,8 @@ package fiuba.algo3.aoe.Juego;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -108,7 +110,7 @@ public class TurnoTest {
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
     }
-/*
+
     @Test
     public void test07AlPasarTurnoYTenerUnAldeanoJugador1ObtieneOro(){
         Mapa mapa = new Mapa(20,20);
@@ -129,5 +131,27 @@ public class TurnoTest {
         Assert.assertEquals(jugador1.getOro(),20);
 
     }
-*/
+
+    @Test
+    public void test08AlPasarTurnoLosEdificiosSeConstruyen(){
+        Mapa mapa = new Mapa(20,20);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        Jugador jugador2 = new Jugador("Maradona", mapa);
+        List<Jugador> jugadores = new ArrayList <>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Turno turno = new Turno(jugadores);
+
+        Edificio cuartel = new Cuartel(jugador1);
+
+        Assert.assertTrue(cuartel.estaEnConstruccion());
+
+        for(int i = 0; i < 5; i++)
+            turno.pasarTurno();
+
+        Assert.assertFalse(cuartel.estaEnConstruccion());
+
+    }
+
 }

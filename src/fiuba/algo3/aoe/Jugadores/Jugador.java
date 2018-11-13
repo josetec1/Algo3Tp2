@@ -1,22 +1,28 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
 
     private String nombre;
     private Mapa mapa;
     private int oro;
-    private boolean activo;
+    private List<UnidadMovil> unidades = new ArrayList<UnidadMovil>();
+    private List<Edificio> edificios = new ArrayList<Edificio>();
 
 
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
         this.mapa = mapa;
         this.oro = 0;
-        this.activo = false;
     }
 
 
@@ -49,8 +55,41 @@ public class Jugador {
         this.oro += oro;
     }
 
-    public Boolean esTuTurno() { return activo; } //TODO testear esto, y que el jugador arranque inactivo
-                                                   // que al pasar el turno este quede activo si es su turno, etc
 
-    public void setActivo (){this.activo = true;}
+    public void agregarEdificio(Edificio unEdificio) {
+
+        edificios.add(unEdificio);
+    }
+
+    public int cantidadEdificios() {
+        return edificios.size();
+    }
+
+    public void agregarUnidad(UnidadMovil unaUnidad) {
+
+        unidades.add(unaUnidad);
+    }
+
+    public int cantidadUnidades() {
+        return unidades.size();
+    }
+
+    public int cantidadAldeanosDesocupados() {
+        int cantidadAldeanos = 0;
+        for(int i= 0; i < unidades.size(); i++)
+            if(unidades.get(i).esAldeanoDesocupado())cantidadAldeanos++;
+
+        return cantidadAldeanos;
+    }
+
+    public void recolectarOro() {
+
+        this.sumarOro(20*cantidadAldeanosDesocupados());
+    }
+
+    public void actualizarEdificios(){
+
+        for(int i = 0; i < edificios.size(); i++)
+            edificios.get(i).construir();
+    }
 }
