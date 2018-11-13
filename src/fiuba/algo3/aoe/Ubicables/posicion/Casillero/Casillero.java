@@ -32,8 +32,8 @@ public class Casillero {
 
        boolean coordenadaX, coordenadaY;
 
-       coordenadaX = ((this.x<= ancho) && (this.x> 0));
-       coordenadaY = ((this.y<= alto) && (this.y> 0));
+       coordenadaX = ((this.x<= ancho) && (this.x>= 0));
+       coordenadaY = ((this.y<= alto) && (this.y>= 0));
        return (coordenadaX && coordenadaY);
 
     }

@@ -65,17 +65,6 @@ public class CasilleroTest {
        Assert.assertFalse(casillero3.estaDentroDe(10,15));
     }
 
-    @Test
-    public void test07estaDentroDeDebeDarFalseSiElCasilleroTieneValoresCero() {
-        Casillero casillero1 = new Casillero( 0, 1 );
-        Casillero casillero2 = new Casillero( 1, 0 );
-        Casillero casillero3 = new Casillero( 0, 0 );
-
-        Assert.assertFalse(casillero1.estaDentroDe(10,15));
-        Assert.assertFalse(casillero2.estaDentroDe(10,15));
-        Assert.assertFalse(casillero3.estaDentroDe(10,15));
-
-    }
 
     @Test
     public void test08estaDentroDeDebeDarTrueSiEstaLosLimitesSuperioresDeLosValoresPasados() {

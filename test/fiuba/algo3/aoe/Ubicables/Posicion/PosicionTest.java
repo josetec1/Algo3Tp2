@@ -127,10 +127,10 @@ public class PosicionTest {
     public void test10CalcularPosicionSiguienteConDireccionArribaDebeDevolverPosicionConCasilleroEnX4Y5(){
 
 
-        Casillero casillero = new Casillero(4,4);
+        Casillero casillero = new Casillero(2,0);
         Posicion posicionOriginal = new Posicion(casillero);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
+        Casillero casilleroSiguiente = new Casillero(2,1);
         Posicion posicionEsperada = new Posicion(casilleroSiguiente);
 
         Direccionable direccionableNueva = new DireccionArriba();
@@ -160,10 +160,10 @@ public class PosicionTest {
 
     @Test
     public void test12CalcularPosicionSiguienteConDireccionAbajoDebeDevolverPosicionConCasilleroEnX4Y5(){
-        Casillero casillero = new Casillero(4,6);
+        Casillero casillero = new Casillero(4,1);
         Posicion posicionOriginal = new Posicion(casillero);
 
-        Casillero casilleroSiguiente = new Casillero(4,5);
+        Casillero casilleroSiguiente = new Casillero(4,0);
         Posicion posicionEsperada = new Posicion(casilleroSiguiente);
 
         Direccionable direccionableNueva = new DireccionAbajo();
