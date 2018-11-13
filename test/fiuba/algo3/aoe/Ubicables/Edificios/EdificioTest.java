@@ -100,7 +100,6 @@ public class EdificioTest {
         unCuartel.disminuirVida(60);
         unCuartel.construir();
         unCuartel.construir();
-        thrown.expect(EdificioConstruidoException.class);
         unCuartel.construir();
 
         unCuartel.reparar();
@@ -116,7 +115,6 @@ public class EdificioTest {
         Edificio unaPlazaCentral = new PlazaCentral(mockedJugador);
         unaPlazaCentral.construir();
         unaPlazaCentral.construir();
-        thrown.expect(EdificioConstruidoException.class);
         unaPlazaCentral.construir();
         unaPlazaCentral.disminuirVida(100);
         unaPlazaCentral.reparar();
@@ -208,22 +206,21 @@ public class EdificioTest {
         Edificio cuartel = new Cuartel(jugador);
         cuartel.construir();
         cuartel.construir();
-        thrown.expect(EdificioConstruidoException.class);
         cuartel.construir();
-        cuartel.reparar();
         thrown.expect(EdificioSinDaniarException.class);
         cuartel.reparar();
     }
 
     @Test
-    public void test021ConstruirCuartelConstruccionTerminadaLanzaEdificioConstruidoException(){
+    public void test021ConstruirCuartelConstruccionTerminadaNoEstaEnReparacionNiConstruccion(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
         Edificio cuartel = new Cuartel(jugador);
         cuartel.construir();
         cuartel.construir();
-        thrown.expect(EdificioConstruidoException.class);
         cuartel.construir();
+        Assert.assertEquals(cuartel.estaEnConstruccion(),false);
+        Assert.assertEquals(cuartel.estaEnReparacion(),false);
     }
 
     @Test
@@ -242,22 +239,8 @@ public class EdificioTest {
         Edificio plaza = new PlazaCentral(jugador);
         plaza.construir();
         plaza.construir();
-        thrown.expect(EdificioConstruidoException.class);
         plaza.construir();
-        plaza.reparar();
         thrown.expect(EdificioSinDaniarException.class);
-        plaza.reparar();
-    }
-
-    @Test
-    public void test024ConstruirPlazaConstruccionTerminadaLanzaEdificioConstruidoException(){
-        Mapa mapa = new Mapa(20,20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio plaza = new PlazaCentral(jugador);
-        plaza.construir();
-        plaza.construir();
-        thrown.expect(EdificioConstruidoException.class);
-        plaza.construir();
         plaza.reparar();
     }
 

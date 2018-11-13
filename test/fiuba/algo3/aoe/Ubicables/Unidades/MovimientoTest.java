@@ -129,5 +129,35 @@ public class MovimientoTest {
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
 
+    @Test
+    public void test09MoverArqueroArribaDerechaDePosicionMueveCorrectamente() {
+        Mapa mapa = new Mapa(20, 20);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+        UnidadMovil arquero = new Arquero(jugador);
+        Posicion origen = new Posicion(1, 1);
+        Posicion calculada = new Posicion(2, 2);
+        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        mapa.colocar(arquero,origen);
+        Direccionable direccion = new DireccionArribaDerecha();
+        arquero.mover(mapa, direccion);
+        Assert.assertTrue(arquero.getPosicion().seSuperponeCon(calculada));
+        Assert.assertFalse(arquero.getPosicion().seSuperponeCon(origen));
+    }
+
+    @Test
+    public void test010MoverEspadachinArribaDerechaDePosicionMueveCorrectamente() {
+        Mapa mapa = new Mapa(20, 20);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+        UnidadMovil espadachin = new Espadachin(jugador);
+        Posicion origen = new Posicion(1, 1);
+        Posicion calculada = new Posicion(2, 2);
+        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        mapa.colocar(espadachin,origen);
+        Direccionable direccion = new DireccionArribaDerecha();
+        espadachin.mover(mapa, direccion);
+        Assert.assertTrue(espadachin.getPosicion().seSuperponeCon(calculada));
+        Assert.assertFalse(espadachin.getPosicion().seSuperponeCon(origen));
+    }
+
 }
 

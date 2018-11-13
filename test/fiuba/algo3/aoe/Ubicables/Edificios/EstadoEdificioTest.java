@@ -89,12 +89,13 @@ public class EstadoEdificioTest {
     }
 
     @Test
-    public void test011EstadoEdificioConstruccionConstruir3VecesDevuelveEdificioConstruidoException(){
+    public void test011EstadoEdificioConstruccionConstruir3VecesNoEstaEnConstruccionNiReparacion(){
         Edificio edificio = new Cuartel(mock(Jugador.class));
         edificio.construir();
         edificio.construir();
-        thrown.expect(EdificioConstruidoException.class);
         edificio.construir();
+        Assert.assertEquals(edificio.estaEnReparacion(),false);
+        Assert.assertEquals(edificio.estaEnReparacion(),false);
     }
 
     @Test
@@ -102,7 +103,6 @@ public class EstadoEdificioTest {
         Edificio edificio = new Cuartel(mock(Jugador.class));
         edificio.construir();
         edificio.construir();
-        thrown.expect(EdificioConstruidoException.class);
         edificio.construir();
         EstadoEdificio estado = new EstadoEnReparacion(10);
         edificio.disminuirVida(10);
@@ -118,7 +118,6 @@ public class EstadoEdificioTest {
         Edificio edificio = new Cuartel(mock(Jugador.class));
         edificio.construir();
         edificio.construir();
-        thrown.expect(EdificioConstruidoException.class);
         edificio.construir();
         EstadoEdificio estado = new EstadoEnReparacion(10);
         edificio.disminuirVida(10);
@@ -126,10 +125,8 @@ public class EstadoEdificioTest {
         Assert.assertEquals(edificio.getVidaActual(),230);
         estado.reparar(edificio);
         estado.reparar(edificio);
-        thrown.expect(EdificioSinDaniarException.class);
-        estado.reparar(edificio);
-        thrown.expect(EdificioConstruidoException.class);
-        edificio.construir();
+        Assert.assertEquals(edificio.estaEnReparacion(),false);
+        Assert.assertEquals(edificio.estaEnConstruccion(),false);
 
     }
 
