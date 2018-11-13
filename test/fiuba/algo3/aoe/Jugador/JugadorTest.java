@@ -165,9 +165,16 @@ public class JugadorTest {
         Assert.assertEquals(jugador1.cantidadUnidades(),1);
     }
 
+    @Test
+    public void test16CrearUnAldeanoCantidadAldeanosDesocupadosIgualAUno(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
 
+        Assert.assertEquals(jugador1.cantidadAldeanosDesocupados(),0);
 
+        new Aldeano(jugador1);
 
-
+        Assert.assertEquals(jugador1.cantidadUnidades(),1);
+    }
 
 }

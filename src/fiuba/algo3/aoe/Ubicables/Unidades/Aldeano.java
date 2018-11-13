@@ -9,6 +9,8 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil {
 
+    boolean ocupado = false;
+
     public Aldeano( Jugador jugador ){
         this.vidaMaxima = 50;
         this.vidaActual = 50;
@@ -28,6 +30,11 @@ public class Aldeano extends UnidadMovil {
         if (mapa.puedoColocar(destino)){
             mapa.moverElemento(this,destino);
         }
+    }
+
+    @Override
+    public boolean esAldeanoDesocupado() {
+        return !ocupado;
     }
 
     public void disminuirVida( int vida){

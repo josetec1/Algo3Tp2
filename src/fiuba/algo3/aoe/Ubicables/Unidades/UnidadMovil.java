@@ -8,6 +8,7 @@ import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public abstract class UnidadMovil implements Ubicable {
+
     protected Posicion posicion;
     protected Jugador jugador;
     protected int vidaMaxima;
@@ -38,5 +39,9 @@ public abstract class UnidadMovil implements Ubicable {
     //TODO: si no se puede mover por que la posicion esta ocupada, tendria que hacer algo, retornar un bool
     // y usar eso para volvera intentar otra cosa, o enviar un mensaje "ahi no me puedo mover"
     public abstract void mover(Mapa mapa, Direccionable direccion);
+
+    public boolean esAldeanoDesocupado(){
+        return false;
+    }
 
 }

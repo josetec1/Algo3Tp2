@@ -2,6 +2,7 @@ package fiuba.algo3.aoe.Juego;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -89,6 +90,27 @@ public class TurnoTest {
 
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
+    }
+
+    @Test
+    public void test07AlPasarTurnoYTenerUnAldeanoJugador1ObtieneOro(){
+        Mapa mapa = new Mapa(20,20);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        Jugador jugador2 = new Jugador("Maradona", mapa);
+        List<Jugador> jugadores = new ArrayList <>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Turno turno = new Turno(jugadores);
+
+        new Aldeano(jugador1);
+
+        Assert.assertEquals(jugador1.getOro(),0);
+
+        turno.pasarTurno();
+
+        Assert.assertEquals(jugador1.getOro(),20);
+
     }
 
 }

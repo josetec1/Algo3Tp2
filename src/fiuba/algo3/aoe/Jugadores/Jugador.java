@@ -73,4 +73,17 @@ public class Jugador {
     public int cantidadUnidades() {
         return unidades.size();
     }
+
+    public int cantidadAldeanosDesocupados() {
+        int cantidadAldeanos = 0;
+        for(int i= 0; i < unidades.size(); i++)
+            if(unidades.get(i).esAldeanoDesocupado())cantidadAldeanos++;
+
+        return cantidadAldeanos;
+    }
+
+    public void recolectarOro() {
+
+        this.sumarOro(20*cantidadAldeanosDesocupados());
+    }
 }
