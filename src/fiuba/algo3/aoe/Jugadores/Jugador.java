@@ -9,12 +9,14 @@ public class Jugador {
     private String nombre;
     private Mapa mapa;
     private int oro;
+    private boolean activo;
 
 
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
         this.mapa = mapa;
         this.oro = 0;
+        this.activo = false;
     }
 
 
@@ -46,4 +48,9 @@ public class Jugador {
     public void sumarOro(int oro) {
         this.oro += oro;
     }
+
+    public Boolean esTuTurno() { return activo; } //TODO testear esto, y que el jugador arranque inactivo
+                                                   // que al pasar el turno este quede activo si es su turno, etc
+
+    public void setActivo (){this.activo = true;}
 }

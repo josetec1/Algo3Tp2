@@ -8,7 +8,7 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class PlazaCentral extends Edificio {
-
+// TODO refactor constantes
     public PlazaCentral( Jugador jugador ){
         this.costo = 100;
         this.vidaMaxima = 450;
@@ -37,5 +37,9 @@ public class PlazaCentral extends Edificio {
         return aldeano;
     }
 
+    @Override
+    public void huboUnCambioDeTurno() {
+
+    }
 }
 

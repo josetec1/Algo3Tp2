@@ -3,10 +3,11 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
+import fiuba.algo3.aoe.Ubicables.ObservadorTurno;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public abstract class Edificio implements Ubicable {
+public abstract class Edificio implements Ubicable, ObservadorTurno {
     protected int vidaMaxima;
     protected int vidaActual;
     protected Posicion posicion;

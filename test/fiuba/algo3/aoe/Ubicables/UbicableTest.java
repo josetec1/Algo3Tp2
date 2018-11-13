@@ -4,7 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;

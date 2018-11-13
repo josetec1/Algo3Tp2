@@ -15,8 +15,8 @@ public class Turno {
     private Iterator<Jugador> it;
     private final int JUGADORES_ADMITIDOS = 2;
 
-    //TODO hay que implementar para que arranque con un jugador al azar.
-    // con que turno arrancar le diria desde afuera, sino va a ser dificil hacer un test que compruebe que arranca al azar
+    //TODO hay que implementar para que arranque con un jugador al azar.  new turno (semilla)
+     // con que turno arrancar le diria desde afuera, sino va a ser dificil hacer un test que compruebe que arranca al azar
     public Turno ( List <Jugador> unosJugadores ) {
         this.numeroDeTurno = 1;
 
@@ -49,6 +49,7 @@ public class Turno {
         this.numeroDeTurno += 1;
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
         this.jugadorActual= this.it.next();
+        //notificar a observadores
      }
 
 

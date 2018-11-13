@@ -3,7 +3,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;

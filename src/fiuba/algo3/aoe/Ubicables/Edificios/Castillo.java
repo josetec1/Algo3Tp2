@@ -4,11 +4,11 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
-import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 
 public class Castillo extends Edificio{
 
+    //TODO implementar multiton
     public Castillo( Jugador jugador){
        costo = 0;
        vidaActual = 1000;
@@ -43,5 +43,10 @@ public class Castillo extends Edificio{
     public Ubicable construirArmaDeAsedio(){
         Ubicable armaDeAsedio = new ArmaDeAsedio(this.jugador);
         return armaDeAsedio;
+    }
+
+    @Override
+    public void huboUnCambioDeTurno() {
+
     }
 }

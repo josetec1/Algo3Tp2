@@ -16,18 +16,18 @@ public class TurnoTest {
     public void test01CrearTurnoInicializaTurnoConNumero1JugadorActualDevuelveMauricio(){
 
         List<Jugador> jugadores = new ArrayList <>();
-        Mapa mapa = new Mapa(20,20);
+       Mapa mapa = new Mapa(20,20);
         Jugador jugador1 = new Jugador("Mauricio", mapa);
         Jugador jugador2 = new Jugador("Jose", mapa);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
-        Assert.assertEquals(turno.getJugadorActual().getNombre(),"Mauricio");
+
         Assert.assertEquals(turno.getJugadorActual(),jugador1);
     }
 
     @Test
-    public void test03CrearTurnoInicializaTurnoConNumero1DevuelveNumeroActual1(){
+    public void test02CrearTurnoInicializaTurnoConNumero1DevuelveNumeroActual1(){
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
@@ -41,7 +41,7 @@ public class TurnoTest {
 
 
     @Test
-    public void test02SePasaTurnoYRecibeComoJugadorActualJose(){
+    public void test03SePasaTurnoYRecibeComoJugadorActualAlJugador2(){
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
@@ -51,7 +51,24 @@ public class TurnoTest {
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
         turno.pasarTurno();
-        Assert.assertEquals(turno.getJugadorActual().getNombre(),"Jose");
+        Assert.assertEquals(turno.getJugadorActual(),jugador2);
+    }
+
+    @Test
+    public void test04LuegoDePasarDosTurnosElJugadorActualVuelveASerConElQueEmpezo(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+        Mapa mapa = new Mapa(20,20);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        Jugador jugador2 = new Jugador("Jose", mapa);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Turno turno = new Turno(jugadores);
+        Jugador jugadorConElQueEmpezo = turno.getJugadorActual();
+
+        turno.pasarTurno();
+        turno.pasarTurno();
+        Assert.assertEquals(turno.getJugadorActual(),jugadorConElQueEmpezo);
     }
 
     @Rule
