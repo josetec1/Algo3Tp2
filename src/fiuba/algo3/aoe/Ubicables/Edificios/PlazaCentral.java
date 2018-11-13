@@ -1,22 +1,31 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
+
 public class PlazaCentral extends Edificio {
 
-    public PlazaCentral(){
+    public PlazaCentral( Jugador jugador ){
         this.costo = 100;
         this.vidaMaxima = 450;
         this.vidaActual = 450;
-        this.turnosParaLaConstruccion = 3;
-        this.estado = "En Construccion";
+        this.estado = new EstadoEnConstruccion(3);
+        this.jugador = jugador;
     }
 
     public void reparar(){
-        if (this.estaDaniado()){
-            this.vidaActual += 25;
+        if(estado.enConstruccion()){
+            throw new EdificioSinDaniarException();
         }
-        else{throw new EdificioSinDaniarException();}
-        if (this.vidaActual> this.vidaMaxima){
-            this.vidaActual = this.vidaMaxima;
+        if(!this.estaDaniado()){
+            throw new EdificioSinDaniarException();
+        }
+        if (estado.enReparacion()){
+            estado.reparar(this);
+        }else {
+            this.aumentarVida(25);
+            this.estado = new EstadoEnReparacion(25);
         }
     }
 

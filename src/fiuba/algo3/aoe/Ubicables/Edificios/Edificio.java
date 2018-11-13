@@ -1,5 +1,8 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
@@ -8,8 +11,8 @@ public abstract class Edificio implements Ubicable {
     protected int vidaActual;
     protected Posicion posicion;
     protected int costo;
-    protected String estado;
-    protected int turnosParaLaConstruccion;
+    protected EstadoEdificio estado;
+    protected Jugador jugador;
 
     public int getCosto () {
         return this.costo;
@@ -37,16 +40,30 @@ public abstract class Edificio implements Ubicable {
             this.vidaActual = 0;
         }
     }
+    public void aumentarVida(int unaCantidad){
+        vidaActual += unaCantidad;
+        if (vidaActual>=vidaMaxima){
+            vidaActual = vidaMaxima;
+            this.estado = new EstadoNormal();
+        }
+    }
 
     public abstract void reparar ();
 
+    public void construir(){
+        this.estado.construir(this);
+    }
+
     public boolean estaEnConstruccion (){
-        return this.estado == "En Construccion";
+        return this.estado.enConstruccion();
     }
 
     public boolean estaDaniado () {
         return (this.vidaActual < this.vidaMaxima && this.vidaActual > 0);
     }
 
+    public boolean perteneceAJugador( Jugador jugador){
+        return (this.jugador == jugador);
+    }
 
 }

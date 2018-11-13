@@ -1,19 +1,18 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
+
 public class Castillo extends Edificio{
 
-    private static Castillo INSTANCE = new Castillo();
-
-    private Castillo(){
+    public Castillo( Jugador jugador){
        costo = 0;
        vidaActual = 1000;
        vidaMaxima = 1000;
-       String estado = "En Construccion";
+       this.jugador = jugador;
+       this.estado = new EstadoNormal();
 
-    }
-
-    public static Castillo getInstancia(){
-        return INSTANCE;
     }
 
     public int getCosto(){
@@ -22,13 +21,20 @@ public class Castillo extends Edificio{
 
 
     public void reparar(){
-        if(this.estaDaniado()){
-            this.vidaActual += 15;
+        if(!this.estaDaniado()){
+            throw new EdificioSinDaniarException();
         }
-        if (this.vidaActual > vidaMaxima){
-            vidaActual = vidaMaxima;
+        if (estado.enReparacion()){
+            estado.reparar(this);
+        }else {
+            this.aumentarVida(15);
+            this.estado = new EstadoEnReparacion(15);
         }
+    }
 
-    };
+    @Override
+    public void construir(){
+        throw new EdificioNoConstruibleSinCostoException();
+    }
 
 }
