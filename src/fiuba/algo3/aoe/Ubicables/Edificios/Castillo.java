@@ -3,6 +3,9 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
 
 public class Castillo extends Edificio{
 
@@ -37,4 +40,8 @@ public class Castillo extends Edificio{
         throw new EdificioNoConstruibleSinCostoException();
     }
 
+    public Ubicable construirArmaDeAsedio(){
+        Ubicable armaDeAsedio = new ArmaDeAsedio(this.jugador);
+        return armaDeAsedio;
+    }
 }

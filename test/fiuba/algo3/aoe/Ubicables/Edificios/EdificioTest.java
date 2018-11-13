@@ -2,6 +2,10 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Tablero.Tablero;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Casillero.Casillero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
@@ -281,6 +285,31 @@ public class EdificioTest {
         Jugador jugador = new Jugador("Mauricio",mockedTablero);
         Edificio cuartel = new Cuartel(jugador);
         Assert.assertEquals(cuartel.perteneceAJugador(jugador),true);
+    }
+
+    @Test
+    public void test27CastilloCreaArmaDeAsedio(){
+        Castillo castillo = new Castillo((mock(Jugador.class)));
+        Ubicable unidad =  castillo.construirArmaDeAsedio();
+        Assert.assertEquals(unidad instanceof ArmaDeAsedio,true);
+    }
+
+    @Test
+    public void test27CuartelCreaArquero(){
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Cuartel cuartel = new Cuartel(jugador);
+        Ubicable unidad = cuartel.construirArquero();
+        Assert.assertEquals(unidad instanceof Arquero,true);
+    }
+
+    @Test
+    public void test27CuartelCreaEspadachin(){
+        Tablero tablero = new Tablero(10,10);
+        Jugador jugador = new Jugador("Mauricio",tablero);
+        Cuartel cuartel = new Cuartel(jugador);
+        Ubicable unidad = cuartel.construirEspadachin();
+        Assert.assertEquals(unidad instanceof Espadachin,true);
     }
 
 }

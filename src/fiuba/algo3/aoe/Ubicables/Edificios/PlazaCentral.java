@@ -3,6 +3,9 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class PlazaCentral extends Edificio {
 
@@ -27,6 +30,11 @@ public class PlazaCentral extends Edificio {
             this.aumentarVida(25);
             this.estado = new EstadoEnReparacion(25);
         }
+    }
+
+    public Ubicable construirAldeano(){
+        Ubicable aldeano = new Aldeano(this.jugador);
+        return aldeano;
     }
 
 }

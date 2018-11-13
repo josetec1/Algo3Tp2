@@ -3,6 +3,10 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.Espadachin;
 
 public class Cuartel extends Edificio {
 
@@ -28,6 +32,16 @@ public class Cuartel extends Edificio {
             this.aumentarVida(50);
             this.estado = new EstadoEnReparacion(50);
         }
+    }
+
+    public Ubicable construirEspadachin(){
+        Ubicable espadachin = new Espadachin(this.jugador);
+        return espadachin;
+    }
+
+    public Ubicable construirArquero(){
+        Ubicable arquero = new Arquero(this.jugador);
+        return arquero;
     }
 
 }
