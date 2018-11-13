@@ -108,7 +108,7 @@ public class TurnoTest {
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
     }
-
+/*
     @Test
     public void test07AlPasarTurnoYTenerUnAldeanoJugador1ObtieneOro(){
         Mapa mapa = new Mapa(20,20);
@@ -129,5 +129,5 @@ public class TurnoTest {
         Assert.assertEquals(jugador1.getOro(),20);
 
     }
-
+*/
 }
