@@ -5,6 +5,9 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil {
@@ -41,7 +44,19 @@ public class Aldeano extends UnidadMovil {
         this.vidaActual-= vida;
     }
 
-    public void construirCastillo(Posicion posicion) {
-        new Castillo(this.jugador);
+    public Edificio construirCuartel(Posicion posicion) {
+        return new Cuartel(this.jugador);
+    }
+
+    public Edificio contruirPlazaCentral(Posicion posicion) {
+        return new PlazaCentral(this.jugador);
+    }
+
+    public void reparar(Edificio unEdificio) {
+
+        if(!unEdificio.estaEnReparacion()){
+            ocupado = true;
+            unEdificio.reparar();
+        }
     }
 }

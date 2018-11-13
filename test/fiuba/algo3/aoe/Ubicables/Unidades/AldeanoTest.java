@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,14 +76,92 @@ public class AldeanoTest {
     }
 
     @Test
-    public void test07AldeanoCreaCastillo(){
+    public void test07AldeanoCreaCuartel(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
         Aldeano aldeano = new Aldeano(jugador);
 
-        aldeano.construirCastillo(new Posicion(2,3));
+        aldeano.construirCuartel(new Posicion(2,3));
         Assert.assertEquals(jugador.cantidadEdificios(),1);
 
+    }
+
+    @Test
+    public void test08AldeanoCreaPlazaCentral(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+        Aldeano aldeano = new Aldeano(jugador);
+
+        aldeano.contruirPlazaCentral(new Posicion(2,3));
+        Assert.assertEquals(jugador.cantidadEdificios(),1);
+    }
+
+    @Test
+    public void test09AldeanoReparaPlazaCentralDaniada(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+        Aldeano aldeano = new Aldeano(jugador);
+
+        Edificio plazaCentral = aldeano.contruirPlazaCentral(new Posicion(2,3));
+        plazaCentral.construir();
+        plazaCentral.construir();
+        plazaCentral.construir();
+
+        Assert.assertEquals(plazaCentral.getVidaActual(), 450);
+
+        plazaCentral.disminuirVida(50);
+        aldeano.reparar(plazaCentral);
+
+        Assert.assertFalse(aldeano.esAldeanoDesocupado());
+        Assert.assertEquals(plazaCentral.getVidaActual(), 425);
+    }
+
+    @Test
+    public void test10UnSoloAldeanoReparaPlazaCentralDaniado(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+
+        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano2 = new Aldeano(jugador);
+
+        Edificio plazaCentral = aldeano.contruirPlazaCentral(new Posicion(2,3));
+        plazaCentral.construir();
+        plazaCentral.construir();
+        plazaCentral.construir();
+
+        Assert.assertEquals(plazaCentral.getVidaActual(), 450);
+
+        plazaCentral.disminuirVida(50);
+        aldeano.reparar(plazaCentral);
+        aldeano2.reparar(plazaCentral);
+
+        Assert.assertFalse(aldeano.esAldeanoDesocupado());
+        Assert.assertTrue(aldeano2.esAldeanoDesocupado());
+
+        Assert.assertEquals(plazaCentral.getVidaActual(), 425);
+    }
+
+
+    @Test
+    public void test11AldeanoReparaCuartelDaniado(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador = new Jugador("Mauricio", mapa);
+
+        Aldeano aldeano = new Aldeano(jugador);
+
+        Edificio cuartel = aldeano.construirCuartel(new Posicion(2,3));
+        cuartel.construir();
+        cuartel.construir();
+        cuartel.construir();
+
+        Assert.assertEquals(cuartel.getVidaActual(), 250);
+
+        cuartel.disminuirVida(50);
+        aldeano.reparar(cuartel);
+
+        Assert.assertFalse(aldeano.esAldeanoDesocupado());
+
+        Assert.assertEquals(cuartel.getVidaActual(), 250);
     }
 
 }
