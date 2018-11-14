@@ -5,7 +5,6 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -79,7 +78,7 @@ public class MapaTest {
         Jugador jugador = new Jugador("Mauricio", mapa);
         Ubicable elemento = new Aldeano(jugador);
         //elemento.colocarEn(posicionFueraDeTablero);
-        thrown.expect(FueraDeTableroException.class);
+        thrown.expect(FueraDelMapaException.class);
         mapa.colocar(elemento,posicionFueraDeTablero);
       }
 
@@ -98,7 +97,7 @@ public class MapaTest {
         Ubicable elementoSuperpuesto = new Aldeano(jugador);
         mapa.colocar(elemento,unaPosicion);
 
-        thrown.expect(PosicionOcupadaException.class);
+        thrown.expect(PosicionDelMapaOcupadaException.class);
         mapa.colocar(elementoSuperpuesto,posicionSuperpuesta);
     }
 
@@ -191,7 +190,7 @@ public class MapaTest {
         Ubicable elemento = new Aldeano(jugador);
         mapa.colocar(elemento,posicion);
 
-        thrown.expect(FueraDeTableroException.class);
+        thrown.expect(FueraDelMapaException.class);
         mapa.moverElemento(elemento,posicionDestino);
     }
 
@@ -242,7 +241,7 @@ public class MapaTest {
         Ubicable elemento2 = new Aldeano(jugador);
         mapa.colocar(elemento2,posicionDestino);
 
-        thrown.expect(PosicionOcupadaException.class);
+        thrown.expect(PosicionDelMapaOcupadaException.class);
         mapa.moverElemento(elemento,posicionDestino);
    }
 

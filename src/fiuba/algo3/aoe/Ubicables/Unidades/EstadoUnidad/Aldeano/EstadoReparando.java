@@ -18,7 +18,7 @@ public class EstadoReparando implements EstadoUnidadAldeano {
     }
 
     @Override
-    public void pasarTurno(UnidadMovil unidad) {
+    public void pasarTurno(Aldeano aldeano){
 
     }
 }

@@ -3,7 +3,6 @@ package fiuba.algo3.aoe.Mapa;
 
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 
 import java.util.*;
 
@@ -50,8 +49,8 @@ public class Mapa {
     // el ubicable tiene no puede estar agregado previamente
     public void colocar (Ubicable unElemento, Posicion posicion)  {
 
-        if (!this.estaDentroDeTablero(posicion)) {throw new FueraDeTableroException();}
-        if(!this.estaLibre(posicion)) {throw new PosicionOcupadaException();}
+        if (!this.estaDentroDeTablero(posicion)) {throw new FueraDelMapaException();}
+        if(!this.estaLibre(posicion)) {throw new PosicionDelMapaOcupadaException();}
         if (this.estaEnElTablero(unElemento)){throw new ElElementoYaExisteException();}
 
         unElemento.colocarEn(posicion);

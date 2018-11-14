@@ -7,7 +7,7 @@ import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 
 import fiuba.algo3.aoe.Ubicables.ObservadorTurno;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.EstadoUnidad;
+
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public abstract class UnidadMovil implements Ubicable, ObservadorTurno {
@@ -54,7 +54,7 @@ public abstract class UnidadMovil implements Ubicable, ObservadorTurno {
         this.cuentaRegresiva= numero;
     }
 
-    public int getCuentaRegresiva( ){
+    public int getCuentaRegresiva( ){ //TODO esto hay que revisarlo, quizas sea mejor que el contador este en el estado.
 
         return this.cuentaRegresiva;
     }

@@ -12,6 +12,14 @@ public class EstadoConstruyendo implements EstadoUnidadAldeano {
     }
 
     @Override
+    public void pasarTurno(Aldeano aldeano) {
+        int cuentaRegresiva= aldeano.getCuentaRegresiva();
+        aldeano.establecerCuentaRegresiva(cuentaRegresiva -1);
+
+        if( cuentaRegresiva ==0) {aldeano.cambiarARecolectando();}
+    }
+
+    @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
         return null; //TODO excepcion
     }
@@ -21,14 +29,5 @@ public class EstadoConstruyendo implements EstadoUnidadAldeano {
         return false;
     }
 
-    @Override
-    public void pasarTurno(UnidadMovil unidad) {
 
-        int cuentaRegresiva= unidad.getCuentaRegresiva();
-        unidad.establecerCuentaRegresiva(cuentaRegresiva -1);
-        Aldeano aldeano = (Aldeano) unidad; //TODO Polemico
-        if( cuentaRegresiva ==0) {aldeano.cambiarARecolectando();}
-
-
-    }
 }
