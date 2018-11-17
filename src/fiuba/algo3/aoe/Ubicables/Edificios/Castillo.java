@@ -40,13 +40,13 @@ public class Castillo extends Edificio{
         throw new EdificioNoConstruibleSinCostoException();
     }
 
-    public Ubicable construirArmaDeAsedio(){
-        Ubicable armaDeAsedio = new ArmaDeAsedio(this.jugador);
-        return armaDeAsedio;
+    public ArmaDeAsedio construirArmaDeAsedio(){
+        return new ArmaDeAsedio();
+
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 }

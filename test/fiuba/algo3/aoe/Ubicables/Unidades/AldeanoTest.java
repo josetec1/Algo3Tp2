@@ -124,11 +124,11 @@ public class AldeanoTest {
 
 
         PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
-        aldeano.huboUnCambioDeTurno(); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
-        aldeano.huboUnCambioDeTurno(); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
         Assert.assertThat(aldeano.podesConstruirORepar(), is(true));
 
     }
@@ -145,10 +145,10 @@ public class AldeanoTest {
 
 
         PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
-        aldeano.huboUnCambioDeTurno(); // turno 2
-        aldeano.huboUnCambioDeTurno(); // turno 3
-        aldeano.huboUnCambioDeTurno(); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
         Assert.assertThat(aldeano.podesConstruirORepar(), is(true));
 
     }
@@ -185,9 +185,9 @@ public class AldeanoTest {
 
 
         PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
-        aldeano.huboUnCambioDeTurno(); // turno 2
-        aldeano.huboUnCambioDeTurno(); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
 
 
         Assert.assertThat(jugador.getOro()==0, is(true));

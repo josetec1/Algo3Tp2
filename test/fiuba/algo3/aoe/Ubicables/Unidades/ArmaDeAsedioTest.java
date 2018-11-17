@@ -13,7 +13,7 @@ public class ArmaDeAsedioTest {
     public void test01SeCreaCorrectamenteArmaDeAsedio(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
 
         Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 150);
@@ -24,7 +24,7 @@ public class ArmaDeAsedioTest {
     public void test02Disminuir50VidaArmaDeAsedioDevuelve100DeVida(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
         armaDeAsedio.disminuirVida(50);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
     }
@@ -33,10 +33,10 @@ public class ArmaDeAsedioTest {
     public void test03Disminuir50VidaArmaDeAsedioCrearNuevaArmaDeAsedioDevuelve150DeVida(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio(jugador);
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
         armaDeAsedio.disminuirVida(50);
         Assert.assertEquals(armaDeAsedio.getVidaActual(), 100);
-        ArmaDeAsedio armaDeAsedioSecundaria = new ArmaDeAsedio(jugador);
+        ArmaDeAsedio armaDeAsedioSecundaria = new ArmaDeAsedio();
         Assert.assertEquals(armaDeAsedioSecundaria.getVidaActual(), 150);
 
     }

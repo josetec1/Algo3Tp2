@@ -34,18 +34,18 @@ public class Cuartel extends Edificio {
         }
     }
 
-    public Ubicable construirEspadachin(){
-        Ubicable espadachin = new Espadachin();
-        return espadachin;
+    public Espadachin construirEspadachin(){
+        return new Espadachin();
+
     }
 
-    public Ubicable construirArquero(){
-        Ubicable arquero = new Arquero();
-        return arquero;
+    public Arquero construirArquero(){
+        return new Arquero();
+
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 }

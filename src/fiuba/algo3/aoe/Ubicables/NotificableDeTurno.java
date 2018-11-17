@@ -4,5 +4,5 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 
 public interface NotificableDeTurno {
 
-     void huboUnCambioDeTurno ();
+     void huboUnCambioDeTurno (Jugador jugador);
 }

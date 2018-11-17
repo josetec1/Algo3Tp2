@@ -37,8 +37,8 @@ public class Aldeano extends UnidadMovil  {
 
 
     @Override
-    public void huboUnCambioDeTurno() {
-        estado.pasarTurno(this);
+    public void huboUnCambioDeTurno(Jugador jugador) {
+        estado.pasarTurno(this, jugador);
 
     }
 

@@ -23,9 +23,9 @@ public class EstadoRecolectando implements EstadoUnidadAldeano {
     }
 
     @Override
-    public void pasarTurno(Aldeano aldeano) {
-            //Todo polemico
-        // este tipo suma 20 de oro.
-       // aldeano.entregarElOro();
+    public void pasarTurno(Aldeano aldeano, Jugador unJugador) {
+
+       //  este tipo suma 20 de oro.
+        aldeano.entregarElOro(unJugador);
     }
 }

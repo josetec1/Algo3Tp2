@@ -26,7 +26,7 @@ public class Espadachin extends UnidadMovilMilitar {
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 }

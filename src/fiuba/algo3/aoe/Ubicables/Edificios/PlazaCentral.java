@@ -33,13 +33,13 @@ public class PlazaCentral extends Edificio {
         }
     }
 
-    public Ubicable construirAldeano(){
-        Ubicable aldeano = new Aldeano();
-        return aldeano;
+    public Aldeano construirAldeano(){
+        return new Aldeano();
+
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 }
