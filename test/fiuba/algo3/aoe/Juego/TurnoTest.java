@@ -26,7 +26,7 @@ public class TurnoTest {
 
         Assert.assertEquals(turno.getJugadorActual(),jugador1);
     }
-
+/*
     @Test
     public void test02CrearTurnoInicializaTurnoConNumero1DevuelveNumeroActual1(){
 
@@ -39,7 +39,7 @@ public class TurnoTest {
         Turno turno = new Turno(jugadores);
         Assert.assertEquals(turno.getNumeroDeTurno(),1);
     }
-
+*/
 
     @Test
     public void test03SePasaTurnoYRecibeComoJugadorActualAlJugador2(){

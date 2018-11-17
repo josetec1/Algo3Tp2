@@ -1,5 +1,8 @@
 package fiuba.algo3.aoe.Jugadores;
 
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorActivo;
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorPasivo;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -9,14 +12,14 @@ public class Jugador {
     private String nombre;
     private Mapa mapa;
     private int oro;
-    private boolean activo;
+    private EstadoJugador estado;
 
 
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
         this.mapa = mapa;
         this.oro = 0;
-        this.activo = false;
+        this.estado = new JugadorPasivo();
     }
 
 
@@ -49,8 +52,7 @@ public class Jugador {
         this.oro += oro;
     }
 
-    public Boolean esTuTurno() { return activo; } //TODO testear esto, y que el jugador arranque inactivo
-                                                   // que al pasar el turno este quede activo si es su turno, etc
 
-    public void setActivo (){this.activo = true;}
+
+    public void setActivo (){this.estado = new JugadorActivo();}
 }

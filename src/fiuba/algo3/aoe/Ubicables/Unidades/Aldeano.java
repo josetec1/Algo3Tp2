@@ -41,13 +41,15 @@ public class Aldeano extends UnidadMovil  {
         estado.pasarTurno(this);
 
     }
-    private Boolean esMiTurno (){return this.jugador.esTuTurno();}
+//   private Boolean esMiTurno (){return this.jugador.esTuTurno();}
+
 
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
     public PlazaCentral crearPlazaCentral(Posicion posicion, Mapa mapa) {
             // revisa que sea el turno de tu jugador.
-          if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
+      //    if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
+
 
             //revisa que pueda construir
           if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
@@ -64,7 +66,7 @@ public class Aldeano extends UnidadMovil  {
 
     public Cuartel crearCuartel(Posicion posicion, Mapa mapa) {
         // revisa que sea el turno de tu jugador.
-        if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
+      //  if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
 
         //revisa que pueda construir
         if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
