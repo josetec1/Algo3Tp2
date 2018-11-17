@@ -10,11 +10,11 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 public class Cuartel extends Edificio {
 
 
-    public Cuartel( Jugador jugador ){
+    public Cuartel( ){
         this.costo = 50;
         this.vidaMaxima = 250;
         this.vidaActual = 250;
-        this.jugador = jugador;
+
         this.estado = new EstadoEnConstruccion(3);
       //  jugador.agregarEdificio(this);
     }
@@ -35,12 +35,12 @@ public class Cuartel extends Edificio {
     }
 
     public Ubicable construirEspadachin(){
-        Ubicable espadachin = new Espadachin(this.jugador);
+        Ubicable espadachin = new Espadachin();
         return espadachin;
     }
 
     public Ubicable construirArquero(){
-        Ubicable arquero = new Arquero(this.jugador);
+        Ubicable arquero = new Arquero();
         return arquero;
     }
 

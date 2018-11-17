@@ -56,7 +56,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test07EstadoEdificioNormalRepararDevuelveEdificioSinDaniarException(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         EstadoEdificio estado = new EstadoNormal();
         thrown.expect(EdificioSinDaniarException.class);
         estado.reparar(edificio);
@@ -65,7 +65,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test08EstadoEdificioEnReparacionConstruirDevuelveEdificioConstruidoException(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         EstadoEdificio estado = new EstadoEnReparacion(50);
         thrown.expect(EdificioConstruidoException.class);
         estado.construir(edificio);
@@ -74,7 +74,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test09EstadoEdificioConstruccionRepararDevuelveEdificioSinDaniarException(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         EstadoEdificio estado = new EstadoEnConstruccion(3);
         thrown.expect(EdificioSinDaniarException.class);
         estado.reparar(edificio);
@@ -82,7 +82,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test010EstadoEdificioNormalConstruirDevuelveEdificioConstruidoException(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         EstadoEdificio estado = new EstadoNormal();
         thrown.expect(EdificioConstruidoException.class);
         estado.construir(edificio);
@@ -90,7 +90,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test011EstadoEdificioConstruccionConstruir3VecesNoEstaEnConstruccionNiReparacion(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         edificio.construir();
         edificio.construir();
         edificio.construir();
@@ -100,7 +100,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test012EstadoEdificioEnReparacionReparar2VecesAumentaVidaDeEdificioEn20(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         edificio.construir();
         edificio.construir();
         edificio.construir();
@@ -115,7 +115,7 @@ public class EstadoEdificioTest {
 
     @Test
     public void test013EstadoEdificioEnReparacionRepararAlMaximoConvierteEnEstadoNormal(){
-        Edificio edificio = new Cuartel(mock(Jugador.class));
+        Edificio edificio = new Cuartel();
         edificio.construir();
         edificio.construir();
         edificio.construir();

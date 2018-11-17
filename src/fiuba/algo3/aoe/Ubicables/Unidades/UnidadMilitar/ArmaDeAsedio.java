@@ -13,7 +13,7 @@ public class ArmaDeAsedio extends UnidadMovilMilitar {
         this.vidaMaxima = 150;
         this.vidaActual = 150;
         this.costo = 200;
-        this.jugador = jugador;
+
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
     }
 

@@ -14,7 +14,7 @@ public class MovimientoTest {
     public void test01MoverAldeanoArribaMueveCorrectamente(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2,2);
         Posicion calculada= new Posicion(2,3);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -29,7 +29,7 @@ public class MovimientoTest {
     public void test02MoverAldeanoALaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -44,7 +44,7 @@ public class MovimientoTest {
     public void test03MoverAldeanoALaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -59,7 +59,7 @@ public class MovimientoTest {
     public void test04MoverAldeanoAbajoDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(1, 1);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -74,7 +74,7 @@ public class MovimientoTest {
     public void test05MoverAldeanoArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -89,7 +89,7 @@ public class MovimientoTest {
     public void test06MoverAldeanoArribaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 1);
         Posicion calculada = new Posicion(1, 2);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -104,7 +104,7 @@ public class MovimientoTest {
     public void test07MoverAldeanoAbajoIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(1, 1);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -119,7 +119,7 @@ public class MovimientoTest {
     public void test08MoverAldeanoAbajoDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil aldeano = new Aldeano(jugador);
+        UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -134,7 +134,7 @@ public class MovimientoTest {
     public void test09MoverArqueroArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil arquero = new Arquero(jugador);
+        UnidadMovil arquero = new Arquero();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen),true);
@@ -149,7 +149,7 @@ public class MovimientoTest {
     public void test010MoverEspadachinArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil espadachin = new Espadachin(jugador);
+        UnidadMovil espadachin = new Espadachin();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen),true);

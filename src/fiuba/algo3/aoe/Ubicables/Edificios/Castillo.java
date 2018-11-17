@@ -9,11 +9,11 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 public class Castillo extends Edificio{
 
     //TODO implementar multiton
-    public Castillo( Jugador jugador){
+    public Castillo( ){
        costo = 0;
        vidaActual = 1000;
        vidaMaxima = 1000;
-       this.jugador = jugador;
+
        this.estado = new EstadoNormal();
 
     }

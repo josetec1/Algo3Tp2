@@ -15,11 +15,11 @@ public class Aldeano extends UnidadMovil  {
     private EstadoUnidadAldeano estado;
 
 
-    public Aldeano( Jugador jugador ){
+    public Aldeano( ){
         this.vidaMaxima = 50;
         this.vidaActual = 50;
         this.costo = 25;
-        this.jugador = jugador;
+
         this.estado = new EstadoRecolectando(); //Todo refactor, revisar constructores
         this.cuentaRegresiva= 0;
 
@@ -41,7 +41,7 @@ public class Aldeano extends UnidadMovil  {
         estado.pasarTurno(this);
 
     }
-//   private Boolean esMiTurno (){return this.jugador.esTuTurno();}
+
 
 
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
@@ -55,7 +55,7 @@ public class Aldeano extends UnidadMovil  {
           if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
 
 
-        PlazaCentral unaPlaza =new PlazaCentral(this.jugador);
+        PlazaCentral unaPlaza =new PlazaCentral();
           unaPlaza = (PlazaCentral) this.estado.construir(this,unaPlaza);
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
@@ -72,7 +72,7 @@ public class Aldeano extends UnidadMovil  {
         if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
 
 
-        Cuartel cuartel =new Cuartel(this.jugador);
+        Cuartel cuartel =new Cuartel();
         cuartel = (Cuartel) this.estado.construir(this,cuartel);
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
@@ -90,5 +90,5 @@ public class Aldeano extends UnidadMovil  {
         return this.estado.puedoConstruirOReparar();
     }
 
-    public void entregarElOro (){this.jugador.sumarOro(20);}
+    public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
 }

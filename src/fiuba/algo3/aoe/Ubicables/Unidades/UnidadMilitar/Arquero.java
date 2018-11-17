@@ -9,11 +9,11 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Arquero extends UnidadMovilMilitar {
 
-    public Arquero( Jugador jugador ){
+    public Arquero(  ){
         this.vidaActual = 75;
         this.vidaMaxima = 75;
         this.costo = 75;
-        this.jugador = jugador;
+
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
     }
 

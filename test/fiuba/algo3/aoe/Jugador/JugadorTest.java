@@ -45,7 +45,7 @@ public class JugadorTest {
         Posicion posicion = new Posicion(1,1);
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable espadachin0 = new Espadachin(jugador);
+        Ubicable espadachin0 = new Espadachin();
         jugador.sumarOro(200);
         jugador.agregarUbicable(espadachin0,posicion);
         Assert.assertEquals(jugador.getOro(),150);
@@ -80,6 +80,12 @@ public class JugadorTest {
         Assert.assertFalse(jugador1.hayOroSuficiente(500));
     }
 
-
+    @Test
+    public void test09(){
+        Mapa mapa = new Mapa(10,10);
+        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        jugador1.sumarOro(300);
+        Assert.assertFalse(jugador1.hayOroSuficiente(500));
+    }
 
 }

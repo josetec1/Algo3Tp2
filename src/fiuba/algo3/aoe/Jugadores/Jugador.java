@@ -1,8 +1,10 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
-import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorActivo;
-import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorPasivo;
+
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorDeshabilitado;
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorHabilitado;
+
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -19,7 +21,7 @@ public class Jugador {
         this.nombre = nombre;
         this.mapa = mapa;
         this.oro = 0;
-        this.estado = new JugadorPasivo();
+        this.estado = new JugadorDeshabilitado();
     }
 
 
@@ -27,7 +29,7 @@ public class Jugador {
     }
     public int getOro(){return this.oro;}
 
-    public void agregarUbicable( Ubicable ubicable, Posicion posicion ) {
+    public void agregarUbicable( Ubicable ubicable, Posicion posicion ) { //TODO este metodo no es necesario. edificios y unidades las crea el jugador
 
         if (this.hayOroSuficiente(ubicable.getCosto())) {
             if (this.mapa.puedoColocar(posicion)) {
@@ -54,5 +56,11 @@ public class Jugador {
 
 
 
-    public void setActivo (){this.estado = new JugadorActivo();}
+    public void habilitar (){
+        this.estado = new JugadorHabilitado();
+        //TODO notificar a mis elementos  hubouncambiode turno
+
+    }
+
+    public void deshabilitar() { this.estado = new JugadorDeshabilitado();   }
 }

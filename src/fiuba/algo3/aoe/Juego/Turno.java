@@ -9,7 +9,7 @@ import java.util.List;
 import fiuba.algo3.aoe.Juego.*;
 
 public class Turno {
-  //  private int numeroDeTurno;  //TODO es necesario este atributo?
+
     private List <Jugador> jugadores;
     private Jugador jugadorActual;
     private Iterator<Jugador> it;
@@ -18,31 +18,26 @@ public class Turno {
     //TODO hay que implementar para que arranque con un jugador al azar.  new turno (semilla)
      // con que turno arrancar le diria desde afuera, sino va a ser dificil hacer un test que compruebe que arranca al azar
     public Turno ( List <Jugador> unosJugadores ) {
-      //  this.numeroDeTurno = 1;
+
 
         if (unosJugadores.size() != JUGADORES_ADMITIDOS) throw new JugadoresInvalidosException();
         this.jugadores = unosJugadores;
         this.it = unosJugadores.iterator();
-        this.jugadorActual = it.next();
+        this.jugadorActual = this.it.next();
+
 
     }
 
     public void pasarTurno () {
-
-
-       // this.numeroDeTurno += 1;
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
+        this.jugadorActual.deshabilitar();
         this.jugadorActual= this.it.next();
-       this.jugadorActual.setActivo();
+        this.jugadorActual.habilitar();
      }
 
 
     public Jugador getJugadorActual () {
         return this.jugadorActual;
     }
-/*
-    public int getNumeroDeTurno () {
-        return this.numeroDeTurno;
-    }
-*/
+
 }

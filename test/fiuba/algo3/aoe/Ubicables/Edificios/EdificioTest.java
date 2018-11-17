@@ -23,7 +23,7 @@ public class EdificioTest {
     public void test001CrearUnaPlazaCentral (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        PlazaCentral unaPlazaCentral = new PlazaCentral(mockedJugador);
+        PlazaCentral unaPlazaCentral = new PlazaCentral();
 
         Assert.assertEquals(unaPlazaCentral.getVidaMaxima(),450);
         Assert.assertEquals(unaPlazaCentral.getCosto(),100);
@@ -34,7 +34,7 @@ public class EdificioTest {
     public void test002CrearUnCuartel (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
 
         Assert.assertEquals(unCuartel.getVidaMaxima(),250);
         Assert.assertEquals(unCuartel.getCosto(),50);
@@ -45,7 +45,7 @@ public class EdificioTest {
     public void test003CrearUnCastilloDisMinuirVida50YRepararDevuelvenVida965(){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCastillo = new Castillo(mockedJugador);
+        Edificio unCastillo = new Castillo();
 
         Assert.assertEquals(unCastillo.getVidaMaxima(),1000);
         Assert.assertEquals(unCastillo.getVidaActual(),1000);
@@ -60,7 +60,7 @@ public class EdificioTest {
     public void test004DisminuirVidaDelCuartelUnaVez (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
 
         Assert.assertEquals(unCuartel.getVidaMaxima(),250);
@@ -72,7 +72,7 @@ public class EdificioTest {
     public void test006DisminuirVidaDelCuartelDosVeces (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(30);
         unCuartel.disminuirVida(40);
 
@@ -84,7 +84,7 @@ public class EdificioTest {
     public void test007RepararCuartelSinDanio (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         thrown.expect(EdificioSinDaniarException.class);
         unCuartel.reparar();
         Assert.assertEquals(unCuartel.getVidaMaxima(),250);
@@ -96,7 +96,7 @@ public class EdificioTest {
     public void test009RepararCuartelMenorAlMaximoDeVida (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(60);
         unCuartel.construir();
         unCuartel.construir();
@@ -112,7 +112,7 @@ public class EdificioTest {
     public void test010RepararPlazaCentralMenorAlMaximoDeVida (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unaPlazaCentral = new PlazaCentral(mockedJugador);
+        Edificio unaPlazaCentral = new PlazaCentral();
         unaPlazaCentral.construir();
         unaPlazaCentral.construir();
         unaPlazaCentral.construir();
@@ -127,7 +127,7 @@ public class EdificioTest {
     public void test012DestruirCuartelgetVidaActualSiempreMayorOIgualQueCero (){
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         unCuartel.disminuirVida(500);
 
         Assert.assertEquals(unCuartel.getVidaMaxima(),250);
@@ -138,7 +138,7 @@ public class EdificioTest {
     public void test013CuartelEstaEnConstruccion () {
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
 
         Assert.assertTrue(unCuartel.estaEnConstruccion());
     }
@@ -147,7 +147,7 @@ public class EdificioTest {
     public void test014CuartelEstaEnConstruccionLuegoDeConstruirseUnaVez () {
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio unCuartel = new Cuartel(mockedJugador);
+        Edificio unCuartel = new Cuartel();
         Assert.assertTrue(unCuartel.estaEnConstruccion());
     }
 
@@ -158,7 +158,7 @@ public class EdificioTest {
     public void test016CastilloGetCostoLanzaUnidadNoConstruiBleException () {
         Mapa mockedMapa = mock(Mapa.class);
         Jugador mockedJugador = mock(Jugador.class);
-        Edificio castillo = new Castillo(mockedJugador);
+        Edificio castillo = new Castillo();
         thrown.expect(EdificioNoConstruibleSinCostoException.class);
         castillo.getCosto();
     }
@@ -168,7 +168,7 @@ public class EdificioTest {
         Mapa mapa = new Mapa(20,20);
 
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio castillo = new Castillo(jugador);
+        Edificio castillo = new Castillo();
         Posicion posicion = new Posicion(1,1);
         posicion.agregar(new Cuadrante(1,2));
         posicion.agregar(new Cuadrante(1,3));
@@ -194,7 +194,7 @@ public class EdificioTest {
         Mapa mapa = new Mapa(20,20);
 
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio cuartel = new Cuartel(jugador);
+        Edificio cuartel = new Cuartel();
         thrown.expect(EdificioSinDaniarException.class);
         cuartel.reparar();
     }
@@ -203,7 +203,7 @@ public class EdificioTest {
     public void test020RepararCuartelConstruidoVidaMaximaLanzaEdificioSinDaniarException(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio cuartel = new Cuartel(jugador);
+        Edificio cuartel = new Cuartel();
         cuartel.construir();
         cuartel.construir();
         cuartel.construir();
@@ -215,7 +215,7 @@ public class EdificioTest {
     public void test021ConstruirCuartelConstruccionTerminadaNoEstaEnReparacionNiConstruccion(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio cuartel = new Cuartel(jugador);
+        Edificio cuartel = new Cuartel();
         cuartel.construir();
         cuartel.construir();
         cuartel.construir();
@@ -227,7 +227,7 @@ public class EdificioTest {
     public void test022CrearPlazaCentralRepararLanzaEdificioSinDaniarException(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio plaza = new PlazaCentral(jugador);
+        Edificio plaza = new PlazaCentral();
         thrown.expect(EdificioSinDaniarException.class);
         plaza.reparar();
     }
@@ -236,7 +236,7 @@ public class EdificioTest {
     public void test023RepararPlazaConstruidaVidaMaximaLanzaEdificioSinDaniarException(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio plaza = new PlazaCentral(jugador);
+        Edificio plaza = new PlazaCentral();
         plaza.construir();
         plaza.construir();
         plaza.construir();
@@ -249,7 +249,7 @@ public class EdificioTest {
     public void test025CrearCastilloRepararLanzaEdificioSinDaniarException(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio castillo = new Castillo(jugador);
+        Edificio castillo = new Castillo();
         thrown.expect(EdificioSinDaniarException.class);
         castillo.reparar();
     }
@@ -258,22 +258,16 @@ public class EdificioTest {
     public void test026ConstruirEdificioLanzaEdificioNoConstruibleSinCostoException(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Edificio castillo = new Castillo(jugador);
+        Edificio castillo = new Castillo();
         thrown.expect(EdificioNoConstruibleSinCostoException.class);
         castillo.construir();
     }
 
-    @Test
-    public void test027EdificioDeJugadorMauricioPerteneceAJugadorMauricio(){
-        Mapa mockedMapa = mock(Mapa.class);
-        Jugador jugador = new Jugador("Mauricio", mockedMapa);
-        Edificio cuartel = new Cuartel(jugador);
-        Assert.assertTrue(cuartel.perteneceAJugador(jugador));
-    }
+
 
     @Test
     public void test028CastilloCreaArmaDeAsedio(){
-        Castillo castillo = new Castillo((mock(Jugador.class)));
+        Castillo castillo = new Castillo();
         Ubicable unidad =  castillo.construirArmaDeAsedio();
         Assert.assertTrue(unidad instanceof ArmaDeAsedio);
     }
@@ -282,7 +276,7 @@ public class EdificioTest {
     public void test029CuartelCreaArquero(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Cuartel cuartel = new Cuartel(jugador);
+        Cuartel cuartel = new Cuartel();
         Ubicable unidad = cuartel.construirArquero();
         Assert.assertTrue(unidad instanceof Arquero);
     }
@@ -291,7 +285,7 @@ public class EdificioTest {
     public void test030CuartelCreaEspadachin(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Cuartel cuartel = new Cuartel(jugador);
+        Cuartel cuartel = new Cuartel();
         Ubicable unidad = cuartel.construirEspadachin();
         Assert.assertTrue(unidad instanceof Espadachin);
     }
@@ -300,7 +294,7 @@ public class EdificioTest {
     public void test031PlazaCentralCreaAldeano(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        PlazaCentral plazaCentral = new PlazaCentral(jugador);
+        PlazaCentral plazaCentral = new PlazaCentral();
         Ubicable unidad = plazaCentral.construirAldeano();
         Assert.assertTrue(unidad instanceof Aldeano);
     }
