@@ -40,9 +40,13 @@ public class Castillo extends Edificio{
         throw new EdificioNoConstruibleSinCostoException();
     }
 
-    public ArmaDeAsedio construirArmaDeAsedio(){
-        return new ArmaDeAsedio();
-
+    public ArmaDeAsedio construirArmaDeAsedio(Jugador jugador){
+        if (!estado.puedoConstruirUnidad()){
+            throw new NoSePuedeConstruirEnEsteMomentoException();
+        }
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
+        jugador.descontarOro(armaDeAsedio.getCosto());
+        return armaDeAsedio;
     }
 
     @Override

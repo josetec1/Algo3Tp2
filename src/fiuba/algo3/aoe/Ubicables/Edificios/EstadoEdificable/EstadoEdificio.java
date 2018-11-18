@@ -11,4 +11,6 @@ public interface EstadoEdificio {
     void construir( Edificio edificio);
 
     void reparar (Edificio edificio);
+
+    boolean puedoConstruirUnidad();
 }

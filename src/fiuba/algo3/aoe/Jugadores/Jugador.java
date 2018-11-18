@@ -12,21 +12,24 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador {
+public class Jugador implements ObservableJugador{
 
     private String nombre;
     private Mapa mapa;
     private int oro;
     private EstadoJugador estado;
     private List<Ubicable> piezas;
+    private ObservadorJugador observador;
 
 
     public Jugador(String nombre, Mapa mapa){
@@ -35,6 +38,28 @@ public class Jugador {
         this.oro = 0;
         this.estado = new JugadorDeshabilitado();
         this.piezas = new ArrayList<>();
+    }
+    //Todo Revisar, esta horrible esto.
+    public void inicializarAldeanosYPlazaCentral(List<Aldeano> aldeanos,PlazaCentral plazaCentral) {
+        if (aldeanos.size() > 3 || aldeanos.size() < 3) return; //Todo Exception
+        Posicion posicion1 = new Posicion(1, 1);
+        Posicion posicion2 = new Posicion(1, 2);
+        Posicion posicion3 = new Posicion(1, 3);
+        Posicion posicion4 = new Posicion(new Cuadrante(2, 2));
+        posicion4.agregar(new Cuadrante(2, 3));
+        posicion4.agregar(new Cuadrante(3, 2));
+        posicion4.agregar(new Cuadrante(3, 3));
+        mapa.colocar(aldeanos.get(0), posicion1);
+        mapa.colocar(aldeanos.get(1), posicion2);
+        mapa.colocar(aldeanos.get(2), posicion3);
+        mapa.colocar(plazaCentral, posicion4);
+        piezas.add(plazaCentral);
+
+        for (int i=0;i<3;i++) {
+            piezas.add(aldeanos.get(i));
+        }
+
+        piezas.add(plazaCentral);
     }
 
 
@@ -105,9 +130,9 @@ public class Jugador {
     //mueve la unidad en la direccion especificada
     //chequeos, que la unidad sea mia
     // que es mi turno
-    //derivados del tablero.  ocupado fuera de limite
     public void mover (UnidadMovil unidad, Direccionable direccion){
 
+        unidad.mover(mapa,direccion);
     }
 
     // estoy activo
@@ -122,10 +147,12 @@ public class Jugador {
     // derivados de tablero, fuera de rango, no se puede colocar
     // TODO quien va a crear la posicion de la plaza????
     public void construirPlaza (Aldeano aldeano, Posicion posicion){  //TODO esto sale con Factory simple
-
         aldeano.podesConstruirORepar();
         PlazaCentral plaza = aldeano.crearPlazaCentral();
-        //colocar la plaza
+        if(mapa.puedoColocar(posicion)){
+            mapa.colocar(plaza,posicion);
+        }
+        this.observador.seCreo(plaza);
 
 
     }
@@ -137,52 +164,60 @@ public class Jugador {
     // derivados de tablero, fuera de rango, no se puede colocar
     // TODO quien va a crear la posicion de la plaza????
     public void construirCuartel (Aldeano aldeano, Posicion posicion){
-
         aldeano.podesConstruirORepar();
         Cuartel cuartel = aldeano.crearCuartel();
-        //colocar la plaza
+        if(mapa.puedoColocar(posicion)){
+            mapa.colocar(cuartel,posicion);
+        }
 
 
     }
 
+    // EsMio
     // estoy activo
     // que sea mia la plaza
     // Limites poblacionales
-    // que haya plata
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
     public void reclutarAldeano (PlazaCentral unaPlaza){
 
-        Aldeano aldeano = unaPlaza.construirAldeano();
-        //agregar aldeano
+        Aldeano aldeano = unaPlaza.construirAldeano(this);
+        piezas.add(aldeano);
         //coloar aldeano en el tablero
 
     }
 
+    //EsMio
+    public void reclutarArmaDeAsedio (Castillo unCastillo){
+
+        ArmaDeAsedio armaDeAsedio= unCastillo.construirArmaDeAsedio(this);
+        piezas.add(armaDeAsedio);
+        //coloar aldeano en el tablero
+
+    }
+    // EsMIo
     // estoy activo
     // que sea mia la plaza
     // Limites poblacionales
-    // que haya plata
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
-    public void reclutarEspadacion (Cuartel unCuartel){
+    public void reclutarEspadachin (Cuartel unCuartel){
 
-        Espadachin espadachin = unCuartel.construirEspadachin();
-        //agregar aldeano
+        Espadachin espadachin = unCuartel.construirEspadachin(this);
+        piezas.add( espadachin);
         //coloar aldeano en el tablero
 
     }
-
+    // EsMIo
     // estoy activo
     // que sea mia la plaza
     // Limites poblacionales
-    // que haya plata
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
     public void reclutarArquero (Cuartel unCuartel){  // TODO esto sale con factory simple
 
-        Arquero arquero = unCuartel.construirArquero();
-        //agregar aldeano
+        Arquero arquero = unCuartel.construirArquero(this);
+        piezas.add(arquero);
         //coloar aldeano en el tablero
 
     }
@@ -196,4 +231,10 @@ public class Jugador {
 
     }
 
+
+
+    @Override
+    public void agregarObservador(ObservadorJugador unObservador) {
+        this.observador= unObservador;
+    }
 }

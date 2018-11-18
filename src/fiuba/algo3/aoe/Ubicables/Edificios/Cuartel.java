@@ -34,13 +34,22 @@ public class Cuartel extends Edificio {
         }
     }
 
-    public Espadachin construirEspadachin(){
-        return new Espadachin();
-
+    public Espadachin construirEspadachin(Jugador jugador){
+        if (!estado.puedoConstruirUnidad()){
+            throw new NoSePuedeConstruirEnEsteMomentoException();
+        }
+        Espadachin espadachin =  new Espadachin();
+        jugador.descontarOro(espadachin.getCosto());
+        return espadachin;
     }
 
-    public Arquero construirArquero(){
-        return new Arquero();
+    public Arquero construirArquero(Jugador jugador){
+        if (!estado.puedoConstruirUnidad()){
+            throw new NoSePuedeConstruirEnEsteMomentoException();
+        }
+        Arquero arquero = new Arquero();
+        jugador.descontarOro(arquero.getCosto());
+        return arquero;
 
     }
 

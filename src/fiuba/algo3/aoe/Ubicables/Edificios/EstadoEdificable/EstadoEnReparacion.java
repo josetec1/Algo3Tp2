@@ -24,6 +24,10 @@ public class EstadoEnReparacion implements EstadoEdificio {
         throw new EdificioConstruidoException();
     }
 
+    public boolean puedoConstruirUnidad () {
+        return false;
+    }
+
     public void reparar ( Edificio edificio ) {
         edificio.aumentarVida(this.cantidad);
     }
