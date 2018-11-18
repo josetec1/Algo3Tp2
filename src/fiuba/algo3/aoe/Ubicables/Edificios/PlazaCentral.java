@@ -33,9 +33,13 @@ public class PlazaCentral extends Edificio {
         }
     }
 
-    public Aldeano construirAldeano(){
-        return new Aldeano();
-
+    public Aldeano construirAldeano(Jugador jugador){
+        if (!estado.puedoConstruirUnidad()){
+            throw new NoSePuedeConstruirEnEsteMomentoException();
+        }
+        Aldeano aldeano = new Aldeano();
+        jugador.descontarOro(aldeano.getCosto());
+        return aldeano;
     }
 
     @Override

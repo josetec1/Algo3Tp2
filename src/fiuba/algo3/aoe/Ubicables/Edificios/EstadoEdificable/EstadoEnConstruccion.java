@@ -30,7 +30,11 @@ public class EstadoEnConstruccion implements EstadoEdificio {
         }
     }
 
+    public boolean puedoConstruirUnidad(){
+        return false;
+    }
+
     public void reparar ( Edificio edificio ) {
-        throw new EdificioSinDaniarException();
+        throw new EdificioEnConstruccionException();
     }
 }
