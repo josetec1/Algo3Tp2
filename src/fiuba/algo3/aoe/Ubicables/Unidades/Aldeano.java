@@ -44,6 +44,7 @@ public class Aldeano extends UnidadMovil  {
 
 
 
+
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
     public PlazaCentral crearPlazaCentral() {

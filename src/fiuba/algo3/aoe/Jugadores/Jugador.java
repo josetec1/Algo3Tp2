@@ -22,13 +22,14 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador {
+public class Jugador implements ObservableJugador{
 
     private String nombre;
     private Mapa mapa;
     private int oro;
     private EstadoJugador estado;
     private List<Ubicable> piezas;
+    private ObservadorJugador observador;
 
 
     public Jugador(String nombre, Mapa mapa){
@@ -151,6 +152,7 @@ public class Jugador {
         if(mapa.puedoColocar(posicion)){
             mapa.colocar(plaza,posicion);
         }
+        this.observador.seCreo(plaza);
 
 
     }
@@ -229,4 +231,10 @@ public class Jugador {
 
     }
 
+
+
+    @Override
+    public void agregarObservador(ObservadorJugador unObservador) {
+        this.observador= unObservador;
+    }
 }
