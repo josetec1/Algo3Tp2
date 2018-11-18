@@ -52,6 +52,11 @@ public class Cuadrante {
 
         return true;
     }
+
+    public int distancia(Cuadrante cuadrante2) {
+
+       return Math.max(Math.abs(cuadrante2.getX() - this.x), Math.abs(cuadrante2.getY() - this.y));
+    }
 }
 /*
     @Override

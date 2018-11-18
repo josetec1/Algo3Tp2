@@ -13,26 +13,15 @@ public class Arquero extends UnidadMovilMilitar {
         this.vidaActual = 75;
         this.vidaMaxima = 75;
         this.costo = 75;
+        this.danioEdificio = 10;
+        this.danioUnidad = 15;
+        this.distanciaAtaque = 3;
 
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
-    }
-
-    public int getVidaMaxima(){
-        return this.vidaMaxima;
-    }
-
-    public int getVidaActual(){
-        return this.vidaActual;
-    }
-
-
-    public void disminuirVida( int vida){
-        this.vidaActual -= vida;
     }
 
     @Override
     public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
-
 }

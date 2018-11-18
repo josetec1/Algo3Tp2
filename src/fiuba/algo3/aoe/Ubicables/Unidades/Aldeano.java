@@ -33,6 +33,11 @@ public class Aldeano extends UnidadMovil  {
 
     public int getVidaActual(){return this.vidaActual;}
 
+    @Override
+    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
+
+    }
+
     public void disminuirVida( int vida){
         this.vidaActual-= vida;
     }

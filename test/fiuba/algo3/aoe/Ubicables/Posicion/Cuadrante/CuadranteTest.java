@@ -136,6 +136,68 @@ public class CuadranteTest {
 
     }
 
+    @Test
+    public void test13distanciaDeDosCuadrantesConMismaPosicion() {
+        Cuadrante cuadrante1 = new Cuadrante( 1, 1 );
+        Cuadrante cuadrante2 = new Cuadrante( 1, 1 );
 
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 0);
+    }
+
+    @Test
+    public void test14distanciaDeDosCuadrantesConDistintaPosicionEnY() {
+        Cuadrante cuadrante1 = new Cuadrante( 1, 1 );
+        Cuadrante cuadrante2 = new Cuadrante( 1, 5 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 4);
+    }
+
+    @Test
+    public void test15distanciaDeDosCuadrantesConDistintaPosicionEnX() {
+        Cuadrante cuadrante1 = new Cuadrante( 1, 1 );
+        Cuadrante cuadrante2 = new Cuadrante( 6, 1 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 5);
+    }
+
+    @Test
+    public void test16distanciaDeDosCuadrantesConDistintaPosicionConXIgualAY() {
+        Cuadrante cuadrante1 = new Cuadrante( 1, 1 );
+        Cuadrante cuadrante2 = new Cuadrante( 7, 7 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 6);
+    }
+
+    @Test
+    public void test17distanciaDeDosCuadrantesConDistintaPosicionConXDistintoDeY() {
+        Cuadrante cuadrante1 = new Cuadrante( 1, 1 );
+        Cuadrante cuadrante2 = new Cuadrante( 2, 4 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 3);
+    }
+
+    @Test
+    public void test18distanciaDeDosCuadrantesConCoordenadasNegativas() {
+        Cuadrante cuadrante1 = new Cuadrante( -1, -1);
+        Cuadrante cuadrante2 = new Cuadrante( -1, -4 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 3);
+    }
+
+    @Test
+    public void test19distanciaDeDosCuadrantesConCoordenadasPositivaYNegativas() {
+        Cuadrante cuadrante1 = new Cuadrante( -1, -1);
+        Cuadrante cuadrante2 = new Cuadrante( 1, 4 );
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 5);
+    }
+
+    @Test
+    public void test20distanciaDeDosCuadrantesConCoordenadasIgualA0() {
+        Cuadrante cuadrante1 = new Cuadrante( 0, 0);
+        Cuadrante cuadrante2 = new Cuadrante( 0, 0);
+
+        Assert.assertEquals(cuadrante1.distancia(cuadrante2), 0);
+    }
 
 }

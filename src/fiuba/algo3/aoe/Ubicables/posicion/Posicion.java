@@ -78,4 +78,23 @@ public class Posicion {
         return nuevaPosicion;
     }
 
+    public int distancia(Posicion otraPosicion) {
+
+        int distancia = 1000;
+        Cuadrante cuadrateOtraPosicion = otraPosicion.getIterador().next();
+        distancia = Math.min(distancia , this.getIterador().next().distancia(cuadrateOtraPosicion ));
+
+        /*for(Cuadrante miCuadrante : this.cuadrantes){
+
+            while(otraPosicion.getIterador().hasNext()){
+
+                cuadrateOtraPosicion = otraPosicion.getIterador().next();
+                distancia = Math.min(distancia , miCuadrante.distancia(cuadrateOtraPosicion ));
+            }
+        }*/
+
+        return distancia;
+
+
+    }
 }
