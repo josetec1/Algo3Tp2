@@ -7,28 +7,19 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 public class TurnoTest {
 
     @Test
-    public void test01CrearTurnoInicializaTurnoConNumero1JugadorActualDevuelveMauricio(){
-
-        List<Jugador> jugadores = new ArrayList <>();
-       Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Jose", mapa);
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        Turno turno = new Turno(jugadores);
-
-        Assert.assertEquals(turno.getJugadorActual(),jugador1);
-    }
-/*
-    @Test
-    public void test02CrearTurnoInicializaTurnoConNumero1DevuelveNumeroActual1(){
+    public void test01CrearTurnoInicializaTurnoConNumero1JugadorActual(){
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
@@ -37,12 +28,13 @@ public class TurnoTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
-        Assert.assertEquals(turno.getNumeroDeTurno(),1);
+
+        Assert.assertEquals(turno.getJugadorActual(),jugador1);
     }
-*/
+
 
     @Test
-    public void test03SePasaTurnoYRecibeComoJugadorActualAlJugador2(){
+    public void test02SePasaTurnoYRecibeComoJugadorActualAlJugador2(){
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
@@ -56,7 +48,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void test04LuegoDePasarDosTurnosElJugadorActualVuelveASerConElQueEmpezo(){
+    public void test03LuegoDePasarDosTurnosElJugadorActualVuelveASerConElQueEmpezo(){
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
@@ -108,26 +100,62 @@ public class TurnoTest {
         thrown.expect(JugadoresInvalidosException.class);
         Turno turno = new Turno(jugadores);
     }
-/*
+
+
     @Test
-    public void test07AlPasarTurnoYTenerUnAldeanoJugador1ObtieneOro(){
-        Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Maradona", mapa);
+    public void test07CrearTurnoNotificaAlJugadorUnoQueEstaHabilitado(){
+
         List<Jugador> jugadores = new ArrayList <>();
+
+
+        Jugador jugador1 = Mockito.mock(Jugador.class);
+        Jugador jugador2 = Mockito.mock(Jugador.class);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-
         Turno turno = new Turno(jugadores);
 
-        new Aldeano(jugador1);
-
-        Assert.assertEquals(jugador1.getOro(),0);
-
-        turno.pasarTurno();
-
-        Assert.assertEquals(jugador1.getOro(),20);
+        verify(jugador1, times(1)).habilitar();
+        verify(jugador2, times(0)).habilitar();
 
     }
-*/
+
+    @Test
+    public void test08PasarTurnoNotificaAlJugadorAnteriorComoDeshabilitadoYHabilitadoAlSiguiente(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+
+        Jugador jugador1 = Mockito.mock(Jugador.class);
+        Jugador jugador2 = Mockito.mock(Jugador.class);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Turno turno = new Turno(jugadores);
+        turno.pasarTurno();
+
+        verify(jugador1, times(1)).deshabilitar();
+        verify(jugador2, times(1)).habilitar();
+
+    }
+
+    @Test
+    public void test09PasarDosTurnosNotificaAlPrimerJugadorDosVecesHabilitadoYUnaVezDeshabilitado(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+
+        Jugador jugador1 = Mockito.mock(Jugador.class);
+        Jugador jugador2 = Mockito.mock(Jugador.class);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Turno turno = new Turno(jugadores);
+        turno.pasarTurno();
+        turno.pasarTurno();
+
+        verify(jugador1, times(1)).deshabilitar();
+        verify(jugador1, times(2)).habilitar();
+
+        verify(jugador2, times(1)).habilitar();
+        verify(jugador2, times(1)).deshabilitar();
+
+    }
 }

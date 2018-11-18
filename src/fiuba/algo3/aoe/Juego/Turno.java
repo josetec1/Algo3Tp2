@@ -24,6 +24,7 @@ public class Turno {
         this.jugadores = unosJugadores;
         this.it = unosJugadores.iterator();
         this.jugadorActual = this.it.next();
+        this.jugadorActual.habilitar();
 
 
     }
@@ -36,7 +37,7 @@ public class Turno {
      }
 
 
-    public Jugador getJugadorActual () {
+    public Jugador getJugadorActual () {  //Todo este metodo es necesario?
         return this.jugadorActual;
     }
 
