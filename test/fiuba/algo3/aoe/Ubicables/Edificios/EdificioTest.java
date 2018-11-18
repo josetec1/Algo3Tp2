@@ -268,7 +268,7 @@ public class EdificioTest {
     @Test
     public void test028CastilloCreaArmaDeAsedio(){
         Castillo castillo = new Castillo();
-        Ubicable unidad =  castillo.construirArmaDeAsedio();
+        Ubicable unidad =  castillo.construirArmaDeAsedio(mock(Jugador.class));
         Assert.assertTrue(unidad instanceof ArmaDeAsedio);
     }
 
@@ -276,8 +276,12 @@ public class EdificioTest {
     public void test029CuartelCreaArquero(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
+        jugador.sumarOro(100);
         Cuartel cuartel = new Cuartel();
-        Ubicable unidad = cuartel.construirArquero();
+        cuartel.construir();
+        cuartel.construir();
+        cuartel.construir();
+        Ubicable unidad = cuartel.construirArquero(jugador);
         Assert.assertTrue(unidad instanceof Arquero);
     }
 
@@ -285,8 +289,12 @@ public class EdificioTest {
     public void test030CuartelCreaEspadachin(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
+        jugador.sumarOro(100);
         Cuartel cuartel = new Cuartel();
-        Ubicable unidad = cuartel.construirEspadachin();
+        cuartel.construir();
+        cuartel.construir();
+        cuartel.construir();
+        Ubicable unidad = cuartel.construirEspadachin(jugador);
         Assert.assertTrue(unidad instanceof Espadachin);
     }
 
@@ -294,8 +302,12 @@ public class EdificioTest {
     public void test031PlazaCentralCreaAldeano(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
+        jugador.sumarOro(100);
         PlazaCentral plazaCentral = new PlazaCentral();
-        Ubicable unidad = plazaCentral.construirAldeano();
+        plazaCentral.construir();
+        plazaCentral.construir();
+        plazaCentral.construir();
+        Ubicable unidad = plazaCentral.construirAldeano(jugador);
         Assert.assertTrue(unidad instanceof Aldeano);
     }
 

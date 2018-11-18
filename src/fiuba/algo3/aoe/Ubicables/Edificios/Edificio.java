@@ -13,7 +13,6 @@ public abstract class Edificio implements Ubicable, NotificableDeTurno {
     protected Posicion posicion;
     protected int costo;
     protected EstadoEdificio estado;
-    protected Jugador jugador;
 
     public int getCosto () {
         return this.costo;
@@ -69,10 +68,6 @@ public abstract class Edificio implements Ubicable, NotificableDeTurno {
 
     public boolean estaDaniado () {
         return (this.vidaActual < this.vidaMaxima && this.vidaActual > 0);
-    }
-
-    public boolean perteneceAJugador( Jugador jugador){
-        return (this.jugador == jugador);
     }
 
 }

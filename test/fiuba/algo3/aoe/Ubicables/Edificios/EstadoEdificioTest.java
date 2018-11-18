@@ -1,10 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -76,7 +73,7 @@ public class EstadoEdificioTest {
     public void test09EstadoEdificioConstruccionRepararDevuelveEdificioSinDaniarException(){
         Edificio edificio = new Cuartel();
         EstadoEdificio estado = new EstadoEnConstruccion(3);
-        thrown.expect(EdificioSinDaniarException.class);
+        thrown.expect(EdificioEnConstruccionException.class);
         estado.reparar(edificio);
     }
 
