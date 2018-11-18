@@ -3,9 +3,8 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoReparando;
 
 public class PlazaCentral extends Edificio {
 // TODO refactor constantes
@@ -33,7 +32,7 @@ public class PlazaCentral extends Edificio {
         }
     }
 
-    public Aldeano construirAldeano(Jugador jugador){
+    public Aldeano construirAldeano( Jugador jugador){
         if (!estado.puedoConstruirUnidad()){
             throw new NoSePuedeConstruirEnEsteMomentoException();
         }
