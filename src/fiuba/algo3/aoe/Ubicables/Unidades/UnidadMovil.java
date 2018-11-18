@@ -2,6 +2,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Mapa.PosicionDelMapaOcupadaException;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 
 import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
@@ -43,9 +44,10 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno {
     // y usar eso para volvera intentar otra cosa, o enviar un mensaje "ahi no me puedo mover"
     public  void mover(Mapa mapa, Direccionable direccion) {
         Posicion destino = this.obtenerPosicionDeAvance(direccion);
-        if (mapa.puedoColocar(destino)) {
-            mapa.moverElemento(this, destino);
+        if (!mapa.puedoColocar(destino)) {
+            throw new PosicionDelMapaOcupadaException();
         }
+        mapa.moverElemento(this, destino);
     }
 
     // es para los estados.
