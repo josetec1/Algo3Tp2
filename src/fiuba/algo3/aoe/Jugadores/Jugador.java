@@ -6,17 +6,19 @@ import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorDeshabilitado;
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorHabilitado;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Mapa.PosicionDelMapaOcupadaException;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
-import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
@@ -28,9 +30,10 @@ public class Jugador implements ObservableJugador{
     private Mapa mapa;
     private int oro;
     private EstadoJugador estado;
-    private List<Ubicable> piezas;
+    private List<NotificableDeTurno> piezas;
     private ObservadorJugador observador;
-
+    private int poblacionActual;
+    private int poblacionMaxima;
 
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
@@ -38,28 +41,9 @@ public class Jugador implements ObservableJugador{
         this.oro = 0;
         this.estado = new JugadorDeshabilitado();
         this.piezas = new ArrayList<>();
-    }
-    //Todo Revisar, esta horrible esto.
-    public void inicializarAldeanosYPlazaCentral(List<Aldeano> aldeanos,PlazaCentral plazaCentral) {
-        if (aldeanos.size() > 3 || aldeanos.size() < 3) return; //Todo Exception
-        Posicion posicion1 = new Posicion(1, 1);
-        Posicion posicion2 = new Posicion(1, 2);
-        Posicion posicion3 = new Posicion(1, 3);
-        Posicion posicion4 = new Posicion(new Cuadrante(2, 2));
-        posicion4.agregar(new Cuadrante(2, 3));
-        posicion4.agregar(new Cuadrante(3, 2));
-        posicion4.agregar(new Cuadrante(3, 3));
-        mapa.colocar(aldeanos.get(0), posicion1);
-        mapa.colocar(aldeanos.get(1), posicion2);
-        mapa.colocar(aldeanos.get(2), posicion3);
-        mapa.colocar(plazaCentral, posicion4);
-        piezas.add(plazaCentral);
+        poblacionActual = 0;
+        poblacionMaxima=50;
 
-        for (int i=0;i<3;i++) {
-            piezas.add(aldeanos.get(i));
-        }
-
-        piezas.add(plazaCentral);
     }
 
 
@@ -73,9 +57,10 @@ public class Jugador implements ObservableJugador{
     //lo tiene que poder colocar
     //pos: tiene que descontar el oro
     //
-    private void agregarUbicable( Ubicable ubicable, Posicion posicion ) {
+    public void agregarNotificable( NotificableDeTurno notificable) {
 
-        piezas.add(ubicable);
+        poblacionActual +=1;
+        piezas.add(notificable);
 
         /*
         if (this.hayOroSuficiente(ubicable.getCosto())) {
@@ -120,6 +105,9 @@ public class Jugador implements ObservableJugador{
 
     public void habilitar (){
         this.estado = new JugadorHabilitado();
+        for(int i = 0;i<piezas.size();i++){
+            piezas.get(i).huboUnCambioDeTurno(this);
+        }
         //TODO notificar a mis elementos  hubouncambiode turno
 
     }
@@ -138,7 +126,7 @@ public class Jugador implements ObservableJugador{
     // estoy activo
     //origen es mio,  destino no es mio
     //derivados de unidad, ataque fuera de rango
-    public void atacar (Ubicable miUbicable, Ubicable ubicableEnemigo){}
+    //public void atacar (Ubicable miUbicable, Ubicable ubicableEnemigo){}
 
     // estoy activo
     // que sea mio
@@ -146,15 +134,20 @@ public class Jugador implements ObservableJugador{
     // que haya plata
     // derivados de tablero, fuera de rango, no se puede colocar
     // TODO quien va a crear la posicion de la plaza????
-    public void construirPlaza (Aldeano aldeano, Posicion posicion){  //TODO esto sale con Factory simple
-        aldeano.podesConstruirORepar();
-        PlazaCentral plaza = aldeano.crearPlazaCentral();
-        if(mapa.puedoColocar(posicion)){
-            mapa.colocar(plaza,posicion);
+    public void construirPlaza ( Aldeano aldeano, Posicion posicion){  //TODO esto sale con Factory simple
+        if(!aldeano.podesConstruirORepar()) {
+            throw new AldeanoOcupadoException();
         }
+        if(!mapa.puedoColocar(posicion)){
+            throw new PosicionDelMapaOcupadaException();
+            // this.observador.seCreo(plaza);
+        }
+        PlazaCentral plaza = aldeano.crearPlazaCentral();
+        this.descontarOro(plaza.getCosto());
+        mapa.colocar(plaza,posicion);
 
-        this.observador.seCreo(plaza);
 
+      //  this.observador.seCreo(plaza);
 
     }
 
@@ -164,14 +157,21 @@ public class Jugador implements ObservableJugador{
     // que haya plata
     // derivados de tablero, fuera de rango, no se puede colocar
     // TODO quien va a crear la posicion de la plaza????
-    public void construirCuartel (Aldeano aldeano, Posicion posicion){
-        aldeano.podesConstruirORepar();
-        Cuartel cuartel = aldeano.crearCuartel();
-        if(mapa.puedoColocar(posicion)){
-            mapa.colocar(cuartel,posicion);
+    public void construirCuartel ( Aldeano aldeano, Posicion posicion){  //TODO esto sale con Factory simple
+        if(!aldeano.podesConstruirORepar()) {
+            throw new AldeanoOcupadoException();
         }
+        if(!mapa.puedoColocar(posicion)){
+            throw new PosicionDelMapaOcupadaException();
+            // this.observador.seCreo(plaza);
+        }
+        Cuartel cuartel = aldeano.crearCuartel();
+        this.descontarOro(cuartel.getCosto());
+        mapa.colocar(cuartel,posicion);
+    }
 
-
+    public boolean alcanzoLimiteDePoblacion(){
+        return poblacionActual == poblacionMaxima;
     }
 
     // EsMio
@@ -180,19 +180,28 @@ public class Jugador implements ObservableJugador{
     // Limites poblacionales
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
-    public void reclutarAldeano (PlazaCentral unaPlaza){
-
+    public void reclutarAldeano (PlazaCentral unaPlaza,Posicion posicion){
+        if(this.alcanzoLimiteDePoblacion()){
+            throw new LimiteDePoblacionAlcanzadoException();
+        }
         Aldeano aldeano = unaPlaza.construirAldeano(this);
-        piezas.add(aldeano);
+        mapa.colocar(aldeano,posicion);
+        this.agregarNotificable(aldeano);
         //coloar aldeano en el tablero
 
     }
 
     //EsMio
-    public void reclutarArmaDeAsedio (Castillo unCastillo){
-
+    public void reclutarArmaDeAsedio (Castillo unCastillo,Posicion posicion){
+        if(this.alcanzoLimiteDePoblacion()){
+            throw new LimiteDePoblacionAlcanzadoException();
+        }
+        if(!mapa.puedoColocar(posicion)) {
+            throw new PosicionDelMapaOcupadaException();
+        }
         ArmaDeAsedio armaDeAsedio= unCastillo.construirArmaDeAsedio(this);
-        piezas.add(armaDeAsedio);
+        mapa.colocar(armaDeAsedio,posicion);
+        this.agregarNotificable(armaDeAsedio);
         //coloar aldeano en el tablero
 
     }
@@ -202,11 +211,19 @@ public class Jugador implements ObservableJugador{
     // Limites poblacionales
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
-    public void reclutarEspadachin (Cuartel unCuartel){
-
+    public void reclutarEspadachin (Cuartel unCuartel,Posicion posicion){
+        if(this.alcanzoLimiteDePoblacion()){
+            throw new LimiteDePoblacionAlcanzadoException();
+        }
+        if(!mapa.puedoColocar(posicion)) {
+            throw new PosicionDelMapaOcupadaException();
+        }
         Espadachin espadachin = unCuartel.construirEspadachin(this);
-        piezas.add( espadachin);
-        //coloar aldeano en el tablero
+        mapa.colocar(espadachin,posicion);
+        this.agregarNotificable(espadachin);
+
+
+
 
     }
     // EsMIo
@@ -215,12 +232,16 @@ public class Jugador implements ObservableJugador{
     // Limites poblacionales
     // derivados de tablero, no se puede colocar
     // TODO como obtengo la posicion donde colocarlo?
-    public void reclutarArquero (Cuartel unCuartel){  // TODO esto sale con factory simple
-
+    public void reclutarArquero ( Cuartel unCuartel, Posicion posicion ){  // TODO esto sale con factory simple
+        if(this.alcanzoLimiteDePoblacion()){
+            throw new LimiteDePoblacionAlcanzadoException();
+        }
+        if(!mapa.puedoColocar(posicion)) {
+            throw new PosicionDelMapaOcupadaException();
+        }
         Arquero arquero = unCuartel.construirArquero(this);
-        piezas.add(arquero);
-        //coloar aldeano en el tablero
-
+        mapa.colocar(arquero,posicion);
+        this.agregarNotificable(arquero);
     }
 
     // yo tengo que estar inactivo
@@ -233,9 +254,16 @@ public class Jugador implements ObservableJugador{
     }
 
 
-
-    @Override
     public void agregarObservador(ObservadorJugador unObservador) {
         this.observador= unObservador;
+    }
+
+    public void eliminarUnidad ( UnidadMovil unidadMovil) {
+        if(!this.esMio(unidadMovil)){
+            throw new UnidadAgenaException();
+        }
+        piezas.remove(unidadMovil);
+        mapa.remover(unidadMovil);
+        poblacionActual-=1;
     }
 }
