@@ -46,7 +46,7 @@ public class Aldeano extends UnidadMovil  {
 
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
-    public PlazaCentral crearPlazaCentral(Posicion posicion, Mapa mapa) {
+    public PlazaCentral crearPlazaCentral() {
             // revisa que sea el turno de tu jugador.
       //    if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
 
@@ -64,7 +64,7 @@ public class Aldeano extends UnidadMovil  {
     }
 
 
-    public Cuartel crearCuartel(Posicion posicion, Mapa mapa) {
+    public Cuartel crearCuartel() {
         // revisa que sea el turno de tu jugador.
       //  if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
 

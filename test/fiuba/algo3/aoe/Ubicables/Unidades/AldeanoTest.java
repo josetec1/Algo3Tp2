@@ -63,9 +63,9 @@ public class AldeanoTest {
         Posicion posicion2 = Mockito.mock(Posicion.class);
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
 
-        Cuartel cuartel = aldeano2.crearCuartel (posicion2, mapa) ;
+        Cuartel cuartel = aldeano2.crearCuartel () ;
 
         //TODO este test hay que verificarlo mandandole el mensaje de construir al edificio y capturando excepcion
         Assert.assertThat (unaPlaza.estaEnConstruccion(),is(true));
@@ -88,10 +88,10 @@ public class AldeanoTest {
 
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
 
         thrown.expect(AldeanoOcupadoException.class);
-        Cuartel cuartel = aldeano.crearCuartel (posicion2, mapa) ;
+        Cuartel cuartel = aldeano.crearCuartel () ;
 
     }
 
@@ -106,7 +106,7 @@ public class AldeanoTest {
 
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
 
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
 
@@ -123,7 +123,7 @@ public class AldeanoTest {
 
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
         aldeano.huboUnCambioDeTurno(jugador); // turno 1
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
         aldeano.huboUnCambioDeTurno(jugador); // turno 2
@@ -144,7 +144,7 @@ public class AldeanoTest {
 
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
         aldeano.huboUnCambioDeTurno(jugador); // turno 1
         aldeano.huboUnCambioDeTurno(jugador); // turno 2
         aldeano.huboUnCambioDeTurno(jugador); // turno 3
@@ -184,7 +184,7 @@ public class AldeanoTest {
 
 
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
         aldeano.huboUnCambioDeTurno(jugador); // turno 1
         aldeano.huboUnCambioDeTurno(jugador); // turno 2
         aldeano.huboUnCambioDeTurno(jugador); // turno 3
