@@ -12,7 +12,7 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

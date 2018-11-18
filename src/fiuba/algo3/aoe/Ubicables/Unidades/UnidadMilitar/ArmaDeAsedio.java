@@ -13,25 +13,13 @@ public class ArmaDeAsedio extends UnidadMovilMilitar {
         this.vidaMaxima = 150;
         this.vidaActual = 150;
         this.costo = 200;
-
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
-    }
-
-    public int getVidaMaxima(){
-        return this.vidaMaxima;
-    }
-
-    public int getVidaActual(){
-        return this.vidaActual;
-    }
-
-    public void disminuirVida( int vida){
-        this.vidaActual -= vida;
     }
 
     @Override
     public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
+
 
 }

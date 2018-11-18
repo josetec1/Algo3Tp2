@@ -14,15 +14,10 @@ public class Espadachin extends UnidadMovilMilitar {
         this.vidaActual = 100;
         this.vidaMaxima = 100;
         this.costo = 50;
+        this.danioEdificio = 15;
+        this.danioUnidad = 25;
+        this.distanciaAtaque = 1;
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
-    }
-
-    public int getVidaMaxima(){return this.vidaMaxima;}
-
-    public int getVidaActual(){return this.vidaActual;}
-
-    public void disminuirVida( int vida){
-        this.vidaActual -= vida;
     }
 
     @Override
