@@ -152,6 +152,7 @@ public class Jugador implements ObservableJugador{
         if(mapa.puedoColocar(posicion)){
             mapa.colocar(plaza,posicion);
         }
+
         this.observador.seCreo(plaza);
 
 

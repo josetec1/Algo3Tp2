@@ -14,13 +14,15 @@ public class Aldeano extends UnidadMovil  {
 
     private EstadoUnidadAldeano estado;
 
+    private final int VIDA_MAXIMA = 50;
+    private final int COSTO = 25;
 
     public Aldeano( ){
-        this.vidaMaxima = 50;
-        this.vidaActual = 50;
-        this.costo = 25;
+        this.vidaMaxima = VIDA_MAXIMA;
+        this.vidaActual = VIDA_MAXIMA;
+        this.costo = COSTO;
 
-        this.estado = new EstadoRecolectando(); //Todo refactor, revisar constructores
+        this.estado = new EstadoRecolectando();
         this.cuentaRegresiva= 0;
 
     }
@@ -92,4 +94,8 @@ public class Aldeano extends UnidadMovil  {
     }
 
     public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
+
+    public boolean podesMoverte() {
+        return true;
+    }
 }
