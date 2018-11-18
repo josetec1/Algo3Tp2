@@ -8,8 +8,8 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 public interface
 EstadoUnidadAldeano  {
 
-    void pasarTurno (Aldeano unidad, Jugador unjugador);
-    Edificio construir (Aldeano unAldeano, Edificio unEdificio);
+    void pasarTurno ( Aldeano unidad, Jugador unjugador);
+    Edificio construir ( Aldeano unAldeano, Edificio unEdificio);
 
     Boolean puedoConstruirOReparar ();
 }

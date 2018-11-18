@@ -31,6 +31,11 @@ public class Aldeano extends UnidadMovil  {
 
     public int getVidaActual(){return this.vidaActual;}
 
+
+    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
+
+    }
+
     public void disminuirVida( int vida){
         this.vidaActual-= vida;
     }
@@ -48,26 +53,26 @@ public class Aldeano extends UnidadMovil  {
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
     public PlazaCentral crearPlazaCentral() {
-            // revisa que sea el turno de tu jugador.
-      //    if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
+        // revisa que sea el turno de tu jugador.
+        //    if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
 
 
-            //revisa que pueda construir
-          if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
+        //revisa que pueda construir
+        if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
 
 
         PlazaCentral unaPlaza =new PlazaCentral();
-          unaPlaza = (PlazaCentral) this.estado.construir(this,unaPlaza);
+        unaPlaza = (PlazaCentral) this.estado.construir(this,unaPlaza);
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
 
-         return unaPlaza;
+        return unaPlaza;
     }
 
 
     public Cuartel crearCuartel() {
         // revisa que sea el turno de tu jugador.
-      //  if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
+        //  if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
 
         //revisa que pueda construir
         if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}

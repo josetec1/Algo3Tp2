@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoReparando;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
