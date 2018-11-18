@@ -9,13 +9,13 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class PlazaCentral extends Edificio {
 // TODO refactor constantes
-    public PlazaCentral( Jugador jugador ){
+    public PlazaCentral(  ){
         this.costo = 100;
         this.vidaMaxima = 450;
         this.vidaActual = 450;
         this.estado = new EstadoEnConstruccion(3);
-        this.jugador = jugador;
-      //  jugador.agregarEdificio(this);
+
+
     }
 
     public void reparar(){
@@ -33,13 +33,13 @@ public class PlazaCentral extends Edificio {
         }
     }
 
-    public Ubicable construirAldeano(){
-        Ubicable aldeano = new Aldeano(this.jugador);
-        return aldeano;
+    public Aldeano construirAldeano(){
+        return new Aldeano();
+
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 }

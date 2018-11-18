@@ -1,4 +1,4 @@
-package fiuba.algo3.aoe.Ubicables.Posicion.Casillero;
+package fiuba.algo3.aoe.Ubicables.Posicion.Cuadrante;
 
 
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;

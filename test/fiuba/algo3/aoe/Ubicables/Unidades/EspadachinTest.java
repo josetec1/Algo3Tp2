@@ -13,7 +13,7 @@ public class EspadachinTest {
     public void test01SeCreaCorrectamenteEspadachin(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Espadachin espadachin1 = new Espadachin(jugador);
+        Espadachin espadachin1 = new Espadachin();
 
         Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
         Assert.assertEquals(espadachin1.getVidaActual(), 100);
@@ -24,7 +24,7 @@ public class EspadachinTest {
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Espadachin espadachin = new Espadachin(jugador);
+        Espadachin espadachin = new Espadachin();
         espadachin.disminuirVida(50);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
     }

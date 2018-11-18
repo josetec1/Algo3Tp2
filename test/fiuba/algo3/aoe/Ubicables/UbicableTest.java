@@ -18,7 +18,7 @@ public class UbicableTest {
     public void test01AlColocarUnUbicableEnelTableroCambiaLaPosicionDelUbicableYEnElTablero(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable lanzaPiedras = new ArmaDeAsedio(jugador);
+        Ubicable lanzaPiedras = new ArmaDeAsedio();
         Posicion origen = new Posicion(2,5);
         mapa.colocar(lanzaPiedras,origen);
         Assert.assertThat(mapa.puedoColocar(origen), is(false) );
@@ -32,7 +32,7 @@ public class UbicableTest {
     public void test02MoverCambiaLaPosicionEnElTableroYElUbicableQuedaConLaNuevaPosicion(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        UnidadMovil lanzaPiedras = new ArmaDeAsedio(jugador);
+        UnidadMovil lanzaPiedras = new ArmaDeAsedio();
         Direccionable direccion = new DireccionDerecha();
 
         Posicion origen = new Posicion(2,5);

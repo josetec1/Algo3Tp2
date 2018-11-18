@@ -9,11 +9,11 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class ArmaDeAsedio extends UnidadMovilMilitar {
 
-    public ArmaDeAsedio( Jugador jugador ){
+    public ArmaDeAsedio(  ){
         this.vidaMaxima = 150;
         this.vidaActual = 150;
         this.costo = 200;
-        this.jugador = jugador;
+
         this.estadoUnidad = new EstadoEsperandoParaAtacar();
     }
 
@@ -30,7 +30,7 @@ public class ArmaDeAsedio extends UnidadMovilMilitar {
     }
 
     @Override
-    public void huboUnCambioDeTurno() {
+    public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
 

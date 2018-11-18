@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
@@ -12,6 +13,14 @@ public class EstadoConstruyendo implements EstadoUnidadAldeano {
     }
 
     @Override
+    public void pasarTurno(Aldeano aldeano, Jugador unJugador) {
+        int cuentaRegresiva= aldeano.getCuentaRegresiva();
+        aldeano.establecerCuentaRegresiva(cuentaRegresiva -1);
+
+        if( cuentaRegresiva ==0) {aldeano.cambiarARecolectando();}
+    }
+
+    @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
         return null; //TODO excepcion
     }
@@ -21,14 +30,5 @@ public class EstadoConstruyendo implements EstadoUnidadAldeano {
         return false;
     }
 
-    @Override
-    public void pasarTurno(UnidadMovil unidad) {
 
-        int cuentaRegresiva= unidad.getCuentaRegresiva();
-        unidad.establecerCuentaRegresiva(cuentaRegresiva -1);
-        Aldeano aldeano = (Aldeano) unidad; //TODO Polemico
-        if( cuentaRegresiva ==0) {aldeano.cambiarARecolectando();}
-
-
-    }
 }

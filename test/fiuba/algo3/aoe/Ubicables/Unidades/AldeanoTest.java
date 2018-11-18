@@ -20,7 +20,7 @@ public class AldeanoTest {
     public void test01SeCreaCorrectamenteAldeano(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
 
         Assert.assertEquals(aldeano.getVidaMaxima(), 50);
         Assert.assertEquals(aldeano.getVidaActual(), 50);
@@ -28,10 +28,10 @@ public class AldeanoTest {
     }
 
     @Test
-    public void test01BISSeCreaCorrectamenteAldeano(){
+    public void test02AlCrearAldeanoEstePuedeConstruirOReparar(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
 
         Assert.assertTrue(aldeano.podesConstruirORepar());
 
@@ -40,100 +40,73 @@ public class AldeanoTest {
 
 
     @Test
-    public void test02AldenoDisminuir25VidaDevuelveVida25(){
+    public void test03AldenoDisminuir25VidaDevuelveVida25(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         aldeano.disminuirVida(25);
         Assert.assertEquals(aldeano.getVidaActual(),25);
     }
 
-    @Test
-    public void test03AldeanoPerteneceAJugadorJuanDevuelveFalse(){
-        Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Juan", mapa);
-        Aldeano aldeano = new Aldeano(jugador);
-        Assert.assertThat (aldeano.perteneceAJugador(jugador2),is(false));
 
-    }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
     @Test
-    public void test04AldeanoConstruirPlazaCentralEnTurnoNoPropioDebeLanzarExepcion (){
+    public void test04AldeanoConstruirEdificioDevuelveElEdificioEnEstadoDeConstruccion (){
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-         Aldeano aldeano = new Aldeano(jugador);
-        Posicion posicion = Mockito.mock(Posicion.class);
-        thrown.expect(NoEsTuTurnoException.class);
-        aldeano.crearPlazaCentral (posicion, mapa) ;   //Todo aldeano tiene que tener el mapa o se lo pasan? . el jugador para que lo tiene al mapa?
-    }
-
-    @Test
-    public void test05AldeanoConstruirCuartelEnTurnoNoPropioDebeLanzarExepcion (){
-
-        Mapa mapa =  Mockito.mock(Mapa.class);
-        Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
-        Posicion posicion = Mockito.mock(Posicion.class);
-        thrown.expect(NoEsTuTurnoException.class);
-        aldeano.crearCuartel (posicion, mapa) ;
-    }
-
-    @Test
-    public void test06AldeanoConstruirEdificioEnTurnoPropioDevuelveElEdificioEnEstadoDeConstruccion (){
-
-        Mapa mapa =  Mockito.mock(Mapa.class);
-        Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
 
         Jugador  jugador2 = new Jugador("Maradona",mapa);
-        Aldeano aldeano2 = new Aldeano(jugador2);
+        Aldeano aldeano2 = new Aldeano();
         Posicion posicion2 = Mockito.mock(Posicion.class);
 
-        jugador.setActivo();
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        jugador2.setActivo();
-        Cuartel cuartel = aldeano2.crearCuartel (posicion2, mapa) ;
+
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
+
+        Cuartel cuartel = aldeano2.crearCuartel () ;
 
         //TODO este test hay que verificarlo mandandole el mensaje de construir al edificio y capturando excepcion
         Assert.assertThat (unaPlaza.estaEnConstruccion(),is(true));
        // Assert.assertThat (cuartel.estaEnConstruccion(),is(true));
     }
 
+
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
-    public void test07AldeanoConstruirEdificioSiEstaConstruyendoDebeLanzarExcepcion (){
+    public void test05AldeanoConstruirEdificioSiEstaConstruyendoDebeLanzarExcepcion (){
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
         Posicion posicion2 = Mockito.mock(Posicion.class);
 
-        jugador.setActivo();
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
 
         thrown.expect(AldeanoOcupadoException.class);
-        Cuartel cuartel = aldeano.crearCuartel (posicion2, mapa) ;
+        Cuartel cuartel = aldeano.crearCuartel () ;
 
     }
 
     @Test
-    public void test08AldeanoAlConstruirEdificiopodesConstruirOReparDebeDarFalse (){
+    public void test06AldeanoAlConstruirEdificiopodesConstruirOReparDebeDarFalse (){
 
         Mapa mapa =  Mockito.mock(Mapa.class);
-        Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
         Posicion posicion2 = Mockito.mock(Posicion.class);
 
-        jugador.setActivo();
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
+
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
 
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
 
@@ -144,18 +117,18 @@ public class AldeanoTest {
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
 
 
-        jugador.setActivo();
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
+
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
-        aldeano.huboUnCambioDeTurno(); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
         Assert.assertThat(aldeano.podesConstruirORepar(), is(false));
-        aldeano.huboUnCambioDeTurno(); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
         Assert.assertThat(aldeano.podesConstruirORepar(), is(true));
 
     }
@@ -165,31 +138,31 @@ public class AldeanoTest {
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
 
 
-        jugador.setActivo();
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
-        aldeano.huboUnCambioDeTurno(); // turno 2
-        aldeano.huboUnCambioDeTurno(); // turno 3
-        aldeano.huboUnCambioDeTurno(); // turno 3
+
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
         Assert.assertThat(aldeano.podesConstruirORepar(), is(true));
 
     }
-
+/*
     @Test
     public void test11AldeanoConstruyendoAlPasar4TurnosRecolectaOro (){
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
 
 
-        jugador.setActivo();
+
 
         PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
         aldeano.huboUnCambioDeTurno(); // turno 1
@@ -200,22 +173,21 @@ public class AldeanoTest {
         Assert.assertThat(jugador.getOro()==20, is(true));
 
     }
-
+*/
     @Test
     public void test12AldeanoConstruyendoAlPasar3TurnosNoSumaOro (){
 
         Mapa mapa =  Mockito.mock(Mapa.class);
         Jugador  jugador = new Jugador("Maradona",mapa);
-        Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano();
         Posicion posicion = Mockito.mock(Posicion.class);
 
 
-        jugador.setActivo();
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral (posicion, mapa) ;
-        aldeano.huboUnCambioDeTurno(); // turno 1
-        aldeano.huboUnCambioDeTurno(); // turno 2
-        aldeano.huboUnCambioDeTurno(); // turno 3
+        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
+        aldeano.huboUnCambioDeTurno(jugador); // turno 1
+        aldeano.huboUnCambioDeTurno(jugador); // turno 2
+        aldeano.huboUnCambioDeTurno(jugador); // turno 3
 
 
         Assert.assertThat(jugador.getOro()==0, is(true));
@@ -257,6 +229,6 @@ public class AldeanoTest {
         Assert.assertThat (unaPlaza.estaEnConstruccion(),is(true));
         Assert.assertThat (cuartel.estaEnConstruccion(),is(false));
     }
-
 */
+
 }

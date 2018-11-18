@@ -5,7 +5,6 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionOcupadaException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,7 +47,7 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
         Assert.assertThat( mapa.puedoColocar(posicion), is( false ) );
@@ -60,7 +59,7 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         Assert.assertEquals( mapa.puedoColocar(posicion), true );
         mapa.colocar(elemento,posicion);
         Assert.assertEquals(mapa.puedoColocar(posicion), false);
@@ -77,9 +76,9 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         //elemento.colocarEn(posicionFueraDeTablero);
-        thrown.expect(FueraDeTableroException.class);
+        thrown.expect(FueraDelMapaException.class);
         mapa.colocar(elemento,posicionFueraDeTablero);
       }
 
@@ -94,11 +93,11 @@ public class MapaTest {
         Posicion posicionSuperpuesta = new Posicion(6,6);
 
        Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
-        Ubicable elementoSuperpuesto = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
+        Ubicable elementoSuperpuesto = new Aldeano();
         mapa.colocar(elemento,unaPosicion);
 
-        thrown.expect(PosicionOcupadaException.class);
+        thrown.expect(PosicionDelMapaOcupadaException.class);
         mapa.colocar(elementoSuperpuesto,posicionSuperpuesta);
     }
 
@@ -111,7 +110,7 @@ public class MapaTest {
         Posicion otraPosicion = new Posicion(4,4);
 
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,unaPosicion);
 
         thrown.expect(ElElementoYaExisteException.class);
@@ -126,7 +125,7 @@ public class MapaTest {
         posicion.agregar(new Cuadrante(2,2));
         posicion.agregar(new Cuadrante(2,1));
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
         Assert.assertThat( mapa.puedoColocar(posicion), is( false ) );
@@ -137,7 +136,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento= new Aldeano(jugador);
+        Ubicable elemento= new Aldeano();
 
 
         thrown.expect(NoExisteElementoException.class);
@@ -151,7 +150,7 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
         Posicion unaPosicion = new Posicion(3,3);
-        Ubicable elemento= new Aldeano(jugador);
+        Ubicable elemento= new Aldeano();
 
         mapa.colocar(elemento,unaPosicion);
 
@@ -188,10 +187,10 @@ public class MapaTest {
 
         Posicion posicionDestino =new Posicion (11,10);
 
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
-        thrown.expect(FueraDeTableroException.class);
+        thrown.expect(FueraDelMapaException.class);
         mapa.moverElemento(elemento,posicionDestino);
     }
 
@@ -202,7 +201,7 @@ public class MapaTest {
 
         Posicion posicionDestino = new Posicion(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicionInicial);
 
 
@@ -219,7 +218,7 @@ public class MapaTest {
 
         Posicion unaPosicion = new Posicion(3,3);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento= new Aldeano(jugador);
+        Ubicable elemento= new Aldeano();
 
 
 
@@ -236,13 +235,13 @@ public class MapaTest {
         Posicion posicionInicial = new Posicion(9,10);
         Posicion posicionDestino = new Posicion(10,10);
        Jugador jugador = new Jugador("Mauricio", mapa);
-        Ubicable elemento = new Aldeano(jugador);
+        Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicionInicial);
 
-        Ubicable elemento2 = new Aldeano(jugador);
+        Ubicable elemento2 = new Aldeano();
         mapa.colocar(elemento2,posicionDestino);
 
-        thrown.expect(PosicionOcupadaException.class);
+        thrown.expect(PosicionDelMapaOcupadaException.class);
         mapa.moverElemento(elemento,posicionDestino);
    }
 
@@ -252,7 +251,7 @@ public class MapaTest {
        Mapa mapa = new Mapa(10,10);
        Posicion posicion = new Posicion(1,1);
        Jugador jugador = new Jugador("Mauricio", mapa);
-       Ubicable aldeano = new Aldeano(jugador);
+       Ubicable aldeano = new Aldeano();
        aldeano.colocarEn(posicion);
        Assert.assertThat(mapa.estaDentroDeTablero(posicion),is(true));
 

@@ -12,7 +12,7 @@ public class ArqueroTest {
     public void test01SeCreaCorrectamenteArquero(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Arquero arquero1 = new Arquero(jugador);
+        Arquero arquero1 = new Arquero();
 
         Assert.assertEquals(arquero1.getVidaMaxima(), 75);
         Assert.assertEquals(arquero1.getVidaActual(), 75);
@@ -24,7 +24,7 @@ public class ArqueroTest {
     public void test04Disminuir50VidaArmaDeAsedioDevuelve25DeVida(){
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        Arquero arquero = new Arquero(jugador);
+        Arquero arquero = new Arquero();
         arquero.disminuirVida(50);
         Assert.assertEquals(arquero.getVidaActual(), 25);
     }
