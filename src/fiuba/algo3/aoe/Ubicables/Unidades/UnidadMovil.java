@@ -2,20 +2,34 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 
 import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public abstract class UnidadMovil implements Ubicable, NotificableDeTurno {
+public abstract class UnidadMovil implements Atacable, NotificableDeTurno {
     protected Posicion posicion;
 
     protected int vidaMaxima;
     protected int costo;
     protected int vidaActual;
     protected int cuentaRegresiva ; // TODO , esto lo uso para los cambios de estado que dependen de turnos ver si amerita en unidad militar
+
+    public int getVidaMaxima(){
+        return this.vidaMaxima;
+    }
+
+    public int getVidaActual(){
+        return this.vidaActual;
+    }
+
+    public void disminuirVida( int vida){
+        this.vidaActual -= vida;
+    }
 
     public int getCosto(){
         return this.costo;
@@ -58,4 +72,10 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno {
 
         return this.cuentaRegresiva;
     }
+    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
+
+        this.disminuirVida(unidadMovilMilitar.getDanioUnidad());
+    }
+
+
 }

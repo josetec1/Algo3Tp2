@@ -272,6 +272,17 @@ public class PosicionTest {
         Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
     }
 
+    /*@Test
+    public void test17DistanciaEntre2PosicionesQueContienenUnCuadranteConIgualCordenadas() {
+
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Cuadrante otroCuadrante = new Cuadrante(5,6);
+        Posicion unaPosicion = new Posicion(unCuadrante);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 0);
+    }*/
+
 }
 
 
