@@ -33,6 +33,7 @@ public class ArqueroTest {
         Jugador jugador = new Jugador("Mauricio", mapa);
         Arquero arquero = new Arquero();
         arquero.disminuirVida(50);
+
         Assert.assertEquals(arquero.getVidaActual(), 25);
     }
 

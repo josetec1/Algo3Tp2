@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoConstruyendo;
@@ -33,15 +34,14 @@ public class Aldeano extends UnidadMovil  {
 
     public int getVidaActual(){return this.vidaActual;}
 
-    @Override
-    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
-
-    }
-
     public void disminuirVida( int vida){
         this.vidaActual-= vida;
     }
 
+    @Override
+    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
+
+    }
 
     @Override
     public void huboUnCambioDeTurno(Jugador jugador) {
