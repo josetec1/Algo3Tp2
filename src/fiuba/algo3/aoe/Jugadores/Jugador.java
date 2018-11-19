@@ -43,7 +43,7 @@ public class Jugador implements ObservableJugador{
         this.piezas = new ArrayList<>();
         poblacionActual = 0;
         poblacionMaxima=50;
-
+        this.observador = new ObservadorDeJugador(); //TODO esto es.... provisorio, sino hay que cambiar el constructor.
 
     }
 
@@ -84,6 +84,7 @@ public class Jugador implements ObservableJugador{
 
         poblacionActual +=1;
         piezas.add(notificable);
+
 
         /*
         if (this.hayOroSuficiente(ubicable.getCosto())) {
@@ -168,6 +169,7 @@ public class Jugador implements ObservableJugador{
         PlazaCentral plaza = aldeano.crearPlazaCentral();
         this.descontarOro(plaza.getCosto());
         mapa.colocar(plaza,posicion);
+        observador.seCreo(plaza);
 
 
       //  this.observador.seCreo(plaza);
@@ -191,6 +193,7 @@ public class Jugador implements ObservableJugador{
         Cuartel cuartel = aldeano.crearCuartel();
         this.descontarOro(cuartel.getCosto());
         mapa.colocar(cuartel,posicion);
+        observador.seCreo(cuartel);
     }
 
     public boolean alcanzoLimiteDePoblacion(){
@@ -211,6 +214,7 @@ public class Jugador implements ObservableJugador{
         mapa.colocar(aldeano,posicion);
         this.agregarNotificable(aldeano);
         //coloar aldeano en el tablero
+        observador.seCreo(aldeano);
 
     }
 
@@ -225,6 +229,7 @@ public class Jugador implements ObservableJugador{
         ArmaDeAsedio armaDeAsedio= unCastillo.construirArmaDeAsedio(this);
         mapa.colocar(armaDeAsedio,posicion);
         this.agregarNotificable(armaDeAsedio);
+        observador.seCreo(armaDeAsedio);
         //coloar aldeano en el tablero
 
     }
@@ -244,6 +249,7 @@ public class Jugador implements ObservableJugador{
         Espadachin espadachin = unCuartel.construirEspadachin(this);
         mapa.colocar(espadachin,posicion);
         this.agregarNotificable(espadachin);
+        observador.seCreo(espadachin);
 
 
 
@@ -265,6 +271,7 @@ public class Jugador implements ObservableJugador{
         Arquero arquero = unCuartel.construirArquero(this);
         mapa.colocar(arquero,posicion);
         this.agregarNotificable(arquero);
+        observador.seCreo(arquero);
     }
 
     // yo tengo que estar inactivo
@@ -280,6 +287,8 @@ public class Jugador implements ObservableJugador{
     public void agregarObservador(ObservadorJugador unObservador) {
         this.observador= unObservador;
     }
+
+
 
     public void eliminarUnidad ( UnidadMovil unidadMovil) {
         if(!this.esMio(unidadMovil)){
