@@ -469,7 +469,7 @@ public class PosicionTest {
     }
 
     @Test
-    public void test030ExpandirPosicionUnitariaATamanio1DevuelvePosicionEsperada() {
+    public void test031ExpandirPosicionUnitariaATamanio1DevuelvePosicionEsperada() {
         Posicion posicionInicial = new Posicion(1, 1);
         Posicion posicionEsperada = posicionInicial.expandir(1);
         Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 1)), true);
@@ -480,7 +480,7 @@ public class PosicionTest {
     }
 
     /*@Test
-    public void test29DistanciaEntrePosicionesQueContienenNueveCuadrantesCercanosCadaUno() {
+    public void test32DistanciaEntrePosicionesQueContienenNueveCuadrantesCercanosCadaUno() {
 
         Posicion posicion1 = new Posicion(0,0);
         Posicion posicion2 = new Posicion(12,15);

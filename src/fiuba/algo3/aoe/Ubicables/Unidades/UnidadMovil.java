@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
+import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
@@ -27,8 +28,8 @@ public abstract class UnidadMovil implements Manipulable {
     public void disminuirVida( int vida){
         this.vidaActual -= vida;
     }
-    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
-        this.disminuirVida(unidadMovilMilitar.getDanioUnidad());
+    public void serAtacadoPor(Atacante unAtacante) {
+        this.disminuirVida(unAtacante.getDanioUnidad());
     }
 
     public int getTamanio(){

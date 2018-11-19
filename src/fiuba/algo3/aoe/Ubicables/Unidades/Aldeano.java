@@ -39,10 +39,6 @@ public class Aldeano extends UnidadMovil  {
 
     public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
 
-    @Override
-    public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
-
-    }
 
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
     @Override

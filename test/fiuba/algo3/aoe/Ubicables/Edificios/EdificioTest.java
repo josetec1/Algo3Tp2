@@ -7,6 +7,7 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
@@ -312,6 +313,45 @@ public class EdificioTest {
         plazaCentral.construir();
         Ubicable unidad = plazaCentral.construirAldeano(jugador);
         Assert.assertTrue(unidad instanceof Aldeano);
+    }
+
+    @Test
+    public void test032CastilloAtacaAldeano(){
+        Castillo castillo = new Castillo();
+        UnidadMovil aldeano = new Aldeano();
+
+        castillo.colocarEn(new Posicion(1,1));
+        aldeano.colocarEn(new Posicion(2,2));
+
+        castillo.atacar(aldeano);
+
+        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima() - 20);
+    }
+
+    @Test
+    public void test033CastilloAtacaAldeanoEnElLimiteDeSuRango(){
+        Castillo castillo = new Castillo();
+        UnidadMovil aldeano = new Aldeano();
+
+        castillo.colocarEn(new Posicion(1,1));
+        aldeano.colocarEn(new Posicion(4,4));
+
+        castillo.atacar(aldeano);
+
+        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima() - 20);
+    }
+
+    @Test
+    public void test034CastilloIntentaAtacarAldeanoFueraDeSuRango(){
+        Castillo castillo = new Castillo();
+        UnidadMovil aldeano = new Aldeano();
+
+        castillo.colocarEn(new Posicion(1,1));
+        aldeano.colocarEn(new Posicion(5,5));
+
+        castillo.atacar(aldeano);
+
+        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima());
     }
 
 }
