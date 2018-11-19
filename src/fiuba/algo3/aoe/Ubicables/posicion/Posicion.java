@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Posicion {
 
-    private ArrayList<Cuadrante> cuadrantes = new ArrayList<>();
+    private ArrayList<Cuadrante> cuadrantes =new ArrayList<>();
 
     public Posicion(){
 
@@ -99,5 +99,6 @@ public class Posicion {
             }
         }
         return distancia;
+
     }
 }
