@@ -1,14 +1,16 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
 import fiuba.algo3.aoe.Ubicables.Atacable;
+import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovilMilitar;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public abstract class Edificio implements Atacable, NotificableDeTurno {
+public abstract class Edificio implements Manipulable {
     protected int vidaMaxima;
     protected int vidaActual;
     protected Posicion posicion;

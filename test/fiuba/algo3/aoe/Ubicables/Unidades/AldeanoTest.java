@@ -80,6 +80,7 @@ public class AldeanoTest {
 
 
 
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test
@@ -91,6 +92,9 @@ public class AldeanoTest {
         thrown.expect(AldeanoOcupadoException.class);
         Cuartel cuartel = aldeano.crearCuartel () ;
     }
+
+
+
 
     @Test
     public void test07AldeanoAlConstruirEdificiopodesConstruirOReparDebeDarFalse (){
@@ -165,6 +169,7 @@ public class AldeanoTest {
         thrown.expect(UnidadSinPosicionExceptcion.class);
         aldeano.mover(mapa,direccion);
     }
+
     //Mover Con movimiento
     @Test
     public void test12PodesMoverteDebeDarFalseSiElAldeanoSeEstaMoviendo(){

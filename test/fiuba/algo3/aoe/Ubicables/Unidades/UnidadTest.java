@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class UnidadTest {
 
+    //TODO esto esta mal vamosa tener que crear a las unidades con una posicion trucha o sino el constructor.
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test

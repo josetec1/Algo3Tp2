@@ -7,6 +7,7 @@ import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorHabilitado;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Mapa.PosicionDelMapaOcupadaException;
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -30,7 +31,7 @@ public class Jugador implements ObservableJugador{
     private Mapa mapa;
     private int oro;
     private EstadoJugador estado;
-    private List<NotificableDeTurno> piezas;
+    private List<Manipulable> piezas;
     private ObservadorJugador observador;
     private int poblacionActual;
     private int poblacionMaxima;
@@ -83,10 +84,10 @@ public class Jugador implements ObservableJugador{
     //lo tiene que poder colocar
     //pos: tiene que descontar el oro
     //
-    public void agregarNotificable( NotificableDeTurno notificable) {
+    public void agregarNotificable( Manipulable pieza) {
 
         poblacionActual +=1;
-        piezas.add(notificable);
+        piezas.add(pieza);
 
 
         /*
@@ -98,9 +99,9 @@ public class Jugador implements ObservableJugador{
         }
         */
     }
-    public Boolean esMio( NotificableDeTurno ubicable ) {
+    public Boolean esMio( Manipulable pieza) {
 
-        return piezas.contains(ubicable);
+        return piezas.contains(pieza);
 
         /*
         if (this.hayOroSuficiente(ubicable.getCosto())) {
@@ -150,6 +151,7 @@ public class Jugador implements ObservableJugador{
             throw new UnidadAgenaException();
         }
         unidad.mover(mapa,direccion);
+
     }
 
     // estoy activo
@@ -329,5 +331,18 @@ public class Jugador implements ObservableJugador{
         piezas.remove(unidadMovil);
         mapa.remover(unidadMovil);
         poblacionActual-=1;
+    }
+
+    public void recibirAtaqueCastillo (Castillo unCastilloEnemigo){
+        // verificar que el casitllo no sea mio. ESTO los hace Jose/Mauricio despues
+
+        //ataca a todos
+        for ( Atacable enemigo : piezas ) {
+            //aca decidir que hacer, un try por si vuelve excepcion fuera de rango
+            //2 optar por que castillo no haga nada si los tiene fuera de rango
+
+          //  unCastilloEnemigo.atacar (enemigo); //castillo no tiene el metodo atacar
+        }
+
     }
 }
