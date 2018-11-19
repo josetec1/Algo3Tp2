@@ -385,6 +385,50 @@ public class PosicionTest {
         Assert.assertEquals(unaPosicion.distancia(otraPosicion), 5);
     }
 
+    @Test
+    public void test25DistanciaEntrePosicionesUna16CuadrantesOtra1CuadranteDistanciaDeveDevolver3() {
+
+        Posicion posicion = new Posicion();
+        for(int i =1;i<9;i++){
+            for(int j = 1;j<9;j++){
+                posicion.agregar(new Cuadrante(i,j));
+            }
+        }
+
+        Posicion comparada = new Posicion(new Cuadrante(10,10));
+        Assert.assertEquals(posicion.distancia(comparada), 2);
+    }
+
+
+    @Test
+
+    public void test26DistanciaEntrePosicionesUna9CuadrantesOtra1Devuelve4(){
+
+        Posicion posicion = new Posicion();
+        for(int i =1;i<4;i++){
+            for(int j = 1;j<4;j++){
+                posicion.agregar(new Cuadrante(i,j));
+            }
+        }
+
+        Posicion comparada = new Posicion(new Cuadrante(6,1));
+
+        Assert.assertEquals(posicion.distancia(comparada),3);
+    }
+
+    @Test
+    public void test028DistanciaEntrePosicionesUna9CuadrantesOtra1Devuelve20(){
+
+        Posicion posicion = new Posicion();
+        for(int i =1;i<4;i++){
+            for(int j = 1;j<4;j++){
+                posicion.agregar(new Cuadrante(i,j));
+            }
+        }
+
+        Posicion comparada = new Posicion(new Cuadrante(23,1));
+        Assert.assertEquals(posicion.distancia(comparada),20);
+    }
 
 }
 
