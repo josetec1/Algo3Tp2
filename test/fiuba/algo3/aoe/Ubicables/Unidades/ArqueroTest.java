@@ -7,6 +7,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,6 +42,10 @@ public class ArqueroTest {
     public void test03AtacarArqueroDebeDisminuirSuVidaEn15(){
         UnidadMovilMilitar arqueroAtacante = new Arquero();
         Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(2, 2));
+
         arqueroAtacante.atacar(arqueroAtacado);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
@@ -50,6 +55,9 @@ public class ArqueroTest {
     public void test04AtacarEspadachinDebeDisminuirSuVidaEn15(){
         UnidadMovilMilitar arqueroAtacante = new Arquero();
         Atacable espadachinAtacado = new Espadachin();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        espadachinAtacado.colocarEn(new Posicion(2, 2));
 
         arqueroAtacante.atacar(espadachinAtacado);
 
@@ -61,6 +69,9 @@ public class ArqueroTest {
         UnidadMovilMilitar arqueroAtacante = new Arquero();
         Atacable plazaCentral = new PlazaCentral();
 
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        plazaCentral.colocarEn(new Posicion(2, 2));
+
         arqueroAtacante.atacar(plazaCentral);
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima() - 10);
@@ -70,6 +81,9 @@ public class ArqueroTest {
     public void test06AtacarCastilloDebeDisminuirSuVidaEn10(){
         UnidadMovilMilitar arqueroAtacante = new Arquero();
         Atacable castillo = new Castillo();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        castillo.colocarEn(new Posicion(2, 2));
 
         arqueroAtacante.atacar(castillo);
 
@@ -81,8 +95,50 @@ public class ArqueroTest {
         UnidadMovilMilitar arqueroAtacante = new Arquero();
         Atacable cuartel = new Cuartel();
 
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        cuartel.colocarEn(new Posicion(2, 2));
+
         arqueroAtacante.atacar(cuartel);
 
         Assert.assertEquals(cuartel.getVidaActual(), cuartel.getVidaMaxima() - 10);
+    }
+
+    @Test
+    public void test08AtacarArqueroEnSuRangoDeAtaque(){
+        UnidadMovilMilitar arqueroAtacante = new Arquero();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(2,2));
+
+        arqueroAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
+    }
+
+    @Test
+    public void test09AtacarArqueroEnElLimiteDelRangoDeAtaque(){
+        UnidadMovilMilitar arqueroAtacante = new Arquero();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(4, 4));
+
+        arqueroAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
+    }
+
+    @Test(expected=UnidadFueraDeRangoDeAtaqueException.class)
+    public void test10IntentarAtacarArqueroFueraDelRangoDeAtaque(){
+        UnidadMovilMilitar arqueroAtacante = new Arquero();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(5, 5));
+
+        arqueroAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 }

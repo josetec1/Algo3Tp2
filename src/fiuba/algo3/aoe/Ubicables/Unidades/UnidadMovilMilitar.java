@@ -13,7 +13,10 @@ public abstract class UnidadMovilMilitar extends UnidadMovil {
 
     public void atacar(Atacable receptorDelAtaque){
 
-        receptorDelAtaque.serAtacadoPor(this);
+        if(distanciaAtaque >= this.posicion.distancia(receptorDelAtaque.getPosicion()))
+            receptorDelAtaque.serAtacadoPor(this);
+        else
+            throw new UnidadFueraDeRangoDeAtaqueException();
     }
 
 

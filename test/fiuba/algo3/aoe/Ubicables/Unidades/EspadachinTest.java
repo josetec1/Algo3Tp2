@@ -9,6 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,8 +18,6 @@ import static org.hamcrest.core.Is.is;
 public class EspadachinTest {
     @Test
     public void test01SeCreaCorrectamenteEspadachin(){
-        Mapa mapa = new Mapa(20,20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
         Espadachin espadachin1 = new Espadachin();
 
         Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
@@ -31,8 +30,6 @@ public class EspadachinTest {
 
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
-        Mapa mapa = new Mapa(20,20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
         Espadachin espadachin = new Espadachin();
         espadachin.disminuirVida(50);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
@@ -42,6 +39,10 @@ public class EspadachinTest {
     public void test03AtacarArqueroDebeDisminuirSuVidaEn25(){
         UnidadMovilMilitar espadachinAtacante = new Espadachin();
         Atacable arqueroAtacado = new Arquero();
+
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(1,2));
+
         espadachinAtacante.atacar(arqueroAtacado);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(),  arqueroAtacado.getVidaMaxima() - 25);
@@ -51,6 +52,9 @@ public class EspadachinTest {
     public void test04AtacarEspadachinDebeDisminuirSuVidaEn25(){
         UnidadMovilMilitar espadachinAtacante = new Espadachin();
         Atacable espadachinAtacado = new Espadachin();
+
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        espadachinAtacado.colocarEn(new Posicion(1,2));
 
         espadachinAtacante.atacar(espadachinAtacado);
 
@@ -62,6 +66,9 @@ public class EspadachinTest {
         UnidadMovilMilitar espadachinAtacante = new Espadachin();
         Atacable plazaCentral = new PlazaCentral();
 
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        plazaCentral.colocarEn(new Posicion(1,2));
+
         espadachinAtacante.atacar(plazaCentral);
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima() - 15);
@@ -71,6 +78,9 @@ public class EspadachinTest {
     public void test06AtacarCastilloDebeDisminuirSuVidaEn15(){
         UnidadMovilMilitar espadachinAtacante = new Espadachin();
         Atacable castillo = new Castillo();
+
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        castillo.colocarEn(new Posicion(1,2));
 
         espadachinAtacante.atacar(castillo);
 
@@ -82,9 +92,38 @@ public class EspadachinTest {
         UnidadMovilMilitar espadachinAtacante = new Espadachin();
         Atacable cuartel = new Cuartel();
 
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        cuartel.colocarEn(new Posicion(1,2));
+
         espadachinAtacante.atacar(cuartel);
 
         Assert.assertEquals(cuartel.getVidaActual(), cuartel.getVidaMaxima() - 15);
+    }
+
+    @Test
+    public void test08AtacarArqueroEnSuRangoDeAtaque(){
+        UnidadMovilMilitar espadachinAtacante = new Espadachin();
+        Atacable arqueroAtacado = new Arquero();
+
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(0,0));
+
+        espadachinAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 25);
+    }
+
+    @Test(expected=UnidadFueraDeRangoDeAtaqueException.class)
+    public void test09IntentarAtacarArqueroFueraDelRangoDeAtaque(){
+        UnidadMovilMilitar espadachinAtacante = new Espadachin();
+        Atacable arqueroAtacado = new Arquero();
+
+        espadachinAtacante.colocarEn(new Posicion(1,1));
+        arqueroAtacado.colocarEn(new Posicion(3, 3));
+
+        espadachinAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
 }
