@@ -54,7 +54,7 @@ public class Jugador implements ObservableJugador{
             Posicion posicion;
             for(int i = 0;i<3;i++){
                  aldeano= new Aldeano();
-                 piezas.add(aldeano);
+                 this.agregarNotificable(aldeano);
                  this.mapa.colocar(aldeano,new Posicion(i+1,i+2));
                  observador.seCreo(aldeano); //notifico
             }
@@ -67,7 +67,6 @@ public class Jugador implements ObservableJugador{
             this.mapa.colocar(castillo,new Posicion(11,11));
             observador.seCreo(plaza);
             observador.seCreo(castillo);
-
         }
 
     public String getNombre(){return this.nombre;
@@ -95,7 +94,7 @@ public class Jugador implements ObservableJugador{
         }
         */
     }
-    public Boolean esMio( Ubicable ubicable ) {
+    public Boolean esMio( NotificableDeTurno ubicable ) {
 
         return piezas.contains(ubicable);
 
@@ -166,9 +165,13 @@ public class Jugador implements ObservableJugador{
             throw new PosicionDelMapaOcupadaException();
             // this.observador.seCreo(plaza);
         }
+        if(!this.esMio(aldeano)){
+            throw new UnidadAgenaException();
+        }
         PlazaCentral plaza = aldeano.crearPlazaCentral();
         this.descontarOro(plaza.getCosto());
         mapa.colocar(plaza,posicion);
+        this.agregarNotificable(plaza);
         observador.seCreo(plaza);
 
 
@@ -188,11 +191,14 @@ public class Jugador implements ObservableJugador{
         }
         if(!mapa.puedoColocar(posicion)){
             throw new PosicionDelMapaOcupadaException();
-            // this.observador.seCreo(plaza);
+        }
+        if(!this.esMio(aldeano)){
+            throw new UnidadAgenaException();
         }
         Cuartel cuartel = aldeano.crearCuartel();
         this.descontarOro(cuartel.getCosto());
         mapa.colocar(cuartel,posicion);
+        this.agregarNotificable(cuartel);
         observador.seCreo(cuartel);
     }
 
@@ -210,6 +216,9 @@ public class Jugador implements ObservableJugador{
         if(this.alcanzoLimiteDePoblacion()){
             throw new LimiteDePoblacionAlcanzadoException();
         }
+        if(!this.esMio(unaPlaza)){
+            throw new EdificioAgenoException();
+        }
         Aldeano aldeano = unaPlaza.construirAldeano(this);
         mapa.colocar(aldeano,posicion);
         this.agregarNotificable(aldeano);
@@ -225,6 +234,9 @@ public class Jugador implements ObservableJugador{
         }
         if(!mapa.puedoColocar(posicion)) {
             throw new PosicionDelMapaOcupadaException();
+        }
+        if(!this.esMio(unCastillo)){
+            throw new EdificioAgenoException();
         }
         ArmaDeAsedio armaDeAsedio= unCastillo.construirArmaDeAsedio(this);
         mapa.colocar(armaDeAsedio,posicion);
@@ -245,6 +257,9 @@ public class Jugador implements ObservableJugador{
         }
         if(!mapa.puedoColocar(posicion)) {
             throw new PosicionDelMapaOcupadaException();
+        }
+        if(!this.esMio(unCuartel)){
+            throw new EdificioAgenoException();
         }
         Espadachin espadachin = unCuartel.construirEspadachin(this);
         mapa.colocar(espadachin,posicion);
@@ -267,6 +282,9 @@ public class Jugador implements ObservableJugador{
         }
         if(!mapa.puedoColocar(posicion)) {
             throw new PosicionDelMapaOcupadaException();
+        }
+        if(!this.esMio(unCuartel)){
+            throw new EdificioAgenoException();
         }
         Arquero arquero = unCuartel.construirArquero(this);
         mapa.colocar(arquero,posicion);

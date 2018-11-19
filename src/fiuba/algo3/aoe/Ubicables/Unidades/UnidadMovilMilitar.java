@@ -11,9 +11,9 @@ public abstract class UnidadMovilMilitar extends UnidadMovil {
     protected int danioEdificio;
     protected int distanciaAtaque;
 
-    public void atacar(Atacable arqueroAtacado){
+    public void atacar(Atacable receptorDelAtaque){
 
-        arqueroAtacado.serAtacadoPor(this);
+        receptorDelAtaque.serAtacadoPor(this);
     }
 
 
