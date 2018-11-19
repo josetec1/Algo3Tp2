@@ -7,13 +7,13 @@ import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 
 public class Castillo extends Edificio{
-
+    private final int TAMANIO = 4;
     //TODO implementar multiton
     public Castillo( ){
        costo = 0;
        vidaActual = 1000;
        vidaMaxima = 1000;
-
+       this.tamanio = TAMANIO;
        this.estado = new EstadoNormal();
 
     }

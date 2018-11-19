@@ -165,28 +165,31 @@ public class EdificioTest {
 
     @Test
     public void test017CastilloGetPosicionDevuelvePosicionEsperada() {
-        Mapa mapa = new Mapa(20,20);
+        Mapa mapa = new Mapa(100,100);
 
         Jugador jugador = new Jugador("Mauricio", mapa);
         Edificio castillo = new Castillo();
         Posicion posicion = new Posicion(1,1);
-        posicion.agregar(new Cuadrante(1,2));
-        posicion.agregar(new Cuadrante(1,3));
-        posicion.agregar(new Cuadrante(1,4));
-        posicion.agregar(new Cuadrante(2,2));
-        posicion.agregar(new Cuadrante(2,1));
-        posicion.agregar(new Cuadrante(2,3));
-        posicion.agregar(new Cuadrante(2,4));
-        posicion.agregar(new Cuadrante(3,1));
-        posicion.agregar(new Cuadrante(3,2));
-        posicion.agregar(new Cuadrante(3,3));
-        posicion.agregar(new Cuadrante(3,4));
-        posicion.agregar(new Cuadrante(4,1));
-        posicion.agregar(new Cuadrante(4,2));
-        posicion.agregar(new Cuadrante(4,3));
-        posicion.agregar(new Cuadrante(4,4));
         mapa.colocar(castillo,posicion);
-        Assert.assertEquals(castillo.getPosicion(),posicion);
+
+        Posicion posicionNueva = new Posicion(1,1);
+        posicionNueva.agregar(new Cuadrante(1,2));
+        posicionNueva.agregar(new Cuadrante(1,3));
+        posicionNueva.agregar(new Cuadrante(1,4));
+        posicionNueva.agregar(new Cuadrante(2,1));
+        posicionNueva.agregar(new Cuadrante(2,2));
+        posicionNueva.agregar(new Cuadrante(2,3));
+        posicionNueva.agregar(new Cuadrante(2,4));
+        posicionNueva.agregar(new Cuadrante(3,1));
+        posicionNueva.agregar(new Cuadrante(3,2));
+        posicionNueva.agregar(new Cuadrante(3,3));
+        posicionNueva.agregar(new Cuadrante(3,4));
+        posicionNueva.agregar(new Cuadrante(4,1));
+        posicionNueva.agregar(new Cuadrante(4,2));
+        posicionNueva.agregar(new Cuadrante(4,3));
+        posicionNueva.agregar(new Cuadrante(4,4));
+
+        Assert.assertEquals(castillo.getPosicion().seSuperponeCon(posicionNueva),true);
     }
 
     @Test

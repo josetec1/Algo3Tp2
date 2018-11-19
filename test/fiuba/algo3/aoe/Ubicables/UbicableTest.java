@@ -21,8 +21,8 @@ public class UbicableTest {
         Ubicable lanzaPiedras = new ArmaDeAsedio();
         Posicion origen = new Posicion(2,5);
         mapa.colocar(lanzaPiedras,origen);
-        Assert.assertThat(mapa.puedoColocar(origen), is(false) );
-        Assert.assertThat(lanzaPiedras.getPosicion(), is(origen) );
+        Assert.assertThat(mapa.puedoColocar(origen,lanzaPiedras.getTamanio()), is(false) );
+        Assert.assertEquals(lanzaPiedras.getPosicion().seSuperponeCon(origen),true);
 
 
     }
@@ -43,8 +43,8 @@ public class UbicableTest {
         lanzaPiedras.mover(mapa, direccion);
         Assert.assertThat(lanzaPiedras.getPosicion().seSuperponeCon(calculada), is(true) );
         Assert.assertThat(lanzaPiedras.getPosicion().seSuperponeCon(origen), is(false) ); // tiene la nueva posicion
-        Assert.assertThat(mapa.puedoColocar(calculada), is(false) ); // la posicion en el tablero esta ocupada
-        Assert.assertThat(mapa.puedoColocar(origen), is(true) ); // el origen esta libre
+        Assert.assertThat(mapa.puedoColocar(calculada,lanzaPiedras.getTamanio()), is(false) ); // la posicion en el tablero esta ocupada
+        Assert.assertThat(mapa.puedoColocar(origen,lanzaPiedras.getTamanio()), is(true) ); // el origen esta libre
 
 
     }

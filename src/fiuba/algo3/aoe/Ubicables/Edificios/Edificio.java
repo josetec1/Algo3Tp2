@@ -14,9 +14,14 @@ public abstract class Edificio implements Atacable, NotificableDeTurno {
     protected Posicion posicion;
     protected int costo;
     protected EstadoEdificio estado;
+    protected int tamanio;
 
     public int getCosto () {
         return this.costo;
+    }
+
+    public int getTamanio (){
+        return this.tamanio;
     }
 
     public void colocarEn ( Posicion posicion ) {

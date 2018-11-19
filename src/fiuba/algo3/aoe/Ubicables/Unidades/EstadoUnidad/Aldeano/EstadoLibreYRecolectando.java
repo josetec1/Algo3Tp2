@@ -28,7 +28,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
     public void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion) {
         Posicion destino = aldeano.obtenerPosicionDeAvance(direccion);
-        if (mapa.puedoColocar(destino)) {
+        if (mapa.puedoColocar(destino,aldeano.getTamanio())) {
             mapa.moverElemento(aldeano, destino);
             aldeano.cambiarAMoviendose();
         }

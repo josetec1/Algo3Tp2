@@ -8,11 +8,13 @@ import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Atacable {
-
+    private final int TAMANIO = 1;
     protected Posicion posicion;
     protected int vidaMaxima;
     protected int costo;
     protected int vidaActual;
+    protected int tamanio = TAMANIO;
+
 
 
     public int getVidaMaxima(){
@@ -26,6 +28,10 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Ataca
     }
     public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
         this.disminuirVida(unidadMovilMilitar.getDanioUnidad());
+    }
+
+    public int getTamanio(){
+        return this.tamanio;
     }
 
     public int getCosto(){

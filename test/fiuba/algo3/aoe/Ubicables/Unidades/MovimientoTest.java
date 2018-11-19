@@ -17,7 +17,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2,2);
         Posicion calculada= new Posicion(2,3);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArriba();
         aldeano.mover(mapa,direccion);
@@ -32,7 +32,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(2, 1);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajo();
         aldeano.mover(mapa, direccion);
@@ -47,7 +47,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 1);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionDerecha();
         aldeano.mover(mapa, direccion);
@@ -62,7 +62,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(1, 1);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajo();
         aldeano.mover(mapa, direccion);
@@ -77,7 +77,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArribaDerecha();
         aldeano.mover(mapa, direccion);
@@ -92,7 +92,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 1);
         Posicion calculada = new Posicion(1, 2);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArribaIzquierda();
         aldeano.mover(mapa, direccion);
@@ -107,7 +107,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(1, 1);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajoIzquierda();
         aldeano.mover(mapa, direccion);
@@ -122,7 +122,7 @@ public class MovimientoTest {
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(2, 1);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajoDerecha();
         aldeano.mover(mapa, direccion);
@@ -137,7 +137,7 @@ public class MovimientoTest {
         UnidadMovil arquero = new Arquero();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,arquero.getTamanio()),true);
         mapa.colocar(arquero,origen);
         Direccionable direccion = new DireccionArribaDerecha();
         arquero.mover(mapa, direccion);
@@ -152,7 +152,7 @@ public class MovimientoTest {
         UnidadMovil espadachin = new Espadachin();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
-        Assert.assertEquals(mapa.puedoColocar(origen),true);
+        Assert.assertEquals(mapa.puedoColocar(origen,espadachin.getTamanio()),true);
         mapa.colocar(espadachin,origen);
         Direccionable direccion = new DireccionArribaDerecha();
         espadachin.mover(mapa, direccion);
