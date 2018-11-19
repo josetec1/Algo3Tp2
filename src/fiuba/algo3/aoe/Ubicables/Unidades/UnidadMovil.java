@@ -33,6 +33,7 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Ataca
     }
 
     public Posicion getPosicion() {
+        if (this.posicion==null){throw new UnidadSinPosicionExceptcion();}
         return this.posicion;
     }
 
@@ -41,8 +42,10 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Ataca
     }
 
     public Posicion obtenerPosicionDeAvance( Direccionable direccionable ){
-        if (this.posicion==null){throw new UnidadSinPosicionExceptcion();}
-        return this.posicion.calcularPosicionSiguiente(direccionable);
+
+        return this.getPosicion().calcularPosicionSiguiente(direccionable);
+
+
     }
 
 
