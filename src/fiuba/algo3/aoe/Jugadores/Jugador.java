@@ -142,7 +142,9 @@ public class Jugador implements ObservableJugador{
     //chequeos, que la unidad sea mia
     // que es mi turno
     public void mover (UnidadMovil unidad, Direccionable direccion){
-
+        if(!this.esMio(unidad)){
+            throw new UnidadAgenaException();
+        }
         unidad.mover(mapa,direccion);
     }
 

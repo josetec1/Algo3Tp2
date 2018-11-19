@@ -615,4 +615,26 @@ public class JugadorTest {
 
     }
 
+    @Test
+    public void test39JugadorMoverUnidadNoPropiaLanzaUnidadAgenaException(){
+
+        Mapa mapa = new Mapa(90,90);
+        Jugador jugador = new Jugador("D10S", mapa);
+        ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
+        jugador.agregarObservador(espia);
+
+        jugador.inicializar();
+
+        List<Aldeano> aldeanos = espia.getAldeanos();
+
+        Aldeano aldeano = aldeanos.get(0);
+        Aldeano aldeano2 = aldeanos.get(1);
+        Aldeano aldeano3 = new Aldeano();
+
+        jugador.mover(aldeano, new DireccionDerecha());
+        jugador.mover(aldeano2, new DireccionDerecha());
+        thrown.expect(UnidadAgenaException.class);
+        jugador.mover(aldeano3, new DireccionDerecha());
+    }
+
 }
