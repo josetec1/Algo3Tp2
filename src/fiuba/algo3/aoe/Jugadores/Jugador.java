@@ -38,7 +38,7 @@ public class Jugador implements ObservableJugador{
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
         this.mapa = mapa;
-        this.oro = 0;
+        this.oro = 100;
         this.estado = new JugadorDeshabilitado();
         this.piezas = new ArrayList<>();
         poblacionActual = 0;
