@@ -25,11 +25,12 @@ public class Mapa {
     }
 
 
-    public Boolean puedoColocar( Posicion unaPosicion) {
+    public Boolean puedoColocar( Posicion unaPosicion,int tamanio) {
+        Posicion posicionAColocar = unaPosicion.expandir(tamanio);
 
-       if(!this.estaDentroDeTablero (unaPosicion)){return false;}
+       if(!this.estaDentroDeTablero (posicionAColocar)){return false;}
 
-        return this.estaLibre(unaPosicion);
+        return this.estaLibre(posicionAColocar);
 
     }
 
@@ -48,12 +49,12 @@ public class Mapa {
     // Recibe un ubicable y una posicion, luego de colocarlo, le setea la posicion al ubicable
     // el ubicable tiene no puede estar agregado previamente
     public void colocar (Ubicable unElemento, Posicion posicion)  {
-
-        if (!this.estaDentroDeTablero(posicion)) {throw new FueraDelMapaException();}
-        if(!this.estaLibre(posicion)) {throw new PosicionDelMapaOcupadaException();}
+        Posicion posicionNueva = posicion.expandir(unElemento.getTamanio());
+        if (!this.estaDentroDeTablero(posicionNueva)) {throw new FueraDelMapaException();}
+        if(!this.estaLibre(posicionNueva)) {throw new PosicionDelMapaOcupadaException();}
         if (this.estaEnElTablero(unElemento)){throw new ElElementoYaExisteException();}
 
-        unElemento.colocarEn(posicion);
+        unElemento.colocarEn(posicionNueva);
         this.ubicables.add (unElemento);
     }
 

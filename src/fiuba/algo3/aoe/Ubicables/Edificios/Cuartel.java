@@ -8,15 +8,14 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 
 public class Cuartel extends Edificio {
-
+    private final int TAMANIO = 2;
 
     public Cuartel( ){
         this.costo = 50;
         this.vidaMaxima = 250;
         this.vidaActual = 250;
-
+        this.tamanio = TAMANIO;
         this.estado = new EstadoEnConstruccion(3);
-      //  jugador.agregarEdificio(this);
     }
 
     public void reparar(){

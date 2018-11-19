@@ -10,11 +10,13 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class PlazaCentral extends Edificio {
 // TODO refactor constantes
+private final int TAMANIO = 2;
     public PlazaCentral(  ){
         this.costo = 100;
         this.vidaMaxima = 450;
         this.vidaActual = 450;
         this.estado = new EstadoEnConstruccion(3);
+        this.tamanio =TAMANIO;
 
 
     }

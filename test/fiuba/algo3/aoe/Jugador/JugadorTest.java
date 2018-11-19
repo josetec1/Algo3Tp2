@@ -99,7 +99,7 @@ public class JugadorTest {
 
     @Test
     public void test010JugadorReclutarEspadachinConOro25DevuelveRecursoInsuficienteException(){
-        Mapa mapa = new Mapa(20,20);
+        Mapa mapa = new Mapa(100,100);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -113,7 +113,7 @@ public class JugadorTest {
         cuartel.construir();
         jugador.sumarOro(25);
         thrown.expect(RecursoInsuficienteException.class);
-        jugador.reclutarEspadachin(cuartel,new Posicion(1,1));
+        jugador.reclutarEspadachin(cuartel,new Posicion(50,50));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class JugadorTest {
         jugador.descontarOro(100);
         jugador.sumarOro(75);
         List<Aldeano> aldeanos = espia.getAldeanos();
-        jugador.construirCuartel(aldeanos.get(0),new Posicion(new Cuadrante(1,1)));
+        jugador.construirCuartel(aldeanos.get(0),new Posicion(new Cuadrante(9,9)));
         Cuartel cuartel = espia.getCuartels().get(0);
         cuartel.construir();
         cuartel.construir();
@@ -155,7 +155,7 @@ public class JugadorTest {
 
     @Test
     public void test013JugadorReclutarArmaDeAsedioConOro25DevuelveRecursoInsuficienteException(){
-        Mapa mapa = new Mapa(25,25);
+        Mapa mapa = new Mapa(100,100);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -163,7 +163,7 @@ public class JugadorTest {
         Castillo castillo = espia.getCastillos().get(0);
         jugador.sumarOro(25);
         thrown.expect(RecursoInsuficienteException.class);
-        jugador.reclutarArmaDeAsedio(castillo,new Posicion(1,1));
+        jugador.reclutarArmaDeAsedio(castillo,new Posicion(90,90));
 
     }
 
@@ -197,7 +197,7 @@ public class JugadorTest {
 
     @Test
     public void test016JugadorReclutarArqueroEdificioEnConstruccionDevuelveEdificioEnConstruccionException(){
-        Mapa mapa = new Mapa(20,20);
+        Mapa mapa = new Mapa(100,100);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -206,12 +206,12 @@ public class JugadorTest {
         jugador.construirCuartel(espia.getAldeanos().get(0),new Posicion(new Cuadrante(9,9)));
         Cuartel cuartel = espia.getCuartels().get(0);
         thrown.expect(NoSePuedeConstruirEnEsteMomentoException.class);
-        jugador.reclutarArquero(cuartel,new Posicion(2,2));
+        jugador.reclutarArquero(cuartel,new Posicion(78,78));
     }
 
     @Test
     public void test017JugadorReclutarEspadachinEdificioEnConstruccionDevuelveEdificioEnConstruccionException(){
-        Mapa mapa = new Mapa(20,20);
+        Mapa mapa = new Mapa(100,100);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -219,7 +219,7 @@ public class JugadorTest {
         jugador.sumarOro(50);
         jugador.construirCuartel(espia.getAldeanos().get(0),new Posicion(new Cuadrante(19,18)));
         thrown.expect(NoSePuedeConstruirEnEsteMomentoException.class);
-        jugador.reclutarEspadachin(espia.getCuartels().get(0),new Posicion(1,1));
+        jugador.reclutarEspadachin(espia.getCuartels().get(0),new Posicion(50,50));
     }
 
 
@@ -262,7 +262,7 @@ public class JugadorTest {
 
     @Test
     public void test020JugadorReclutarEspadachinEdificioEnReparacionDevuelveEdificioEnConstruccionException(){
-        Mapa mapa = new Mapa(20,20);
+        Mapa mapa = new Mapa(100,1000);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -277,12 +277,12 @@ public class JugadorTest {
         cuartel.reparar();
         jugador.sumarOro(50);
         thrown.expect(NoSePuedeConstruirEnEsteMomentoException.class);
-        jugador.reclutarEspadachin(cuartel,new Posicion(1,1));
+        jugador.reclutarEspadachin(cuartel,new Posicion(45,45));
     }
 
     @Test
     public void test020JugadorReclutarArmaDeAsedioEdificioEnReparacionDevuelveEdificioEnConstruccionException(){
-        Mapa mapa = new Mapa(25,25);
+        Mapa mapa = new Mapa(100,100);
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
@@ -292,7 +292,7 @@ public class JugadorTest {
         castillo.reparar();
         jugador.sumarOro(50);
         thrown.expect(NoSePuedeConstruirEnEsteMomentoException.class);
-        jugador.reclutarArmaDeAsedio(castillo,new Posicion(4,4));
+        jugador.reclutarArmaDeAsedio(castillo,new Posicion(40,50));
     }
 
     @Test
@@ -352,12 +352,12 @@ public class JugadorTest {
         plaza.construir();
         plaza.construir();
         plaza.construir();
-        for(int i = 0;i<47;i++){
-            jugador.reclutarAldeano(plaza,mock(Posicion.class));
+       /* for(int i = 0;i<47;i++){
+            jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(20,20+i)));
         }
         Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
-        jugador.reclutarAldeano(plaza,mock(Posicion.class));
+        jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(30,90)));*/
     }
 
     @Test
@@ -368,15 +368,15 @@ public class JugadorTest {
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
-        List<Castillo> castillos= espia.getCastillos();
+       /* List<Castillo> castillos= espia.getCastillos();
         Castillo castillo = castillos.get(0);
 
         for(int i = 0;i<47;i++){
-            jugador.reclutarArmaDeAsedio(castillo,new Posicion(12,i+12));
+            jugador.reclutarArmaDeAsedio(castillo,new Posicion(50,i+50));
         }
         Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
-        jugador.reclutarArmaDeAsedio(castillo,new Posicion(70,70));
+        jugador.reclutarArmaDeAsedio(castillo,new Posicion(7,8));*/
     }
 
 
@@ -415,7 +415,7 @@ public class JugadorTest {
         aldeano.cambiarARecolectando();
         jugador.habilitar();
         thrown.expect(RecursoInsuficienteException.class);
-        jugador.construirCuartel(aldeano,new Posicion(new Cuadrante(20,20)));
+        jugador.construirCuartel(aldeano,new Posicion(new Cuadrante(60,60)));
     }
 
     @Test
@@ -459,7 +459,7 @@ public class JugadorTest {
         jugador.inicializar();
         Aldeano aldeano = espia.getAldeanos().get(0);
         jugador.construirPlaza(aldeano,posicion);
-        Assert.assertEquals(mapa.puedoColocar(posicion),false);
+        Assert.assertEquals(mapa.puedoColocar(posicion,espia.getPlazaCentrals().get(1).getTamanio()),false);
     }
 
     @Test
@@ -492,8 +492,8 @@ public class JugadorTest {
         posicion.agregar(new Cuadrante(12,13));
         posicion.agregar(new Cuadrante(13,12));
         posicion.agregar(new Cuadrante(13,13));
-        jugador.construirCuartel(aldeano,posicion);
-        Assert.assertEquals(mapa.puedoColocar(posicion),false);
+        jugador.construirPlaza(aldeano,posicion);
+        Assert.assertEquals(mapa.puedoColocar(posicion,espia.getPlazaCentrals().get(1).getTamanio()),false);
     }
 
     @Test
@@ -628,7 +628,7 @@ public class JugadorTest {
     @Test
     public void test39JugadorMoverUnidadNoPropiaLanzaUnidadAgenaException(){
 
-        Mapa mapa = new Mapa(90,90);
+        Mapa mapa = new Mapa(200,200);
         Jugador jugador = new Jugador("D10S", mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);

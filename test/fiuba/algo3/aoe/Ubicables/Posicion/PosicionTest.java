@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Posicion;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -430,6 +431,54 @@ public class PosicionTest {
         Assert.assertEquals(posicion.distancia(comparada),20);
     }
 
+    @Test
+    public void test029ExpandirPosicionUnitariaATamanio4DevuelvePosicionEsperada(){
+        Posicion posicionInicial = new Posicion(1,1);
+
+        Posicion posicionEsperada = posicionInicial.expandir(4);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1,1)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1,2)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1,3)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1,4)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2,1)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2,2)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2,3)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2,4)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3,1)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3,2)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3,3)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3,4)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(4,1)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(4,2)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(4,3)),true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(4,4)),true);
+    }
+
+    @Test
+    public void test030ExpandirPosicionUnitariaATamanio2DevuelvePosicionEsperada() {
+        Posicion posicionInicial = new Posicion(1, 1);
+
+        Posicion posicionEsperada = posicionInicial.expandir(2);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 1)), true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 2)), true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2, 1)), true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2, 2)), true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 3)), false);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 3)), false);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3, 1)), false);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(3, 2)), false);
+    }
+
+    @Test
+    public void test030ExpandirPosicionUnitariaATamanio1DevuelvePosicionEsperada() {
+        Posicion posicionInicial = new Posicion(1, 1);
+        Posicion posicionEsperada = posicionInicial.expandir(1);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 1)), true);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(1, 2)), false);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2, 2)), false);
+        Assert.assertEquals(posicionEsperada.seSuperponeCon(new Posicion(2, 1)), false);
+
+    }
 }
 
 

@@ -1,12 +1,13 @@
 package fiuba.algo3.aoe.Ubicables.posicion;
 
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 
 import java.util.*;
 
 public class Posicion {
-
+    private int tamanio;
     private ArrayList<Cuadrante> cuadrantes =new ArrayList<>();
 
     public Posicion(){
@@ -15,13 +16,13 @@ public class Posicion {
 
     //sobrecarga con Cuadrante
     public Posicion(Cuadrante unCuadrante){
-
+        this.tamanio ++;
         this.agregar(unCuadrante);
     }
 
     //sobrecarga directa con int
     public Posicion(int x, int y){
-
+        this.tamanio++;
         this.agregar(new Cuadrante(x,y));
     }
 
@@ -55,6 +56,7 @@ public class Posicion {
 
     public void agregar (Cuadrante unCuadrante) {
         this.cuadrantes.add(unCuadrante);
+        this.tamanio++;
     }
 
     public boolean estasDentroDe (int ancho, int alto) {
@@ -76,6 +78,18 @@ public class Posicion {
              nuevaPosicion.agregar(cuadranteNuevo);
         }
         return nuevaPosicion;
+    }
+
+
+    public Posicion expandir(int tamanio){
+        Cuadrante cuadrante = this.cuadrantes.get(0);
+        Posicion posicionNueva = new Posicion();
+        for (int i = 0;i<tamanio;i++){
+            for (int j = 0;j<tamanio;j++){
+                posicionNueva.agregar(new Cuadrante(cuadrante.getX()+i,cuadrante.getY()+j));
+            }
+        }
+        return posicionNueva;
     }
 
     public int distancia(Posicion otraPosicion) {
