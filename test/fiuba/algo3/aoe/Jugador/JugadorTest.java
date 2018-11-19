@@ -23,9 +23,10 @@ public class JugadorTest {
     @Test
     public void test01CrearJugadorCreaJugadorConNombreMauricioOro0Test(){
         Mapa mapa = new Mapa(10,20);
+
         Jugador jugador1 = new Jugador("Mauricio", mapa);
         Assert.assertEquals(jugador1.getNombre(), "Mauricio");
-        Assert.assertEquals(jugador1.getOro(), 0);
+        Assert.assertEquals(jugador1.getOro(), 100);
     }
 
     @Test
@@ -33,14 +34,16 @@ public class JugadorTest {
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
         jugador.sumarOro(200);
+        jugador.descontarOro(100);
         Assert.assertEquals(jugador.getOro(),200);
     }
 
     @Test
-    public void test03JugadorSumarOro300DescontarOro100Devuelve200DeOro(){
+    public void test03JugadorSumarOro200DescontarOro100Devuelve200DeOro(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio", mapa);
-        jugador.sumarOro(300);
+        jugador.sumarOro(200);
+
         jugador.descontarOro(100);
         Assert.assertEquals(jugador.getOro(),200);
     }
@@ -102,6 +105,7 @@ public class JugadorTest {
         jugador.agregarObservador(espia);
         jugador.inicializar();
         jugador.sumarOro(50);
+        jugador.descontarOro(100);
         jugador.construirCuartel(espia.getAldeanos().get(0),new Posicion(new Cuadrante(2,2)));
         Cuartel cuartel = espia.getCuartels().get(0);
         cuartel.construir();
@@ -119,6 +123,7 @@ public class JugadorTest {
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
+        jugador.descontarOro(100);
         jugador.sumarOro(75);
         List<Aldeano> aldeanos = espia.getAldeanos();
         jugador.construirCuartel(aldeanos.get(0),new Posicion(new Cuadrante(1,1)));
@@ -138,6 +143,7 @@ public class JugadorTest {
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
+        jugador.descontarOro(100);
         PlazaCentral plaza = espia.getPlazaCentrals().get(0);
         plaza.construir();
         plaza.construir();
@@ -177,15 +183,16 @@ public class JugadorTest {
     }
 
     @Test
-    public void test015JugadorReclutarAldeanoEdificioEnConstruccionDevuelveEdificioEnConstruccionException(){
-        Jugador jugador = new Jugador("Mauricio",mock(Mapa.class));
+    public void test015JugadorReclutarArqueroEdificioEnConstruccionDevuelveEdificioEnConstruccionException(){
+        Jugador jugador = new Jugador("Mauricio",new Mapa(90,90));
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
-        PlazaCentral plaza = espia.getPlazaCentrals().get(0);
+        Aldeano aldeano = espia.getAldeanos().get(0);
         jugador.sumarOro(50);
+        jugador.construirCuartel(aldeano,new Posicion(new Cuadrante(50,50)));
         thrown.expect(NoSePuedeConstruirEnEsteMomentoException.class);
-        jugador.reclutarAldeano(plaza,mock(Posicion.class));
+        jugador.reclutarArquero(espia.getCuartels().get(0),new Posicion(new Cuadrante(60,60)));
     }
 
     @Test
@@ -399,6 +406,7 @@ public class JugadorTest {
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
+        jugador.descontarOro(100);
         Aldeano aldeano = espia.getAldeanos().get(0);
         jugador.habilitar();
         jugador.construirCuartel(aldeano,new Posicion(new Cuadrante(9,9)));
@@ -416,6 +424,7 @@ public class JugadorTest {
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
+        jugador.descontarOro(100);
         jugador.inicializar();
         jugador.eliminarUnidad(espia.getAldeanos().get(1));
         jugador.eliminarUnidad(espia.getAldeanos().get(2));
@@ -459,6 +468,7 @@ public class JugadorTest {
         Jugador jugador = new Jugador("Mauricio",mapa);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
+        jugador.descontarOro(100);
         jugador.inicializar();
         Aldeano aldeano = espia.getAldeanos().get(0);
         Posicion posicion = new Posicion(12,12);
@@ -494,7 +504,7 @@ public class JugadorTest {
         posicion.agregar(new Cuadrante(12,13));
         posicion.agregar(new Cuadrante(13,12));
         posicion.agregar(new Cuadrante(13,13));
-
+        jugador.descontarOro(100);
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();

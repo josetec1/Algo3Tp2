@@ -60,6 +60,9 @@ public class Jugador implements ObservableJugador{
             }
 
             PlazaCentral plaza = new PlazaCentral();
+            plaza.construir();
+            plaza.construir();
+            plaza.construir();
             Castillo castillo = new Castillo();
             piezas.add (plaza);
             this.mapa.colocar(plaza,new Posicion(6,6));
