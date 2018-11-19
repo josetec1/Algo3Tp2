@@ -47,6 +47,8 @@ public class Jugador implements ObservableJugador{
 
     }
 
+    //TODO REFACTOR A TODOS LOS IF URGENTE
+
     //TODO refactor!
     public void inicializar (){
 
