@@ -80,21 +80,25 @@ public class Posicion {
 
     public int distancia(Posicion otraPosicion) {
 
+        Iterator<Cuadrante>  it = this.getIterador();
+        Iterator<Cuadrante>  itOtraPos;
+
+        Cuadrante miCuadrante;
+        Cuadrante cuadrateOtraPosicion;
+
         int distancia = 1000;
-        Cuadrante cuadrateOtraPosicion = otraPosicion.getIterador().next();
-        distancia = Math.min(distancia , this.getIterador().next().distancia(cuadrateOtraPosicion ));
 
-        /*for(Cuadrante miCuadrante : this.cuadrantes){
+        while(it.hasNext()) {
 
-            while(otraPosicion.getIterador().hasNext()){
+            miCuadrante = it.next();
+            itOtraPos = otraPosicion.getIterador();
 
-                cuadrateOtraPosicion = otraPosicion.getIterador().next();
-                distancia = Math.min(distancia , miCuadrante.distancia(cuadrateOtraPosicion ));
+            while(itOtraPos.hasNext()){
+                cuadrateOtraPosicion = itOtraPos.next();
+                distancia = Math.min(distancia , miCuadrante.distancia(cuadrateOtraPosicion) );
             }
-        }*/
-
+        }
         return distancia;
-
 
     }
 }
