@@ -341,7 +341,7 @@ public class JugadorTest {
     @Test
     public void testt23JugadorReclutarAldeanoConPoblacion50DevuelveLimiteDePoblacionAlcanzadoException(){
 
-        Jugador jugador = new Jugador("Mauricio",mock(Mapa.class));
+        Jugador jugador = new Jugador("Mauricio",new Mapa(1000,1000));
         jugador.sumarOro(9999999);
 
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
@@ -352,12 +352,12 @@ public class JugadorTest {
         plaza.construir();
         plaza.construir();
         plaza.construir();
-       /* for(int i = 0;i<47;i++){
-            jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(20,20+i)));
+        for(int i = 0;i<47;i++){
+            jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(40,40+i)));
         }
         Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
-        jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(30,90)));*/
+        jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(30,30)));
     }
 
     @Test
@@ -368,7 +368,7 @@ public class JugadorTest {
         ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
         jugador.agregarObservador(espia);
         jugador.inicializar();
-       /* List<Castillo> castillos= espia.getCastillos();
+        List<Castillo> castillos= espia.getCastillos();
         Castillo castillo = castillos.get(0);
 
         for(int i = 0;i<47;i++){
@@ -376,7 +376,7 @@ public class JugadorTest {
         }
         Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
-        jugador.reclutarArmaDeAsedio(castillo,new Posicion(7,8));*/
+        jugador.reclutarArmaDeAsedio(castillo,new Posicion(7,8));
     }
 
 
