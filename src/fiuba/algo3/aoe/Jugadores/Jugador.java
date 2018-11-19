@@ -132,12 +132,11 @@ public class Jugador implements ObservableJugador{
 
 
     public void habilitar (){
-        this.estado = new JugadorHabilitado();
-        for(int i = 0;i<piezas.size();i++){
-            piezas.get(i).huboUnCambioDeTurno(this);
-        }
-        //TODO notificar a mis elementos  hubouncambiode turno
 
+        this.estado = new JugadorHabilitado();
+        for (Manipulable pieza : this.piezas){
+             pieza.huboUnCambioDeTurno(this);
+        }
     }
 
     public void deshabilitar() { this.estado = new JugadorDeshabilitado();   }
@@ -341,7 +340,7 @@ public class Jugador implements ObservableJugador{
             //aca decidir que hacer, un try por si vuelve excepcion fuera de rango
             //2 optar por que castillo no haga nada si los tiene fuera de rango
 
-          //  unCastilloEnemigo.atacar (enemigo); //castillo no tiene el metodo atacar
+          unCastilloEnemigo.atacar (enemigo);
         }
 
     }
