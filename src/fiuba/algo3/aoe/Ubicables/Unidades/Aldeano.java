@@ -3,17 +3,19 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Atacable;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoConstruyendo;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoRecolectando;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoUnidadAldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoLibreYRecolectando;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoMoviendoseYRecolectando;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.IEstadoUnidadAldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil  {
 
-    private EstadoUnidadAldeano estado;
+    private IEstadoUnidadAldeano estado;
 
     private final int VIDA_MAXIMA = 50;
     private final int COSTO = 25;
@@ -22,10 +24,7 @@ public class Aldeano extends UnidadMovil  {
         this.vidaMaxima = VIDA_MAXIMA;
         this.vidaActual = VIDA_MAXIMA;
         this.costo = COSTO;
-
-        this.estado = new EstadoRecolectando();
-        this.cuentaRegresiva= 0;
-
+        this.estado = new EstadoLibreYRecolectando();
     }
 
     public int getVidaMaxima(){
@@ -38,14 +37,24 @@ public class Aldeano extends UnidadMovil  {
         this.vidaActual-= vida;
     }
 
+    public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
+
     @Override
     public void serAtacadoPor(UnidadMovilMilitar unidadMovilMilitar) {
 
     }
 
+    //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
+    @Override
+    public void mover(Mapa mapa, Direccionable direccion) {
+
+        this.estado.mover(this, mapa,direccion);
+
+    }
+
     @Override
     public void huboUnCambioDeTurno(Jugador jugador) {
-        estado.pasarTurno(this, jugador);
+        this.estado.pasarTurno(this, jugador);
 
     }
 
@@ -55,52 +64,41 @@ public class Aldeano extends UnidadMovil  {
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
     public PlazaCentral crearPlazaCentral() {
-            // revisa que sea el turno de tu jugador.
-      //    if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
-
-
-            //revisa que pueda construir
-          if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
-
 
         PlazaCentral unaPlaza =new PlazaCentral();
-          unaPlaza = (PlazaCentral) this.estado.construir(this,unaPlaza);
+        unaPlaza = (PlazaCentral) this.estado.construir(this,unaPlaza);
+
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
-
          return unaPlaza;
     }
 
-
     public Cuartel crearCuartel() {
-        // revisa que sea el turno de tu jugador.
-      //  if (!this.esMiTurno()) {{throw new NoEsTuTurnoException();}}  // TODO  preguntamos esto?
-
-        //revisa que pueda construir
-        if (!this.estado.puedoConstruirOReparar()) {throw new AldeanoOcupadoException();}
-
 
         Cuartel cuartel =new Cuartel();
         cuartel = (Cuartel) this.estado.construir(this,cuartel);
+
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
-
         return cuartel;
-
     }
 
     // no usar desde afuera.
     public void cambiarAContruyendo(){this.estado= new EstadoConstruyendo(this);}
-    public void cambiarARecolectando(){this.estado= new EstadoRecolectando();}
+    public void cambiarARecolectando(){this.estado= new EstadoLibreYRecolectando();}
+    public void cambiarAMoviendose() {
+        this.estado = new EstadoMoviendoseYRecolectando();
+    }
+
 
     //Siempre usar este metodo antes de llamar a reparar o construir
     public Boolean podesConstruirORepar() {
         return this.estado.puedoConstruirOReparar();
     }
-
-    public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
-
     public boolean podesMoverte() {
-        return true;
+        return this.estado.podesMoverte();
     }
+
+
+
 }

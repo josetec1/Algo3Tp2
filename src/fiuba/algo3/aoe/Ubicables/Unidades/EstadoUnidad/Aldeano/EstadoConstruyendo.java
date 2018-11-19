@@ -1,32 +1,51 @@
 package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
+import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
 
-public class EstadoConstruyendo implements EstadoUnidadAldeano {
+public class EstadoConstruyendo implements IEstadoUnidadAldeano {
 
-    public EstadoConstruyendo (Aldeano aldeano){
+    private final int TURNOS_DE_CONSTRUCCION = 3;
 
-        aldeano.establecerCuentaRegresiva(2); //TODO numeromagico
+    private int turnosRestantes;
+
+//
+    public EstadoConstruyendo(Aldeano aldeano){
+
+        this.turnosRestantes = TURNOS_DE_CONSTRUCCION;
+
     }
 
+    //
     @Override
     public void pasarTurno(Aldeano aldeano, Jugador unJugador) {
-        int cuentaRegresiva= aldeano.getCuentaRegresiva();
-        aldeano.establecerCuentaRegresiva(cuentaRegresiva -1);
 
-        if( cuentaRegresiva ==0) {aldeano.cambiarARecolectando();}
+        this.turnosRestantes -=1;
+        if( this.turnosRestantes ==0) {aldeano.cambiarARecolectando();}
     }
 
+    //
     @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
-        return null; //TODO excepcion
+        throw new AldeanoOcupadoException();
     }
-
+//
     @Override
     public Boolean puedoConstruirOReparar() {
+        return false;
+    }
+//
+    @Override
+    public void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion) {
+        throw new AldeanoOcupadoException();
+    }
+    @Override
+//*
+    public Boolean podesMoverte() {
         return false;
     }
 

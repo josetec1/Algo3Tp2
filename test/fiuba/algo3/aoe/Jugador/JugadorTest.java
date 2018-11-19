@@ -260,7 +260,7 @@ public class JugadorTest {
         for(int i = 0;i<50;i++){
             jugador.reclutarEspadachin(cuartel,new Posicion(1,i+1));
         }
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),true);
+        Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
         jugador.reclutarEspadachin(cuartel,new Posicion(90,90));
     }
@@ -277,7 +277,7 @@ public class JugadorTest {
         for(int i = 0;i<50;i++){
             jugador.reclutarEspadachin(cuartel,new Posicion(1,i+1));
         }
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),true);
+        Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
         jugador.reclutarArquero(cuartel,new Posicion( 90,90));
     }
@@ -294,7 +294,7 @@ public class JugadorTest {
         for(int i = 0;i<50;i++){
             jugador.reclutarAldeano(plaza,mock(Posicion.class));
         }
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),true);
+        Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
         jugador.reclutarAldeano(plaza,mock(Posicion.class));
     }
@@ -308,7 +308,7 @@ public class JugadorTest {
         for(int i = 0;i<50;i++){
             jugador.reclutarArmaDeAsedio(castillo,new Posicion(1,i+1));
         }
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),true);
+        Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         thrown.expect(LimiteDePoblacionAlcanzadoException.class);
         jugador.reclutarArmaDeAsedio(castillo,new Posicion(70,70));
     }
@@ -328,9 +328,9 @@ public class JugadorTest {
         }
         Aldeano aldeano = new Aldeano();
         jugador.agregarNotificable(aldeano);
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),true);
+        Assert.assertTrue(jugador.alcanzoLimiteDePoblacion());
         jugador.eliminarUnidad(aldeano);
-        Assert.assertEquals(jugador.alcanzoLimiteDePoblacion(),false);
+        Assert.assertFalse(jugador.alcanzoLimiteDePoblacion());
     }
 
     @Test
@@ -426,8 +426,8 @@ public class JugadorTest {
         List<Aldeano> aldeanos = espia.getAldeanos();
 
         Aldeano aldeano = aldeanos.get(0);
-        Aldeano aldeano2 = aldeanos.get(0);
-        Aldeano aldeano3 = aldeanos.get(0);
+        Aldeano aldeano2 = aldeanos.get(1);
+        Aldeano aldeano3 = aldeanos.get(2);
 
         jugador.mover(aldeano, new DireccionDerecha());
         jugador.mover(aldeano2, new DireccionDerecha());

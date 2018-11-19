@@ -24,4 +24,13 @@ public class Espadachin extends UnidadMovilMilitar {
     public void huboUnCambioDeTurno(Jugador unJugador) {
 
     }
+
+    @Override  //TODO REVISAR ESTO POR QUE ESTA REPETIDO EN OTROS LADOS Y ALGO TENES QUE HACER SI NO SE PUEDE MOVER
+    public void mover(Mapa mapa, Direccionable direccion) {
+        Posicion destino = this.obtenerPosicionDeAvance(direccion);
+        if (mapa.puedoColocar(destino)) {
+            mapa.moverElemento(this, destino);
+
+        }
+    }
 }

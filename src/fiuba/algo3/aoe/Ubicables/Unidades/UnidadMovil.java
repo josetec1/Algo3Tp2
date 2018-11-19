@@ -13,7 +13,7 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Ataca
     protected int vidaMaxima;
     protected int costo;
     protected int vidaActual;
-    protected int cuentaRegresiva ; // TODO , esto lo uso para los cambios de estado que dependen de turnos ver si amerita en unidad militar
+
 
     public int getVidaMaxima(){
         return this.vidaMaxima;
@@ -41,35 +41,20 @@ public abstract class UnidadMovil implements Ubicable, NotificableDeTurno, Ataca
     }
 
     public Posicion obtenerPosicionDeAvance( Direccionable direccionable ){
-
+        if (this.posicion==null){throw new UnidadSinPosicionExceptcion();}
         return this.posicion.calcularPosicionSiguiente(direccionable);
     }
 
 
 
-    //TODO: si no se puede mover por que la posicion esta ocupada, tendria que hacer algo, retornar un bool
-    // y usar eso para volvera intentar otra cosa, o enviar un mensaje "ahi no me puedo mover"
-    public  void mover(Mapa mapa, Direccionable direccion) {
-        Posicion destino = this.obtenerPosicionDeAvance(direccion);
-        if (mapa.puedoColocar(destino)) {
-            mapa.moverElemento(this, destino);
-        }
-    }
+    //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
+    public abstract  void mover(Mapa mapa, Direccionable direccion);
 
 
 
 
 
-    // es para los estados.
-    public void establecerCuentaRegresiva( int numero ){
 
-        this.cuentaRegresiva= numero;
-    }
-
-    public int getCuentaRegresiva( ){ //TODO esto hay que revisarlo, quizas sea mejor que el contador este en el estado.
-
-        return this.cuentaRegresiva;
-    }
 
 
 }
