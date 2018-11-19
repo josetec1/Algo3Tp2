@@ -44,8 +44,31 @@ public class Jugador implements ObservableJugador{
         poblacionActual = 0;
         poblacionMaxima=50;
 
+
     }
 
+    //TODO refactor!
+    public void inicializar (){
+
+            Aldeano aldeano;
+            Posicion posicion;
+            for(int i = 0;i<3;i++){
+                 aldeano= new Aldeano();
+                 piezas.add(aldeano);
+                 this.mapa.colocar(aldeano,new Posicion(i+1,i+2));
+                 observador.seCreo(aldeano); //notifico
+            }
+
+            PlazaCentral plaza = new PlazaCentral();
+            Castillo castillo = new Castillo();
+            piezas.add (plaza);
+            this.mapa.colocar(plaza,new Posicion(6,6));
+            piezas.add (castillo);
+            this.mapa.colocar(castillo,new Posicion(11,11));
+            observador.seCreo(plaza);
+            observador.seCreo(castillo);
+
+        }
 
     public String getNombre(){return this.nombre;
     }

@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Jugadores;
 
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
@@ -15,5 +16,6 @@ public interface ObservadorJugador {
      void seCreo(ArmaDeAsedio arma);
      void seCreo(PlazaCentral plaza);
      void seCreo(Cuartel cuartel);
+     void seCreo(Castillo castillo);
 
 }

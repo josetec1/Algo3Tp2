@@ -3,12 +3,12 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.LimiteDePoblacionAlcanzadoException;
 import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.NoSePuedeConstruirEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoReparando;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -17,7 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
@@ -412,4 +413,24 @@ public class JugadorTest {
         jugador.construirPlaza(aldeano,posicion);
     }
 
+    @Test
+    public void test32ChequeQueAlInicializarSeEncuentrenLosObjetosDentroDelJugador(){
+
+        Mapa mapa = new Mapa(90,90);
+        Jugador jugador = new Jugador("D10S", mapa);
+        ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
+        jugador.agregarObservador(espia);
+
+        jugador.inicializar();
+
+        List<Aldeano> aldeanos = espia.getAldeanos();
+
+        Aldeano aldeano = aldeanos.get(0);
+        Aldeano aldeano2 = aldeanos.get(0);
+        Aldeano aldeano3 = aldeanos.get(0);
+
+        jugador.mover(aldeano, new DireccionDerecha());
+        jugador.mover(aldeano2, new DireccionDerecha());
+        jugador.mover(aldeano3, new DireccionDerecha());
+    }
 }
