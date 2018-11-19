@@ -272,16 +272,119 @@ public class PosicionTest {
         Assert.assertTrue(posicionCalculada.seSuperponeCon(posicionEsperada));
     }
 
-    /*@Test
+    @Test
     public void test17DistanciaEntre2PosicionesQueContienenUnCuadranteConIgualCordenadas() {
 
         Cuadrante unCuadrante = new Cuadrante(4,5);
-        Cuadrante otroCuadrante = new Cuadrante(5,6);
+        Cuadrante otroCuadrante = new Cuadrante(4,5);
         Posicion unaPosicion = new Posicion(unCuadrante);
         Posicion otraPosicion = new Posicion(otroCuadrante);
 
         Assert.assertEquals(unaPosicion.distancia(otraPosicion), 0);
-    }*/
+    }
+
+    @Test
+    public void test18DistanciaEntre2PosicionesQueContienenUnCuadranteConDistintasCordenadasEnX() {
+
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Cuadrante otroCuadrante = new Cuadrante(6,5);
+        Posicion unaPosicion = new Posicion(unCuadrante);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 2);
+    }
+
+    @Test
+    public void test19DistanciaEntre2PosicionesQueContienenUnCuadranteConDistintasCordenadasEnY() {
+
+        Cuadrante unCuadrante = new Cuadrante(4,5);
+        Cuadrante otroCuadrante = new Cuadrante(4,8);
+        Posicion unaPosicion = new Posicion(unCuadrante);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 3);
+    }
+
+    @Test
+    public void test20DistanciaEntre2PosicionesQueContienenUnCuadranteConDistintasCordenadasEnXeY() {
+
+        Cuadrante unCuadrante = new Cuadrante(3,6);
+        Cuadrante otroCuadrante = new Cuadrante(4,8);
+        Posicion unaPosicion = new Posicion(unCuadrante);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 2);
+    }
+
+    @Test
+    public void test21DistanciaEntrePosicionesQueContienenDosCuadrantesCercanosYOtraConUnCuadrante() {
+
+        Cuadrante cuadrante1 = new Cuadrante(3,6);
+        Cuadrante cuadrante2 = new Cuadrante(3, 7);
+        Cuadrante otroCuadrante = new Cuadrante(4,8);
+        Posicion unaPosicion = new Posicion(cuadrante1);
+        unaPosicion.agregar(cuadrante2);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 1);
+    }
+
+    @Test
+    public void test22DistanciaEntrePosicionesQueContienenDosCuadrantesLejanosYOtraConUnCuadrante() {
+
+        Cuadrante cuadrante1 = new Cuadrante(3,6);
+        Cuadrante cuadrante2 = new Cuadrante(2, -1);
+        Cuadrante otroCuadrante = new Cuadrante(4,8);
+
+        Posicion unaPosicion = new Posicion(cuadrante1);
+        unaPosicion.agregar(cuadrante2);
+        Posicion otraPosicion = new Posicion(otroCuadrante);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 2);
+    }
+
+    @Test
+    public void test23DistanciaEntrePosicionesQueContienenDosCuadrantesLejanosYOtraConDosCuadrantes() {
+
+        Cuadrante cuadrante1 = new Cuadrante(3,6);
+        Cuadrante cuadrante2 = new Cuadrante(2, -1);
+        Cuadrante otroCuadrante1 = new Cuadrante(7,9);
+        Cuadrante otroCuadrante2 = new Cuadrante(2,11);
+
+        Posicion unaPosicion = new Posicion(cuadrante1);
+        unaPosicion.agregar(cuadrante2);
+        Posicion otraPosicion = new Posicion(otroCuadrante1);
+        otraPosicion.agregar(otroCuadrante2);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 4);
+    }
+
+    @Test
+    public void test24DistanciaEntrePosicionesQueContienenCuatroCuadrantesCercanosCadaUno() {
+
+        Cuadrante cuadrante1 = new Cuadrante(1,1);
+        Cuadrante cuadrante2 = new Cuadrante(1, 2);
+        Cuadrante cuadrante3 = new Cuadrante(2, 1);
+        Cuadrante cuadrante4 = new Cuadrante(2, 2);
+
+        Cuadrante otroCuadrante1 = new Cuadrante(7,7);
+        Cuadrante otroCuadrante2 = new Cuadrante(7,8);
+        Cuadrante otroCuadrante3 = new Cuadrante(8,7);
+        Cuadrante otroCuadrante4 = new Cuadrante(8,8);
+
+        Posicion unaPosicion = new Posicion(cuadrante1);
+        unaPosicion.agregar(cuadrante2);
+        unaPosicion.agregar(cuadrante3);
+        unaPosicion.agregar(cuadrante4);
+
+        Posicion otraPosicion = new Posicion(otroCuadrante1);
+        otraPosicion.agregar(otroCuadrante2);
+        otraPosicion.agregar(otroCuadrante3);
+        otraPosicion.agregar(otroCuadrante4);
+
+        Assert.assertEquals(unaPosicion.distancia(otraPosicion), 5);
+    }
+
 
 }
 
