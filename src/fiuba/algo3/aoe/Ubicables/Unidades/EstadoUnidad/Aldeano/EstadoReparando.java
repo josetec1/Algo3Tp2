@@ -5,13 +5,21 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
 
 public class EstadoReparando implements IEstadoUnidadAldeano {
 
+//private Edificio edificioEnReparacion;
+
+        public EstadoReparando(Aldeano aldeano, Edificio unEdificio){
+
+
+            unEdificio.repararCon(aldeano);
+        }
 
     @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
-        return null; //TODO
+        throw new AldeanoOcupadoException();
     }
 
     @Override
@@ -21,7 +29,7 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
 
     @Override
     public void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion) {
-
+        throw new AldeanoOcupadoException();
     }
 
 
@@ -32,7 +40,13 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
     }
 
     @Override
-    public void pasarTurno(Aldeano aldeano, Jugador unJugador){
+    public void reparar(Aldeano unidad, Edificio unEdificio) {
+        throw new AldeanoOcupadoException();
+    }
 
+
+    @Override
+    public void pasarTurno(Aldeano aldeano, Jugador unJugador){
+        //no hacer nada
     }
 }

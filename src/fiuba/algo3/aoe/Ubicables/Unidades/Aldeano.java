@@ -5,12 +5,10 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoConstruyendo;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoLibreYRecolectando;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.EstadoMoviendoseYRecolectando;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.IEstadoUnidadAldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Aldeano extends UnidadMovil  {
@@ -79,13 +77,26 @@ public class Aldeano extends UnidadMovil  {
         return cuartel;
     }
 
+    //TODO verificar que el edificio se tenga que reparar
+    public void reparar (Edificio unEdificio){
+       this.estado.reparar(this,unEdificio);
+    }
+
+
+
     // no usar desde afuera.
-    public void cambiarAContruyendo(){this.estado= new EstadoConstruyendo(this);}
+    public void cambiarAContruyendo(){
+        this.estado= new EstadoConstruyendo();
+    }
+
     public void cambiarARecolectando(){this.estado= new EstadoLibreYRecolectando();}
     public void cambiarAMoviendose() {
         this.estado = new EstadoMoviendoseYRecolectando();
     }
 
+    public void cambiarAReparando(Edificio unEdificio) {
+        this.estado = new EstadoReparando(this, unEdificio);
+    }
 
     //Siempre usar este metodo antes de llamar a reparar o construir
     public Boolean podesConstruirORepar() {

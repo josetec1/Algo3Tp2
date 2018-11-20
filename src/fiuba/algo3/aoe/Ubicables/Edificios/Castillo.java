@@ -6,6 +6,7 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 
@@ -43,6 +44,11 @@ public class Castillo extends Edificio implements Atacante {
     @Override
     public void construir(){
         throw new EdificioNoConstruibleSinCostoException();
+    }
+
+    @Override
+    public void repararCon(Aldeano aldeano) {
+        //todo
     }
 
     public ArmaDeAsedio construirArmaDeAsedio(Jugador jugador){

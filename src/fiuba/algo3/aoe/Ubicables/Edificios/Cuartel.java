@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 
@@ -31,6 +32,11 @@ public class Cuartel extends Edificio {
             this.aumentarVida(50);
             this.estado = new EstadoEnReparacion(50);
         }
+    }
+
+    @Override
+    public void repararCon(Aldeano aldeano) {
+        //todo
     }
 
     public Espadachin construirEspadachin(Jugador jugador){

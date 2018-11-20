@@ -8,6 +8,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovilMilitar;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
@@ -68,6 +69,8 @@ public abstract class Edificio implements Manipulable {
         }
     }
 
+
+
     public boolean estaEnConstruccion (){
         return this.estado.enConstruccion();
     }
@@ -83,4 +86,9 @@ public abstract class Edificio implements Manipulable {
 
         this.disminuirVida(unAtacante.getDanioEdificio());
     }
+
+    public abstract void repararCon(Aldeano aldeano);
+            //TODO, aca el edificio aplica una sanacion.
+            //se guarda al aldeano
+            // se fija si ya sano, y en aso de que si hace aldeano.cambiarARecolectando()
 }

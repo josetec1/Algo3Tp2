@@ -14,7 +14,7 @@ public class EstadoConstruyendo implements IEstadoUnidadAldeano {
     private int turnosRestantes;
 
 //
-    public EstadoConstruyendo(Aldeano aldeano){
+    public EstadoConstruyendo(){
 
         this.turnosRestantes = TURNOS_DE_CONSTRUCCION;
 
@@ -47,6 +47,11 @@ public class EstadoConstruyendo implements IEstadoUnidadAldeano {
 //*
     public Boolean podesMoverte() {
         return false;
+    }
+
+    @Override
+    public void reparar(Aldeano unidad, Edificio unEdificio) {
+        throw new AldeanoOcupadoException();
     }
 
 

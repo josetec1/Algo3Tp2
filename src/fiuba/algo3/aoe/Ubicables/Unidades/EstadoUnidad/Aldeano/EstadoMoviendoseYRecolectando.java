@@ -15,7 +15,7 @@ public class EstadoMoviendoseYRecolectando implements IEstadoUnidadAldeano {
 
     @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
-        return null;
+        throw new AldeanoOcupadoException();
     }
 
     @Override
@@ -33,5 +33,10 @@ public class EstadoMoviendoseYRecolectando implements IEstadoUnidadAldeano {
     @Override
     public Boolean podesMoverte() {
         return false;
+    }
+
+    @Override
+    public void reparar(Aldeano unidad, Edificio unEdificio) {
+        throw new AldeanoOcupadoException();
     }
 }

@@ -41,6 +41,15 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
         return true;
     }
 
+
+    @Override
+    public void reparar(Aldeano aldeano, Edificio unEdificio) {
+        //TODO refactor la pregunta de abajo
+        if (!unEdificio.estaDaniado()||unEdificio.estaEnConstruccion()||unEdificio.estaEnReparacion()) {throw new NoSePuedeRepararException();}
+         aldeano.cambiarAReparando(unEdificio);
+
+    }
+
     @Override
     public void pasarTurno(Aldeano aldeano, Jugador unJugador) {
         aldeano.entregarElOro(unJugador);

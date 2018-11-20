@@ -36,6 +36,11 @@ private final int TAMANIO = 2;
         }
     }
 
+    @Override
+    public void repararCon(Aldeano aldeano) {
+        //TODO
+    }
+
     public Aldeano construirAldeano(Jugador jugador){
         if (!estado.puedoConstruirUnidad()){
             throw new NoSePuedeConstruirEnEsteMomentoException();
