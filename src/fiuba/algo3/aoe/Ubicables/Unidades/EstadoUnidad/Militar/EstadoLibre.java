@@ -1,9 +1,8 @@
 package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar;
 
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovilMilitar;
 
-public class EstadoEsperandoParaAtacar implements EstadoUnidadMilitar {
+public class EstadoLibre implements IEstadoUnidadMilitar {
 
 
     @Override

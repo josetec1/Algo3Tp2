@@ -2,12 +2,11 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoUnidadMilitar;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.IEstadoUnidadMilitar;
 
 public abstract class UnidadMovilMilitar extends UnidadMovil implements Atacante {
 //Todo, esto hay que revisar que unidadMilitar cumpla el " es una unidadMovil"
-    protected EstadoUnidadMilitar estadoUnidad;
+    protected IEstadoUnidadMilitar estadoUnidad;
     protected int danioUnidad;
     protected int danioEdificio;
     protected int distanciaAtaque;
