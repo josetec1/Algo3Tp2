@@ -9,7 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+
 
 public class Aldeano extends UnidadMovil  {
 
@@ -41,18 +41,13 @@ public class Aldeano extends UnidadMovil  {
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
     @Override
     public void mover(Mapa mapa, Direccionable direccion) {
-
         this.estado.mover(this, mapa,direccion);
-
     }
 
     @Override
     public void huboUnCambioDeTurno(Jugador jugador) {
         this.estado.pasarTurno(this, jugador);
-
     }
-
-
 
 
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
@@ -90,6 +85,7 @@ public class Aldeano extends UnidadMovil  {
     }
 
     public void cambiarARecolectando(){this.estado= new EstadoLibreYRecolectando();}
+
     public void cambiarAMoviendose() {
         this.estado = new EstadoMoviendoseYRecolectando();
     }
@@ -102,10 +98,9 @@ public class Aldeano extends UnidadMovil  {
     public Boolean podesConstruirORepar() {
         return this.estado.puedoConstruirOReparar();
     }
+
     public boolean podesMoverte() {
         return this.estado.podesMoverte();
     }
-
-
 
 }

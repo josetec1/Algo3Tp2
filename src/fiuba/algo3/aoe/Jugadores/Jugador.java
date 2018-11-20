@@ -30,7 +30,7 @@ public class Jugador implements ObservableJugador{
     private int oro;
     private EstadoJugador estado;
     private List<Manipulable> piezas;
-    private ObservadorJugador observador;
+    private ArrayList<ObservadorJugador> observadores;
     private int poblacionActual;
     private int poblacionMaxima;
 
@@ -42,8 +42,7 @@ public class Jugador implements ObservableJugador{
         this.piezas = new ArrayList<>();
         poblacionActual = 0;
         poblacionMaxima=50;
-        this.observador = new ObservadorDeJugador(); //TODO esto es.... provisorio, sino hay que cambiar el constructor.
-
+        this.observadores = new ArrayList<>();
     }
 
     //TODO REFACTOR A TODOS LOS IF URGENTE
@@ -56,7 +55,10 @@ public class Jugador implements ObservableJugador{
                  aldeano= new Aldeano();
                  this.agregarPieza(aldeano);
                  this.mapa.colocar(aldeano,new Posicion(i+1,1));
-                 observador.seCreo(aldeano); //notifico
+
+                for(ObservadorJugador unObservador : this.observadores){
+                    unObservador.seCreo(aldeano);
+                }
             }
 
             PlazaCentral plaza = new PlazaCentral();
@@ -68,8 +70,12 @@ public class Jugador implements ObservableJugador{
             this.mapa.colocar(plaza,new Posicion(20,20));
             piezas.add (castillo);
             this.mapa.colocar(castillo,new Posicion(30,30));
-            observador.seCreo(plaza);
-            observador.seCreo(castillo);
+
+            for(ObservadorJugador unObservador : this.observadores){
+                unObservador.seCreo(plaza);
+                unObservador.seCreo(castillo);
+             }
+
         }
 
     public String getNombre(){return this.nombre;
@@ -177,10 +183,12 @@ public class Jugador implements ObservableJugador{
         this.descontarOro(plaza.getCosto());
         mapa.colocar(plaza,posicion);
         this.agregarPieza(plaza);
-        observador.seCreo(plaza);
+
+        for(ObservadorJugador unObservador : this.observadores) {
+            unObservador.seCreo(plaza);
+        }
 
 
-      //  this.observador.seCreo(plaza);
 
     }
 
@@ -205,7 +213,8 @@ public class Jugador implements ObservableJugador{
         this.descontarOro(cuartel.getCosto());
         mapa.colocar(cuartel,posicion);
         this.agregarPieza(cuartel);
-        observador.seCreo(cuartel);
+        for(ObservadorJugador unObservador : this.observadores){
+        unObservador.seCreo(cuartel);}
     }
 
     public boolean alcanzoLimiteDePoblacion(){
@@ -233,7 +242,8 @@ public class Jugador implements ObservableJugador{
         mapa.colocar(aldeano,posicion);
         this.agregarPieza(aldeano);
         //coloar aldeano en el tablero
-        observador.seCreo(aldeano);
+        for(ObservadorJugador unObservador : this.observadores){unObservador.seCreo(aldeano);}
+
 
     }
 
@@ -252,7 +262,8 @@ public class Jugador implements ObservableJugador{
         }
         mapa.colocar(armaDeAsedio,posicion);
         this.agregarPieza(armaDeAsedio);
-        observador.seCreo(armaDeAsedio);
+        for(ObservadorJugador unObservador : this.observadores){unObservador.seCreo(armaDeAsedio);}
+
         //coloar aldeano en el tablero
 
     }
@@ -276,7 +287,8 @@ public class Jugador implements ObservableJugador{
         }
         mapa.colocar(espadachin,posicion);
         this.agregarPieza(espadachin);
-        observador.seCreo(espadachin);
+        for(ObservadorJugador unObservador : this.observadores){unObservador.seCreo(espadachin);}
+
 
 
 
@@ -302,7 +314,8 @@ public class Jugador implements ObservableJugador{
         }
         mapa.colocar(arquero,posicion);
         this.agregarPieza(arquero);
-        observador.seCreo(arquero);
+        for(ObservadorJugador unObservador : this.observadores){unObservador.seCreo(arquero);}
+
     }
 
     // yo tengo que estar inactivo
@@ -316,7 +329,7 @@ public class Jugador implements ObservableJugador{
 
 
     public void agregarObservador(ObservadorJugador unObservador) {
-        this.observador= unObservador;
+        this.observadores.add(unObservador);
     }
 
 

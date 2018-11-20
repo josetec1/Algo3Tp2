@@ -13,38 +13,32 @@ public class EstadoConstruyendo implements IEstadoUnidadAldeano {
 
     private int turnosRestantes;
 
-//
     public EstadoConstruyendo(){
-
         this.turnosRestantes = TURNOS_DE_CONSTRUCCION;
-
     }
 
-    //
     @Override
     public void pasarTurno(Aldeano aldeano, Jugador unJugador) {
-
         this.turnosRestantes -=1;
         if( this.turnosRestantes ==0) {aldeano.cambiarARecolectando();}
     }
 
-    //
     @Override
     public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
         throw new AldeanoOcupadoException();
     }
-//
+
     @Override
     public Boolean puedoConstruirOReparar() {
         return false;
     }
-//
+
     @Override
     public void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion) {
         throw new AldeanoOcupadoException();
     }
     @Override
-//*
+
     public Boolean podesMoverte() {
         return false;
     }
