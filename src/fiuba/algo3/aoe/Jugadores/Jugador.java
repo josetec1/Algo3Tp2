@@ -12,8 +12,6 @@ import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.NotificableDeTurno;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
@@ -56,7 +54,7 @@ public class Jugador implements ObservableJugador{
             Aldeano aldeano;
             for(int i = 0;i<3;i++){
                  aldeano= new Aldeano();
-                 this.agregarNotificable(aldeano);
+                 this.agregarPieza(aldeano);
                  this.mapa.colocar(aldeano,new Posicion(i+1,1));
                  observador.seCreo(aldeano); //notifico
             }
@@ -84,7 +82,7 @@ public class Jugador implements ObservableJugador{
     //lo tiene que poder colocar
     //pos: tiene que descontar el oro
     //
-    public void agregarNotificable( Manipulable pieza) {
+    private void agregarPieza(Manipulable pieza) {
 
         poblacionActual +=1;
         piezas.add(pieza);
@@ -178,7 +176,7 @@ public class Jugador implements ObservableJugador{
         }
         this.descontarOro(plaza.getCosto());
         mapa.colocar(plaza,posicion);
-        this.agregarNotificable(plaza);
+        this.agregarPieza(plaza);
         observador.seCreo(plaza);
 
 
@@ -206,7 +204,7 @@ public class Jugador implements ObservableJugador{
         }
         this.descontarOro(cuartel.getCosto());
         mapa.colocar(cuartel,posicion);
-        this.agregarNotificable(cuartel);
+        this.agregarPieza(cuartel);
         observador.seCreo(cuartel);
     }
 
@@ -233,7 +231,7 @@ public class Jugador implements ObservableJugador{
             throw new PosicionDelMapaOcupadaException();
         }
         mapa.colocar(aldeano,posicion);
-        this.agregarNotificable(aldeano);
+        this.agregarPieza(aldeano);
         //coloar aldeano en el tablero
         observador.seCreo(aldeano);
 
@@ -253,7 +251,7 @@ public class Jugador implements ObservableJugador{
             throw new PosicionDelMapaOcupadaException();
         }
         mapa.colocar(armaDeAsedio,posicion);
-        this.agregarNotificable(armaDeAsedio);
+        this.agregarPieza(armaDeAsedio);
         observador.seCreo(armaDeAsedio);
         //coloar aldeano en el tablero
 
@@ -277,7 +275,7 @@ public class Jugador implements ObservableJugador{
             throw new PosicionDelMapaOcupadaException();
         }
         mapa.colocar(espadachin,posicion);
-        this.agregarNotificable(espadachin);
+        this.agregarPieza(espadachin);
         observador.seCreo(espadachin);
 
 
@@ -303,7 +301,7 @@ public class Jugador implements ObservableJugador{
             throw new PosicionDelMapaOcupadaException();
         }
         mapa.colocar(arquero,posicion);
-        this.agregarNotificable(arquero);
+        this.agregarPieza(arquero);
         observador.seCreo(arquero);
     }
 
