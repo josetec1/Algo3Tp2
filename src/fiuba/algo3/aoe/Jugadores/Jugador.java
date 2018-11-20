@@ -101,13 +101,14 @@ public class Jugador implements ObservableJugador{
             unObservador.seCreo(plaza);
         }
         this.mapa.colocar(plaza, posicionAuxiliar);
+        //la plaza se crea a 8 unidades distancia diagonal respecto a la posicion
 
         posicionAuxiliar = unaPosicion;
 
         for(int i = 1; i<= 3; i++)
             posicionAuxiliar = posicionAuxiliar.calcularPosicionSiguiente(new DireccionArribaDerecha());
 
-
+        // los aldeanos se crean a 4, 5 y 6 unidades de distancia diagonal respecto a la posicion
         Aldeano aldeano;
         for(int i = 0;i<3;i++){
             aldeano= new Aldeano();
@@ -388,15 +389,17 @@ public class Jugador implements ObservableJugador{
     }
 
     public void recibirAtaqueCastillo (Castillo unCastilloEnemigo){
-        // verificar que el casitllo no sea mio. ESTO los hace Jose/Mauricio despues
 
-        //ataca a todos
-        for ( Atacable enemigo : piezas ) {
-            //aca decidir que hacer, un try por si vuelve excepcion fuera de rango
-            //2 optar por que castillo no haga nada si los tiene fuera de rango
+        if(!this.esMio(unCastilloEnemigo)){
+            //ataca a todos
+            for ( Atacable enemigo : piezas ) {
+                //aca decidir que hacer, un try por si vuelve excepcion fuera de rango
+                //2 optar por que castillo no haga nada si los tiene fuera de rango
 
-          unCastilloEnemigo.atacar (enemigo);
+                unCastilloEnemigo.atacar (enemigo);
+            }
         }
+
 
     }
 }
