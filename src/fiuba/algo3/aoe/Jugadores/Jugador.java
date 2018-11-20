@@ -1,13 +1,12 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
-
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorDeshabilitado;
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorHabilitado;
-
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Mapa.PosicionDelMapaOcupadaException;
 import fiuba.algo3.aoe.Ubicables.Atacable;
+import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArribaDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -77,6 +76,51 @@ public class Jugador implements ObservableJugador{
              }
 
         }
+
+    public void inicializar (Posicion unaPosicion){
+
+        Posicion posicionAuxiliar = unaPosicion;
+
+        Castillo castillo = new Castillo();
+        piezas.add (castillo);
+        for(ObservadorJugador unObservador : this.observadores){
+            unObservador.seCreo(castillo);
+        }
+
+        this.mapa.colocar(castillo,posicionAuxiliar);
+
+        for(int i = 1; i<= 8; i++)
+            posicionAuxiliar = posicionAuxiliar.calcularPosicionSiguiente(new DireccionArribaDerecha());
+
+        PlazaCentral plaza = new PlazaCentral();
+        plaza.construir();
+        plaza.construir();
+        plaza.construir();
+        piezas.add (plaza);
+        for(ObservadorJugador unObservador : this.observadores){
+            unObservador.seCreo(plaza);
+        }
+        this.mapa.colocar(plaza, posicionAuxiliar);
+
+        posicionAuxiliar = unaPosicion;
+
+        for(int i = 1; i<= 3; i++)
+            posicionAuxiliar = posicionAuxiliar.calcularPosicionSiguiente(new DireccionArribaDerecha());
+
+
+        Aldeano aldeano;
+        for(int i = 0;i<3;i++){
+            aldeano= new Aldeano();
+            this.agregarPieza(aldeano);
+            posicionAuxiliar = posicionAuxiliar.calcularPosicionSiguiente(new DireccionArribaDerecha());
+            this.mapa.colocar(aldeano,posicionAuxiliar);
+            for(ObservadorJugador unObservador : this.observadores){
+                unObservador.seCreo(aldeano);
+            }
+        }
+
+
+    }
 
     public String getNombre(){return this.nombre;
     }

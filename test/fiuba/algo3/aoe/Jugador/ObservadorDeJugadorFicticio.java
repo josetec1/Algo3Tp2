@@ -22,8 +22,6 @@ public class ObservadorDeJugadorFicticio implements ObservadorJugador {
     private List<Castillo> castillos = new ArrayList<>();
     private List<Cuartel> cuartels = new ArrayList<>();
 
-
-
     @Override
     public void seCreo(Aldeano unaldeano) {
         aldeanos.add(unaldeano);
