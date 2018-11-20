@@ -126,4 +126,28 @@ public class EspadachinTest {
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
+    @Test(expected=UnidadSinPosicionExceptcion.class)
+    public void test10IntentarAtacarArqueroAtacanteSinPosicion(){
+        UnidadMovilMilitar espadachinAtacante = new Espadachin();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacado.colocarEn(new Posicion(3, 3));
+
+        espadachinAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
+    }
+
+    @Test(expected=UnidadSinPosicionExceptcion.class)
+    public void test11IntentarAtacarUnidadSinPosicion(){
+        UnidadMovilMilitar espadachinAtacante = new Espadachin();
+        Atacable arqueroAtacado = new Arquero();
+
+        espadachinAtacante.colocarEn(new Posicion(3, 3));
+
+        espadachinAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
+    }
+
 }

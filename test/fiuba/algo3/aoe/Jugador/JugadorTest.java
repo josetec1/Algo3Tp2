@@ -647,4 +647,66 @@ public class JugadorTest {
         jugador.mover(aldeano3, new DireccionDerecha());
     }
 
+    @Test
+    public void test40JugadorRecibeAtaqueDeCastilloEnemigoConUnidadesEnDiferentesPosiciones(){
+
+        Mapa mapa = new Mapa(200,200);
+        Jugador jugador1 = new Jugador("D10S", mapa);
+        Jugador jugador2 = new Jugador("Angel", mapa);
+
+        Castillo castilloEnemigo = new Castillo();
+        mapa.colocar(castilloEnemigo,new Posicion(20,20));
+        jugador2.agregarNotificable(castilloEnemigo);
+
+
+        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano2 = new Aldeano();
+        Aldeano aldeanoFueraDeRango = new Aldeano();
+
+        mapa.colocar(aldeano, new Posicion(19,19));
+        mapa.colocar(aldeano2, new Posicion(17,18));
+        mapa.colocar(aldeanoFueraDeRango, new Posicion(16,16));
+
+        jugador1.agregarNotificable(aldeano);
+        jugador1.agregarNotificable(aldeano2);
+        jugador1.agregarNotificable(aldeanoFueraDeRango);
+
+        jugador1.recibirAtaqueCastillo(castilloEnemigo);
+
+        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima()-20);
+        Assert.assertEquals(aldeano2.getVidaActual(), aldeano2.getVidaMaxima()-20);
+        Assert.assertEquals(aldeanoFueraDeRango.getVidaActual(), aldeanoFueraDeRango.getVidaMaxima());
+    }
+
+    @Test
+    public void test41JugadorRecibeAtaqueDeCastilloEnemigoConEdificiosEnDiferentesPosiciones(){
+
+        Mapa mapa = new Mapa(200,200);
+        Jugador jugador1 = new Jugador("D10S", mapa);
+        Jugador jugador2 = new Jugador("Angel", mapa);
+
+        Castillo castilloEnemigo = new Castillo();
+        mapa.colocar(castilloEnemigo,new Posicion(20,20));
+        jugador2.agregarNotificable(castilloEnemigo);
+
+
+        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel2 = new Cuartel();
+        Cuartel cuartelFueraDeRango = new Cuartel();
+
+        mapa.colocar(cuartel, new Posicion(18,18));
+        mapa.colocar(cuartel2, new Posicion(22,16));
+        mapa.colocar(cuartelFueraDeRango, new Posicion(30,30));
+
+        jugador1.agregarNotificable(cuartel);
+        jugador1.agregarNotificable(cuartel2);
+        jugador1.agregarNotificable(cuartelFueraDeRango);
+
+        jugador1.recibirAtaqueCastillo(castilloEnemigo);
+
+        Assert.assertEquals(cuartel.getVidaActual(), cuartel.getVidaMaxima()-20);
+        Assert.assertEquals(cuartel2.getVidaActual(), cuartel2.getVidaMaxima()-20);
+        Assert.assertEquals(cuartelFueraDeRango.getVidaActual(), cuartelFueraDeRango.getVidaMaxima());
+    }
+
 }

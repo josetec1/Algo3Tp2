@@ -479,7 +479,7 @@ public class PosicionTest {
 
     }
 
-    /*@Test
+    @Test
     public void test32DistanciaEntrePosicionesQueContienenNueveCuadrantesCercanosCadaUno() {
 
         Posicion posicion1 = new Posicion(0,0);
@@ -491,11 +491,11 @@ public class PosicionTest {
 
         for(int i = 1 ; i <= 9; i++)
             for(int j = 1 ; j <= 9; j++)
-                posicion1.agregar(new Cuadrante(i+12,j+15));
+                posicion2.agregar(new Cuadrante(i+12,j+15));
 
 
         Assert.assertEquals(posicion1.distancia(posicion2), 6);
-    }*/
+    }
 
 
 }

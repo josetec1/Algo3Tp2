@@ -14,6 +14,8 @@ public abstract class UnidadMovilMilitar extends UnidadMovil implements Atacante
 
     public void atacar(Atacable receptorDelAtaque){
 
+        if(this.posicion == null)
+            throw new UnidadSinPosicionExceptcion();
         if(distanciaAtaque >= this.posicion.distancia(receptorDelAtaque.getPosicion()))
             receptorDelAtaque.serAtacadoPor(this);
         else

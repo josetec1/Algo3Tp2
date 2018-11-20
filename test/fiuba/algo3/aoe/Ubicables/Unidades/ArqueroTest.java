@@ -141,4 +141,28 @@ public class ArqueroTest {
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
+
+    @Test(expected=UnidadSinPosicionExceptcion.class)
+    public void test11IntentarAtacarUnidadAtacanteSinPosicion(){
+        UnidadMovilMilitar arqueroAtacante = new Arquero();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacado.colocarEn(new Posicion(5, 5));
+
+        arqueroAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
+    }
+
+    @Test(expected=UnidadSinPosicionExceptcion.class)
+    public void test12IntentarAtacarAUnidadSinPosicion(){
+        UnidadMovilMilitar arqueroAtacante = new Arquero();
+        Atacable arqueroAtacado = new Arquero();
+
+        arqueroAtacante.colocarEn(new Posicion(5, 5));
+
+        arqueroAtacante.atacar(arqueroAtacado);
+
+        Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
+    }
 }
