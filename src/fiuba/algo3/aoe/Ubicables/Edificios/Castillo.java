@@ -54,7 +54,7 @@ public class Castillo extends Edificio implements Atacante {
             throw new NoSePuedeConstruirEnEsteMomentoException();
         }
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
-        jugador.descontarOro(armaDeAsedio.getCosto());
+       // jugador.descontarOro(armaDeAsedio.getCosto());
         return armaDeAsedio;
     }
 

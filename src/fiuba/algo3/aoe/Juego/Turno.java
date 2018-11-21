@@ -24,16 +24,16 @@ public class Turno {
         this.jugadores = unosJugadores;
         this.it = unosJugadores.iterator();
         this.jugadorActual = this.it.next();
-        this.jugadorActual.habilitar();
+      //  this.jugadorActual.habilitar();
 
 
     }
 
     public void pasarTurno () {
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
-        this.jugadorActual.deshabilitar();
+     //   this.jugadorActual.deshabilitar();
         this.jugadorActual= this.it.next();
-        this.jugadorActual.habilitar();
+       // this.jugadorActual.habilitar();
      }
 
 

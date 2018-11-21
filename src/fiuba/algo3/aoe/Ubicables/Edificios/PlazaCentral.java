@@ -46,7 +46,7 @@ private final int TAMANIO = 2;
             throw new NoSePuedeConstruirEnEsteMomentoException();
         }
         Aldeano aldeano = new Aldeano();
-        jugador.descontarOro(aldeano.getCosto());
+      //  jugador.descontarOro(aldeano.getCosto());
         return aldeano;
     }
 

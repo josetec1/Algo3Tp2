@@ -44,7 +44,7 @@ public class Cuartel extends Edificio {
             throw new NoSePuedeConstruirEnEsteMomentoException();
         }
         Espadachin espadachin =  new Espadachin();
-        jugador.descontarOro(espadachin.getCosto());
+        //jugador.descontarOro(espadachin.getCosto());
         return espadachin;
     }
 
@@ -53,7 +53,7 @@ public class Cuartel extends Edificio {
             throw new NoSePuedeConstruirEnEsteMomentoException();
         }
         Arquero arquero = new Arquero();
-        jugador.descontarOro(arquero.getCosto());
+       // jugador.descontarOro(arquero.getCosto());
         return arquero;
 
     }

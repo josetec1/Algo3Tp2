@@ -10,6 +10,7 @@ import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArribaDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
@@ -25,27 +26,27 @@ import java.util.List;
 public class Jugador implements ObservableJugador{
 
     private String nombre;
-    private Mapa mapa;
+    private Mapa mapa;  //Todo es necesario?
     private int oro;
-    private EstadoJugador estado;
-    private List<Manipulable> piezas;
+    private EstadoJugador estado; // todo sacar
+    private List<Manipulable> unidades;
+    private List<Manipulable> edificios;
     private ArrayList<ObservadorJugador> observadores;
-    private int poblacionActual;
-    private int poblacionMaxima;
+
+    private final int POBLACION_MAXIMA = 50;
 
     public Jugador(String nombre, Mapa mapa){
         this.nombre = nombre;
         this.mapa = mapa;
         this.oro = 100;
         this.estado = new JugadorDeshabilitado();
-        this.piezas = new ArrayList<>();
-        poblacionActual = 0;
-        poblacionMaxima=50;
+        this.unidades = new ArrayList<>();
+        this.edificios = new ArrayList<>();
         this.observadores = new ArrayList<>();
     }
 
     //TODO REFACTOR A TODOS LOS IF URGENTE
-
+/*
     //TODO refactor!
     public void inicializar (){
 
@@ -65,9 +66,9 @@ public class Jugador implements ObservableJugador{
             plaza.construir();
             plaza.construir();
             Castillo castillo = new Castillo();
-            piezas.add (plaza);
+            this.agregarPieza (plaza);
             this.mapa.colocar(plaza,new Posicion(20,20));
-            piezas.add (castillo);
+            edificios.add (castillo);
             this.mapa.colocar(castillo,new Posicion(30,30));
 
             for(ObservadorJugador unObservador : this.observadores){
@@ -82,7 +83,7 @@ public class Jugador implements ObservableJugador{
         Posicion posicionAuxiliar = unaPosicion;
 
         Castillo castillo = new Castillo();
-        piezas.add (castillo);
+        agregarPieza (castillo);
         for(ObservadorJugador unObservador : this.observadores){
             unObservador.seCreo(castillo);
         }
@@ -96,7 +97,7 @@ public class Jugador implements ObservableJugador{
         plaza.construir();
         plaza.construir();
         plaza.construir();
-        piezas.add (plaza);
+        this.edificios.add (plaza);
         for(ObservadorJugador unObservador : this.observadores){
             unObservador.seCreo(plaza);
         }
@@ -122,21 +123,23 @@ public class Jugador implements ObservableJugador{
 
 
     }
-
+*/
     public String getNombre(){return this.nombre;
     }
 
-    public int getOro(){return this.oro;} //Todo es necesario?
+    private int getOro(){return this.oro;} //Todo es necesario?
 
 
     //pre: tiene que haber oro.
     //lo tiene que poder colocar
     //pos: tiene que descontar el oro
     //
-    private void agregarPieza(Manipulable pieza) {
+    private void agregarPieza(UnidadMovil pieza) {
 
-        poblacionActual +=1;
-        piezas.add(pieza);
+        if(this.alcanzoLimiteDePoblacion()){
+            throw new LimiteDePoblacionAlcanzadoException();
+        }
+        this.unidades.add(pieza);
 
 
         /*
@@ -148,27 +151,37 @@ public class Jugador implements ObservableJugador{
         }
         */
     }
+
+    private void agregarPieza(Edificio pieza) {
+
+
+        this.edificios.add(pieza);
+
+
+        /*
+        if (this.hayOroSuficiente(ubicable.getCosto())) {
+            if (this.mapa.puedoColocar(posicion)) {
+                mapa.colocar(ubicable, posicion);
+                this.descontarOro(ubicable.getCosto());
+            }
+        }
+        */
+    }
+
+
+
     public Boolean esMio( Manipulable pieza) {
+        return ((this.unidades.contains(pieza)) ||(this.edificios.contains(pieza)));
 
-        return piezas.contains(pieza);
-
-        /*
-        if (this.hayOroSuficiente(ubicable.getCosto())) {
-            if (this.mapa.puedoColocar(posicion)) {
-                mapa.colocar(ubicable, posicion);
-                this.descontarOro(ubicable.getCosto());
-            }
-        }
-        */
     }
 
 
-    public boolean hayOroSuficiente(int costo) {
+    private boolean hayOroSuficiente(int costo) {
         return (costo <= this.oro);
     }
 
 
-    public void descontarOro ( int costo ) throws RecursoInsuficienteException{
+    private void descontarOro ( int costo ) throws RecursoInsuficienteException{
 
         if(this.hayOroSuficiente(costo)){this.oro -= costo;}
         else throw new RecursoInsuficienteException();
@@ -179,7 +192,7 @@ public class Jugador implements ObservableJugador{
     }
 
 
-
+/*
     public void habilitar (){
 
         this.estado = new JugadorHabilitado();
@@ -201,7 +214,8 @@ public class Jugador implements ObservableJugador{
         unidad.mover(mapa,direccion);
 
     }
-
+*/
+  /*
     // estoy activo
     //origen es mio,  destino no es mio
     //derivados de unidad, ataque fuera de rango
@@ -261,11 +275,12 @@ public class Jugador implements ObservableJugador{
         for(ObservadorJugador unObservador : this.observadores){
         unObservador.seCreo(cuartel);}
     }
+*/
+    private boolean alcanzoLimiteDePoblacion(){
 
-    public boolean alcanzoLimiteDePoblacion(){
-        return poblacionActual == poblacionMaxima;
+        return  (this.unidades.size() == POBLACION_MAXIMA);
     }
-
+/*
     // EsMio
     // estoy activo
     // que sea mia la plaza
@@ -362,16 +377,18 @@ public class Jugador implements ObservableJugador{
         for(ObservadorJugador unObservador : this.observadores){unObservador.seCreo(arquero);}
 
     }
-
+*/
     // yo tengo que estar inactivo
     // el castillo no tiene que ser mio
     // TODO como obtengo la posicion donde colocarlo?
+
+    /*
     public void RecibirAtaque (Castillo castillo){
 
         // para cada uno de mis elementos aplicar   castillo.atacar (elemento)
 
     }
-
+*/
 
     public void agregarObservador(ObservadorJugador unObservador) {
         this.observadores.add(unObservador);
@@ -379,15 +396,22 @@ public class Jugador implements ObservableJugador{
 
 
 
-    public void eliminarUnidad ( UnidadMovil unidadMovil) {
-        if(!this.esMio(unidadMovil)){
+    public void eliminarPieza ( Manipulable pieza) {
+      /*
+        if(!this.esMio(pieza)){
             throw new UnidadAgenaException();
         }
         piezas.remove(unidadMovil);
         mapa.remover(unidadMovil);
         poblacionActual-=1;
+        */
     }
 
+
+
+    public ArrayList<Atacable> getPiezas (){return new ArrayList<>();}
+
+    /*
     public void recibirAtaqueCastillo (Castillo unCastilloEnemigo){
 
         if(!this.esMio(unCastilloEnemigo)){
@@ -402,4 +426,10 @@ public class Jugador implements ObservableJugador{
 
 
     }
+
+*/
+
+    public Boolean puedoAgregar(UnidadMovil pieza){return true;}
+    public Boolean puedoAgregar(Edificio pieza){return true;}
+
 }

@@ -101,7 +101,7 @@ public class TurnoTest {
         Turno turno = new Turno(jugadores);
     }
 
-
+/*
     @Test
     public void test07CrearTurnoNotificaAlJugadorUnoQueEstaHabilitado(){
 
@@ -157,5 +157,5 @@ public class TurnoTest {
         verify(jugador2, times(1)).habilitar();
         verify(jugador2, times(1)).deshabilitar();
 
-    }
+    }*/
 }
