@@ -42,7 +42,7 @@ public class Mapa {
 
     }
 
-    public Boolean estaDentroDeTablero ( Posicion unaPosicion ){
+    public Boolean estaDentroDeTablero ( Posicion unaPosicion ){  //TODO ARREGLAR ESTO, ESTE METODO TIENE QUE SER PRIVADO
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
@@ -66,7 +66,7 @@ public class Mapa {
 
     }
 
-    private Boolean estaEnElTablero (Ubicable unElemento){
+    private Boolean estaEnElTablero (Ubicable unElemento){  //TODO ARREGLAR ESTO, ESTE METODO TIENE QUE SER PRIVADO
         return this.ubicables.contains(unElemento);
     }
 
