@@ -60,6 +60,29 @@ public class JugadorTest {
         jugador1.agregarPieza(unidad);
     }
 
+    @Test
+    public void test04CrearJugadorCreaJugadorCon0UnidadesYElMaximoQuePuedeTenerSon50(){
+        // Mapa mapa = new Mapa(10,20);
+
+        UnidadMovil unidad;
+        UnidadMovil unidad50 = Mockito.mock (UnidadMovil.class);
+        Mockito.when(unidad50.getCosto()).thenReturn(0);
+
+
+        Jugador jugador1 = new Jugador("Maradona");
+
+        for (int i = 0; i <50 ; i++) {
+
+            unidad = Mockito.mock (Aldeano.class);
+            Mockito.when(unidad.getCosto()).thenReturn(0);
+            jugador1.agregarPieza(unidad);
+        }
+
+        thrown.expect((LimiteDePoblacionAlcanzadoException.class));
+        jugador1.agregarPieza(unidad50);
+
+
+    }
 /*
     @Test
     public void test02JugadorSumarOro200Suma200DeOro(){

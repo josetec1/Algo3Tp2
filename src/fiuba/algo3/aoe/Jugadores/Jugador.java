@@ -92,7 +92,7 @@ public class Jugador implements ObservableJugador{
         */
     }
 
-
+    private boolean alcanzoLimiteDePoblacion(){ return  (this.unidades.size() == POBLACION_MAXIMA);    }
 
     public boolean esMio( Manipulable pieza) {
         return ((this.unidades.contains(pieza)) ||(this.edificios.contains(pieza)));
@@ -116,10 +116,7 @@ public class Jugador implements ObservableJugador{
     }
 
 
-    private boolean alcanzoLimiteDePoblacion(){
 
-        return  (this.unidades.size() == POBLACION_MAXIMA);
-    }
 
 
     public void agregarObservador(ObservadorJugador unObservador) {
