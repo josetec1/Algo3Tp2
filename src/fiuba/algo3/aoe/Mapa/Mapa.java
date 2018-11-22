@@ -28,7 +28,7 @@ public class Mapa {
     public Boolean puedoColocar( Posicion unaPosicion,int tamanio) {
         Posicion posicionAColocar = unaPosicion.expandir(tamanio);
 
-       if(!this.estaDentroDeTablero (posicionAColocar)){return false;}
+       if(!this.estaDentroDeLosMargenesDelMapa(posicionAColocar)){return false;}
 
         return this.estaLibre(posicionAColocar);
 
@@ -42,7 +42,7 @@ public class Mapa {
 
     }
 
-    public Boolean estaDentroDeTablero ( Posicion unaPosicion ){
+    private Boolean estaDentroDeLosMargenesDelMapa(Posicion unaPosicion ){
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
@@ -50,9 +50,9 @@ public class Mapa {
     // el ubicable tiene no puede estar agregado previamente
     public void colocar (Ubicable unElemento, Posicion posicion)  {
         Posicion posicionNueva = posicion.expandir(unElemento.getTamanio());
-        if (!this.estaDentroDeTablero(posicionNueva)) {throw new FueraDelMapaException();}
+        if (!this.estaDentroDeLosMargenesDelMapa(posicionNueva)) {throw new FueraDelMapaException();}
         if(!this.estaLibre(posicionNueva)) {throw new PosicionDelMapaOcupadaException();}
-        if (this.estaEnElTablero(unElemento)){throw new ElElementoYaExisteException();}
+        if (this.estaEnElMapa(unElemento)){throw new ElElementoYaExisteException();}
 
         unElemento.colocarEn(posicionNueva);
         this.ubicables.add (unElemento);
@@ -60,13 +60,13 @@ public class Mapa {
 
 
     public void remover (Ubicable unElemento) {
-        if(!this.estaEnElTablero (unElemento)) {throw new NoExisteElementoException();}
+        if(!this.estaEnElMapa(unElemento)) {throw new NoExisteElementoException();}
 
         this.ubicables.remove(unElemento);
 
     }
 
-    private Boolean estaEnElTablero (Ubicable unElemento){
+    private Boolean estaEnElMapa(Ubicable unElemento){
         return this.ubicables.contains(unElemento);
     }
 
@@ -77,7 +77,7 @@ public class Mapa {
     // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
     public void moverElemento (Ubicable unElemento, Direccionable direccion) {
 
-        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+        if (!this.estaEnElMapa(unElemento)) {throw new NoExisteElementoException();}
 
         Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
         this.remover(unElemento);
@@ -90,7 +90,7 @@ public class Mapa {
     // quita el elemento pasado y luego lo coloca en la posicion de destino
     public void moverElemento(Ubicable unElemento, Posicion destino) {
 
-        if (!this.estaEnElTablero(unElemento)) {throw new NoExisteElementoException();}
+        if (!this.estaEnElMapa(unElemento)) {throw new NoExisteElementoException();}
 
 
         this.remover(unElemento);

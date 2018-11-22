@@ -7,26 +7,57 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.NoSePuedeConstruirEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 //Todo esto vuela.
 public class JugadorTest {
 
     @Test
-    public void test01CrearJugadorCreaJugadorConNombreMauricioOro0Test(){
-        Mapa mapa = new Mapa(10,20);
+    public void test01CrearJugadorCreaJugadorConNombreMauricio(){
+      //  Mapa mapa = new Mapa(10,20);
 
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
         Assert.assertEquals(jugador1.getNombre(), "Mauricio");
-       // Assert.assertEquals(jugador1.getOro(), 100);
+
+    }
+
+    @Test
+    public void test02CrearJugadorCreaJugadorCon100DeOro(){
+       // Mapa mapa = new Mapa(10,20);
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+
+        Mockito.when(unidad.getCosto()).thenReturn(100);
+
+        Jugador jugador1 = new Jugador("Maradona");
+
+        jugador1.agregarPieza(unidad);
+
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    @Test
+    public void test03CrearJugadorCreaJugadorCon100DeOroYNoPuedeAgregarAlgoQueCueste101(){
+        // Mapa mapa = new Mapa(10,20);
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(101);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        thrown.expect(RecursoInsuficienteException.class);
+        jugador1.agregarPieza(unidad);
     }
 
 /*

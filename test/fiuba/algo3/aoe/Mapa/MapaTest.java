@@ -242,17 +242,7 @@ public class MapaTest {
         mapa.moverElemento(elemento,posicionDestino);
    }
 
-   @Test
-   public void test16EstaEnTableroDevuelveTrueSiUbicableEstaEnElTablero(){
 
-       Mapa mapa = new Mapa(10,10);
-       Posicion posicion = new Posicion(1,1);
-       Jugador jugador = new Jugador("Mauricio", mapa);
-       Ubicable aldeano = new Aldeano();
-       aldeano.colocarEn(posicion);
-       Assert.assertThat(mapa.estaDentroDeTablero(posicion),is(true));
-
-   }
 
    @Test
     public void test17MapaColocarPlazaColocaEnPosicionCorrecta(){

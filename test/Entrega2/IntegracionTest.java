@@ -88,15 +88,15 @@ public class IntegracionTest {
     public void test003AlInicioDeJuegoElMapaContieneAlosEdificiosYUnidadesIniciales(){
 
         for(int i = 0; i<=2; i++) {
-            Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador1.getAldeanos().get(i).getPosicion() ) );
-            Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador2.getAldeanos().get(i).getPosicion() ) );
+            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.getAldeanos().get(i).getPosicion() ) );
+            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador2.getAldeanos().get(i).getPosicion() ) );
         }
 
-        Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador1.getCastillos().get(0).getPosicion() ) );
-        Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador2.getCastillos().get(0).getPosicion() ) );
+        Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.getCastillos().get(0).getPosicion() ) );
+        Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador2.getCastillos().get(0).getPosicion() ) );
 
-        Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador1.getPlazaCentrals().get(0).getPosicion() ) );
-        Assert.assertTrue(mapa.estaDentroDeTablero(observadorJugador2.getPlazaCentrals().get(0).getPosicion() ) );
+        Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.getPlazaCentrals().get(0).getPosicion() ) );
+        Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador2.getPlazaCentrals().get(0).getPosicion() ) );
 
     }
 */
