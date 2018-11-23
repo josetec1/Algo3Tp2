@@ -3,7 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.*;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class MovimientoTest {
     @Test
     public void test01MoverAldeanoArribaMueveCorrectamente(){
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2,2);
         Posicion calculada= new Posicion(2,3);
@@ -28,7 +28,7 @@ public class MovimientoTest {
     @Test
     public void test02MoverAldeanoALaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(2, 1);
@@ -43,7 +43,7 @@ public class MovimientoTest {
     @Test
     public void test03MoverAldeanoALaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 1);
@@ -58,7 +58,7 @@ public class MovimientoTest {
     @Test
     public void test04MoverAldeanoAbajoDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(1, 1);
@@ -73,7 +73,7 @@ public class MovimientoTest {
     @Test
     public void test05MoverAldeanoArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
@@ -88,7 +88,7 @@ public class MovimientoTest {
     @Test
     public void test06MoverAldeanoArribaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 1);
         Posicion calculada = new Posicion(1, 2);
@@ -103,7 +103,7 @@ public class MovimientoTest {
     @Test
     public void test07MoverAldeanoAbajoIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(1, 1);
@@ -118,7 +118,7 @@ public class MovimientoTest {
     @Test
     public void test08MoverAldeanoAbajoDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil aldeano = new Aldeano();
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(2, 1);
@@ -133,7 +133,7 @@ public class MovimientoTest {
     @Test
     public void test09MoverArqueroArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil arquero = new Arquero();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
@@ -148,7 +148,7 @@ public class MovimientoTest {
     @Test
     public void test010MoverEspadachinArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio", mapa);
+        Jugador jugador = new Jugador("Mauricio");
         UnidadMovil espadachin = new Espadachin();
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);

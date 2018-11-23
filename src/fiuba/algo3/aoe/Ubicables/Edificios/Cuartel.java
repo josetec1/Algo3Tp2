@@ -3,10 +3,9 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 
 public class Cuartel extends Edificio {
     private final int TAMANIO = 2;
@@ -19,7 +18,7 @@ public class Cuartel extends Edificio {
         this.estado = new EstadoEnConstruccion(3);
     }
 
-    public void reparar(){
+    public void reparar(Aldeano aldeano){
         if(estado.enConstruccion()){
             throw new EdificioSinDaniarException();
         }
@@ -27,7 +26,7 @@ public class Cuartel extends Edificio {
             throw new EdificioSinDaniarException();
         }
         if (estado.enReparacion()){
-            estado.reparar(this);
+            estado.reparar(this, aldeano);
         }else {
             this.aumentarVida(50);
             this.estado = new EstadoEnReparacion(50);

@@ -2,13 +2,10 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Ubicable;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
 
 public class UnidadTest {
 
@@ -20,7 +17,7 @@ public class UnidadTest {
 
         UnidadMovil aldeano = new Aldeano();
 
-        thrown.expect(UnidadSinPosicionExceptcion.class);
+        thrown.expect(UnidadSinPosicionException.class);
         aldeano.getPosicion();
 
 
@@ -32,7 +29,7 @@ public class UnidadTest {
         UnidadMovil arquero = new Arquero();
         Direccionable direccion = new DireccionDerecha();
 
-        thrown.expect(UnidadSinPosicionExceptcion.class);
+        thrown.expect(UnidadSinPosicionException.class);
         arquero.obtenerPosicionDeAvance(direccion);
 
     }

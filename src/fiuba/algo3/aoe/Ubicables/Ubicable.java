@@ -1,7 +1,6 @@
 package fiuba.algo3.aoe.Ubicables;
 
 
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovilMilitar;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public interface Ubicable{

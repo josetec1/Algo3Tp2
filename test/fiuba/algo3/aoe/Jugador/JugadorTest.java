@@ -2,10 +2,7 @@ package fiuba.algo3.aoe.Jugador;
 import fiuba.algo3.aoe.Jugadores.*;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.Edificios.NoSePuedeConstruirEnEsteMomentoException;
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.Edificios.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
@@ -83,6 +80,514 @@ public class JugadorTest {
 
 
     }
+
+
+    @Test
+    public void test05LosEdificiosNoCuentanComoLimiteDePoblacion(){
+        // Mapa mapa = new Mapa(10,20);
+
+        UnidadMovil unidad;
+        UnidadMovil unidad50 = Mockito.mock (UnidadMovil.class);
+        Mockito.when(unidad50.getCosto()).thenReturn(0);
+
+
+        Jugador jugador1 = new Jugador("Maradona");
+
+        for (int i = 0; i <50 ; i++) {
+
+            unidad = Mockito.mock (Aldeano.class);
+            Mockito.when(unidad.getCosto()).thenReturn(0);
+            jugador1.agregarPieza(unidad);
+        }
+
+        for (int i = 0; i <1500 ; i++) {
+
+            Edificio edificio = Mockito.mock (Edificio.class);
+            Mockito.when(edificio.getCosto()).thenReturn(0);
+            jugador1.agregarPieza(edificio);
+        }
+
+        thrown.expect((LimiteDePoblacionAlcanzadoException.class));
+        jugador1.agregarPieza(unidad50);
+
+
+    }
+
+
+
+/*
+    @Test
+    public void test07PuedoAgregarDebeDarTrueCuandoLaUnidadNoFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test08PuedoAgregarDebeDarFalseCuandoLaUnidadFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test09PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale100(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test09PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale101(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test10PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnaUnidad(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test11PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorSeAgregan50Unidades(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test12PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan50UnidadesYSeAgreganEdificios(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test13PuedoAgregarDebeDarTrueCuandoElEdificioNoFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test14PuedoAgregarDebeDarFalseCuandoElEdificioFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test15PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale100(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test16PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale101(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test17PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnEdificio(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test18AgregarPiezaAgregaLaUnidad(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test19AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficiente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test20AgregarPiezaDebeLanzarExcepcionCuandoLaUnidadFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test20AgregarPiezaDebeLanzarExcepcionCuandoSeAgregaronPreviamente50Unidades(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test21AgregarPiezaAgregaElEdificio(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test22AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficienteParaElEdificio(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test23AgregarPiezaDebeLanzarExcepcionCuandoElEdificioFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test25EliminarPiezaEliminaLaPieza(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test26EliminarPiezaDebeLanzarExcepcionSiLaPiezaNoFueAgregadaPreviamente(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test26EliminarPiezaCuandoSeAgregaron50unidadesYEliminoUnaUnidadPermiteQueSePuedaVolverAAgregarOtraUnidad(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test27EsMioDebeDarFalseSiNoSeAgregoPreviamenteLaUnidad(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+    @Test
+    public void test28EsMioDebeDarTrueSiSeAgregoPreviamenteLaUnidad(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test29EsMioDebeDarFalseLuegoDeEliminarLaUnidadPreviamenteAgregada(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test30EsMioDebeDarFalseSiNoSeAgregoPreviamenteElEdificio(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+    @Test
+    public void test31EsMioDebeDarTrueSiSeAgregoPreviamenteElEdificio(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test32EsMioDebeDarFalseLuegoDeEliminarElEdificioPreviamenteAgregada(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test33SumarOro50PermiteAgregarPiezaQueCuesta150AlCrearseElAldeanoCon100DeOro(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test33SumarOro50YAgregarPiezaDe150ConLos100DelJugadorYaNoPermiteAgregarMasPiezasDeValorMayorACero(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test34NoSePuedenAgregarPiezasDeValorCero(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test35NoSePuedenAgregarPiezasDeValorNegativo(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+    @Test
+    public void test36GetPiezasDevuelveTodasLasPiezasPreviamenteAgregadasEdificiosYUnidades(){
+
+        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad.getCosto()).thenReturn(150);
+        Jugador jugador1 = new Jugador("Maradona");
+
+        Assert.assertFalse( jugador1.puedoAgregar(unidad));
+
+        jugador1.sumarOro(50);
+        Assert.assertTrue( jugador1.puedoAgregar(unidad));
+        Assert.assertTrue( false);
+    }
+
+*/
+    /******************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * ****************************************************
+     * NO USAR ESTAS PRUEBAS DE ABAJO
+     */
 /*
     @Test
     public void test02JugadorSumarOro200Suma200DeOro(){

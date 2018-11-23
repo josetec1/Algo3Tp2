@@ -9,6 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 
 public class Aldeano extends UnidadMovil  {
@@ -49,7 +50,7 @@ public class Aldeano extends UnidadMovil  {
         this.estado.pasarTurno(this, jugador);
     }
 
-
+/*
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
     //Pos devuelve el edificio en construccion y el aldeano queda en estado construyendo
     public PlazaCentral crearPlazaCentral() {
@@ -70,6 +71,18 @@ public class Aldeano extends UnidadMovil  {
         //colocar el edificio en construccion en el mapa.
         //TODO coloco el edificio enel mapa o lo coloca otro?
         return cuartel;
+    }
+ */
+
+    public void construirEdificio (Edificio edificio, Mapa mapa, Jugador jugador, Posicion posicion){
+
+        if (!jugador.esMio(this)) {throw new UnidadSinPosicionException();}
+        if (!jugador.puedoAgregar(edificio)){throw new UnidadSinPosicionException();}
+        if (!mapa.puedoColocar(posicion,edificio.getTamanio())){throw new UnidadSinPosicionException();}
+        this.estado.construir(this,edificio);
+        mapa.colocar(edificio,posicion);
+
+
     }
 
     //TODO verificar que el edificio se tenga que reparar
@@ -92,15 +105,13 @@ public class Aldeano extends UnidadMovil  {
 
     public void cambiarAReparando(Edificio unEdificio) {
         this.estado = new EstadoReparando(this, unEdificio);
+
     }
 
-    //Siempre usar este metodo antes de llamar a reparar o construir
-    public Boolean podesConstruirORepar() {
-        return this.estado.puedoConstruirOReparar();
-    }
 
-    public boolean podesMoverte() {
-        return this.estado.podesMoverte();
-    }
+
+
+
+    public boolean estasDisponible (){return this.estado.estasDisponible();}
 
 }

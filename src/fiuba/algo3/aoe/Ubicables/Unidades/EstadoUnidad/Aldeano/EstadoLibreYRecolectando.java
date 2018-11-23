@@ -11,19 +11,19 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
 
     @Override
-    public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
-        unEdificio.construir();
-        unAldeano.cambiarAContruyendo();
-        return unEdificio;
+    public void construir(Aldeano unAldeano, Edificio unEdificio) {
+        unEdificio.construir(unAldeano);
+
+
 
 
     }
-
+/*
     @Override
     public Boolean puedoConstruirOReparar() {
         return true;
     }
-
+*/
     @Override
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
     public void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion) {
@@ -34,19 +34,26 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
         }
     }
 
+    @Override
+    public boolean estasDisponible() {
+        return true;
+    }
 
 
+/*
     @Override
     public Boolean podesMoverte() {
         return true;
     }
-
+*/
 
     @Override
     public void reparar(Aldeano aldeano, Edificio unEdificio) {
         //TODO refactor la pregunta de abajo
         if (!unEdificio.estaDaniado()||unEdificio.estaEnConstruccion()||unEdificio.estaEnReparacion()) {throw new NoSePuedeRepararException();}
-         aldeano.cambiarAReparando(unEdificio);
+
+        aldeano.cambiarAReparando(unEdificio);
+
 
     }
 

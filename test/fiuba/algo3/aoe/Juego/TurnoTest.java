@@ -2,18 +2,14 @@ package fiuba.algo3.aoe.Juego;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class TurnoTest {
@@ -23,8 +19,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Jose", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
+        Jugador jugador2 = new Jugador("Jose");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
@@ -38,8 +34,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Jose", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
+        Jugador jugador2 = new Jugador("Jose");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
@@ -52,8 +48,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Jose", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
+        Jugador jugador2 = new Jugador("Jose");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores);
@@ -79,7 +75,7 @@ public class TurnoTest {
     @Test
     public void test05InicializarTurnoConListaDeJugadoresConUnJugadorLanzajugadoresInvalidosExeption(){
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
         List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         thrown.expect(JugadoresInvalidosException.class);
@@ -89,9 +85,9 @@ public class TurnoTest {
     @Test
     public void test06InicializarTurnoConListaDeJugadoresDeMasDeDosJugadoresLanzajugadoresInvalidosExeption(){
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador1 = new Jugador("Mauricio", mapa);
-        Jugador jugador2 = new Jugador("Maradona", mapa);
-        Jugador jugadorQueSobra = new Jugador("Messi", mapa);
+        Jugador jugador1 = new Jugador("Mauricio");
+        Jugador jugador2 = new Jugador("Maradona");
+        Jugador jugadorQueSobra = new Jugador("Messi");
         List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);

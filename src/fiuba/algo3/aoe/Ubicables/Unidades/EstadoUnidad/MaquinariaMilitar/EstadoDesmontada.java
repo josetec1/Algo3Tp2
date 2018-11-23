@@ -1,4 +1,4 @@
 package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar;
 
-public class EstadoDesmontada {
+public class EstadoDesmontada implements IEstadoMaquinariaMilitar {
 }

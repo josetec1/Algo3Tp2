@@ -12,13 +12,14 @@ import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
     void pasarTurno (Aldeano unidad, Jugador unjugador);
 
 
-    Edificio construir (Aldeano unAldeano, Edificio unEdificio);
+    void construir (Aldeano unAldeano, Edificio unEdificio);
 
-    Boolean puedoConstruirOReparar ();
+  //  Boolean puedoConstruirOReparar ();
 
     void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion);
 
-    Boolean podesMoverte ();
+  //  Boolean podesMoverte ();
+        boolean estasDisponible ();
 
     void reparar (Aldeano unidad, Edificio unEdificio);
 

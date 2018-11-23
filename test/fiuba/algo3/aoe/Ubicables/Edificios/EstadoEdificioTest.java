@@ -17,7 +17,7 @@ public class EstadoEdificioTest {
         EstadoEdificio estado = new EstadoEnReparacion(50);
         Assert.assertEquals(estado.enReparacion(),true);
     }
-
+/*
     @Test
     public void test02EstadoEdificioEnConstruccionDevuelveTrueEnConstruccion(){
         EstadoEdificio estado = new EstadoEnConstruccion(50);
@@ -126,6 +126,6 @@ public class EstadoEdificioTest {
         Assert.assertEquals(edificio.estaEnConstruccion(),false);
 
     }
-
+*/
 }
 

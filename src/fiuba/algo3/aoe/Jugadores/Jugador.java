@@ -2,23 +2,9 @@ package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorDeshabilitado;
-import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorHabilitado;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Mapa.PosicionDelMapaOcupadaException;
 import fiuba.algo3.aoe.Ubicables.Atacable;
-import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArribaDerecha;
-import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Espadachin;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +12,6 @@ import java.util.List;
 public class Jugador implements ObservableJugador{
 
     private String nombre;
-    private Mapa mapa;  //Todo es necesario?
     private int oro;
     private EstadoJugador estado; // todo sacar
     private List<Manipulable> unidades;
@@ -36,37 +21,30 @@ public class Jugador implements ObservableJugador{
     private final int POBLACION_MAXIMA = 50;
     private final int ORO_INICIAL = 100;
 
-    public Jugador(String nombre, Mapa mapa){
-        this.nombre = nombre;
-        this.mapa = mapa;
-        this.oro = ORO_INICIAL;
-        this.estado = new JugadorDeshabilitado();
-        this.unidades = new ArrayList<>();
-        this.edificios = new ArrayList<>();
-        this.observadores = new ArrayList<>();
-    }
-
     public Jugador(String nombre){  //TODO constructor sin mapa... me parece que el mapa no va
         this.nombre = nombre;
-       // this.mapa = mapa;
         this.oro = ORO_INICIAL;
         this.estado = new JugadorDeshabilitado();
         this.unidades = new ArrayList<>();
         this.edificios = new ArrayList<>();
         this.observadores = new ArrayList<>();
-    }
 
+    }
     public String getNombre(){return this.nombre;}
 
-    private int getOro(){return this.oro;} //Todo es necesario?
+    public Boolean puedoAgregar(UnidadMovil pieza){
+        //cheque poblacion
+        //chequea oro
+        //chequea que no este agregado.
+
+       return   this.hayOroSuficiente(pieza.getCosto());
+
+        }
 
 
+    public Boolean puedoAgregar(Edificio pieza){
 
-
-    public Boolean puedoAgregar(UnidadMovil pieza){return true;}
-    public Boolean puedoAgregar(Edificio pieza){return true;}
-
-
+        return true;}
 
     public void agregarPieza(UnidadMovil pieza) {
 
@@ -92,39 +70,6 @@ public class Jugador implements ObservableJugador{
         */
     }
 
-    private boolean alcanzoLimiteDePoblacion(){ return  (this.unidades.size() == POBLACION_MAXIMA);    }
-
-    public boolean esMio( Manipulable pieza) {
-        return ((this.unidades.contains(pieza)) ||(this.edificios.contains(pieza)));
-
-    }
-
-
-    private boolean hayOroSuficiente(int costo) {
-        return (costo <= this.oro);
-    }
-
-
-    private void descontarOro ( int costo ) throws RecursoInsuficienteException{
-
-        if(this.hayOroSuficiente(costo)){this.oro -= costo;}
-        else throw new RecursoInsuficienteException();
-    }
-
-    public void sumarOro(int oro) {
-        this.oro += oro;
-    }
-
-
-
-
-
-    public void agregarObservador(ObservadorJugador unObservador) {
-        this.observadores.add(unObservador);
-    }
-
-
-
     public void eliminarPieza ( Manipulable pieza) {
       /*
         if(!this.esMio(pieza)){
@@ -136,11 +81,31 @@ public class Jugador implements ObservableJugador{
         */
     }
 
+    public boolean esMio( Manipulable pieza) {
+        return ((this.unidades.contains(pieza)) ||(this.edificios.contains(pieza)));
 
+    }
 
+    public void sumarOro(int oro) {
+        this.oro += oro;
+    }
+    public void agregarObservador(ObservadorJugador unObservador) {
+        this.observadores.add(unObservador);
+    }
     public ArrayList<Atacable> getPiezas (){return new ArrayList<>();}
 
+    private boolean alcanzoLimiteDePoblacion(){ return  (this.unidades.size() == POBLACION_MAXIMA);    }
+    private boolean hayOroSuficiente(int costo) {
+        return (costo <= this.oro);
+    }
+    private void descontarOro ( int costo ) throws RecursoInsuficienteException{
 
+        if(this.hayOroSuficiente(costo)){this.oro -= costo;}
+        else throw new RecursoInsuficienteException();
+    }
+
+
+   // private int getOro(){return this.oro;} //Todo es necesario?
 
 
 

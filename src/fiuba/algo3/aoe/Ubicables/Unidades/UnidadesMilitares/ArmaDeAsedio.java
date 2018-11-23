@@ -1,19 +1,22 @@
-package fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar;
+package fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibre;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovilMilitar;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.EstadoDesmontada;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibreTropa;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarMaquinaria;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public class ArmaDeAsedio extends UnidadMovilMilitar {
+public class ArmaDeAsedio extends UnidadMilitarMaquinaria {
 
     public ArmaDeAsedio(  ){
         this.vidaMaxima = 150;
         this.vidaActual = 150;
         this.costo = 200;
-        this.estadoUnidad = new EstadoLibre();
+        this.estado = new EstadoDesmontada();
     }
 
     @Override

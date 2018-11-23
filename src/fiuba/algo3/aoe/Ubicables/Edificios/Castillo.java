@@ -6,7 +6,7 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 
 public class Castillo extends Edificio implements Atacante {
     private final int TAMANIO = 4;
@@ -27,12 +27,12 @@ public class Castillo extends Edificio implements Atacante {
     }
 
 
-    public void reparar(){
+    public void reparar( Aldeano aldeano){
         if(!this.estaDaniado()){
             throw new EdificioSinDaniarException();
         }
         if (estado.enReparacion()){
-            estado.reparar(this);
+            estado.reparar(this, aldeano);
         }else {
             this.aumentarVida(15);
             this.estado = new EstadoEnReparacion(15);
@@ -40,7 +40,7 @@ public class Castillo extends Edificio implements Atacante {
     }
 
     @Override
-    public void construir(){
+    public void construir( Aldeano aldeano){
         throw new EdificioNoConstruibleSinCostoException();
     }
 

@@ -12,19 +12,13 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
 //private Edificio edificioEnReparacion;
 
         public EstadoReparando(Aldeano aldeano, Edificio unEdificio){
-
-
             unEdificio.repararCon(aldeano);
+
         }
 
     @Override
-    public Edificio construir(Aldeano unAldeano, Edificio unEdificio) {
+    public void construir(Aldeano unAldeano, Edificio unEdificio) {
         throw new AldeanoOcupadoException();
-    }
-
-    @Override
-    public Boolean puedoConstruirOReparar() {
-        return false;
     }
 
     @Override
@@ -32,13 +26,17 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
         throw new AldeanoOcupadoException();
     }
 
+    @Override
+    public boolean estasDisponible() {
+        return false;
+    }
 
-
+/*
     @Override
     public Boolean podesMoverte() {
         return false;
     }
-
+*/
     @Override
     public void reparar(Aldeano unidad, Edificio unEdificio) {
         throw new AldeanoOcupadoException();

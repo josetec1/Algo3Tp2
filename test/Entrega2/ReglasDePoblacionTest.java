@@ -1,23 +1,9 @@
 package Entrega2;
 
-import fiuba.algo3.aoe.Jugador.ObservadorDeJugadorFicticio;
-import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Jugadores.LimiteDePoblacionAlcanzadoException;
-import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar.Arquero;
-import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.List;
 
 import static org.mockito.Mockito.mock;
 
