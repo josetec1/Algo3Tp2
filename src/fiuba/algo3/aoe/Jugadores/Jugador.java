@@ -1,7 +1,7 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
-import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorDeshabilitado;
+
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
@@ -24,7 +24,6 @@ public class Jugador implements ObservableJugador{
     public Jugador(String nombre){  //TODO constructor sin mapa... me parece que el mapa no va
         this.nombre = nombre;
         this.oro = ORO_INICIAL;
-        this.estado = new JugadorDeshabilitado();
         this.unidades = new ArrayList<>();
         this.edificios = new ArrayList<>();
         this.observadores = new ArrayList<>();
@@ -33,18 +32,16 @@ public class Jugador implements ObservableJugador{
     public String getNombre(){return this.nombre;}
 
     public Boolean puedoAgregar(UnidadMovil pieza){
-        //cheque poblacion
-        //chequea oro
-        //chequea que no este agregado.
-
-       return   this.hayOroSuficiente(pieza.getCosto());
+        return (this.hayOroSuficiente(pieza.getCosto()) &&
+                !this.esMio(pieza) && !this.alcanzoLimiteDePoblacion());
 
         }
 
-
     public Boolean puedoAgregar(Edificio pieza){
+        return (this.hayOroSuficiente(pieza.getCosto()) &&
+                !this.esMio(pieza) && !this.alcanzoLimiteDePoblacion());
+    }
 
-        return true;}
 
     public void agregarPieza(UnidadMovil pieza) {
 
