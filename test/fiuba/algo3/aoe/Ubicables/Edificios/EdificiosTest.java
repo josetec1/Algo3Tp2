@@ -1,7 +1,9 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioNoPuedeRepararseEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -107,6 +109,106 @@ public class EdificiosTest {
         thrown.expect ( EdificioSinDaniarException.class );
         plazaCentral.reparar ( new Aldeano () );
     }
+
+    @Test
+    public void test12CuartelConstruidaRepararLanzaEdificioSinDaniarException(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.comenzarConstruccion ( new Aldeano () );
+        cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
+        cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
+        cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
+        thrown.expect ( EdificioSinDaniarException.class );
+        cuartel.reparar ( new Aldeano () );
+    }
+
+    @Test
+    public void test13CastilloConstruidoRepararLanzaEdificioSinDaniarException(){
+        Castillo castillo = new Castillo ();
+        thrown.expect ( EdificioSinDaniarException.class );
+        castillo.reparar ( new Aldeano () );
+    }
+
+    @Test
+    public void test14CuartelConstruidoDisminuirVidaPuedoRepararNoPuedoConstruir(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        cuartel.disminuirVida ( 30 );
+        Assert.assertTrue ( cuartel.puedoReparar () );
+        Assert.assertFalse ( cuartel.puedoConstruir () );
+    }
+
+    @Test
+    public void test15CuartelConstruidoDisminuirVidaAumentarVidaHastaTotalNoPuedoConstruirNoPuedoReparar(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        cuartel.disminuirVida ( 30 );
+        cuartel.aumentarVida ( 30 );
+        Assert.assertFalse ( cuartel.puedoReparar ());
+        Assert.assertFalse ( cuartel.puedoConstruir () );
+
+    }
+
+    @Test
+    public void test16CuartelConstruidoDisminuirVida450DejaUnidadConVida0(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        cuartel.disminuirVida ( 430 );
+        Assert.assertTrue (cuartel.getVidaActual ()== 0);
+
+    }
+
+    @Test
+    public void test17InicializarCuartel(){
+        Cuartel cuartel = new Cuartel ();
+        Assert.assertTrue ( cuartel.getVidaActual () == 250 );
+        Assert.assertTrue ( cuartel.getVidaMaxima () == 250 );
+        Assert.assertTrue ( cuartel.getCosto () == 50);
+    }
+
+    @Test
+    public void test18InicializarPlaza(){
+        PlazaCentral plazaCentral = new PlazaCentral ();
+        Assert.assertTrue ( plazaCentral.getVidaActual () == 450 );
+        Assert.assertTrue ( plazaCentral.getVidaMaxima () == 450 );
+        Assert.assertTrue ( plazaCentral.getCosto () == 100);
+    }
+
+    @Test
+    public void test19InicializarCastilloGetCostoLanzaEdificioNoConstruibleSinCostroException(){
+        Castillo castillo = new Castillo ();
+        Assert.assertTrue ( castillo.getVidaActual () == 1000 );
+        Assert.assertTrue ( castillo.getVidaMaxima () == 1000 );
+        thrown.expect ( EdificioNoConstruibleSinCostoException.class );
+        castillo.getCosto ();
+    }
+
+    @Test
+    public void test20CuartelConstruirNoPuedoConstruirDeNuevoNoPuedoReparar(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.construir ( new Aldeano () );
+        Assert.assertFalse ( cuartel.puedoConstruir () );
+        Assert.assertFalse ( cuartel.puedoReparar () );
+    }
+
+
+    @Test
+    public void test21CuartelConstruirRepararLanzaExcepcionEdificioNoPuedeRepararseEnEsteMomentoException(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.construir ( new Aldeano () );
+        thrown.expect ( EdificioNoPuedeRepararseEnEsteMomentoException.class );
+        cuartel.reparar ( new Aldeano () );
+    }
+
+    @Test
+    public void test22CuartelRepararConstruirLanzaExcepcionEdificioYaConstruidoException(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        cuartel.disminuirVida ( 50);
+        cuartel.reparar ( new Aldeano () );
+        thrown.expect ( EdificioYaConstruidoException.class );
+        cuartel.construir (new Aldeano ()  );
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
@@ -41,17 +42,19 @@ public abstract class Edificio implements Manipulable {
 
     public void disminuirVida ( int unaCantidad ) {
         this.vidaActual = this.vidaActual - unaCantidad;
+        this.estado = new EstadoDaniado ();
         if (this.vidaActual < 0) {
             this.vidaActual = 0;
         }
     }
 
     public void aumentarVida ( int unaCantidad ) {
+        vidaActual += unaCantidad;
         if (vidaActual >= vidaMaxima) {
             vidaActual = vidaMaxima;
+            this.estado = new EstadoNormal ();
             return;
         }
-        vidaActual += unaCantidad;
     }
 
     public void serAtacadoPor ( Atacante unAtacante ) {

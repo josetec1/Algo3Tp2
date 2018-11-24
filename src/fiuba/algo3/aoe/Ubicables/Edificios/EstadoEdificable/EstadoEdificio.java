@@ -9,5 +9,7 @@ public interface EstadoEdificio {
      void construir( Edificio edificio , Aldeano aldeano );
      void reparar( Edificio edificio , Aldeano aldeano );
      void nuevoTurno(Edificio edificio,int curacion);
-    public boolean puedoCrearUnidad();
+     boolean puedoCrearUnidad();
+     void liberarAldeano();
+
 }

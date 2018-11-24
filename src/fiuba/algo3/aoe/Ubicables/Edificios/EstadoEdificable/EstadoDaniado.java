@@ -3,42 +3,35 @@ package fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 
-public class EstadoEnReparacion implements EstadoEdificio {
-    private Aldeano aldeano;
-
-    public EstadoEnReparacion( Aldeano aldeano){
-        this.aldeano = aldeano;
-    }
+public class EstadoDaniado implements EstadoEdificio {
 
     public boolean puedoConstruir(){
         return false;
     }
 
     public boolean puedoReparar(){
-        return false;
+        return true;
     }
 
 
     public void construir( Edificio edificio, Aldeano aldeano ){
-        throw new EdificioYaConstruidoException ();
+        throw new EdificioYaConstruidoException();
     }
 
     public void reparar(Edificio edificio,Aldeano aldeano){
-        throw new EdificioEnReparacionException();
+        edificio.comenzarReparacion ( aldeano );
     }
 
+    @Override
     public void nuevoTurno (Edificio edificio,int curacion) {
-        edificio.aumentarVida (curacion);
-        if(edificio.getVidaActual () >=edificio.getVidaMaxima ()){
-            this.liberarAldeano ();
-        }
+
     }
 
     public boolean puedoCrearUnidad(){
-        return false;
+        return true;
     }
 
     public void liberarAldeano(){
-        this.aldeano.cambiarARecolectando ();
+        throw new EdificioNoEstaSiendoConstruidoOReparadoException();
     }
 }

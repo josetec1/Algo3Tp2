@@ -30,4 +30,8 @@ public class EstadoAConstruir implements EstadoEdificio{
     public boolean puedoCrearUnidad(){
         return false;
     }
+
+    public void liberarAldeano(){
+        throw new EdificioNoEstaSiendoConstruidoOReparadoException();
+    }
 }

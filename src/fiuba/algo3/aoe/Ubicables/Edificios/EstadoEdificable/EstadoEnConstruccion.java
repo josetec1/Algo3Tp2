@@ -27,16 +27,20 @@ public class EstadoEnConstruccion implements EstadoEdificio{
     }
 
     public void reparar(Edificio edificio,Aldeano aldeano){
-        throw new EdificioEnConstruccionException();
+        throw new EdificioNoPuedeRepararseEnEsteMomentoException ();
     }
 
     @Override
     public void nuevoTurno (Edificio edificio,int curacion) {
         turnosParaConstruccion-=1;
         if (turnosParaConstruccion == 0){
-            aldeano.cambiarARecolectando ();
+            this.liberarAldeano ();
             edificio.finalizarConstruccion();
         }
+    }
+
+    public void liberarAldeano(){
+        this.aldeano.cambiarARecolectando ();
     }
 
     public boolean puedoCrearUnidad(){

@@ -29,4 +29,8 @@ public class EstadoNormal implements EstadoEdificio {
     public boolean puedoCrearUnidad(){
         return true;
     }
+
+    public void liberarAldeano(){
+        throw new EdificioNoEstaSiendoConstruidoOReparadoException();
+    }
 }
