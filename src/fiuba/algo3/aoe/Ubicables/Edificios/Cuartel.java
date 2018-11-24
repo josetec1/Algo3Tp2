@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
@@ -25,7 +26,9 @@ public class Cuartel extends Edificio {
         estado = new EstadoEnConstruccion (aldeano,this.TURNOSPARACONSTRUCCION);
     }
 
-    public void comenzarReparacion(Aldeano aldeano){}
+    public void comenzarReparacion(Aldeano aldeano){
+        this.estado = new EstadoEnReparacion (aldeano);
+    }
 
     @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {

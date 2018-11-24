@@ -178,6 +178,8 @@ public class EdificiosTest {
         Castillo castillo = new Castillo ();
         Assert.assertTrue ( castillo.getVidaActual () == 1000 );
         Assert.assertTrue ( castillo.getVidaMaxima () == 1000 );
+        Assert.assertTrue ( castillo.getDanioEdificio () == 20 );
+        Assert.assertTrue ( castillo.getDanioUnidad () == 20 );
         thrown.expect ( EdificioNoConstruibleSinCostoException.class );
         castillo.getCosto ();
     }
@@ -210,5 +212,36 @@ public class EdificiosTest {
     }
 
 
+    @Test
+    public void test23CastilloRepararDespuesde3TurnosTieneVida645(){
+        Castillo castillo = new Castillo ();
+        castillo.disminuirVida ( 400 );
+        castillo.reparar ( new Aldeano () );
+        castillo.huboUnCambioDeTurno ( mock( Jugador.class ) );
+        castillo.huboUnCambioDeTurno ( mock(Jugador.class) );
+        castillo.huboUnCambioDeTurno ( mock(Jugador.class) );
+        Assert.assertEquals ( castillo.getVidaActual (),645 );
+    }
 
+    @Test
+    public void test24PlazaRepararDespuesde3TurnosTieneVida245(){
+        PlazaCentral plazaCentral = new PlazaCentral ();
+        plazaCentral.disminuirVida ( 250 );
+        plazaCentral.reparar ( new Aldeano () );
+        plazaCentral.huboUnCambioDeTurno ( mock( Jugador.class ) );
+        plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
+        plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
+        Assert.assertEquals ( plazaCentral.getVidaActual (),275 );
+    }
+
+    @Test
+    public void test25CuartelRepararDespuesde3TurnosTieneVida245(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.disminuirVida ( 200 );
+        cuartel.reparar ( new Aldeano () );
+        cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
+        cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
+        cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
+        Assert.assertEquals ( cuartel.getVidaActual (),200 );
+    }
 }
