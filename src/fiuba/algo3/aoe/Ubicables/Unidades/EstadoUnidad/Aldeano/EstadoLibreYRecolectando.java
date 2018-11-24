@@ -12,8 +12,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
     @Override
     public void construir(Aldeano unAldeano, Edificio unEdificio) {
-
-        unEdificio.comenzarConstruccion(unAldeano); //TODO aca habria que preguntar si se puede construir. pero
+        unEdificio.construir (unAldeano); //TODO aca habria que preguntar si se puede construir. pero
         unAldeano.cambiarAContruyendo();
     }
 
