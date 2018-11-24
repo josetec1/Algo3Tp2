@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Mapa;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
@@ -22,6 +23,15 @@ public class MapaTest {
          Posicion posicionDentroDeTablero = new Posicion(1,1);
 
         Assert.assertThat( mapa.puedoColocar(posicionDentroDeTablero,1), is( true ) );
+   }
+
+   @Test
+   public void testprueba(){
+       ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
+       Mapa mapa = new Mapa ( 200,200 );
+       Posicion posicion = new Posicion ( 2,2 );
+       mapa.colocar ( armaDeAsedio,posicion );
+       Assert.assertFalse (mapa.puedoColocar ( posicion,1 ));
    }
 
     @Test

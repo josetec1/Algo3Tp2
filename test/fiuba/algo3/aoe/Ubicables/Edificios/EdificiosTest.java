@@ -1,10 +1,12 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioNoPuedeRepararseEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -243,5 +245,53 @@ public class EdificiosTest {
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
         Assert.assertEquals ( cuartel.getVidaActual (),200 );
+    }
+
+
+    @Test
+    public void test26CuartelCrearEspadachinCreaSeagregaEspadachinAJugadorYSeColocaEnElMapa(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Jugador jugador = new Jugador ( "Mauricio" );
+        Posicion posicion = new Posicion ( 2,2 );
+        cuartel.crearEspadachin ( jugador,mapa,posicion );
+
+        Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
+
+    }
+
+    @Test
+    public void test27CuartelCrearArqueroCreaSeagregaArqueroAJugadorYSeColocaEnElMapa(){
+        Cuartel cuartel = new Cuartel ();
+        cuartel.finalizarConstruccion ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Jugador jugador = new Jugador ( "Mauricio" );
+        Posicion posicion = new Posicion ( 2,2 );
+        cuartel.crearArquero ( jugador,mapa,posicion );
+
+        Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
+    }
+
+    @Test
+    public void test28PlazaCrearAldeanoCreaSeagregaAldeanoAJugadorYSeColocaEnElMapa(){
+        PlazaCentral plazaCentral= new PlazaCentral ();
+        plazaCentral.finalizarConstruccion ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Jugador jugador = new Jugador ( "Mauricio" );
+        Posicion posicion = new Posicion ( 2,2 );
+        plazaCentral.crearAldeano ( jugador,mapa,posicion);
+        Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
+    }
+
+    @Test
+    public void test29PlazaCrearArmaDeASedioCreaSeagregaArmaDeAsedioAJugadorYSeColocaEnElMapa(){
+        Castillo castillo= new Castillo ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Jugador jugador = new Jugador ( "Mauricio" );
+        jugador.sumarOro ( 100 );
+        Posicion posicion = new Posicion ( 2,2 );
+        castillo.crearArmaDeAsedio (jugador,mapa,posicion);
+        Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
     }
 }

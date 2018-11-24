@@ -1,12 +1,14 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class Cuartel extends Edificio {
     private final int TAMANIO = 2;
@@ -33,5 +35,21 @@ public class Cuartel extends Edificio {
     @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
+    }
+
+    public void crearArquero( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+        Arquero arquero= new  Arquero ();
+        if(!mapa.puedoColocar ( posicion,arquero.getTamanio () )){return;}
+        if(!jugadorActivo.puedoAgregar (arquero)){return;}
+        jugadorActivo.agregarPieza ( arquero );
+        mapa.colocar ( arquero,posicion );
+    }
+
+    public void crearEspadachin( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+        Espadachin espadachin= new  Espadachin ();
+        if(!mapa.puedoColocar ( posicion,espadachin.getTamanio () )){return;}
+        if(!jugadorActivo.puedoAgregar (espadachin)){return;}
+        jugadorActivo.agregarPieza ( espadachin );
+        mapa.colocar ( espadachin,posicion );
     }
 }

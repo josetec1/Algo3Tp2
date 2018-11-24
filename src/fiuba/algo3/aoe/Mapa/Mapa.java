@@ -53,7 +53,6 @@ public class Mapa {
         if (!this.estaDentroDeLosMargenesDelMapa(posicionNueva)) {throw new FueraDelMapaException();}
         if(!this.estaLibre(posicionNueva)) {throw new PosicionDelMapaOcupadaException();}
         if (this.estaEnElMapa(unElemento)){throw new ElElementoYaExisteException();}
-
         unElemento.colocarEn(posicionNueva);
         this.ubicables.add (unElemento);
     }

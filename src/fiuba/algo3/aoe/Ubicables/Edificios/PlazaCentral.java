@@ -1,10 +1,13 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class PlazaCentral extends Edificio {
 // TODO refactor constantes
@@ -30,6 +33,14 @@ public class PlazaCentral extends Edificio {
     @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
+    }
+
+    public void crearAldeano( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+        Aldeano aldeano= new Aldeano ();
+        if(!mapa.puedoColocar ( posicion,aldeano.getTamanio () )){return;}
+        if(!jugadorActivo.puedoAgregar (aldeano)){return;}
+        jugadorActivo.agregarPieza ( aldeano );
+        mapa.colocar ( aldeano,posicion );
     }
 }
 

@@ -16,13 +16,11 @@ public class Posicion {
 
     //sobrecarga con Cuadrante
     public Posicion(Cuadrante unCuadrante){
-        this.tamanio ++;
         this.agregar(unCuadrante);
     }
 
     //sobrecarga directa con int
     public Posicion(int x, int y){
-        this.tamanio++;
         this.agregar(new Cuadrante(x,y));
     }
 
