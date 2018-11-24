@@ -1,5 +1,6 @@
 package Entrega2;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -9,135 +10,148 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class AtaqueTest {
 
+    private Jugador jugadorAtacante;
+    private UnidadMilitar arqueroAtacante;
+    private UnidadMilitar espadachinAtacante;
+
+    private Atacable arqueroAtacado;
+    private Atacable espadachinAtacado;
+    private Atacable plazaCentral;
+    private Atacable cuartel;
+    private Atacable castillo;
+
+    private UnidadMovil aldeano;
+
     /***************** PRUEBAS ARQUERO ATACANDO *******************************************/
+
+    @Before
+    public void setUp(){
+
+        jugadorAtacante = new Jugador("jose");
+        jugadorAtacante.sumarOro(3000);
+        arqueroAtacante = new Arquero();
+        jugadorAtacante.agregarPieza(arqueroAtacante);
+        espadachinAtacante = new Espadachin();
+        jugadorAtacante.agregarPieza(espadachinAtacante);
+
+        arqueroAtacado = new Arquero();
+        espadachinAtacado = new Espadachin();
+        plazaCentral = new PlazaCentral();
+        cuartel = new Cuartel();
+        castillo = new Castillo();
+
+        aldeano = new Aldeano();
+    }
+
     @Test
     public void test01AtacarArqueroDebeDisminuirSuVidaEn15(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
-        arqueroAtacante.colocarEn(new Posicion(1,1));
-        arqueroAtacado.colocarEn(new Posicion(2, 2));
+        arqueroAtacante.colocarEn(new Posicion (1,1));
+        arqueroAtacado.colocarEn(new Posicion( 3,3));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
     }
 
     @Test
     public void test02AtacarEspadachinDebeDisminuirSuVidaEn15(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable espadachinAtacado = new Espadachin();
 
-        arqueroAtacante.colocarEn(new Posicion(1,1));
-        espadachinAtacado.colocarEn(new Posicion(2, 2));
+        arqueroAtacante.colocarEn(new Posicion (1,1));
+        espadachinAtacado.colocarEn(new Posicion( 4,4));
 
-        arqueroAtacante.atacar(espadachinAtacado);
+        arqueroAtacante.atacar(espadachinAtacado, jugadorAtacante);
 
         Assert.assertEquals(espadachinAtacado.getVidaActual(), espadachinAtacado.getVidaMaxima() - 15);
     }
 
     @Test
     public void test03AtacarPlazaCentralDebeDisminuirSuVidaEn10(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable plazaCentral = new PlazaCentral();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
-        plazaCentral.colocarEn(new Posicion(2, 2));
+        plazaCentral.colocarEn(new Posicion(2,3));
 
-        arqueroAtacante.atacar(plazaCentral);
+        arqueroAtacante.atacar(plazaCentral, jugadorAtacante);
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima() - 10);
     }
 
     @Test
     public void test04AtacarCastilloDebeDisminuirSuVidaEn10(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable castillo = new Castillo();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
         castillo.colocarEn(new Posicion(2, 2));
 
-        arqueroAtacante.atacar(castillo);
+        arqueroAtacante.atacar(castillo, jugadorAtacante);
 
         Assert.assertEquals(castillo.getVidaActual(), castillo.getVidaMaxima() - 10);
     }
 
     @Test
     public void test05AtacarCuartelDebeDisminuirSuVidaEn10(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable cuartel = new Cuartel();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
         cuartel.colocarEn(new Posicion(2, 2));
 
-        arqueroAtacante.atacar(cuartel);
+        arqueroAtacante.atacar(cuartel, jugadorAtacante);
 
         Assert.assertEquals(cuartel.getVidaActual(), cuartel.getVidaMaxima() - 10);
     }
 
     @Test
     public void test06AtacarArqueroEnSuRangoDeAtaque(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(2,2));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
     }
 
     @Test
     public void test07AtacarArqueroEnElLimiteDelRangoDeAtaque(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(4, 4));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 15);
     }
 
     @Test(expected= UnidadFueraDeRangoDeAtaqueException.class)
     public void test08IntentarAtacarArqueroFueraDelRangoDeAtaque(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(5, 5));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
     @Test(expected= UnidadSinPosicionException.class)
     public void test09IntentarAtacarUnidadAtacanteSinPosicion(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacado.colocarEn(new Posicion(5, 5));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
     @Test(expected= UnidadSinPosicionException.class)
     public void test10IntentarAtacarAUnidadSinPosicion(){
-        UnidadMilitar arqueroAtacante = new Arquero();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacante.colocarEn(new Posicion(5, 5));
 
-        arqueroAtacante.atacar(arqueroAtacado);
+        arqueroAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
@@ -146,125 +160,105 @@ public class AtaqueTest {
 
     @Test
     public void test11AtacarArqueroDebeDisminuirSuVidaEn25(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable arqueroAtacado = new Arquero();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(1,2));
 
-        espadachinAtacante.atacar(arqueroAtacado);
+        espadachinAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(),  arqueroAtacado.getVidaMaxima() - 25);
     }
 
     @Test
     public void test12AtacarEspadachinDebeDisminuirSuVidaEn25(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable espadachinAtacado = new Espadachin();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         espadachinAtacado.colocarEn(new Posicion(1,2));
 
-        espadachinAtacante.atacar(espadachinAtacado);
+        espadachinAtacante.atacar(espadachinAtacado, jugadorAtacante);
 
         Assert.assertEquals(espadachinAtacado.getVidaActual(), espadachinAtacado.getVidaMaxima() - 25);
     }
 
     @Test
     public void test13AtacarPlazaCentralDebeDisminuirSuVidaEn15(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable plazaCentral = new PlazaCentral();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         plazaCentral.colocarEn(new Posicion(1,2));
 
-        espadachinAtacante.atacar(plazaCentral);
+        espadachinAtacante.atacar(plazaCentral, jugadorAtacante);
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima() - 15);
     }
 
     @Test
     public void test14AtacarCastilloDebeDisminuirSuVidaEn15(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable castillo = new Castillo();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         castillo.colocarEn(new Posicion(1,2));
 
-        espadachinAtacante.atacar(castillo);
+        espadachinAtacante.atacar(castillo, jugadorAtacante);
 
         Assert.assertEquals(castillo.getVidaActual(), castillo.getVidaMaxima() - 15);
     }
 
     @Test
     public void test15AtacarCuartelDebeDisminuirSuVidaEn15(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable cuartel = new Cuartel();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         cuartel.colocarEn(new Posicion(1,2));
 
-        espadachinAtacante.atacar(cuartel);
+        espadachinAtacante.atacar(cuartel, jugadorAtacante);
 
         Assert.assertEquals(cuartel.getVidaActual(), cuartel.getVidaMaxima() - 15);
     }
 
     @Test
     public void test16AtacarArqueroEnSuRangoDeAtaque(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable arqueroAtacado = new Arquero();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(0,0));
 
-        espadachinAtacante.atacar(arqueroAtacado);
+        espadachinAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima() - 25);
     }
 
     @Test(expected=UnidadFueraDeRangoDeAtaqueException.class)
     public void test17IntentarAtacarArqueroFueraDelRangoDeAtaque(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable arqueroAtacado = new Arquero();
 
         espadachinAtacante.colocarEn(new Posicion(1,1));
         arqueroAtacado.colocarEn(new Posicion(3, 3));
 
-        espadachinAtacante.atacar(arqueroAtacado);
+        espadachinAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
     @Test(expected= UnidadSinPosicionException.class)
     public void test18IntentarAtacarArqueroAtacanteSinPosicion(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable arqueroAtacado = new Arquero();
 
         arqueroAtacado.colocarEn(new Posicion(3, 3));
 
-        espadachinAtacante.atacar(arqueroAtacado);
+        espadachinAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
     @Test(expected= UnidadSinPosicionException.class)
     public void test19IntentarAtacarUnidadSinPosicion(){
-        UnidadMilitar espadachinAtacante = new Espadachin();
-        Atacable arqueroAtacado = new Arquero();
 
         espadachinAtacante.colocarEn(new Posicion(3, 3));
 
-        espadachinAtacante.atacar(arqueroAtacado);
+        espadachinAtacante.atacar(arqueroAtacado, jugadorAtacante);
 
         Assert.assertEquals(arqueroAtacado.getVidaActual(), arqueroAtacado.getVidaMaxima());
     }
 
     /***************** PRUEBAS CASTILLO ATACANDO *******************************************/
-
+/*
     @Test
     public void test020CastilloAtacaAldeano(){
-        Castillo castillo = new Castillo();
-        UnidadMovil aldeano = new Aldeano();
 
         castillo.colocarEn(new Posicion(1,1));
         aldeano.colocarEn(new Posicion(2,2));
@@ -299,9 +293,9 @@ public class AtaqueTest {
 
         Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima());
     }
-
+*/
     /***************** PRUEBAS JUGADOR RECIBE ATAQUE DE CASTILLO *******************************************/
-/*
+/*//TODO A Eliminar como implementamos ataque de castillo
     @Test
     public void test23JugadorRecibeAtaqueDeCastilloEnemigoDebeAtacarAlaPlazaUnicamente(){
 
