@@ -1,12 +1,10 @@
 package fiuba.algo3.aoe.Juego;
 import fiuba.algo3.aoe.Jugadores.*;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 
-import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
-
-
-import fiuba.algo3.aoe.Juego.*;
 
 public class Turno {
 
@@ -15,19 +13,33 @@ public class Turno {
     private Iterator<Jugador> it;
     private final int JUGADORES_ADMITIDOS = 2;
 
-    //TODO hay que implementar para que arranque con un jugador al azar.  new turno (semilla)
-     // con que turno arrancar le diria desde afuera, sino va a ser dificil hacer un test que compruebe que arranca al azar
-    public Turno ( List <Jugador> unosJugadores ) {
+    public Turno ( List <Jugador> unosJugadores , ModoInicio semilla) {
 
 
         if (unosJugadores.size() != JUGADORES_ADMITIDOS) throw new JugadoresInvalidosException();
         this.jugadores = unosJugadores;
         this.it = unosJugadores.iterator();
-        this.jugadorActual = this.it.next();
-      //  this.jugadorActual.habilitar();
+
+        this.inicializarTurno(semilla);
+
+        //  this.jugadorActual.habilitar();
 
 
     }
+
+    private void inicializarTurno(ModoInicio semilla){
+
+        this.jugadorActual = this.it.next();
+        for (int i = 0; i < (semilla.getOrden()); i++) {
+            if (!this.it.hasNext()) {this.it = jugadores.iterator();}
+            this.jugadorActual= this.it.next();
+        }
+
+
+    }
+
+
+
 
     public void pasarTurno () {
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
