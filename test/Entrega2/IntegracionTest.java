@@ -1,15 +1,12 @@
 package Entrega2;
 
-import fiuba.algo3.aoe.Juego.Turno;
+import fiuba.algo3.aoe.Juego.Turno.Turno;
 import fiuba.algo3.aoe.Jugador.ObservadorDeJugadorFicticio;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IntegracionTest {

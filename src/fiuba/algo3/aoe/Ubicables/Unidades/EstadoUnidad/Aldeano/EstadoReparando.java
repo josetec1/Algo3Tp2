@@ -9,7 +9,6 @@ import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
 
 public class EstadoReparando implements IEstadoUnidadAldeano {
 
-//private Edificio edificioEnReparacion;
 
         public EstadoReparando(Aldeano aldeano, Edificio unEdificio){
             unEdificio.repararCon(aldeano);
@@ -31,12 +30,7 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
         return false;
     }
 
-/*
-    @Override
-    public Boolean podesMoverte() {
-        return false;
-    }
-*/
+
     @Override
     public void reparar(Aldeano unidad, Edificio unEdificio) {
         throw new AldeanoOcupadoException();
@@ -45,6 +39,6 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
 
     @Override
     public void pasarTurno(Aldeano aldeano, Jugador unJugador){
-        //no hacer nada
+        //no hacer nada lo libera el edificio
     }
 }

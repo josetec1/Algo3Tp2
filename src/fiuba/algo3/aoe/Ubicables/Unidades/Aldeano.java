@@ -1,21 +1,16 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
-
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionInvalidaException;
 
 public class Aldeano extends UnidadMovil  {
 
     private IEstadoUnidadAldeano estado;
-
     private final int VIDA_MAXIMA = 50;
     private final int COSTO = 25;
 
@@ -26,6 +21,53 @@ public class Aldeano extends UnidadMovil  {
         this.estado = new EstadoLibreYRecolectando();
     }
 
+
+    @Override
+    public void mover(Mapa mapa, Direccionable direccion) {
+        this.estado.mover(this, mapa,direccion);//TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
+    }
+
+    public boolean estasDisponible (){return this.estado.estasDisponible();}
+
+    public void construirEdificio (Edificio edificio, Mapa mapa, Jugador jugador, Posicion posicion){
+
+        if (!jugador.esMio(this)) {throw new NoEsMiJugadorException();}
+
+        //TODO refactor... estas 2 preguntas de abajo podrian ir dentro del estado, pero hay que pasar 20 mil parametros
+        if (!jugador.puedoAgregar(edificio)){throw new EdificioYaAgregadoException();}
+        if (!mapa.puedoColocar(posicion,edificio.getTamanio())){throw new PosicionInvalidaException();}
+        // TODO ................................
+
+        this.estado.construir(this,edificio);
+
+        mapa.colocar(edificio,posicion);
+    }
+
+    //TODO verificar que el edificio se tenga que reparar
+    public void reparar (Edificio unEdificio){ this.estado.reparar(this,unEdificio); }
+
+
+
+    // no usar desde afuera.
+    public void cambiarAContruyendo(){
+        this.estado= new EstadoConstruyendo();
+    }
+
+    public void cambiarARecolectando(){this.estado= new EstadoLibreYRecolectando();}
+
+    public void cambiarAMoviendose() {
+        this.estado = new EstadoMoviendoseYRecolectando();
+    }
+
+    public void cambiarAReparando(Edificio unEdificio) {
+        this.estado = new EstadoReparando(this, unEdificio);}
+
+
+
+    @Override
+    public void huboUnCambioDeTurno(Jugador jugador) {
+        this.estado.pasarTurno(this, jugador);
+    }
     public int getVidaMaxima(){
         return this.vidaMaxima;
     }
@@ -38,17 +80,8 @@ public class Aldeano extends UnidadMovil  {
 
     public void entregarElOro (Jugador jugador){jugador.sumarOro(20);}
 
+}
 
-    //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
-    @Override
-    public void mover(Mapa mapa, Direccionable direccion) {
-        this.estado.mover(this, mapa,direccion);
-    }
-
-    @Override
-    public void huboUnCambioDeTurno(Jugador jugador) {
-        this.estado.pasarTurno(this, jugador);
-    }
 
 /*
     //Antes de llamar a este metodo hay que preguntar si el aldeano esta disponible!
@@ -73,45 +106,3 @@ public class Aldeano extends UnidadMovil  {
         return cuartel;
     }
  */
-
-    public void construirEdificio (Edificio edificio, Mapa mapa, Jugador jugador, Posicion posicion){
-
-        if (!jugador.esMio(this)) {throw new UnidadSinPosicionException();}
-        if (!jugador.puedoAgregar(edificio)){throw new UnidadSinPosicionException();}
-        if (!mapa.puedoColocar(posicion,edificio.getTamanio())){throw new UnidadSinPosicionException();}
-        this.estado.construir(this,edificio);
-        mapa.colocar(edificio,posicion);
-
-
-    }
-
-    //TODO verificar que el edificio se tenga que reparar
-    public void reparar (Edificio unEdificio){
-       this.estado.reparar(this,unEdificio);
-    }
-
-
-
-    // no usar desde afuera.
-    public void cambiarAContruyendo(){
-        this.estado= new EstadoConstruyendo();
-    }
-
-    public void cambiarARecolectando(){this.estado= new EstadoLibreYRecolectando();}
-
-    public void cambiarAMoviendose() {
-        this.estado = new EstadoMoviendoseYRecolectando();
-    }
-
-    public void cambiarAReparando(Edificio unEdificio) {
-        this.estado = new EstadoReparando(this, unEdificio);
-
-    }
-
-
-
-
-
-    public boolean estasDisponible (){return this.estado.estasDisponible();}
-
-}

@@ -1,4 +1,4 @@
-package fiuba.algo3.aoe.Juego;
+package fiuba.algo3.aoe.Juego.Turno;
 
 
 public abstract class ModoInicio {

@@ -87,40 +87,54 @@ public class AldeanoTest {
 /*   ******************************************************************
                        PRUEBAS DE CONSTRUCCION
       ***************************************************************   */
-/*
 
+/*
     @Test
     public void test07ConstruirEdificioDevuelveElEdificioEnEstadoDeConstruccion (){
 
         Aldeano aldeano = new Aldeano();
         Aldeano aldeano2 = new Aldeano();
+        PlazaCentral unaPlaza = new PlazaCentral();
+        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
 
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
         Cuartel cuartel = aldeano2.crearCuartel () ;
 
-        //TODO este test hay que verificarlo mandandole el mensaje de construir al edificio y capturando excepcion
+
         Assert.assertThat (unaPlaza.estaEnConstruccion(),is(true));
         Assert.assertThat (cuartel.estaEnConstruccion(),is(true));
     }
 
-
+*/
 
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Test
     public void test08ConstruirEdificioSiEstaConstruyendoDebeLanzarExcepcion (){
+        Mapa mapa = Mockito.mock(Mapa.class);
+        Jugador jugador = Mockito.mock(Jugador.class);
 
+        Posicion posicion = new Posicion(2,2);
+        PlazaCentral unaPlaza = Mockito.mock(PlazaCentral.class);
+        Mockito.when(unaPlaza.getTamanio()).thenReturn(1);
         Aldeano aldeano = new Aldeano();
-        PlazaCentral unaPlaza = aldeano.crearPlazaCentral () ;
+
+        Mockito.when(jugador.esMio(any())).thenReturn(true);
+        Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
+        Mockito.when(mapa.puedoColocar(posicion,1)).thenReturn(true);
+
+        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+
+        Cuartel cuartel = Mockito.mock(Cuartel.class);
+        Mockito.when(cuartel.getTamanio()).thenReturn(1);
 
         thrown.expect(AldeanoOcupadoException.class);
-        Cuartel cuartel = aldeano.crearCuartel () ;
+        aldeano.construirEdificio(cuartel,mapa,jugador,posicion);
     }
 
 
 
-
+/*
     @Test
     public void test09EstasDisponibleDebeDarFalseAlConstruirEdificio (){
 
