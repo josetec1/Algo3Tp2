@@ -1,64 +1,34 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 
 public class Cuartel extends Edificio {
     private final int TAMANIO = 2;
+    private final int  TURNOSPARACONSTRUCCION = 3;
+    private final int CURACION = 50;
 
     public Cuartel( ){
         this.costo = 50;
         this.vidaMaxima = 250;
         this.vidaActual = 250;
         this.tamanio = TAMANIO;
-        this.estado = new EstadoEnConstruccion(3);
+        this.estado = new EstadoAConstruir ();
+
     }
 
-    public void reparar(Aldeano aldeano){
-        if(estado.enConstruccion()){
-            throw new EdificioSinDaniarException();
-        }
-        if(!this.estaDaniado()){
-            throw new EdificioSinDaniarException();
-        }
-        if (estado.enReparacion()){
-            estado.reparar(this, aldeano);
-        }else {
-            this.aumentarVida(50);
-            this.estado = new EstadoEnReparacion(50);
-        }
+    public void comenzarConstruccion(Aldeano aldeano){
+        estado = new EstadoEnConstruccion (aldeano,this.TURNOSPARACONSTRUCCION);
     }
+
+    public void comenzarReparacion(Aldeano aldeano){}
 
     @Override
-    public void repararCon(Aldeano aldeano) {
-        //todo
-    }
-
-    public Espadachin construirEspadachin(Jugador jugador){
-        if (!estado.puedoConstruirUnidad()){
-            throw new NoSePuedeConstruirEnEsteMomentoException();
-        }
-        Espadachin espadachin =  new Espadachin();
-        //jugador.descontarOro(espadachin.getCosto());
-        return espadachin;
-    }
-
-    public Arquero construirArquero(Jugador jugador){
-        if (!estado.puedoConstruirUnidad()){
-            throw new NoSePuedeConstruirEnEsteMomentoException();
-        }
-        Arquero arquero = new Arquero();
-       // jugador.descontarOro(arquero.getCosto());
-        return arquero;
-
-    }
-
-    @Override
-    public void huboUnCambioDeTurno(Jugador unJugador) {
-
+    public void huboUnCambioDeTurno ( Jugador jugador ) {
+        this.estado.nuevoTurno(this,CURACION);
     }
 }

@@ -13,7 +13,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
     @Override
     public void construir(Aldeano unAldeano, Edificio unEdificio) {
 
-        unEdificio.construir(unAldeano); //TODO aca habria que preguntar si se puede construir. pero
+        unEdificio.comenzarConstruccion(unAldeano); //TODO aca habria que preguntar si se puede construir. pero
         unAldeano.cambiarAContruyendo();
     }
 
@@ -36,7 +36,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
     @Override
     public void reparar(Aldeano aldeano, Edificio unEdificio) {
         //TODO refactor la pregunta de abajo
-        if (!unEdificio.estaDaniado()||unEdificio.estaEnConstruccion()||unEdificio.estaEnReparacion()) {throw new NoSePuedeRepararException();}
+        if (!unEdificio.puedoReparar()) {throw new NoSePuedeRepararException();}
 
         aldeano.cambiarAReparando(unEdificio);
 

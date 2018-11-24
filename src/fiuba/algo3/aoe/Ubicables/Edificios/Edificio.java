@@ -12,14 +12,14 @@ public abstract class Edificio implements Manipulable {
     protected int vidaActual;
     protected Posicion posicion;
     protected int costo;
-    protected EstadoEdificio estado;
     protected int tamanio;
+    protected EstadoEdificio estado ;
 
     public int getCosto () {
         return this.costo;
     }
 
-    public int getTamanio (){
+    public int getTamanio () {
         return this.tamanio;
     }
 
@@ -45,46 +45,46 @@ public abstract class Edificio implements Manipulable {
             this.vidaActual = 0;
         }
     }
-    public void aumentarVida(int unaCantidad){
-        if (vidaActual>=vidaMaxima){
+
+    public void aumentarVida ( int unaCantidad ) {
+        if (vidaActual >= vidaMaxima) {
             vidaActual = vidaMaxima;
-            this.estado = new EstadoNormal();
             return;
         }
         vidaActual += unaCantidad;
     }
 
-
-
-    public void construir(Aldeano aldeano){
-        try {
-            this.estado.construir(this, aldeano);
-        }catch (EdificioConstruidoException e){
-            this.estado = new EstadoNormal();
-        }
-    }
-
-
-
-    public boolean estaEnConstruccion (){
-        return this.estado.enConstruccion();
-    }
-    public boolean estaEnReparacion (){
-        return this.estado.enReparacion();
-    }
-
-    public boolean estaDaniado () {
-        return (this.vidaActual < this.vidaMaxima && this.vidaActual > 0);
-    }
-
-    public void serAtacadoPor(Atacante unAtacante) {
+    public void serAtacadoPor ( Atacante unAtacante ) {
 
         this.disminuirVida(unAtacante.getDanioEdificio());
     }
 
-    public abstract void repararCon(Aldeano aldeano);
-            //TODO, aca el edificio aplica una sanacion.
-            //se guarda al aldeano
-            // se fija si ya sano, y en aso de que si hace aldeano.cambiarARecolectando()
+    public abstract void comenzarConstruccion(Aldeano aldeano);
 
+    public abstract void comenzarReparacion(Aldeano aldeano);
+
+    public boolean puedoReparar(){
+        return this.estado.puedoReparar();
+    }
+
+    public boolean puedoConstruir(){
+        return this.estado.puedoConstruir ();
+    }
+
+    public boolean puedocrearUnidad(){
+        return this.estado.puedoCrearUnidad();
+    }
+
+
+    public void finalizarConstruccion (){
+        this.estado = new EstadoNormal ();
+    }
+
+    public void reparar(Aldeano aldeano){
+        this.estado.reparar ( this,aldeano );
+    }
+
+    public void construir(Aldeano aldeano){
+        this.estado.construir ( this,aldeano );
+    }
 }

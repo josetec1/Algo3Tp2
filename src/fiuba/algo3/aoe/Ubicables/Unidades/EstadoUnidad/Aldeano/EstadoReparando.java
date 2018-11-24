@@ -11,7 +11,7 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
 
 
         public EstadoReparando(Aldeano aldeano, Edificio unEdificio){
-            unEdificio.repararCon(aldeano);
+            unEdificio.comenzarReparacion(aldeano);
 
         }
 

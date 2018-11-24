@@ -1,36 +1,37 @@
 package fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable;
 
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruidoException;
-import fiuba.algo3.aoe.Ubicables.Edificios.EdificioSinDaniarException;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 
 public class EstadoEnReparacion implements EstadoEdificio {
-    private int cantidad;
+    private Aldeano aldeano;
 
-    public EstadoEnReparacion(int unaCantidad){
-        this.cantidad = unaCantidad;
+    public EstadoEnReparacion( Aldeano aldeano){
+        this.aldeano = aldeano;
     }
 
-    public boolean enReparacion () {
-        return true;
-    }
-
-    public boolean enConstruccion () {
+    public boolean puedoConstruir(){
         return false;
     }
 
-    public void construir ( Edificio edificio, Aldeano aldeano ) {
-        throw new EdificioConstruidoException();
-    }
-
-    public boolean puedoConstruirUnidad () {
+    public boolean puedoReparar(){
         return false;
     }
 
-    public void reparar ( Edificio edificio, Aldeano aldeano ) {
-        edificio.aumentarVida(this.cantidad);
+
+    public void construir( Edificio edificio, Aldeano aldeano ){
+        throw new EdificioEnConstruccionException();
     }
 
+    public void reparar(Edificio edificio,Aldeano aldeano){
+        throw new EdificioEnReparacionException();
+    }
+
+    public void nuevoTurno (Edificio edificio,int curacion) {
+        edificio.aumentarVida (curacion);
+    }
+
+    public boolean puedoCrearUnidad(){
+        return false;
+    }
 }
