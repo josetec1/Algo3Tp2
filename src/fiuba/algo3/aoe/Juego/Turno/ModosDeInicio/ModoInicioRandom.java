@@ -1,5 +1,7 @@
-package fiuba.algo3.aoe.Juego.Turno;
+package fiuba.algo3.aoe.Juego.Turno.ModosDeInicio;
 
+
+import fiuba.algo3.aoe.Juego.Turno.TipoOrden;
 
 import java.util.Random;
 

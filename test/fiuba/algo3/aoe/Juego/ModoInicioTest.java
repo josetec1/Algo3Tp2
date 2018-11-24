@@ -1,18 +1,20 @@
 package fiuba.algo3.aoe.Juego;
 
-import fiuba.algo3.aoe.Juego.Turno.ModoInicio;
-import fiuba.algo3.aoe.Juego.Turno.ModoInicioEspecifico;
-import fiuba.algo3.aoe.Juego.Turno.ModoInicioRandom;
+import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicio;
+import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioEspecifico;
+import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioRandom;
 import fiuba.algo3.aoe.Juego.Turno.TipoOrden;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static fiuba.algo3.aoe.Juego.Turno.TipoOrden.FIRST;
 
 public class ModoInicioTest {
 
     @Test
     public void test01AlCrearModoInicioEspecificoConFirstGetOrdenDebeDevolverCero(){
 
-        ModoInicio modo = new ModoInicioEspecifico(TipoOrden.FIRST);
+        ModoInicio modo = new ModoInicioEspecifico(FIRST);
         Assert.assertEquals(modo.getOrden(),0);
 
     }
