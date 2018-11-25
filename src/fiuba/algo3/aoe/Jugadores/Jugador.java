@@ -1,9 +1,14 @@
 package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.EstadoJugador.EstadoJugador;
-
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorIniciado;
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorSinIniciar;
+import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorYaIniciadoException;
 import fiuba.algo3.aoe.Ubicables.Atacable;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 
 import java.util.ArrayList;
@@ -13,22 +18,39 @@ public class Jugador implements ObservableJugador{
 
     private String nombre;
     private int oro;
-    private EstadoJugador estado; // todo sacar
+    private EstadoJugador estadoInicial;
     private List<Manipulable> unidades;
     private List<Manipulable> edificios;
     private ArrayList<ObservadorJugador> observadores;
 
     private final int POBLACION_MAXIMA = 50;
     private final int ORO_INICIAL = 100;
+    private final int ALDEANOS_INICIALES = 3;
 
-    public Jugador(String nombre){  //TODO constructor sin mapa... me parece que el mapa no va
+
+    public Jugador(String nombre, Castillo castillo){
         this.nombre = nombre;
         this.oro = ORO_INICIAL;
         this.unidades = new ArrayList<>();
         this.edificios = new ArrayList<>();
+        this.estadoInicial = new JugadorSinIniciar();
         this.observadores = new ArrayList<>();
 
     }
+
+    public void inicializar (PlazaCentral plaza , ArrayList<Aldeano> listaAldeanos){
+       if (this.estadoInicial.iniciado()) {throw new JugadorYaIniciadoException();}
+       if (!(listaAldeanos.size()==ALDEANOS_INICIALES)){throw new CantidadIncorrectaAldeanosException();}
+       if (esMio(plaza)) {throw new PiezaYaAgregadaException();}
+
+         for (Aldeano aldeano: listaAldeanos){
+             if (esMio(aldeano)) {throw new PiezaYaAgregadaException();}
+             this.unidades.add(aldeano);
+         }
+        this.edificios.add(plaza);
+        this.estadoInicial = new JugadorIniciado();
+    }
+
     public String getNombre(){return this.nombre;}
 
     public Boolean puedoAgregar(UnidadMovil pieza){

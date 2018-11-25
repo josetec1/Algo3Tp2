@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -13,11 +14,11 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 
 public class UbicableTest {
-
+    private Castillo castillo= new Castillo();
     @Test
     public void test01AlColocarUnUbicableEnelTableroCambiaLaPosicionDelUbicableYEnElTablero(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable lanzaPiedras = new ArmaDeAsedio();
         Posicion origen = new Posicion(2,5);
         mapa.colocar(lanzaPiedras,origen);
@@ -31,7 +32,7 @@ public class UbicableTest {
     @Test
     public void test02MoverCambiaLaPosicionEnElTableroYElUbicableQuedaConLaNuevaPosicion(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         UnidadMovil lanzaPiedras = new ArmaDeAsedio();
         Direccionable direccion = new DireccionDerecha();
 

@@ -1,10 +1,9 @@
 package fiuba.algo3.aoe.Mapa;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.NoSePuedeRepararException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
@@ -15,7 +14,7 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.CoreMatchers.is;
 
 public class MapaTest {
-
+    private Castillo castillo= new Castillo();
 
     @Test
     public void test01AlCrearElTableroPuedoColocarDeberiaDarTrueSiLaPosicionPerteneceAlTablero() {
@@ -49,7 +48,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
@@ -61,7 +60,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(1,1);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         Assert.assertEquals( mapa.puedoColocar(posicion,elemento.getTamanio()), true );
         mapa.colocar(elemento,posicion);
@@ -78,7 +77,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         thrown.expect(FueraDelMapaException.class);
         mapa.colocar(elemento,posicionFueraDeTablero);
@@ -93,7 +92,7 @@ public class MapaTest {
 
         Posicion posicionSuperpuesta = new Posicion(60,66);
 
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         Ubicable elementoSuperpuesto = new Aldeano();
         mapa.colocar(elemento,unaPosicion);
@@ -110,7 +109,7 @@ public class MapaTest {
         Posicion unaPosicion = new Posicion(3,3);
         Posicion otraPosicion = new Posicion(4,4);
 
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,unaPosicion);
 
@@ -125,7 +124,7 @@ public class MapaTest {
         posicion.agregar(new Cuadrante(1,2));
         posicion.agregar(new Cuadrante(2,2));
         posicion.agregar(new Cuadrante(2,1));
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
@@ -136,7 +135,7 @@ public class MapaTest {
     public void test10RemoverDebeLanzarExcepcionSiElElementoNoFueColocadoPreviamente(){
 
         Mapa mapa = new Mapa( 10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento= new Aldeano();
 
 
@@ -149,7 +148,7 @@ public class MapaTest {
     public void test11RemoverRemueveElElementoColocadoPreviamente(){
 
         Mapa mapa = new Mapa( 10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Posicion unaPosicion = new Posicion(3,3);
         Ubicable elemento= new Aldeano();
 
@@ -164,7 +163,7 @@ public class MapaTest {
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Mapa mapa = new Mapa( 10,10);
         Posicion posicion = new Posicion(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
 
 
         Posicion posicionFueraDeMapa =new Posicion (11,10);
@@ -182,7 +181,7 @@ public class MapaTest {
         Posicion posicionInicial = new Posicion(9,10);
 
         Posicion posicionDestino = new Posicion(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicionInicial);
 
@@ -199,7 +198,7 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
 
         Posicion unaPosicion = new Posicion(3,3);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento= new Aldeano();
 
 
@@ -216,7 +215,7 @@ public class MapaTest {
 
         Posicion posicionInicial = new Posicion(9,10);
         Posicion posicionDestino = new Posicion(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicionInicial);
 

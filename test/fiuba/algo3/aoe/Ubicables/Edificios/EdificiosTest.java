@@ -253,10 +253,11 @@ public class EdificiosTest {
 
     @Test
     public void test26CuartelCrearEspadachinCreaSeagregaEspadachinAJugadorYSeColocaEnElMapa(){
+        Castillo castillo = new Castillo();
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio" );
+        Jugador jugador = new Jugador ( "Mauricio",castillo );
         Posicion posicion = new Posicion ( 2,2 );
         cuartel.crearEspadachin ( jugador,mapa,posicion );
 
@@ -266,10 +267,11 @@ public class EdificiosTest {
 
     @Test
     public void test27CuartelCrearArqueroCreaSeagregaArqueroAJugadorYSeColocaEnElMapa(){
+        Castillo castillo = new Castillo();
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio" );
+        Jugador jugador = new Jugador ( "Mauricio", castillo);
         Posicion posicion = new Posicion ( 2,2 );
         cuartel.crearArquero ( jugador,mapa,posicion );
 
@@ -278,10 +280,11 @@ public class EdificiosTest {
 
     @Test
     public void test28PlazaCrearAldeanoCreaSeagregaAldeanoAJugadorYSeColocaEnElMapa(){
+        Castillo castillo = new Castillo();
         PlazaCentral plazaCentral= new PlazaCentral ();
         plazaCentral.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio" );
+        Jugador jugador = new Jugador ( "Mauricio",castillo );
         Posicion posicion = new Posicion ( 2,2 );
         plazaCentral.crearAldeano ( jugador,mapa,posicion);
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
@@ -289,9 +292,10 @@ public class EdificiosTest {
 
     @Test
     public void test29PlazaCrearArmaDeASedioCreaSeagregaArmaDeAsedioAJugadorYSeColocaEnElMapa(){
+
         Castillo castillo= new Castillo ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio" );
+        Jugador jugador = new Jugador ( "Mauricio",castillo );
         jugador.sumarOro ( 100 );
         Posicion posicion = new Posicion ( 2,2 );
         castillo.crearArmaDeAsedio (jugador,mapa,posicion);

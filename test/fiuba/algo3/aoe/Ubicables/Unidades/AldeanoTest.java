@@ -4,7 +4,6 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.*;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.NoSePuedeRepararException;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -17,7 +16,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class AldeanoTest {
-
+    private Castillo castillo= new Castillo ();
     @Test
     public void test01SeCreaCorrectamenteAldeano(){
         Mapa mapa = new Mapa(10,10);
@@ -31,7 +30,7 @@ public class AldeanoTest {
     @Test
     public void test02AldenoDisminuir25VidaDevuelveVida25(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio", castillo);
         Aldeano aldeano = new Aldeano();
         aldeano.disminuirVida(25);
         Assert.assertEquals(aldeano.getVidaActual(),25);
@@ -40,7 +39,7 @@ public class AldeanoTest {
     @Test
     public void test03AlCrearAldeanoEsteEstaDisponible(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio",castillo );
         Aldeano aldeano = new Aldeano();
 
         Assert.assertTrue(aldeano.estasDisponible());
@@ -49,7 +48,7 @@ public class AldeanoTest {
     @Test
     public void test04AlCrearAldeanoEsteSePuedeMover(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio");
+        Jugador jugador = new Jugador("Mauricio",castillo );
         Aldeano aldeano = new Aldeano();
 
         Assert.assertTrue(aldeano.estasDisponible());

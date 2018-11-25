@@ -27,9 +27,10 @@ public class Castillo extends Edificio implements Atacante {
     }
 
     public int getCosto(){
-        return this.costo;
-        //throw new EdificioNoConstruibleSinCostoException();
+       // return this.costo;
+        throw new EdificioNoConstruibleSinCostoException(); //TODO esto hay que refactorizarlo
     } // TODO necesito que devuelva 0
+      //TODO esto esta mal, si el castillo no tiene costo entonces no se cumple  "es un" edificio que tiene costo"
 
     public void comenzarConstruccion(Aldeano aldeano){
         throw new EdificioNoConstruibleSinCostoException ();

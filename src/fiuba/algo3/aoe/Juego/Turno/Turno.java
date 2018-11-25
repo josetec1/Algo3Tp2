@@ -50,7 +50,7 @@ public class Turno {
      }
 
 
-    public Jugador getJugadorActual () {  //Todo este metodo es necesario?
+    public Jugador getJugadorActual () {
         return this.jugadorActual;
     }
 

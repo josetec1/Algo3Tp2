@@ -2,6 +2,7 @@ package Entrega2;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
@@ -27,6 +28,7 @@ public class AtaqueTest {
     private Edificio plazaCentralEnemiga;
     private Edificio cuartelEnemigo;
     private UnidadMovil aldeanoEnemigo;
+    private Castillo castillo;
 
     /***************** PRUEBAS ARQUERO ATACANDO *******************************************/
 
@@ -34,8 +36,8 @@ public class AtaqueTest {
     public void setUp(){
 
         mapa = new Mapa(50, 50);
-        jugadorAtacante = new Jugador("Jose");
-        jugadorEnemigo = new Jugador ("Maria");
+        jugadorAtacante = new Jugador("Diego", castillo);
+        jugadorEnemigo = new Jugador ("Maradona",castillo );
 
         jugadorAtacante.sumarOro(3000);
         jugadorEnemigo.sumarOro(3000);

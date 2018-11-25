@@ -2,6 +2,8 @@ package fiuba.algo3.aoe.Juego;
 
 import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioRandom;
 import fiuba.algo3.aoe.Juego.Turno.Turno;
+import fiuba.algo3.aoe.Juego.estadoJuego.Ipartida;
+import fiuba.algo3.aoe.Juego.estadoJuego.SinIniciar;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
@@ -12,53 +14,65 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import java.util.ArrayList;
 
 public class JuegoAoE {
-
+/*
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private Mapa mapa;
     private Turno turno;
+    private Ipartida partida;
 
-    public JuegoAoE(Jugador jugador1, Jugador jugador2) {
-
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-
-        turno = new Turno(jugadores, new ModoInicioRandom());
-
+    public JuegoAoE() {
+        this.partida= new SinIniciar();
     }
 
-    public boolean contieneJugadores() {
 
-        if(jugadores.size() == 2) return true;
-        return false;
-    }
 
-    public void inicializar(int anchoMapa, int altoMapa) {
+    public void inicializar(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
 
         mapa = new Mapa(anchoMapa, altoMapa);
 
+        //Variables auxiliares
         Aldeano aldeano;
         Castillo castillo;
         PlazaCentral plazaCentral;
+        Jugador j1;
+        Jugador j2;
 
-        Jugador jugador1 = jugadores.get(0);
-        Jugador jugador2 = jugadores.get(1);
-
-        jugador1.sumarOro(275);
-        jugador2.sumarOro(275);
+        //Inicializo jugador 1
         castillo = new Castillo();
         castillo.colocarEn(new Posicion(7,7));
-        jugador1.agregarPieza(castillo);
-
+        j1= new Jugador(jugador1,castillo);
+        //agrego plaza central
         plazaCentral = new PlazaCentral();
         plazaCentral.colocarEn(new Posicion(3,3));
-        jugador1.agregarPieza(plazaCentral);
-
+        j1.agregarPieza(plazaCentral);
+        //agrego aldeanos
         for(int i = 0; i<3; i++){
-             aldeano= new Aldeano();
-             aldeano.colocarEn(new Posicion(2 + i, 6));
-             jugador1.agregarPieza(aldeano);
-
+            aldeano= new Aldeano();
+            aldeano.colocarEn(new Posicion(2 + i, 6));
+            j1.agregarPieza(aldeano);
         }
+
+        this.jugadores.add(j1);
+
+
+
+
+
+
+
+
+        this.jugadores.add(jugador2);
+        this.turno = new Turno(jugadores, new ModoInicioRandom());
+
+
+
+
+
+
+
+
+
+
 
         castillo = new Castillo();
         castillo.colocarEn(new Posicion (anchoMapa- 6, altoMapa - 6));
@@ -77,11 +91,12 @@ public class JuegoAoE {
 
     }
 
-    public Jugador jugadorActual() {
+    public Jugador getJugadorActivo() {
         return turno.getJugadorActual();
     }
 
     public void pasarJugada() {
+
         turno.pasarTurno();
-    }
+    }*/
 }
