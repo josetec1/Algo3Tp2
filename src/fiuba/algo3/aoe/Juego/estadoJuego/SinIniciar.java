@@ -1,6 +1,6 @@
 package fiuba.algo3.aoe.Juego.estadoJuego;
 
-import fiuba.algo3.aoe.Juego.JuegoAOE;
+import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class SinIniciar implements Ijuego {
     @Override
-    public void iniciar(String jugador1, String jugador2, int anchoMapa, int altoMapa, JuegoAOE juego) {
+    public void iniciar(String jugador1, String jugador2, int anchoMapa, int altoMapa, Juego juego) {
 
         Mapa mapa= new Mapa(anchoMapa, altoMapa);
         ArrayList<Jugador>jugadores = new ArrayList<>();

@@ -1,5 +1,4 @@
 package fiuba.algo3.aoe.Juego;
-
 import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioRandom;
 import fiuba.algo3.aoe.Juego.Turno.Turno;
 import fiuba.algo3.aoe.Juego.estadoJuego.EnCurso;
@@ -10,14 +9,14 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 
 import java.util.ArrayList;
 
-public class JuegoAOE {
+public class Juego {
 
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private Mapa mapa;
     private Turno turno;
     private Ijuego juego;
 
-    public JuegoAOE() {
+    public Juego() {
         this.juego= new SinIniciar();
     }
 

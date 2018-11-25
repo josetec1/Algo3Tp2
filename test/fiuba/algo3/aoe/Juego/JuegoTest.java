@@ -1,13 +1,11 @@
 package fiuba.algo3.aoe.Juego;
 
 import fiuba.algo3.aoe.Juego.estadoJuego.JuegoNoIniciadoException;
-import fiuba.algo3.aoe.Jugadores.Jugador;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class JuegoAOETest {
+public class JuegoTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -15,7 +13,7 @@ public class JuegoAOETest {
     @Test
     public void test01PasarJugadaDebeLanzarExcepcionSiNoEmpezoElJuego(){
 
-        JuegoAOE juego = new JuegoAOE();
+        Juego juego = new Juego();
         thrown.expect(JuegoNoIniciadoException.class);
         juego.pasarJugada();
     }
@@ -23,7 +21,7 @@ public class JuegoAOETest {
     @Test  //TODO OJO CON LOS MINIMOS DEL MAPA
     public void test02EmpiezaElJuegoCorrectamente(){
 
-        JuegoAOE juego = new JuegoAOE();
+        Juego juego = new Juego();
         juego.empezar("Maradona","Messi",500,500);
        // thrown.expect(JuegoNoIniciadoException.class);
         //juego.e();

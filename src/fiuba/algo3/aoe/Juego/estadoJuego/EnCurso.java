@@ -1,11 +1,11 @@
 package fiuba.algo3.aoe.Juego.estadoJuego;
 
-import fiuba.algo3.aoe.Juego.JuegoAOE;
+import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 
 public class EnCurso implements Ijuego {
     @Override
-    public void iniciar(String jugador1, String jugador2, int anchoMapa, int altoMapa, JuegoAOE juego) {
+    public void iniciar(String jugador1, String jugador2, int anchoMapa, int altoMapa, Juego juego) {
 
     }
 
