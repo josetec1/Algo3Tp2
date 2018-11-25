@@ -35,6 +35,7 @@ public class Jugador implements ObservableJugador{
         this.edificios = new ArrayList<>();
         this.estadoInicial = new JugadorSinIniciar();
         this.observadores = new ArrayList<>();
+        this.edificios.add(castillo);
 
     }
 
