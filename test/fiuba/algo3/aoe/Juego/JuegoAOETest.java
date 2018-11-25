@@ -1,35 +1,34 @@
 package fiuba.algo3.aoe.Juego;
 
+import fiuba.algo3.aoe.Juego.estadoJuego.JuegoNoIniciadoException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-public class JuegoAoETest {
-    private Castillo castillo= new Castillo();
-    private Jugador jugador1;
-    private Jugador jugador2;
-    private JuegoAoE juego;
-/*
-    @Before
-    public void setUp(){
+public class JuegoAOETest {
 
-        jugador1 = new Jugador("pepe",castillo );
-        jugador2 = new Jugador("Maria",castillo );
-
-        juego = new JuegoAoE(jugador1, jugador2);
-
-    }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void test01JuegoCreado(){
+    public void test01PasarJugadaDebeLanzarExcepcionSiNoEmpezoElJuego(){
 
-        juego = new JuegoAoE(jugador1, jugador2);
-
-        Assert.assertTrue(juego.contieneJugadores());
+        JuegoAOE juego = new JuegoAOE();
+        thrown.expect(JuegoNoIniciadoException.class);
+        juego.pasarJugada();
     }
 
+    @Test  //TODO OJO CON LOS MINIMOS DEL MAPA
+    public void test02EmpiezaElJuegoCorrectamente(){
+
+        JuegoAOE juego = new JuegoAOE();
+        juego.empezar("Maradona","Messi",500,500);
+       // thrown.expect(JuegoNoIniciadoException.class);
+        //juego.e();
+    }
+/*
     @Test
     public void test02InicializarJuegoLosJugadoresComienzanCon5Piezas(){
 
