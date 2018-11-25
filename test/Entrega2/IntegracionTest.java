@@ -26,7 +26,7 @@ public class IntegracionTest {
     @Before
     public void inicializacion (){
 
-        mapa = new Mapa(ANCHOMAPA, ALTOMAPA);
+
         jugador1 = new Jugador("Jorge", mapa);
         jugador2 = new Jugador("Maria", mapa);
 
@@ -34,7 +34,7 @@ public class IntegracionTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
-        turno = new Turno(jugadores);
+
 
         observadorJugador1 = new ObservadorDeJugadorFicticio();
         observadorJugador2 = new ObservadorDeJugadorFicticio();

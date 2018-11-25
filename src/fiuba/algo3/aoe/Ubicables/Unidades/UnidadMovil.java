@@ -2,11 +2,12 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public abstract class UnidadMovil implements Manipulable {
+public abstract class UnidadMovil implements Manipulable, Atacable {
     private final int TAMANIO = 1;
     protected Posicion posicion;
     protected int vidaMaxima;

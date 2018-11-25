@@ -1,16 +1,15 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionInvalidaException;
 
 public class Castillo extends Edificio implements Atacante {
     private final int TAMANIO = 4;
@@ -28,8 +27,9 @@ public class Castillo extends Edificio implements Atacante {
     }
 
     public int getCosto(){
-        throw new EdificioNoConstruibleSinCostoException();
-    }
+        return this.costo;
+        //throw new EdificioNoConstruibleSinCostoException();
+    } // TODO necesito que devuelva 0
 
     public void comenzarConstruccion(Aldeano aldeano){
         throw new EdificioNoConstruibleSinCostoException ();
@@ -40,7 +40,11 @@ public class Castillo extends Edificio implements Atacante {
     }
 
 
-    public void atacar(Atacable unAtacable) {
+    public void atacar(Atacable unAtacable, Jugador jugadorAtacante) {
+
+        if(!jugadorAtacante.esMio(this))
+            throw new NoEsMiJugadorException(); //TODO reeveer excepcion
+
         if(distanciaAtaque >= posicion.distancia(unAtacable.getPosicion()))
             unAtacable.serAtacadoPor(this);
     }
