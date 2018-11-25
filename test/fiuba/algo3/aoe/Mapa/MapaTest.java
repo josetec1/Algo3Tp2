@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Mapa;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.NoSePuedeRepararException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -25,14 +26,7 @@ public class MapaTest {
         Assert.assertThat( mapa.puedoColocar(posicionDentroDeTablero,1), is( true ) );
    }
 
-   @Test
-   public void testprueba(){
-       ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
-       Mapa mapa = new Mapa ( 200,200 );
-       Posicion posicion = new Posicion ( 2,2 );
-       mapa.colocar ( armaDeAsedio,posicion );
-       Assert.assertFalse (mapa.puedoColocar ( posicion,1 ));
-   }
+
 
     @Test
     public void test02AlCrearElTableroPuedoColocarDeberiaDarFalseSiLaPosicionNoPerteneceAlTablero() {
@@ -166,25 +160,6 @@ public class MapaTest {
 
     }
 
-
-/*
-    @Test
-   public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
-        Mapa tablero = new Mapa( 10,10);
-        Posicion posicion = new Posicion(10,10);
-
-
-        Ubicable elemento = new UnidadMovil();
-        tablero.colocar(elemento,posicion);
-        Direccionable derecha = new DireccionDerecha();
-
-
-
-       thrown.expect(FueraDeTableroException.class);
-       tablero.moverElemento(elemento,derecha);
-   }
-*/
-
     @Test
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Mapa mapa = new Mapa( 10,10);
@@ -192,13 +167,13 @@ public class MapaTest {
         Jugador jugador = new Jugador("Mauricio");
 
 
-        Posicion posicionDestino =new Posicion (11,10);
+        Posicion posicionFueraDeMapa =new Posicion (11,10);
 
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento,posicion);
 
-        thrown.expect(FueraDelMapaException.class);
-        mapa.moverElemento(elemento,posicionDestino);
+        thrown.expect(NoSePuedeMoverElElementoException.class);
+        mapa.moverElemento(elemento,posicionFueraDeMapa);
     }
 
     @Test
@@ -248,9 +223,36 @@ public class MapaTest {
         Ubicable elemento2 = new Aldeano();
         mapa.colocar(elemento2,posicionDestino);
 
-        thrown.expect(PosicionDelMapaOcupadaException.class);
+        thrown.expect(NoSePuedeMoverElElementoException.class);
         mapa.moverElemento(elemento,posicionDestino);
    }
+
+    @Test
+    public void test16MoverNoRetiraElElementoSiNoPuedeMoverlo(){
+
+        Mapa mapa = new Mapa( 20,20);
+        Posicion posicionInicial = new Posicion(5,5);
+        Posicion posicionDestino = new Posicion(10,10);
+        Posicion posicionLibre = new Posicion(7,7);
+
+        Ubicable elemento = new Aldeano();
+        mapa.colocar(elemento,posicionInicial);
+
+        Ubicable elemento2 = new Aldeano();
+        mapa.colocar(elemento2,posicionDestino);
+
+        try {
+            mapa.moverElemento(elemento, posicionDestino);
+        }catch (Exception e){
+            //nada
+        }
+
+
+
+        Assert.assertFalse(mapa.puedoColocar(posicionInicial,1));
+        thrown.expect(ElElementoYaExisteException.class);
+        mapa.colocar(elemento,posicionLibre);
+    }
 
 
 

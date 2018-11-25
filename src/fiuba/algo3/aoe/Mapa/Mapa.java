@@ -46,8 +46,7 @@ public class Mapa {
         return unaPosicion.estasDentroDe(this.ancho,this.alto);
     }
 
-    // Recibe un ubicable y una posicion, luego de colocarlo, le setea la posicion al ubicable
-    // el ubicable tiene no puede estar agregado previamente
+
     public void colocar (Ubicable unElemento, Posicion posicion)  {
         Posicion posicionNueva = posicion.expandir(unElemento.getTamanio());
         if (!this.estaDentroDeLosMargenesDelMapa(posicionNueva)) {throw new FueraDelMapaException();}
@@ -69,32 +68,11 @@ public class Mapa {
         return this.ubicables.contains(unElemento);
     }
 
-    //VERSION ANTERIOR DE MOVER
-/*
-    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
-    //(previamente haber llamado a puedo colocar)
-    // quita el elemento pasado y luego lo coloca enla posicion de destino calculada con la direccio
-    public void moverElemento (Ubicable unElemento, Direccionable direccion) {
 
-        if (!this.estaEnElMapa(unElemento)) {throw new NoExisteElementoException();}
-
-        Posicion destino = unElemento.getPosicion().calcularPosicionSiguiente(direccion);
-        this.remover(unElemento);
-        this.colocar(unElemento,destino);
-
-    }
-*/
-    // Pre: el elemento tiene que estar colocado, la posicion de destino tiene que ser valida
-    //(previamente haber llamado a puedo colocar)
-    // quita el elemento pasado y luego lo coloca en la posicion de destino
     public void moverElemento(Ubicable unElemento, Posicion destino) {
-
-        if (!this.estaEnElMapa(unElemento)) {throw new NoExisteElementoException();}
-
-
-        this.remover(unElemento);
-        this.colocar(unElemento,destino);
-
+        if (!this.puedoColocar(destino,unElemento.getTamanio())){throw new NoSePuedeMoverElElementoException();}
+        this.remover(unElemento); //si no esta esta lanza exception
+        this.colocar(unElemento,destino); //aca ya es seguro
     }
 
 }
