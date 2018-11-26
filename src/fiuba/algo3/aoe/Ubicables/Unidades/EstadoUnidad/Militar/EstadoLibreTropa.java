@@ -2,6 +2,7 @@ package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.UnidadYaRealizoMovimientoEsteTurnoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -23,8 +24,10 @@ public class EstadoLibreTropa implements IEstadoUnidadMilitarTropa {
         }
     }
 
+    public void atacar(){}
+
     @Override
     public boolean estasDisponible() {
-        return false;
+        return true;
     }
 }

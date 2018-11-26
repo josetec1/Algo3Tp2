@@ -12,5 +12,7 @@ public interface IEstadoUnidadMilitarTropa {
 
     void mover(UnidadMilitarTropa unidad, Mapa mapa, Direccionable direccion);
 
+    void atacar();
+
     boolean estasDisponible ();
 }
