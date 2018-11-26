@@ -53,7 +53,7 @@ public abstract class Edificio implements Manipulable {
         if (vidaActual >= vidaMaxima) {
             vidaActual = vidaMaxima;
             this.estado = new EstadoNormal ();
-            return;
+
         }
     }
 
@@ -62,7 +62,7 @@ public abstract class Edificio implements Manipulable {
         this.disminuirVida(unAtacante.getDanioEdificio());
     }
 
-    public abstract void comenzarConstruccion(Aldeano aldeano);
+    public abstract void comenzarConstruccion(Aldeano aldeano); //TODO este metodo es el que tendria que notificar la creacion a la vista
 
     public abstract void comenzarReparacion(Aldeano aldeano);
 

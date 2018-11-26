@@ -17,12 +17,14 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2,2);
         Posicion calculada= new Posicion(2,3);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArriba();
-        aldeano.mover(mapa,direccion);
+
+        aldeano.mover(mapa,direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -32,12 +34,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajo();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -47,12 +50,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionDerecha();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -62,12 +66,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(1, 1);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajo();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -77,12 +82,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArribaDerecha();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -92,12 +98,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 1);
         Posicion calculada = new Posicion(1, 2);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionArribaIzquierda();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -107,12 +114,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(1, 1);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajoIzquierda();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -122,12 +130,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(2, 1);
         Assert.assertEquals(mapa.puedoColocar(origen,aldeano.getTamanio()),true);
         mapa.colocar(aldeano,origen);
         Direccionable direccion = new DireccionAbajoDerecha();
-        aldeano.mover(mapa, direccion);
+        aldeano.mover(mapa, direccion,jugador);
         Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(aldeano.getPosicion().seSuperponeCon(origen));
     }
@@ -137,12 +146,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil arquero = new Arquero();
+        jugador.agregarPieza(arquero);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen,arquero.getTamanio()),true);
         mapa.colocar(arquero,origen);
         Direccionable direccion = new DireccionArribaDerecha();
-        arquero.mover(mapa, direccion);
+        arquero.mover(mapa, direccion,jugador);
         Assert.assertTrue(arquero.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(arquero.getPosicion().seSuperponeCon(origen));
     }
@@ -152,12 +162,13 @@ public class MovimientoTest {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
         UnidadMovil espadachin = new Espadachin();
+        jugador.agregarPieza(espadachin);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
         Assert.assertEquals(mapa.puedoColocar(origen,espadachin.getTamanio()),true);
         mapa.colocar(espadachin,origen);
         Direccionable direccion = new DireccionArribaDerecha();
-        espadachin.mover(mapa, direccion);
+        espadachin.mover(mapa, direccion,jugador);
         Assert.assertTrue(espadachin.getPosicion().seSuperponeCon(calculada));
         Assert.assertFalse(espadachin.getPosicion().seSuperponeCon(origen));
     }

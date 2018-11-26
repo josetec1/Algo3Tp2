@@ -10,7 +10,9 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.omg.PortableServer.POA;
+import org.mockito.Mockito;
+import static org.mockito.Matchers.any;
+
 
 import java.util.Map;
 
@@ -52,13 +54,15 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test04MoverArmaDeAsedioRecienCreadaMueveALaPosicionCorrecta(){
+        Jugador jugador = Mockito.mock (Jugador.class);
+        Mockito.when(jugador.puedoAgregar(any(UnidadMovil.class))).thenReturn(true);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
         Mapa mapa = new Mapa ( 200,200 );
         Posicion origen = new Posicion ( 1,1 );
         Posicion deseada = new Posicion ( 1,2 );
         mapa.colocar ( armaDeAsedio,origen );
         DireccionArriba direccionArriba = new DireccionArriba ();
-        armaDeAsedio.mover ( mapa,direccionArriba);
+        armaDeAsedio.mover ( mapa,direccionArriba,jugador);
         Assert.assertTrue ( armaDeAsedio.getPosicion ().seSuperponeCon ( deseada ) );
         Assert.assertFalse ( armaDeAsedio.getPosicion ().seSuperponeCon ( origen) );
     }
@@ -68,15 +72,17 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test05MoverArmaDeAsedioYaMovidaLanzaUnidadYaRealizoMovimientosEsteTurnoException(){
+        Jugador jugador = Mockito.mock (Jugador.class);
+        Mockito.when(jugador.puedoAgregar(any(UnidadMovil.class))).thenReturn(true);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
         Mapa mapa = new Mapa ( 200,200 );
         Posicion origen = new Posicion ( 1,1 );
         Posicion movimiento1= new Posicion ( 1,3);
         mapa.colocar ( armaDeAsedio,origen );
         DireccionArriba direccionArriba = new DireccionArriba ();
-        armaDeAsedio.mover ( mapa,direccionArriba);
+        armaDeAsedio.mover ( mapa,direccionArriba,jugador);
         thrown.expect ( UnidadYaRealizoMovimientoEsteTurnoException.class );
-        armaDeAsedio.mover ( mapa,direccionArriba );
+        armaDeAsedio.mover ( mapa,direccionArriba ,jugador);
     }
 
     @Test
@@ -88,13 +94,15 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void test07ArmaDeAsedioMovidaNoPuedeMoverseNoPuedeAtacar(){
+        Jugador jugador = Mockito.mock (Jugador.class);
+        Mockito.when(jugador.puedoAgregar(any(UnidadMovil.class))).thenReturn(true);
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
         Mapa mapa = new Mapa ( 200,200 );
         Posicion origen = new Posicion ( 1,1 );
 
         mapa.colocar ( armaDeAsedio,origen );
         DireccionArriba direccionArriba = new DireccionArriba ();
-        armaDeAsedio.mover (mapa,direccionArriba );
+        armaDeAsedio.mover (mapa,direccionArriba,jugador );
         Assert.assertFalse ( armaDeAsedio.puedeMoverse () );
         Assert.assertFalse ( armaDeAsedio.puedeAtacar () );
     }

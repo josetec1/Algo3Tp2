@@ -6,6 +6,7 @@ import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class EstadoReparando implements IEstadoUnidadAldeano {
 
@@ -16,7 +17,7 @@ public class EstadoReparando implements IEstadoUnidadAldeano {
         }
 
     @Override
-    public void construir(Aldeano unAldeano, Edificio unEdificio) {
+    public void construir(Aldeano unAldeano, Edificio unEdificio, Mapa mapa, Posicion posicion, Jugador jugador) {
         throw new AldeanoOcupadoException();
     }
 

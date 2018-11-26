@@ -5,20 +5,20 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 
-    public interface IEstadoUnidadAldeano {
+public interface IEstadoUnidadAldeano {
 
     void pasarTurno (Aldeano unidad, Jugador unjugador);
 
 
-    void construir (Aldeano unAldeano, Edificio unEdificio);
+    void construir (Aldeano unAldeano, Edificio unEdificio, Mapa mapa, Posicion posicion, Jugador jugador);
 
-  //  Boolean puedoConstruirOReparar ();
 
     void mover(Aldeano aldeano, Mapa mapa, Direccionable direccion);
 
-  //  Boolean podesMoverte ();
+
         boolean estasDisponible ();
 
     void reparar (Aldeano unidad, Edificio unEdificio);

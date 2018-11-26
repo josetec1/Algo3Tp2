@@ -21,13 +21,16 @@ public class ArmaDeAsedio extends UnidadMilitarMaquinaria {
     }
 
     @Override
-    public void mover ( Mapa mapa, Direccionable direccion ) {
+    public void mover ( Mapa mapa, Direccionable direccion, Jugador jugador ) {
         this.estado.mover ( mapa,direccion,this );
     }
 
     public void atacar( Manipulable receptorDelAtaque, Jugador jugadorAtacante, Jugador jugadorEnemigo, Mapa mapa){
         this.estado.atacar (this,distanciaAtaque,receptorDelAtaque,jugadorAtacante,jugadorEnemigo,mapa  );
     }
+
+
+
     @Override
     public void huboUnCambioDeTurno(Jugador unJugador) {
         this.estado.nuevoTurno ( this);

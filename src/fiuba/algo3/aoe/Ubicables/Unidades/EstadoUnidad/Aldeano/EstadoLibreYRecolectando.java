@@ -5,14 +5,22 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
 
     @Override
-    public void construir(Aldeano unAldeano, Edificio unEdificio) {
-        unEdificio.construir (unAldeano); //TODO aca habria que preguntar si se puede construir. pero
+    public void construir(Aldeano unAldeano, Edificio edificio, Mapa mapa,Posicion posicion, Jugador jugador) {
+        //Chequeos
+        if (!jugador.puedoAgregar(edificio) || (!mapa.puedoColocar(posicion,edificio.getTamanio()))
+                || (!edificio.puedoConstruir()) ) {throw new NoSePuedeConstruir();
+        }
+
+        edificio.construir (unAldeano);
+        mapa.colocar(edificio,posicion);
+        jugador.agregarPieza(edificio);
         unAldeano.cambiarAContruyendo();
     }
 
@@ -34,9 +42,9 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
     @Override
     public void reparar(Aldeano aldeano, Edificio unEdificio) {
-        //TODO refactor la pregunta de abajo
-        if (!unEdificio.puedoReparar()) {throw new NoSePuedeRepararException();}
 
+        if (!unEdificio.puedoReparar()) {throw new NoSePuedeRepararException();}
+        unEdificio.reparar(aldeano);
         aldeano.cambiarAReparando(unEdificio);
 
 

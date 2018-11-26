@@ -12,7 +12,7 @@ public abstract class UnidadMilitarMaquinaria extends UnidadMilitar {
     protected IEstadoMaquinariaMilitar estado;
 
 
-    public abstract void mover(Mapa mapa, Direccionable direccion);
+
 
 
     public abstract void huboUnCambioDeTurno(Jugador jugador);

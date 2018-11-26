@@ -23,6 +23,7 @@ public class Castillo extends Edificio implements Atacante {
        vidaMaxima = 1000;
        this.tamanio = TAMANIO;
        this.estado = new EstadoNormal ();
+
     }
 
     public int getCosto(){

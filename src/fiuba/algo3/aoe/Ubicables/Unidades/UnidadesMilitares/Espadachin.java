@@ -27,7 +27,7 @@ public class Espadachin extends UnidadMilitarTropa {
     }
 
     @Override  //TODO REVISAR ESTO POR QUE ESTA REPETIDO EN OTROS LADOS Y ALGO TENES QUE HACER SI NO SE PUEDE MOVER
-    public void mover(Mapa mapa, Direccionable direccion) {
+    public void mover(Mapa mapa, Direccionable direccion, Jugador jugador) {
         Posicion destino = this.obtenerPosicionDeAvance(direccion);
         if (mapa.puedoColocar(destino,this.tamanio)) {
             mapa.moverElemento(this, destino);

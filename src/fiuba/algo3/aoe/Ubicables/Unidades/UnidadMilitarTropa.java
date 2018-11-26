@@ -10,7 +10,7 @@ public class UnidadMilitarTropa extends UnidadMilitar{
     protected IEstadoUnidadMilitarTropa estado;
 
     @Override
-    public void mover(Mapa mapa, Direccionable direccion) {
+    public void mover(Mapa mapa, Direccionable direccion, Jugador jugador) {
 
     }
 

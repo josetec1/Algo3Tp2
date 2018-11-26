@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
@@ -7,7 +8,7 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public abstract class UnidadMovil implements Manipulable, Atacable {
+public  abstract class UnidadMovil implements Manipulable  {
     private final int TAMANIO = 1;
     protected Posicion posicion;
     protected int vidaMaxima;
@@ -55,9 +56,8 @@ public abstract class UnidadMovil implements Manipulable, Atacable {
     }
 
 
-
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
-    public abstract  void mover(Mapa mapa, Direccionable direccion);
+    public abstract  void mover(Mapa mapa, Direccionable direccion, Jugador jugador);
 
 
 

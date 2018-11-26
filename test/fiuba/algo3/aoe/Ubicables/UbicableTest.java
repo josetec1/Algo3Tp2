@@ -41,7 +41,7 @@ public class UbicableTest {
         mapa.colocar(lanzaPiedras,origen);
 
         // le digo que se mueva y le paso la direccion
-        lanzaPiedras.mover(mapa, direccion);
+        lanzaPiedras.mover(mapa, direccion,jugador);
         Assert.assertThat(lanzaPiedras.getPosicion().seSuperponeCon(calculada), is(true) );
         Assert.assertThat(lanzaPiedras.getPosicion().seSuperponeCon(origen), is(false) ); // tiene la nueva posicion
         Assert.assertThat(mapa.puedoColocar(calculada,lanzaPiedras.getTamanio()), is(false) ); // la posicion en el tablero esta ocupada
