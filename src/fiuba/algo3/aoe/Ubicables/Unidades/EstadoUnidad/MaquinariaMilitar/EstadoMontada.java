@@ -45,6 +45,6 @@ public class EstadoMontada implements IEstadoMaquinariaMilitar{
 
     @Override
     public boolean puedeAtacar () {
-        return false;
+        return true;
     }
 }

@@ -24,6 +24,7 @@ public class EstadoDesmontada implements IEstadoMaquinariaMilitar {
 
     public void atacar ( ArmaDeAsedio armaDeAsedio, int distanciaAtaque,
                          Manipulable receptorDelAtaque, Jugador atacante, Jugador jugadorEnemigo, Mapa mapa ) {
+        throw new DebeMontarsePrimeroException ();
     }
 
 

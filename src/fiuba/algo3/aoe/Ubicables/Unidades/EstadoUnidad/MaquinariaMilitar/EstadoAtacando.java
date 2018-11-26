@@ -23,7 +23,7 @@ public class EstadoAtacando {
     }
 
     public void atacar ( ArmaDeAsedio armaDeAsedio, int distanciaAtaque,
-                         Manipulable receptorDelAtaque, Jugador jugadorAtacante, Mapa mapa ) {
+                         Manipulable receptorDelAtaque, Jugador jugadorAtacante,Jugador atacado, Mapa mapa ) {
         throw new UnidadYaRealizoMovimientoEsteTurnoException ();
     }
 
