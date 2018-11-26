@@ -14,10 +14,6 @@ import org.mockito.Mockito;
 public class IntegracionTest {
 
 
-    @Test
-    public void test01PruebaVacia(){
-        Assert.assertTrue(true);
-    }
 
     @Test
     public void test01AldeanoAlContruirEdificioYpasar3TurnosQuedaLibre(){

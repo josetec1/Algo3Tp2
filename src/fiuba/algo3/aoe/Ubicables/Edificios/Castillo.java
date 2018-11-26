@@ -51,12 +51,12 @@ public class Castillo extends Edificio implements Atacante {
     }
 
     @Override
-    public int getDanioUnidad() {
+    public int getDanioGeneradoAUnidad() {
         return danio;
     }
 
     @Override
-    public int getDanioEdificio() {
+    public int getDanioGeneradoAEdificio() {
         return danio;
     }
 

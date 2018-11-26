@@ -59,7 +59,7 @@ public abstract class Edificio implements Manipulable {
 
     public void serAtacadoPor ( Atacante unAtacante ) {
 
-        this.disminuirVida(unAtacante.getDanioEdificio());
+        this.disminuirVida(unAtacante.getDanioGeneradoAEdificio());
     }
 
     public abstract void comenzarConstruccion(Aldeano aldeano); //TODO este metodo es el que tendria que notificar la creacion a la vista

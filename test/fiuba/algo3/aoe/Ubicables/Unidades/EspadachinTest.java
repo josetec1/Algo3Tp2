@@ -14,8 +14,8 @@ public class EspadachinTest {
         Assert.assertEquals(espadachin1.getVidaMaxima(), 100);
         Assert.assertEquals(espadachin1.getVidaActual(), 100);
         Assert.assertEquals(espadachin1.getCosto(),50);
-        Assert.assertEquals(espadachin1.getDanioUnidad(),25);
-        Assert.assertEquals(espadachin1.getDanioEdificio(),15);
+        Assert.assertEquals(espadachin1.getDanioGeneradoAUnidad(),25);
+        Assert.assertEquals(espadachin1.getDanioGeneradoAEdificio(),15);
         Assert.assertEquals(espadachin1.getDistanciaAtaque(),1);
     }
 

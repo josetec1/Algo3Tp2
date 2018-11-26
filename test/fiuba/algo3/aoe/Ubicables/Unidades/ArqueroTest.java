@@ -13,8 +13,8 @@ public class ArqueroTest {
         Assert.assertEquals(arquero1.getVidaMaxima(), 75);
         Assert.assertEquals(arquero1.getVidaActual(), 75);
         Assert.assertEquals(arquero1.getCosto(),75);
-        Assert.assertEquals(arquero1.getDanioUnidad(),15);
-        Assert.assertEquals(arquero1.getDanioEdificio(),10);
+        Assert.assertEquals(arquero1.getDanioGeneradoAUnidad(),15);
+        Assert.assertEquals(arquero1.getDanioGeneradoAEdificio(),10);
         Assert.assertEquals(arquero1.getDistanciaAtaque(),3);
     }
 

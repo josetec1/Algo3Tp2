@@ -182,8 +182,8 @@ public class EdificiosTest {
         Castillo castillo = new Castillo ();
         Assert.assertTrue ( castillo.getVidaActual () == 1000 );
         Assert.assertTrue ( castillo.getVidaMaxima () == 1000 );
-        Assert.assertTrue ( castillo.getDanioEdificio () == 20 );
-        Assert.assertTrue ( castillo.getDanioUnidad () == 20 );
+        Assert.assertTrue ( castillo.getDanioGeneradoAEdificio () == 20 );
+        Assert.assertTrue ( castillo.getDanioGeneradoAUnidad () == 20 );
         thrown.expect ( EdificioNoConstruibleSinCostoException.class );
         castillo.getCosto ();
     }

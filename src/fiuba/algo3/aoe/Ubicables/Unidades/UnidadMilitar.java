@@ -9,8 +9,8 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 public abstract class UnidadMilitar extends UnidadMovil implements Atacante {
 
   //
-    protected int danioUnidad;
-    protected int danioEdificio;
+    protected int danioGeneradoAUnidad;
+    protected int danioGeneradoAEdificio;
     protected int distanciaAtaque;
 
     public void atacar(Manipulable receptorDelAtaque, Jugador jugadorAtacante, Jugador jugadorEnemigo, Mapa mapa){
@@ -36,9 +36,9 @@ public abstract class UnidadMilitar extends UnidadMovil implements Atacante {
     }
 
 
-    public int getDanioUnidad(){return danioUnidad;}
+    public int getDanioGeneradoAUnidad(){return danioGeneradoAUnidad;}
 
-    public int getDanioEdificio() {return danioEdificio;}
+    public int getDanioGeneradoAEdificio() {return danioGeneradoAEdificio;}
 
     public int getDistanciaAtaque() { return distanciaAtaque;}
 }
