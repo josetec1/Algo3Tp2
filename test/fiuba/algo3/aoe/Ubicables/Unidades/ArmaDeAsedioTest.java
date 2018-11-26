@@ -1,10 +1,18 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArriba;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.UnidadYaRealizoMovimientoEsteTurnoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.omg.PortableServer.POA;
+
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 
@@ -42,5 +50,53 @@ public class ArmaDeAsedioTest {
 
     }
 
+    @Test
+    public void test04MoverArmaDeAsedioRecienCreadaMueveALaPosicionCorrecta(){
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Posicion origen = new Posicion ( 1,1 );
+        Posicion deseada = new Posicion ( 1,2 );
+        mapa.colocar ( armaDeAsedio,origen );
+        DireccionArriba direccionArriba = new DireccionArriba ();
+        armaDeAsedio.mover ( mapa,direccionArriba);
+        Assert.assertTrue ( armaDeAsedio.getPosicion ().seSuperponeCon ( deseada ) );
+        Assert.assertFalse ( armaDeAsedio.getPosicion ().seSuperponeCon ( origen) );
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none ();
+
+    @Test
+    public void test05MoverArmaDeAsedioYaMovidaLanzaUnidadYaRealizoMovimientosEsteTurnoException(){
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Posicion origen = new Posicion ( 1,1 );
+        Posicion movimiento1= new Posicion ( 1,3);
+        mapa.colocar ( armaDeAsedio,origen );
+        DireccionArriba direccionArriba = new DireccionArriba ();
+        armaDeAsedio.mover ( mapa,direccionArriba);
+        thrown.expect ( UnidadYaRealizoMovimientoEsteTurnoException.class );
+        armaDeAsedio.mover ( mapa,direccionArriba );
+    }
+
+    @Test
+    public void test06ArmaDeAsedioInicializadaNoPuedeMoverseNoPuedeAtacar(){
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
+        Assert.assertFalse ( armaDeAsedio.puedeAtacar () );
+        Assert.assertTrue ( armaDeAsedio.puedeMoverse ());
+    }
+
+    @Test
+    public void test07ArmaDeAsedioMovidaNoPuedeMoverseNoPuedeAtacar(){
+        ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Posicion origen = new Posicion ( 1,1 );
+
+        mapa.colocar ( armaDeAsedio,origen );
+        DireccionArriba direccionArriba = new DireccionArriba ();
+        armaDeAsedio.mover (mapa,direccionArriba );
+        Assert.assertFalse ( armaDeAsedio.puedeMoverse () );
+        Assert.assertFalse ( armaDeAsedio.puedeAtacar () );
+    }
 
 }

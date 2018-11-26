@@ -59,7 +59,6 @@ public abstract class UnidadMovil implements Manipulable, Atacable {
     //TODO si no se puede mover por que la posicion esta ocupada, deberia responder algo!
     public abstract  void mover(Mapa mapa, Direccionable direccion);
 
-    public abstract  boolean estasDisponible();
 
 
 

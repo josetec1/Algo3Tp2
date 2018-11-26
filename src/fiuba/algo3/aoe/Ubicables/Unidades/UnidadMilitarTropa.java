@@ -14,7 +14,6 @@ public class UnidadMilitarTropa extends UnidadMilitar{
 
     }
 
-    @Override
     public boolean estasDisponible() {
         return false;
     }

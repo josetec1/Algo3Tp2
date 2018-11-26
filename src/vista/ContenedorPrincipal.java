@@ -32,6 +32,9 @@ public class ContenedorPrincipal extends BorderPane {
         this.setCentro(casillero);
         this.setConsola();
         this.setBotonera(casillero);
+        Image imagen = new Image("file:src/vista/imagenes/stars.jpg");
+        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        this.setBackground(new Background(imagenDeFondo));
     }
 
     private void setBotonera(Casillero casillero) {
@@ -45,6 +48,7 @@ public class ContenedorPrincipal extends BorderPane {
         botonDireccion.setOnAction(directionButtonHandler);
 
         VBox contenedorVertical = new VBox(botonMover, botonDireccion);
+
         contenedorVertical.setSpacing(10);
         contenedorVertical.setPadding(new Insets(15));
 
@@ -59,15 +63,15 @@ public class ContenedorPrincipal extends BorderPane {
 
     private void setCentro(Casillero casillero) {
 
-        canvasCentral = new Canvas(460, 220);
+        canvasCentral = new Canvas(1260, 900);
         vistaCasillero = new VistaCasillero(casillero, canvasCentral);
         vistaCasillero.dibujar();
 
         contenedorCentral = new VBox(canvasCentral);
         contenedorCentral.setAlignment(Pos.CENTER);
-        contenedorCentral.setSpacing(20);
-        contenedorCentral.setPadding(new Insets(25));
-        Image imagen = new Image("file:src/vista/imagenes/fondo-negro.jpg");
+        contenedorCentral.setSpacing(0);
+        contenedorCentral.setPadding(new Insets(0));
+        Image imagen = new Image("file:/home/mauricio/Descargas/background-1814917_1920.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         contenedorCentral.setBackground(new Background(imagenDeFondo));
 

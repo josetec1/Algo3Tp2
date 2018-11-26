@@ -5,7 +5,7 @@ public class Casillero {
     private Terreno terreno;
     private Posicion posicion;
     private String mensaje;
-    public final int RADIO = 10;
+    public final int RADIO = 20;
 
     public Casillero(Terreno terreno, Posicion posicion, String mensaje) {
         this.terreno = terreno;

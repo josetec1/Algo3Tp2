@@ -19,7 +19,6 @@ public class Castillo extends Edificio implements Atacante {
     //TODO implementar multiton
 
     public Castillo( ){
-       costo = 0;
        vidaActual = 1000;
        vidaMaxima = 1000;
        this.tamanio = TAMANIO;

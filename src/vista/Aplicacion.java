@@ -22,13 +22,13 @@ public class Aplicacion extends Application {
         Casillero casillero = crearModelo();
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, casillero);
-        Scene escenaJuego = new Scene(contenedorPrincipal, 640, 480);
+        Scene escenaJuego = new Scene(contenedorPrincipal, 1440, 900);
 
         AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorPrincipal.getBarraDeMenu());
         escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
 
         ContenedorBienvenidos contenedorBienvenidos = new ContenedorBienvenidos(stage, escenaJuego);
-        Scene escenaBienvenidos = new Scene(contenedorBienvenidos, 640, 480);
+        Scene escenaBienvenidos = new Scene(contenedorBienvenidos, 1440, 900);
 
         // add handler to this:
         // stage.setOnCloseRequest()
@@ -43,8 +43,8 @@ public class Aplicacion extends Application {
     public String string = "lalalal";
 
     private Casillero crearModelo() {
-        Terreno terreno = new Terreno(460, 250);
-        Casillero casillero = new Casillero(terreno, new Posicion(10, 10), string);
+        Terreno terreno = new Terreno(1, 1);
+        Casillero casillero = new Casillero(terreno, new Posicion(900, 10), string);
         return casillero;
     }
 }
