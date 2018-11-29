@@ -74,5 +74,6 @@ public class Mapa {
         this.remover(unElemento); //si no esta esta lanza exception
         this.colocar(unElemento,destino); //aca ya es seguro
     }
-
+    public int getAncho (){return this.ancho;} //XXSentinela
+    public  int getAlto(){return this.alto;} //XXSentinela
 }

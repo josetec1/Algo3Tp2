@@ -10,6 +10,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,5 +134,16 @@ public class Jugador implements ObservableJugador{
         }
     }
 
+    //XXSentinela
+    public ArrayList<Aldeano> getAldeanos(){
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano2 = new Aldeano();
+        aldeano.colocarEn(new Posicion(1,1));
+        aldeano2.colocarEn(new Posicion(3,3));
+        aldeanos.add(aldeano);
+        aldeanos.add(aldeano2);
+        return aldeanos;
 
+    }
 }

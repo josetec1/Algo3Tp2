@@ -26,7 +26,7 @@ public class ModoInicioTest {
         Assert.assertEquals(modo.getOrden(),1);
 
     }
-
+    //
     @Test
     public void test03AlCrearModoInicioRandomElNumeroQueGeneraEsCeroOUnoLuegoDeMuchasIteraciones(){
 

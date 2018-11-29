@@ -9,7 +9,6 @@ Trabajo Practico Numero 2 - Algoritmos 3 - Grupo XXI
 1) Gonzalez Mauricio 100948  
 2) Rodriguez José  89786
 
-
 # Informe
 
 https://es.overleaf.com/read/ycgqffzmdbxw

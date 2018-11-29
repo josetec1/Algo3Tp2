@@ -28,11 +28,11 @@ public class Posicion {
         return cuadrantes.iterator();
 
     }
-/*
+
+    //XXSentinela para la vista
     public ArrayList <Cuadrante> getCasilleros(){
-        return this.casilleros;
+        return this.cuadrantes;
     }
-*/
 
     //
     public boolean seSuperponeCon (Posicion otraPosicion) {
