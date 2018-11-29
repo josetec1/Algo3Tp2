@@ -7,9 +7,7 @@ Trabajo Practico Numero 2 - Algoritmos 3 - Grupo XXI
 
 # Integrantes:
 1) Gonzalez Mauricio 100948  
-2) Jarmolinski Arian 94727
-3) Rodriguez José  89786
-4) Sartori Agustin 100541
+2) Rodriguez José  89786
 
 # Informe
 
