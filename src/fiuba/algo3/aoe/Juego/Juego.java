@@ -44,4 +44,10 @@ public class Juego {
         this.juego.cambiarTurno();
 
     }
+    public Jugador getJugadorUno (){return jugadores.get(0);} //XXSentinela
+    public   Jugador getJugadorDos (){return jugadores.get(1);} //XXSentinela
+    public Mapa getMapa(){
+        return mapa;
+    } //XXSentinela
+
 }
