@@ -11,7 +11,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ContenedorPrincipal extends BorderPane {
@@ -23,11 +25,12 @@ public class ContenedorPrincipal extends BorderPane {
     Canvas canvasCentral;
     
 	public ContenedorPrincipal(Stage unStage, Juego unJuego){
-		this.setMenu(unStage);
-		this.juego = unJuego;
+        final VBox vbox1=new VBox(); VBox vbox2=new VBox();
+        this.setMenu(unStage,vbox1);
+        this.juego = unJuego;
 
         this.setTablero(unJuego); //dibuja el mapa
-        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos()); // dibujar nombres en pantalla, obtener y presentar Piezas, suscribir observadores que tiene que ser la vista
+        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos(),vbox1,vbox2); // dibujar nombres en pantalla, obtener y presentar Piezas, suscribir observadores que tiene que ser la vista
 
 
 
@@ -43,10 +46,8 @@ public class ContenedorPrincipal extends BorderPane {
 
 
     //TODO
-    private void setJugadores(Jugador jugadorUno, Jugador jugadorDos) {
-    	
-    	VBox vbox1=new VBox(); VBox vbox2=new VBox();
-    	
+    private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
+
     	JugadorVista vistaJugador1 = new JugadorVista(vbox1,jugadorUno);
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
@@ -110,12 +111,14 @@ public class ContenedorPrincipal extends BorderPane {
 
 	}
 
-	private void setMenu(Stage stage) {
+	private void setMenu(Stage stage,VBox vbox1) {
         this.menuBar = new BarraDeMenu(stage);
         this.setTop(menuBar);
         
         this.menuInferior = new MenuInferior(stage);
     	this.setBottom(menuInferior);
-    	
+
+        Button derechaButton = new Button ( "Derecha" );
+        vbox1.getChildren ().add ( derechaButton );
     }
 }
