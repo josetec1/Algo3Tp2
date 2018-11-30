@@ -9,20 +9,20 @@ public class JuegoTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
+/*
     @Test
     public void test01PasarJugadaDebeLanzarExcepcionSiNoEmpezoElJuego(){
 
-        Juego juego = new Juego();
+        Juego juego = new Juego("Maradona","Messi",500,500);
         thrown.expect(JuegoNoIniciadoException.class);
         juego.pasarJugada();
     }
-
+*/
     @Test  //TODO OJO CON LOS MINIMOS DEL MAPA
     public void test02EmpiezaElJuegoCorrectamente(){
 
-        Juego juego = new Juego();
-        juego.empezar("Maradona","Messi",500,500);
+        Juego juego = new Juego("Maradona","Messi",500,500);
+
        // thrown.expect(JuegoNoIniciadoException.class);
         //juego.e();
     }
