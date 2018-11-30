@@ -36,6 +36,7 @@ public class TableroVistaControlador implements Observer {
 	}
 
 
+
 	public void dibujarTablero() {
 		tableroView.setOnMousePressed(null);
 		for (int i = 0; i<(mapa.getAncho()); i++){
@@ -46,7 +47,6 @@ public class TableroVistaControlador implements Observer {
 		} //Creo mapa de 11x11 si Tablero (10,10);
 		//XXSentineladibujarTerrenos();
 		crearBotones();
-
 		
 		tableroView.setAlignment(Pos.CENTER);
 	}
@@ -58,11 +58,11 @@ public class TableroVistaControlador implements Observer {
 
 				Button boton=new Button("");
 				boton.setAlignment(Pos.CENTER);
-				boton.setTranslateX(2);
+				boton.setTranslateX(0);
 				//boton.setPrefWidth(70);
 				//boton.setPrefHeight(30);
-				boton.setPrefWidth(30);
-				boton.setPrefHeight(10);
+				boton.setPrefWidth(20);
+				boton.setPrefHeight(20);
 				Cuadrante cuadrante=new Cuadrante(i, j);
 				SeleccionVacioHandler seleccionVacioHandler = new SeleccionVacioHandler(cuadrante);
 				boton.setOnMouseClicked(seleccionVacioHandler);

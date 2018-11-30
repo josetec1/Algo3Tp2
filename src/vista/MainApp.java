@@ -17,11 +17,11 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Age Of Empires");
 
 
-        Juego unJuego = new Juego("mario","Diego",70,40);
+        Juego unJuego = new Juego("mario","Diego",40,30);
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage, unJuego); //
 
-        Scene scene = new Scene(contenedorPrincipal,1280,720);
+        Scene scene = new Scene(contenedorPrincipal,1280,900);
         
         primaryStage.setScene(scene);
         primaryStage.show();

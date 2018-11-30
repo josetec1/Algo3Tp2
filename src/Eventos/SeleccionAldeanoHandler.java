@@ -64,6 +64,7 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 				//XXSentinela	TableroVistaControlador.aldeanoSeleccionado = aldeano;
 
 				} else {
+				//XXSentinela		MenuInferior.log.appendText("\nEste aldeano no es tuyo");
 
 					MenuInferior.log.appendText("\nEste aldeano no es tuyo");
 				}
@@ -89,11 +90,6 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 				}
 			}
 		}
-
-
-
-
-
 	}
 }
 
