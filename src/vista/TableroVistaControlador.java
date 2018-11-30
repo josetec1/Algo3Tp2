@@ -22,9 +22,10 @@ import java.util.Observer;
 //TODO ojo el obsvador juego....
 public class TableroVistaControlador implements Observer {
 //public class TableroVistaControlador implements ObservadorTablero, ObservadorBonus, ObservadorAldeano, ObservadorJuego {
-	Mapa mapa;
+    public static Mapa mapa;
 	GridPane tableroView;
 	Juego juego;
+
 	public static boolean seleccionado;
 	public static Aldeano AldeanoSeleccionado;
 	
@@ -92,7 +93,7 @@ public class TableroVistaControlador implements Observer {
 		botonAlgo = (Button) tableroView.getChildren().get(x+y);
 	//	botonAlgo = (Button) tableroView.getChildren().get()
 		botonAlgo.setText("A");
-		botonAlgo.setStyle("-fx-background-color: #990099");
+		botonAlgo.setStyle("-fx-background-color: #b3ffff");
 
 
 			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
@@ -250,4 +251,7 @@ public class TableroVistaControlador implements Observer {
 		
 	}
 	*///XXSentinela
+
+
+
 }
