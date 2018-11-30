@@ -16,8 +16,11 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import java.util.Observable;
+import java.util.Observer;
+
 //TODO ojo el obsvador juego....
-public class TableroVistaControlador  {
+public class TableroVistaControlador implements Observer {
 //public class TableroVistaControlador implements ObservadorTablero, ObservadorBonus, ObservadorAldeano, ObservadorJuego {
 	Mapa mapa;
 	GridPane tableroView;
@@ -36,10 +39,10 @@ public class TableroVistaControlador  {
 	public void dibujarTablero() {
 		tableroView.setOnMousePressed(null);
 		for (int i = 0; i<(mapa.getAncho()); i++){
-			tableroView.getColumnConstraints().add(new ColumnConstraints(80));
+			tableroView.getColumnConstraints().add(new ColumnConstraints(20));
 		}
 		for (int j = 0; j<(mapa.getAlto()); j++){
-			tableroView.getRowConstraints().add(new RowConstraints(40));
+			tableroView.getRowConstraints().add(new RowConstraints(20));
 		} //Creo mapa de 11x11 si Tablero (10,10);
 		//XXSentineladibujarTerrenos();
 		crearBotones();
@@ -55,9 +58,11 @@ public class TableroVistaControlador  {
 
 				Button boton=new Button("");
 				boton.setAlignment(Pos.CENTER);
-				boton.setTranslateX(5);
-				boton.setPrefWidth(70);
-				boton.setPrefHeight(30);
+				boton.setTranslateX(2);
+				//boton.setPrefWidth(70);
+				//boton.setPrefHeight(30);
+				boton.setPrefWidth(30);
+				boton.setPrefHeight(10);
 				Cuadrante cuadrante=new Cuadrante(i, j);
 				SeleccionVacioHandler seleccionVacioHandler = new SeleccionVacioHandler(cuadrante);
 				boton.setOnMouseClicked(seleccionVacioHandler);
@@ -86,7 +91,8 @@ public class TableroVistaControlador  {
 		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
 		botonAlgo = (Button) tableroView.getChildren().get(x+y);
 	//	botonAlgo = (Button) tableroView.getChildren().get()
-		botonAlgo.setText("Aldeano");
+		botonAlgo.setText("A");
+		botonAlgo.setStyle("-fx-background-color: #990099");
 
 
 			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
@@ -218,6 +224,11 @@ public class TableroVistaControlador  {
 		if (alert.showAndWait().get()==ok){
 			System.exit(0);
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+
 	}
 
 
