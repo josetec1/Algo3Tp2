@@ -23,8 +23,6 @@ public class MenuInferior extends HBox{
     	log.setWrapText(true);
     	log.insertText(0, "");
     	log.setTranslateY ( -10 );
-
-
     	this.setSpacing(100);
     	this.getChildren().addAll(log,selecOpciones);
     	this.setAlignment(Pos.BASELINE_CENTER);
