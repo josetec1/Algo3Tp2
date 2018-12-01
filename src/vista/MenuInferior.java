@@ -19,10 +19,10 @@ public class MenuInferior extends HBox{
     	log.setEditable(false);
     	log.setPrefWidth(250);
     	log.setPrefHeight(120);
-    	log.setTranslateY(50);
+    	//
     	log.setWrapText(true);
     	log.insertText(0, "");
-    	log.setTranslateY ( -10 );
+    	log.setTranslateY ( -40 );
     	this.setSpacing(100);
     	this.getChildren().addAll(log,selecOpciones);
     	this.setAlignment(Pos.BASELINE_CENTER);

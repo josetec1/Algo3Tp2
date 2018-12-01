@@ -47,10 +47,10 @@ public class MapaVistaControlador {
 	public void dibujarTablero() {
 		tableroView.setOnMousePressed(null);
 		for (int i = 0; i<(mapa.getAncho()); i++){
-			tableroView.getColumnConstraints().add(new ColumnConstraints(20));
+			tableroView.getColumnConstraints().add(new ColumnConstraints(18));
 		}
 		for (int j = 0; j<(mapa.getAlto()); j++){
-			tableroView.getRowConstraints().add(new RowConstraints(20));
+			tableroView.getRowConstraints().add(new RowConstraints(17));
 		}
 		crearBotones();
 		tableroView.setAlignment(Pos.CENTER);

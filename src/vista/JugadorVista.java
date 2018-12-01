@@ -36,7 +36,7 @@ public class JugadorVista {
 		vbox.getChildren().add(titulo);
 		Text info = new Text();
 		info.setText("\nAzul: Aldeano \nMarron Oscuro: Espadachin\nVerde: Arquero \nCeleste claro: Asedio ");
-		titulo.setFont(new Font("Arial",14));
+		info.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
 	}
 	public void dibujarInfoEdificios(){
@@ -45,8 +45,19 @@ public class JugadorVista {
 		vbox.getChildren().add(titulo);
 		Text info = new Text();
 		info.setText("\nCeleste: Castillo\nRojo: Plaza Central\nAmarillo: Cuartel");
-		titulo.setFont(new Font("Arial",14));
+		info.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
+	}
+
+	public void dibujarIformacionJugador(){
+		Label titulo= new Label("\n\nInfo Jugador:");
+		titulo.setFont(new Font("Arial",16));
+		vbox.getChildren().add(titulo);
+		Text info = new Text();
+		info.setText("\nOro  =" + jugador.getOro() + " \nPoblacion = " + jugador.getPoblacionActual() + "/50");
+		info.setFont(new Font("Arial",14));
+		vbox.getChildren().add(info);
+
 	}
 
 }

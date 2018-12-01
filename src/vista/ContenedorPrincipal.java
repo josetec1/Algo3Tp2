@@ -62,9 +62,11 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
     	vistaJugador1.dibujarJugador(this.juego.getJugadorActual());
+    	vistaJugador1.dibujarIformacionJugador();
         vistaJugador1.dibujarInfoUnidades();
         vistaJugador1.dibujarInfoEdificios();
         vistaJugador2.dibujarJugador(this.juego.getJugadorActual());
+        vistaJugador2.dibujarIformacionJugador();
         vistaJugador2.dibujarInfoUnidades();
         vistaJugador2.dibujarInfoEdificios();
 
