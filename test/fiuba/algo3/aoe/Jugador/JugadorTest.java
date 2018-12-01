@@ -761,7 +761,7 @@ private Castillo castillo= new Castillo ();
         Assert.assertTrue(jugador1.esMio(plaza));
 
     }
-
+/*
     @Test
     public void test51AlCrearJugadorContieneElCastilloQueSeLePasaPorParametro(){
 
@@ -772,4 +772,18 @@ private Castillo castillo= new Castillo ();
 
 
     }
+
+    @Test
+    public void test52NoSePuedeEliminarElCastilloDelJugador(){
+
+        Jugador jugador1 = new Jugador("Maradona",castillo );
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+
+
+        jugador1.eliminarPieza(castillo);
+        Assert.assertTrue( jugador1.esMio(castillo));
+
+
+    }
+*/
 }
