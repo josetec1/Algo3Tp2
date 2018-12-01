@@ -22,9 +22,9 @@ import java.util.Observer;
 
 public class ContenedorPrincipal extends BorderPane implements Observer {
 
-    BarraDeMenu menuBar;
-    public static MenuInferior menuInferior;
-    MapaVistaControlador vistaMapa;
+    private BarraDeMenu menuBar;
+    private static MenuInferior menuInferior;
+    private MapaVistaControlador vistaMapa;
     private static Juego juego;  //OJO
 
    // Canvas canvasCentral;

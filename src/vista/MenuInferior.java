@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MenuInferior extends HBox{
-	public static ChoiceBox<String> selecOpciones=new ChoiceBox<String>();
+	private static ChoiceBox<String> selecOpciones=new ChoiceBox<String>();
 	private static TextArea log = new TextArea();
 	
 	public MenuInferior(Stage stage){
@@ -30,6 +30,10 @@ public class MenuInferior extends HBox{
 
 	public static TextArea getLog(){
 		return log;
+	}
+
+	public static ChoiceBox<String> getSelecOpciones(){
+		return selecOpciones;
 	}
 
 }

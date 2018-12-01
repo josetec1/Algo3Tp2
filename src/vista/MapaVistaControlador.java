@@ -27,8 +27,8 @@ import java.util.Observer;
 public class MapaVistaControlador {
 
     private static Mapa mapa;
-	GridPane tableroView;
-	Juego juego;
+	private GridPane tableroView;
+	private Juego juego;
 
 	public static boolean seleccionado;
 	public static Aldeano AldeanoSeleccionado;

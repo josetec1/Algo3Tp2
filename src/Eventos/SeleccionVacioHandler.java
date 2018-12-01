@@ -19,10 +19,10 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 	@Override
 	public void handle(MouseEvent event) {
 		// TODO Auto-generated method stub
-		if ("Observar"== MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
+		if ("Observar"== MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
 			MenuInferior.getLog().appendText("\nCasillero: "+cuadrante.getX() +"," + cuadrante.getY());
 		}
-		if ("Mover"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
+		if ("Mover"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
 			if (MapaVistaControlador.seleccionado==false){
 				MenuInferior.getLog().appendText("\nSoy una posicion");
 				}
@@ -43,7 +43,7 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 					
 				}
 		}
-		if ("Atacar"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
+		if ("Atacar"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
 			if (MapaVistaControlador.seleccionado==false){
 				
 				MenuInferior.getLog().appendText("\nPor favor, seleccione un aldeano");

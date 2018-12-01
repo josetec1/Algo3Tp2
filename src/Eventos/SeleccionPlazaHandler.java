@@ -14,7 +14,7 @@ public class SeleccionPlazaHandler implements EventHandler<MouseEvent> {
     public SeleccionPlazaHandler(PlazaCentral plaza){this.plaza=plaza;}
     @Override
     public void handle(MouseEvent event) {
-        if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
+        if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 
             MenuInferior.getLog().appendText("\nPlaza Seleccionada");
 

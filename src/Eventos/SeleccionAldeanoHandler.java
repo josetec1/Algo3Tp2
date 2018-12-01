@@ -36,7 +36,7 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 			alert.showAndWait();
 		} else {
 
-			if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
+			if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 				if (MapaVistaControlador.seleccionado == false) {
 					//si no esta seleccionado, entonces lo selecciono
 					if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(this.aldeano)){
@@ -54,7 +54,7 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 				} //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
 				//TODO MOVIMIENTO
 			}
-			if ("Atacar" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
+			if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 				//TODO ATAQUE
 				if (MapaVistaControlador.seleccionado == false) {
 					//si no esta seleccionado, entonces lo selecciono

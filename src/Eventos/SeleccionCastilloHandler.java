@@ -13,7 +13,7 @@ public class SeleccionCastilloHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
 
-        if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
+        if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 
                     MenuInferior.getLog().appendText("\nCastillo Seleccionado");
 
