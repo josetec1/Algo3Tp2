@@ -58,7 +58,7 @@ public class Juego extends Observable {
         aldeanos = new ArrayList<>();
         for(int i = 0; i<3; i++){
             aldeano= new Aldeano();
-            mapa.colocar(aldeano,new Posicion(7 + i, 1));
+            mapa.colocar(aldeano,new Posicion(7 + (i*3), (i*2+3)));
             aldeanos.add(aldeano);
         }
         j1.inicializar(plazaCentral,aldeanos);
@@ -79,7 +79,7 @@ public class Juego extends Observable {
         aldeanos = new ArrayList<>();
         for(int i = 0; i<3; i++){
             aldeano= new Aldeano();
-            mapa.colocar(aldeano,new Posicion(anchoMapa - (10 + i), altoMapa -4));
+            mapa.colocar(aldeano,new Posicion(anchoMapa - (10 + i), altoMapa -(4+i)));
             aldeanos.add(aldeano);
 
         }
