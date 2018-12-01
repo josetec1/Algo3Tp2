@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import vista.ContenedorPrincipal;
 import vista.MenuInferior;
 import vista.TableroVistaControlador;
 
@@ -38,9 +39,13 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 			if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
 				if (TableroVistaControlador.seleccionado == false) {
 					//si no esta seleccionado, entonces lo selecciono
-					MenuInferior.log.appendText("\nAldeano Seleccionado!!!!, ahora hace algo");
-					TableroVistaControlador.seleccionado = true;
-					TableroVistaControlador.AldeanoSeleccionado = aldeano;
+					if (!ContenedorPrincipal.juego.getJugadorActual().esMio(this.aldeano)){
+						MenuInferior.log.appendText("\nNo es tuyo");
+					}else{
+						MenuInferior.log.appendText("\nAldeano Seleccionado");
+						TableroVistaControlador.seleccionado = true;
+						TableroVistaControlador.AldeanoSeleccionado = aldeano;
+					}
 				} else {
 
 					MenuInferior.log.appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");

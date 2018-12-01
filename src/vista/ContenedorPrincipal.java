@@ -118,7 +118,7 @@ public class ContenedorPrincipal extends BorderPane {
 
     }
 
-    private void actualizarTablero (){
+    private void actualizarTablero (){ //regenero el tablero
         this.setTablero(this.juego);
 
     }

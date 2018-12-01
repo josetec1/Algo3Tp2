@@ -30,8 +30,11 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
             Mapa mapita = TableroVistaControlador.mapa;
             Jugador jugador = ContenedorPrincipal.juego.getJugadorActual(); //???????!!!!!!!!
 
-            TableroVistaControlador.AldeanoSeleccionado.mover(mapita,this.direccion,jugador);
-
+            if (!TableroVistaControlador.AldeanoSeleccionado.estasDisponible()){
+                MenuInferior.log.appendText("\n Aldeano Ocupado");
+            }else {
+                TableroVistaControlador.AldeanoSeleccionado.mover(mapita, this.direccion, jugador);
+            }
             //aca le mando un actualizar vista, va en otro lado pero sino no puedo probar nada
 
 
