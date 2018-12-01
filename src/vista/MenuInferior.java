@@ -8,8 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MenuInferior extends HBox{
-	public static ChoiceBox<String> selecOpciones=new ChoiceBox<String>();
-	public static TextArea log = new TextArea();
+	private static ChoiceBox<String> selecOpciones=new ChoiceBox<String>();
+	private static TextArea log = new TextArea();
 	
 	public MenuInferior(Stage stage){
     	ContenedorPrincipal.setAlignment(this, Pos.BOTTOM_CENTER);
@@ -26,6 +26,14 @@ public class MenuInferior extends HBox{
     	this.setSpacing(100);
     	this.getChildren().addAll(log,selecOpciones);
     	this.setAlignment(Pos.BASELINE_CENTER);
+	}
+
+	public static TextArea getLog(){
+		return log;
+	}
+
+	public static ChoiceBox<String> getSelecOpciones(){
+		return selecOpciones;
 	}
 
 }

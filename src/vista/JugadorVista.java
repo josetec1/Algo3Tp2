@@ -8,10 +8,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class JugadorVista {
-	VBox vbox;
-	Jugador jugador;
+	private VBox vbox;
+	private Jugador jugador;
 
-	
+
 	public JugadorVista(VBox unVBox,Jugador unJugador){
 		vbox=unVBox;
 		jugador=unJugador;
@@ -24,7 +24,7 @@ public class JugadorVista {
 		vbox.setTranslateY(150);
 
 		if(this.jugador == jugadorActual){
-			MenuInferior.log.insertText(0, "\nEs turno de " + jugador.getNombre());
+			MenuInferior.getLog().insertText(0, "\nEs turno de " + jugador.getNombre());
 			//this.dibujarJugadorActual();
 		}
 

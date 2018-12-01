@@ -6,7 +6,7 @@ import Eventos.SeleccionPasarTurnoHandler;
 import Eventos.SeleccionUpdateHandler;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
+import fiuba.algo3.aoe.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.geometry.Pos;
@@ -22,10 +22,10 @@ import java.util.Observer;
 
 public class ContenedorPrincipal extends BorderPane implements Observer {
 
-    BarraDeMenu menuBar;
-    public static MenuInferior menuInferior;
-    MapaVistaControlador vistaMapa;
-    public static Juego juego;  //OJO
+    private BarraDeMenu menuBar;
+    private static MenuInferior menuInferior;
+    private MapaVistaControlador vistaMapa;
+    private static Juego juego;  //OJO
 
    // Canvas canvasCentral;
 
@@ -47,6 +47,10 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         unJuego.getJugadorDos().addObserver(this);
         juego.addObserver(this);
 	}
+
+	public static Juego getJuego(){
+	    return juego;
+    }
 
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
 
@@ -85,29 +89,81 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
         // ojo aca quizas tengamos que tener un metodo en esta clase o en otra. "dibuajarBotones" algo asi
         //fijate que se estan dibujando los botones del tablero en dibajarTablero de TableroVistaControlador
-        Button derechaButton = new Button ( "Derecha" );
-        SeleccionDireccionHandler seleccionDireccionHandler = new SeleccionDireccionHandler(new DireccionDerecha());
 
-        derechaButton.setOnMouseClicked(seleccionDireccionHandler);
+        this.crearBotonesDireccion(vbox1);
+        this.crearBotonPasarTurno(vbox1);
+        this.crearBotonActualizar(vbox1);
+    }
 
-        vbox1.getChildren ().add ( derechaButton );
-
-
+    private void crearBotonActualizar(VBox vbox1){
         Button actualizarButton = new Button ( "Altualizar" );
         SeleccionUpdateHandler seleccionUpdateHandler = new SeleccionUpdateHandler(this);
         actualizarButton.setOnMouseClicked(seleccionUpdateHandler);
         vbox1.getChildren ().add ( actualizarButton );
+    }
 
-
+    private void crearBotonPasarTurno(VBox vbox1){
         Button pasarTurnoButton = new Button ( "Pasar Turno" );
         SeleccionPasarTurnoHandler seleccionPasarTurnoHandler = new SeleccionPasarTurnoHandler(this);
         pasarTurnoButton.setOnMouseClicked(seleccionPasarTurnoHandler);
         vbox1.getChildren ().add ( pasarTurnoButton );
+    }
 
+    private void crearBotonesDireccion(VBox vbox1){
+        //Arriba
+        Button arribaButton = new Button ( "Arriba" );
+        SeleccionDireccionHandler seleccionDireccionHandlerArriba = new SeleccionDireccionHandler(new DireccionArriba());
+        arribaButton.setOnMouseClicked(seleccionDireccionHandlerArriba);
+        arribaButton.setAlignment(Pos.BASELINE_CENTER);
+        vbox1.getChildren ().add ( arribaButton );
+
+        //Abajo
+        Button abajoButton = new Button ( "Abajo" );
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajo = new SeleccionDireccionHandler(new DireccionAbajo());
+        abajoButton.setOnMouseClicked(seleccionDireccionHandlerAbajo);
+        abajoButton.setAlignment(Pos.BASELINE_CENTER);
+        vbox1.getChildren ().add ( abajoButton );
+
+        //Derecha
+        Button derechaButton = new Button ( "Derecha" );
+        SeleccionDireccionHandler seleccionDireccionHandler = new SeleccionDireccionHandler(new DireccionDerecha());
+        derechaButton.setOnMouseClicked(seleccionDireccionHandler);
+        derechaButton.setAlignment(Pos.TOP_CENTER);
+        vbox1.getChildren ().add ( derechaButton );
+
+        //Izquierda
+        Button izquierdaButton = new Button ( "Izquierda" );
+        SeleccionDireccionHandler seleccionDireccionHandlerIzquierda = new SeleccionDireccionHandler(new DireccionIzquierda());
+        izquierdaButton.setOnMouseClicked(seleccionDireccionHandlerIzquierda);
+        izquierdaButton.setAlignment(Pos.TOP_CENTER);
+        vbox1.getChildren ().add ( izquierdaButton);
+
+        //Arriba Derecha
+        Button arribaYDerechaButton = new Button ( "Arriba Derecha" );
+        SeleccionDireccionHandler seleccionDireccionHandlerArribaDerecha = new SeleccionDireccionHandler(new DireccionArribaDerecha());
+        arribaYDerechaButton.setOnMouseClicked(seleccionDireccionHandlerArribaDerecha);
+        vbox1.getChildren ().add ( arribaYDerechaButton );
+
+        //Arriba Izquierda
+        Button arribaIzquierdaButton = new Button ( "Arriba Izquierda" );
+        SeleccionDireccionHandler seleccionDireccionHandlerArribaIzquierda = new SeleccionDireccionHandler(new DireccionArribaIzquierda());
+        arribaIzquierdaButton.setOnMouseClicked(seleccionDireccionHandlerArribaIzquierda);
+        vbox1.getChildren ().add ( arribaIzquierdaButton );
+
+        //Abajo Derecha
+        Button abajoDerechaButton = new Button ( "Abajo Derecha" );
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajoDerecha = new SeleccionDireccionHandler(new DireccionAbajoDerecha());
+        abajoDerechaButton.setOnMouseClicked(seleccionDireccionHandlerAbajoDerecha);
+        vbox1.getChildren ().add ( abajoDerechaButton );
+
+        //Abajo Izquierda
+        Button abajoIzquierdaButton = new Button ( "Abajo Izquierda" );
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajoIzquierda = new SeleccionDireccionHandler(new DireccionAbajoIzquierda());
+        abajoIzquierdaButton.setOnMouseClicked(seleccionDireccionHandlerAbajoIzquierda);
+        vbox1.getChildren ().add ( abajoIzquierdaButton );
 
 
     }
-
     private void actualizarPiezas (Jugador jugadorUno, Jugador jugadorDos){
 
 

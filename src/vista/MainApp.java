@@ -19,7 +19,7 @@ public class MainApp extends Application {
 
         Juego unJuego = new Juego("Diego","Maradona",40,30);
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage, unJuego);
-        Scene scene = new Scene(contenedorPrincipal,1280,900);
+        Scene scene = new Scene(contenedorPrincipal,1440,900);
         primaryStage.setScene(scene);
         primaryStage.show();
 

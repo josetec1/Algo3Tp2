@@ -12,8 +12,8 @@ public class SeleccionPasarTurnoHandler  implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        contenedor.juego.pasarJugada();
-        MenuInferior.log.appendText("\n Se pasa turno");
+        contenedor.getJuego().pasarJugada();
+        MenuInferior.getLog().appendText("\n Se pasa turno");
     }
 }
 

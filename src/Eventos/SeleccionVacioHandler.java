@@ -19,22 +19,22 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 	@Override
 	public void handle(MouseEvent event) {
 		// TODO Auto-generated method stub
-		if ("Observar"== MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
-			MenuInferior.log.appendText("\nCasillero: "+cuadrante.getX() +"," + cuadrante.getY());
+		if ("Observar"== MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+			MenuInferior.getLog().appendText("\nCasillero: "+cuadrante.getX() +"," + cuadrante.getY());
 		}
-		if ("Mover"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
+		if ("Mover"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
 			if (MapaVistaControlador.seleccionado==false){
-				MenuInferior.log.appendText("\nSoy una posicion");
+				MenuInferior.getLog().appendText("\nSoy una posicion");
 				}
 				else{
 					//Mover y terminar turno
 					try{
 						//XXSentinela	TableroVistaControlador.AldeanoSeleccionado.mover(coordenada, ContenedorPrincipal.juego.getMapa());
 						//XXSentinela	MenuInferior.log.appendText("\naldeano: mover a posicion " + coordenada.getX() + " , " + coordenada.getY());
-						ContenedorPrincipal.juego.pasarJugada();
+						ContenedorPrincipal.getJuego().pasarJugada();
 					}
 					catch (PosicionInvalidaException e){
-						MenuInferior.log.appendText("\nMovimiento fuera de rango");
+						MenuInferior.getLog().appendText("\nMovimiento fuera de rango");
 					}
 
 					
@@ -43,15 +43,15 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 					
 				}
 		}
-		if ("Atacar"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
+		if ("Atacar"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
 			if (MapaVistaControlador.seleccionado==false){
 				
-				MenuInferior.log.appendText("\nPor favor, seleccione un aldeano");
+				MenuInferior.getLog().appendText("\nPor favor, seleccione un aldeano");
 			}
 			else{
 				//TableroVistaControlador.aldeanoSeleccionado.getJugador().atacar(coordenada, ContenedorPrincipal.juego.getTablero());
 				//XXSentinela MenuInferior.log.appendText("\n" + TableroVistaControlador.aldeanoSeleccionado.getNombre()+" :ataque fallido!");
-				ContenedorPrincipal.juego.pasarJugada();
+				ContenedorPrincipal.getJuego().pasarJugada();
 				MapaVistaControlador.seleccionado=false;
 				//Atacar a lugar vacio
 			}
