@@ -12,8 +12,8 @@ public class SeleccionUpdateHandler implements EventHandler<MouseEvent>{
 
     @Override
     public void handle(MouseEvent event) {
-        contenedor.actualizarTodo();
-        MenuInferior.log.appendText("\n Se actualiza el tablero");}
+        contenedor.update(null,null);
+        MenuInferior.log.appendText("\n Se actualiza el Mapa");}
     }
 
 

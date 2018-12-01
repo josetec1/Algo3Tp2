@@ -2,6 +2,7 @@ package vista;
 
 
 import Eventos.SeleccionDireccionHandler;
+import Eventos.SeleccionPasarTurnoHandler;
 import Eventos.SeleccionUpdateHandler;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
@@ -9,7 +10,6 @@ import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -24,27 +24,30 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     BarraDeMenu menuBar;
     public static MenuInferior menuInferior;
-    TableroVistaControlador vistaTablero;
+    MapaVistaControlador vistaTablero;
     public static Juego juego;  //OJO
 
-    Canvas canvasCentral;
+   // Canvas canvasCentral;
 
     
 	public ContenedorPrincipal(Stage unStage, Juego unJuego){
         final VBox vbox1=new VBox(); VBox vbox2=new VBox();
+
         this.setMenu(unStage,vbox1);
         this.juego = unJuego;
 
-        this.setTablero(unJuego); //dibuja el mapa
+        //dibuja el mapa
+        this.setMapa(unJuego);
 
-        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos(),vbox1,vbox2); // dibujar nombres en pantalla, obtener y presentar Piezas, suscribir observadores que tiene que ser la vista
+        // dibujar nombres en pantalla, obtener y presentar Piezas,
+        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos(),vbox1,vbox2);
+
+        //suscribir observadores que tiene que ser la vista
         unJuego.getJugadorUno().addObserver(this);
         unJuego.getJugadorDos().addObserver(this);
+        juego.addObserver(this);
 	}
 
-
-
-    //TODO
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
 
     	JugadorVista vistaJugador1 = new JugadorVista(vbox1,jugadorUno);
@@ -61,88 +64,26 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     	this.actualizarPiezas(jugadorUno,jugadorDos);
     }
-
-    private void actualizarPiezas (Jugador jugadorUno, Jugador jugadorDos){
-
-
-
-        //XXSentinelavalue.suscribir(vistaTablero);  aca suscribis una vista al aldeano
-       /*
-    	for(Aldeano value: jugadorUno.getAldeanos()){
-    		vistaTablero.ubicarAldeano(value,value.getPosicion().getX(),value.getPosicion().getY());
-            //XXSentinelavalue.suscribir(vistaTablero);  aca suscribis una vista al aldeano
-    	}
-    	for(Aldeano value: jugadorDos.getAldeanos()){
-    		vistaTablero.ubicarAldeano(value,value.getPosicion().getX(),value.getPosicion().getY());
-            //XXSentinela  value.suscribir(vistaTablero);
-    	}
-    	*/
-        for(Aldeano value: jugadorUno.getAldeanos()){
-            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
-            for (Cuadrante casilla : cuadrantes ) {
-                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
-
-
-            }
-
-        }
-
-        for(Aldeano value: jugadorDos.getAldeanos()){
-            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
-            for (Cuadrante casilla : cuadrantes ) {
-                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
-
-
-            }
-
-        }
-
-
-        /******************************************************************************************
-         *            XXSentinela*/////////
-
-        /*
-        // poner los nombres de los jugadores en pantalla DONE
-        // obtener los aldeanos de cada uno y ponerlos en pantalla DONE
-        // jugador.getaldeanos..........
-        // subscribir los observadores
-        //  aldeanos.subscribirobservador
-        */
-
-
-    }
-
-    private void actualizarTablero (){ //regenero el tablero
-        this.setTablero(this.juego);
-
-    }
-
-    public void actualizarTodo (){
-
-	    this.actualizarTablero();
-	    this.actualizarPiezas(this.juego.getJugadorUno(),this.juego.getJugadorDos());
-    }
-
-    private void setTablero(Juego unJuego) {
-		// TODO Auto-generated method stub
+    private void setMapa(Juego unJuego) {
+        // TODO Auto-generated method stub
         GridPane grid=new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setGridLinesVisible(true);
-        vistaTablero = new TableroVistaControlador(unJuego,grid);
-         //esto lo cambie de orden
+        vistaTablero = new MapaVistaControlador(unJuego,grid);
+        //esto lo cambie de orden
         this.vistaTablero.dibujarTablero();
         this.setCenter(grid);
 
-	}
+    }
 
-	private void setMenu(Stage stage,VBox vbox1) {
+    private void setMenu(Stage stage,VBox vbox1) {
         this.menuBar = new BarraDeMenu(stage);
         this.setTop(menuBar);
-        
-        this.menuInferior = new MenuInferior(stage);
-    	this.setBottom(menuInferior);
 
-    	// ojo aca quizas tengamos que tener un metodo en esta clase o en otra. "dibuajarBotones" algo asi
+        this.menuInferior = new MenuInferior(stage);
+        this.setBottom(menuInferior);
+
+        // ojo aca quizas tengamos que tener un metodo en esta clase o en otra. "dibuajarBotones" algo asi
         //fijate que se estan dibujando los botones del tablero en dibajarTablero de TableroVistaControlador
         Button derechaButton = new Button ( "Derecha" );
         SeleccionDireccionHandler seleccionDireccionHandler = new SeleccionDireccionHandler(new DireccionDerecha());
@@ -157,10 +98,44 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         actualizarButton.setOnMouseClicked(seleccionUpdateHandler);
         vbox1.getChildren ().add ( actualizarButton );
 
+
+        Button pasarTurnoButton = new Button ( "Pasar Turno" );
+        SeleccionPasarTurnoHandler seleccionPasarTurnoHandler = new SeleccionPasarTurnoHandler(this);
+        pasarTurnoButton.setOnMouseClicked(seleccionPasarTurnoHandler);
+        vbox1.getChildren ().add ( pasarTurnoButton );
+
+
+
     }
+
+    private void actualizarPiezas (Jugador jugadorUno, Jugador jugadorDos){
+
+        for(Aldeano value: jugadorUno.getAldeanos()){
+            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
+            for (Cuadrante casilla : cuadrantes ) {
+                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
+            }
+        }
+
+        for(Aldeano value: jugadorDos.getAldeanos()){
+            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
+            for (Cuadrante casilla : cuadrantes ) {
+                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
+            }
+        }
+    }
+    private void actualizarMapa(){ //regenero el tablero
+        this.setMapa(this.juego);
+
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {
-       this.actualizarTodo();
+        this.actualizarMapa();
+        this.actualizarPiezas(this.juego.getJugadorUno(),this.juego.getJugadorDos());
+
+
+
     }
 }

@@ -18,6 +18,7 @@ public class Turno {
     public Turno ( List <Jugador> unosJugadores , ModoInicio semilla) {
 
         if (unosJugadores.size() != JUGADORES_ADMITIDOS) throw new JugadoresInvalidosException();
+        if (unosJugadores.get(0) == unosJugadores.get(1))throw new JugadoresInvalidosException();
         this.jugadores = unosJugadores;
         this.it = unosJugadores.iterator();
         this.inicializarTurno(semilla);

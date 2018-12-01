@@ -25,7 +25,7 @@ public class JugadorVista {
 
 		if(this.jugador == jugadorActual){
 			MenuInferior.log.insertText(0, "\nEs turno de " + jugador.getNombre());
-			this.dibujarJugadorActual();
+			//this.dibujarJugadorActual();
 		}
 
 	}

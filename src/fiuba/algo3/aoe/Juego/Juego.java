@@ -85,7 +85,7 @@ public class Juego extends Observable {
         }
         j2.inicializar(plazaCentral,aldeanos);
         this.jugador2=j2;
-        jugadores.add (j1);
+        jugadores.add (j2);
 
 
         this.mapa = mapa;
@@ -96,7 +96,14 @@ public class Juego extends Observable {
     }
 
 
-    public void pasarJugada() {this.juego.cambiarTurno();}
+    public void pasarJugada() {
+
+        if (this.juego.juegoTerminado()) {      } //excepcion
+        this.juego.cambiarTurno(this.turno);
+        this.setChanged();
+        this.notifyObservers();
+
+    }
 
     public Jugador getJugadorActual() {
         return this.juego.getJugadorActivo(this.turno);

@@ -144,6 +144,16 @@ public class TurnoTest {
         Turno turno = new Turno(jugadores,inicioFirst);
     }
 
+    @Test
+    public void test09InicializarTurnoConListaDeJugadoresConDosJugadoresIgualesDebeLanzajugadoresInvalidosExeption(){
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        List<Jugador> jugadores = new ArrayList <>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador1);
+        thrown.expect(JugadoresInvalidosException.class);
+        Turno turno = new Turno(jugadores,inicioFirst);
+    }
 
 
 

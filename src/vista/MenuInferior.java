@@ -13,7 +13,7 @@ public class MenuInferior extends HBox{
 	
 	public MenuInferior(Stage stage){
     	ContenedorPrincipal.setAlignment(this, Pos.BOTTOM_CENTER);
-    	selecOpciones.getItems().addAll("Mover","Atacar","Transformar","Fusionar");
+    	selecOpciones.getItems().addAll("Mover","Atacar","Opinable","Alfombrar");
     	selecOpciones.getSelectionModel().selectFirst();
     	selecOpciones.setPrefWidth(300);
     	log.setEditable(false);

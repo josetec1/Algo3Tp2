@@ -7,8 +7,9 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 public interface Ijuego {
 
 
-    void cambiarTurno();
+    void cambiarTurno(Turno turno);
     Jugador getGanador();
     Jugador getJugadorActivo(Turno turno);
+    boolean juegoTerminado();
 
 }

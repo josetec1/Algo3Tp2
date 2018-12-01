@@ -10,7 +10,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import vista.ContenedorPrincipal;
 import vista.MenuInferior;
-import vista.TableroVistaControlador;
+import vista.MapaVistaControlador;
 
 public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 
@@ -37,30 +37,30 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 		} else {
 
 			if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
-				if (TableroVistaControlador.seleccionado == false) {
+				if (MapaVistaControlador.seleccionado == false) {
 					//si no esta seleccionado, entonces lo selecciono
 					if (!ContenedorPrincipal.juego.getJugadorActual().esMio(this.aldeano)){
 						MenuInferior.log.appendText("\nNo es tuyo");
 					}else{
 						MenuInferior.log.appendText("\nAldeano Seleccionado");
-						TableroVistaControlador.seleccionado = true;
-						TableroVistaControlador.AldeanoSeleccionado = aldeano;
+						MapaVistaControlador.seleccionado = true;
+						MapaVistaControlador.AldeanoSeleccionado = aldeano;
 					}
 				} else {
 
 					MenuInferior.log.appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");
-					TableroVistaControlador.seleccionado = false;
+					MapaVistaControlador.seleccionado = false;
 
 				} //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
 				//TODO MOVIMIENTO
 			}
 			if ("Atacar" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
 				//TODO ATAQUE
-				if (TableroVistaControlador.seleccionado == false) {
+				if (MapaVistaControlador.seleccionado == false) {
 					//si no esta seleccionado, entonces lo selecciono
 					MenuInferior.log.appendText("\nAldeano Seleccionado, ahora elegi que atacar!!!!");
-					TableroVistaControlador.seleccionado = true;
-					TableroVistaControlador.AldeanoSeleccionado = aldeano;
+					MapaVistaControlador.seleccionado = true;
+					MapaVistaControlador.AldeanoSeleccionado = aldeano;
 				} else { //Seleccionado=true
 
 					//ATACAR

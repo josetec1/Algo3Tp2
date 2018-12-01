@@ -7,7 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import vista.ContenedorPrincipal;
 import vista.MenuInferior;
-import vista.TableroVistaControlador;
+import vista.MapaVistaControlador;
 
 public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 	
@@ -23,7 +23,7 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 			MenuInferior.log.appendText("\nCasillero: "+cuadrante.getX() +"," + cuadrante.getY());
 		}
 		if ("Mover"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
-			if (TableroVistaControlador.seleccionado==false){
+			if (MapaVistaControlador.seleccionado==false){
 				MenuInferior.log.appendText("\nSoy una posicion");
 				}
 				else{
@@ -38,13 +38,13 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 					}
 
 					
-					TableroVistaControlador.seleccionado=false;
+					MapaVistaControlador.seleccionado=false;
 					
 					
 				}
 		}
 		if ("Atacar"==MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()){
-			if (TableroVistaControlador.seleccionado==false){
+			if (MapaVistaControlador.seleccionado==false){
 				
 				MenuInferior.log.appendText("\nPor favor, seleccione un aldeano");
 			}
@@ -52,7 +52,7 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 				//TableroVistaControlador.aldeanoSeleccionado.getJugador().atacar(coordenada, ContenedorPrincipal.juego.getTablero());
 				//XXSentinela MenuInferior.log.appendText("\n" + TableroVistaControlador.aldeanoSeleccionado.getNombre()+" :ataque fallido!");
 				ContenedorPrincipal.juego.pasarJugada();
-				TableroVistaControlador.seleccionado=false;
+				MapaVistaControlador.seleccionado=false;
 				//Atacar a lugar vacio
 			}
 		}

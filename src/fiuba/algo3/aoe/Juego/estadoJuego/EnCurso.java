@@ -8,7 +8,8 @@ public class EnCurso implements Ijuego {
 
 
     @Override
-    public void cambiarTurno() {
+    public void cambiarTurno(Turno turno) {
+        turno.pasarTurno();
 
     }
 
@@ -20,5 +21,10 @@ public class EnCurso implements Ijuego {
     @Override
     public Jugador getJugadorActivo(Turno turno) {
         return turno.getJugadorActual();
+    }
+
+    @Override
+    public boolean juegoTerminado() {
+        return false;
     }
 }

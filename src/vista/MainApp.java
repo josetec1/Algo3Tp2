@@ -14,15 +14,12 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Age Of Empires");
+        this.primaryStage.setTitle("Age Of Campeones");
 
 
         Juego unJuego = new Juego("Diego","Maradona",40,30);
-
-        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage, unJuego); //
-
+        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage, unJuego);
         Scene scene = new Scene(contenedorPrincipal,1280,900);
-        
         primaryStage.setScene(scene);
         primaryStage.show();
 

@@ -20,8 +20,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 //TODO ojo el obsvador juego....
-public class TableroVistaControlador   {
-//public class TableroVistaControlador implements ObservadorTablero, ObservadorBonus, ObservadorAldeano, ObservadorJuego {
+public class MapaVistaControlador {
+
     public static Mapa mapa;
 	GridPane tableroView;
 	Juego juego;
@@ -29,7 +29,7 @@ public class TableroVistaControlador   {
 	public static boolean seleccionado;
 	public static Aldeano AldeanoSeleccionado;
 	
-	public TableroVistaControlador(Juego unJuego,GridPane unGrid){
+	public MapaVistaControlador(Juego unJuego, GridPane unGrid){
 		tableroView=unGrid;
 		mapa =unJuego.getMapa();
 		juego=unJuego;
@@ -45,10 +45,8 @@ public class TableroVistaControlador   {
 		}
 		for (int j = 0; j<(mapa.getAlto()); j++){
 			tableroView.getRowConstraints().add(new RowConstraints(20));
-		} //Creo mapa de 11x11 si Tablero (10,10);
-		//XXSentineladibujarTerrenos();
+		}
 		crearBotones();
-		
 		tableroView.setAlignment(Pos.CENTER);
 	}
 
@@ -60,16 +58,11 @@ public class TableroVistaControlador   {
 				Button boton=new Button("");
 				boton.setAlignment(Pos.CENTER);
 				boton.setTranslateX(0);
-				//boton.setPrefWidth(70);
-				//boton.setPrefHeight(30);
 				boton.setPrefWidth(20);
 				boton.setPrefHeight(20);
 				Cuadrante cuadrante=new Cuadrante(i, j);
 				SeleccionVacioHandler seleccionVacioHandler = new SeleccionVacioHandler(cuadrante);
 				boton.setOnMouseClicked(seleccionVacioHandler);
-				//XXSentinela	if ((ContenedorPrincipal.juego.getChispaSuperma().getPosicion().getX()==i) && (ContenedorPrincipal.juego.getChispaSuperma().getPosicion().getX()==j)){
-				//XXSentinela	boton.setStyle("-fx-base: #e6e600;"); //Color de chispa suprema
-				//XXSentinela}
 				boton.setId("#" + Integer.toString(i)+"," + Integer.toString(j));
 				tableroView.add(boton, i, j);
 				
