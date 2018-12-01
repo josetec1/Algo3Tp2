@@ -25,7 +25,7 @@ public class Jugador extends Observable implements Observer {
     private ListaDePiezas piezas;
     private List<Manipulable> unidades;
     private List<Manipulable> edificios;
-    private Castillo castillo;
+    //private Castillo castillo;
 
     private final int POBLACION_MAXIMA = 50;
     private final int ORO_INICIAL = 100;
@@ -37,7 +37,8 @@ public class Jugador extends Observable implements Observer {
         this.oro = ORO_INICIAL;
         this.unidades = new ArrayList<>();
         this.edificios = new ArrayList<>();
-        this.castillo= castillo;
+        //this.castillo= castillo;
+        this.edificios.add(castillo);
         this.estadoInicial = new JugadorSinIniciar();
 
 
