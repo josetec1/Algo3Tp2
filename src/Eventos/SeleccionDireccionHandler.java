@@ -3,6 +3,7 @@ package Eventos;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import vista.MenuInferior;
@@ -30,6 +31,9 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
             Jugador jugador = ContenedorPrincipal.juego.getJugadorActual(); //???????!!!!!!!!
 
             TableroVistaControlador.AldeanoSeleccionado.mover(mapita,this.direccion,jugador);
+
+            //aca le mando un actualizar vista, va en otro lado pero sino no puedo probar nada
+
 
 
         }

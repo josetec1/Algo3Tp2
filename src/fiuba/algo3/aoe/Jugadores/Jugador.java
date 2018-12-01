@@ -136,13 +136,17 @@ public class Jugador implements ObservableJugador{
 
     //XXSentinela
     public ArrayList<Aldeano> getAldeanos(){
+
+
         ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        Aldeano aldeano = new Aldeano();
-        Aldeano aldeano2 = new Aldeano();
-        aldeano.colocarEn(new Posicion(1,1));
-        aldeano2.colocarEn(new Posicion(3,3));
-        aldeanos.add(aldeano);
-        aldeanos.add(aldeano2);
+        Aldeano aldeanoxxx= (Aldeano)this.unidades.get(0);
+        aldeanos.add(aldeanoxxx);
+         aldeanoxxx= (Aldeano)this.unidades.get(1);
+        aldeanos.add(aldeanoxxx);
+         aldeanoxxx= (Aldeano)this.unidades.get(2);
+        aldeanos.add(aldeanoxxx);
+
+
         return aldeanos;
 
     }

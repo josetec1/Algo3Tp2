@@ -99,7 +99,7 @@ public class Juego extends Observable {
     public void pasarJugada() {this.juego.cambiarTurno();}
 
     public Jugador getJugadorActual() {
-        return this.juego.getJugadorActivo();
+        return this.juego.getJugadorActivo(this.turno);
     }
     public Jugador getJugadorUno (){return this.jugador1;}
     public   Jugador getJugadorDos (){return this.jugador2;}

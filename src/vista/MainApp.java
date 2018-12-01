@@ -17,7 +17,7 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Age Of Empires");
 
 
-        Juego unJuego = new Juego("mario","Diego",40,30);
+        Juego unJuego = new Juego("Diego","Maradona",40,30);
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage, unJuego); //
 

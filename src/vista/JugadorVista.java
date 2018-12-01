@@ -31,21 +31,20 @@ public class JugadorVista {
 		//XXSentinela
 	}
 	public void dibujarInfoTerreno(){
-		Label titulo= new Label("\n\nTerrenos:");
+		Label titulo= new Label("\n\nUnidades:");
 		titulo.setFont(new Font("Arial",16));
 		vbox.getChildren().add(titulo);
 		Text info = new Text();
-		info.setText("\nBeige: Rocoso \nMarron Oscuro: Pantano\nVerde: Espinas \nCeleste claro: Nubes\nVioleta: "
-				+ "Nebulosa de Andromeda\nAzul: Tormenta Psionica");
+		info.setText("\nAzul: Aldeano \nMarron Oscuro: Espadachin\nVerde: Arquero \nCeleste claro: Asedio ");
 		titulo.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
 	}
 	public void dibujarInfoBonus(){
-		Label titulo= new Label("\n\nBonus:");
+		Label titulo= new Label("\n\nEdificios:");
 		titulo.setFont(new Font("Arial",16));
 		vbox.getChildren().add(titulo);
 		Text info = new Text();
-		info.setText("\nCeleste: Burbuja\nRojo: Doble Canion\nAmarillo: Flash");
+		info.setText("\nCeleste: Castillo\nRojo: Plaza Central\nAmarillo: Cuartel");
 		titulo.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
 	}

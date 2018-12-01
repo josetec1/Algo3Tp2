@@ -20,7 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 //TODO ojo el obsvador juego....
-public class TableroVistaControlador implements Observer {
+public class TableroVistaControlador   {
 //public class TableroVistaControlador implements ObservadorTablero, ObservadorBonus, ObservadorAldeano, ObservadorJuego {
     public static Mapa mapa;
 	GridPane tableroView;
@@ -76,6 +76,8 @@ public class TableroVistaControlador implements Observer {
 			}
 		}
 	}
+
+	//https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
 	//TODO XXSentinela  explota esto de aca abajo
 	public void ubicarAldeano(Aldeano aldeano, int x, int y){
 		Button botonAlgo;
@@ -90,10 +92,10 @@ public class TableroVistaControlador implements Observer {
 
 
 		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
-		botonAlgo = (Button) tableroView.getChildren().get(x+y);
+		botonAlgo = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ; //
 	//	botonAlgo = (Button) tableroView.getChildren().get()
 		botonAlgo.setText("A");
-		botonAlgo.setStyle("-fx-background-color: #b3ffff");
+		botonAlgo.setStyle("-fx-background-color: #1E90FF");
 
 
 			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
@@ -163,7 +165,9 @@ public class TableroVistaControlador implements Observer {
 
 	//XXSentinela@Override
 	public void huboUnMovimiento(Aldeano unAldeano, Posicion original) {
-        //actualizar el movimiento
+
+
+		//actualizar el movimiento
 
 		//TODO PARCHE Arreglar!!!
 		// esto pincha por que cuando el Eventos coloca al fusionado, este metodo intenta sacarlo de su posicion que la vista no lo tiene
@@ -227,10 +231,7 @@ public class TableroVistaControlador implements Observer {
 		}
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
 
-	}
 
 
 	//XXSentinela
