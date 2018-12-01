@@ -15,13 +15,14 @@ public class JugadorVista {
 	public JugadorVista(VBox unVBox,Jugador unJugador){
 		vbox=unVBox;
 		jugador=unJugador;
+
 	}
 	public void dibujarJugador(Jugador jugadorActual){
 		
 		Label j= new Label(jugador.getNombre());
 		vbox.getChildren().add(j);
 		j.setFont(new Font("Arial",20));
-		vbox.setTranslateY(150);
+		j.setTranslateY(15);
 
 		if(this.jugador == jugadorActual){
 			MenuInferior.getLog().insertText(0, "\nEs turno de " + jugador.getNombre());
@@ -48,13 +49,4 @@ public class JugadorVista {
 		vbox.getChildren().add(info);
 	}
 
-	public void dibujarJugadorActual(){
-		Label titulo= new Label("\n\nJugadorActual:");
-		titulo.setFont(new Font("Arial",16));
-		vbox.getChildren().add(titulo);
-		Text info = new Text();
-		info.setText( this.jugador.getNombre());
-		titulo.setFont(new Font("Arial",14));
-		vbox.getChildren().add(info);
-	}
 }

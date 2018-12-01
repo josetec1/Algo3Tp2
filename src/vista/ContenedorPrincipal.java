@@ -32,6 +32,10 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     
 	public ContenedorPrincipal(Stage unStage, Juego unJuego){
         final VBox vbox1=new VBox(); VBox vbox2=new VBox();
+        this.setRight(vbox2);
+        this.setLeft(vbox1);
+        vbox1.setTranslateX(5);
+        vbox1.setTranslateY(10);
 
         this.setMenu(unStage,vbox1);
         this.juego = unJuego;
@@ -54,17 +58,16 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
 
-    	JugadorVista vistaJugador1 = new JugadorVista(vbox1,jugadorUno);
+    	JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno);
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
     	vistaJugador1.dibujarJugador(this.juego.getJugadorActual());
-    	vistaJugador2.dibujarJugador(this.juego.getJugadorActual());
-    	vistaJugador1.dibujarInfoUnidades();
-    	vistaJugador2.dibujarInfoEdificios();
-    	this.setLeft(vbox1);
-    	this.setRight(vbox2);
-    	vbox1.setTranslateX(20);
-    	vbox2.setTranslateX(-20);
+        vistaJugador1.dibujarInfoUnidades();
+        vistaJugador1.dibujarInfoEdificios();
+        vistaJugador2.dibujarJugador(this.juego.getJugadorActual());
+        vistaJugador2.dibujarInfoUnidades();
+        vistaJugador2.dibujarInfoEdificios();
+
 
     	this.actualizarPiezas(jugadorUno,jugadorDos);
     }
