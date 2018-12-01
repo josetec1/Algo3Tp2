@@ -17,7 +17,15 @@ public class SeleccionPlazaHandler implements EventHandler<MouseEvent> {
         if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 
             MenuInferior.getLog().appendText("\nPlaza Seleccionada");
-
         }
+        if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+
+            MenuInferior.getLog().appendText("\nPlaza Seleccionada");
+        }
+        if ("Crear" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+
+            MenuInferior.getLog().appendText("\nPlaza Seleccionada");
+        }
+
     }
 }

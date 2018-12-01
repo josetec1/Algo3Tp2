@@ -8,6 +8,7 @@ import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -71,7 +72,8 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         vistaJugador2.dibujarInfoEdificios();
 
 
-    	this.actualizarPiezas(jugadorUno,jugadorDos);
+    	this.actualizarPiezas(jugadorUno);
+        this.actualizarPiezas(jugadorDos);
     }
     private void setMapa(Juego unJuego) {
         // TODO Auto-generated method stub
@@ -169,18 +171,11 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
 
     }
-    private void actualizarPiezas (Jugador jugadorUno, Jugador jugadorDos){
+    private void actualizarPiezas (Jugador jugador){
 
 
 
-        for(Aldeano value: jugadorUno.getAldeanos()){
-            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
-            for (Cuadrante casilla : cuadrantes ) {
-                vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
-            }
-        }
-
-        for(Aldeano value: jugadorDos.getAldeanos()){
+        for(Aldeano value: jugador.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
                 vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
@@ -188,24 +183,19 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         }
 
         //castillo
-        vistaMapa.ubicarCastillo (jugadorUno.getCastillo());
-        vistaMapa.ubicarCastillo (jugadorDos.getCastillo());
+        vistaMapa.ubicarCastillo (jugador.getCastillo());
 
-        vistaMapa.ubicarPlaza(jugadorUno.getPlaza());
-        vistaMapa.ubicarPlaza (jugadorDos.getPlaza());
+        vistaMapa.ubicarPlaza(jugador.getPlaza());
     }
     private void actualizarMapa(){ //regenero el tablero
         this.setMapa(this.juego);
 
     }
 
-
     @Override
     public void update(Observable o, Object arg) {
         this.actualizarMapa();
-        this.actualizarPiezas(this.juego.getJugadorUno(),this.juego.getJugadorDos());
-
-
-
+        this.actualizarPiezas(this.juego.getJugadorUno());
+        this.actualizarPiezas(this.juego.getJugadorDos());
     }
 }

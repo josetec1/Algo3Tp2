@@ -1,8 +1,11 @@
 package Eventos;
 
 
+import fiuba.algo3.aoe.Juego.Juego;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadFueraDeRangoDeAtaqueException;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -14,53 +17,73 @@ import vista.MapaVistaControlador;
 
 import java.util.ArrayList;
 
-public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
+public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
 
-	Aldeano aldeano;
+    Arquero arquero;
 
-	public SeleccionAldeanoHandler(Aldeano unAldeano) {
-		aldeano = unAldeano;
-	}
+    public SeleccionArqueroHandler(Arquero unArquero) {
+        arquero = unArquero;
+    }
 
-	@Override
-	public void handle(MouseEvent event) {
+    @Override
+    public void handle(MouseEvent event) {
 
-		MouseButton button = event.getButton();
-		if (button == MouseButton.SECONDARY) { //Observar
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Observar aldeano");
-			Cuadrante cuadrante = aldeano.getPosicion().getCasilleros().get(0); // esto lo uso para que veamos que cambio de posicion
-			alert.setHeaderText( "Aldeano ");
-			alert.setContentText("Vida actual: " + aldeano.getVidaActual() + "\nPoder: " + aldeano.getVidaActual()
-					+ " (Costo: " + aldeano.getCosto() + ")\nVelocidad: " + aldeano.getCosto()
-					+ " (Posicion: X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\nRango de ataque: "
-					+ aldeano.getCosto());
-			alert.showAndWait();
-		} else {
+        MouseButton button = event.getButton();
+        if (button == MouseButton.SECONDARY) { //Observar
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Observar arquero");
+            Cuadrante cuadrante = arquero.getPosicion().getCasilleros().get(0); // esto lo uso para que veamos que cambio de posicion
+            alert.setHeaderText( "Arquero ");
+            alert.setContentText("Vida actual: " + arquero.getVidaActual() + "\nPoder: " + arquero.getVidaActual()
+                    + " (Costo: " + arquero.getCosto() + ")\nVelocidad: " + arquero.getCosto()
+                    + " (Posicion: X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\nRango de ataque: "
+                    + arquero.getCosto());
+            alert.showAndWait();
+        } else {
 
-			if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-				if (!MapaVistaControlador.tengoAldeanoSeleccionado()) {
-					//si no esta seleccionado, entonces lo selecciono
-					if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(this.aldeano)){
-						MenuInferior.getLog().appendText("\nNo es tuyo");
-					}else{
-						MenuInferior.getLog().appendText("\nAldeano Seleccionado");
-						MapaVistaControlador.seleccionarAldeano(aldeano);
-					}
-				} else {
+            if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                if (!MapaVistaControlador.tengoArqueroSeleccionado()) {
+                    //si no esta seleccionado, entonces lo selecciono
+                    if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(this.arquero)){
+                        MenuInferior.getLog().appendText("\nNo es tuyo");
+                    }else{
+                        MenuInferior.getLog().appendText("\nArqueroSeleccionado Seleccionado");
+                        MapaVistaControlador.seleccionarArquero(arquero);
+                    }
+                } else {
 
-					MenuInferior.getLog().appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");
-					MapaVistaControlador.desSeleccionarUnidades();
+                    MenuInferior.getLog().appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");
+                    MapaVistaControlador.desSeleccionarUnidades();
 
-				} //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
-				//TODO MOVIMIENTO
-			}
-			if("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-				//TODO ATAQUE
-				MenuInferior.getLog().appendText("\nAldeano no puede Atacar");
-			}
-		}
-	}
+                } //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
+                //TODO MOVIMIENTO
+            }
+            if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                //TODO ATAQUE
+                if (!MapaVistaControlador.tengoAlgunaUnidadSeleccionada()) {
+                    //si no esta seleccionado, entonces lo selecciono
+                    MenuInferior.getLog().appendText("\nArquero Seleccionado, ahora elegi que atacar!!!!");
+                    MapaVistaControlador.seleccionarArquero(arquero);
+                } else { //Seleccionado=true
+
+                    //ATACAR
+                    try {
+
+                        MenuInferior.getLog().appendText("\n Ya seleccionaste antes una unidad y ahora se ataca a arquero!");
+
+                        if(MapaVistaControlador.tengoEspadachinSeleccionado()){
+                           // Ataco
+                            // MapaVistaControlador.getEspadachinSeleccionado().atacar(arquero,Atacante,atacado,MapaVistaControlador.getMapa());
+                        }
+                    } catch (UnidadFueraDeRangoDeAtaqueException e) {
+
+
+                    }
+                }
+
+            }
+        }
+    }
 }
 
 //XXSENTINELA

@@ -1,15 +1,16 @@
 package vista;
 
-import Eventos.SeleccionAldeanoHandler;
-import Eventos.SeleccionCastilloHandler;
-import Eventos.SeleccionPlazaHandler;
-import Eventos.SeleccionVacioHandler;
+import Eventos.*;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import javafx.geometry.Pos;
@@ -27,17 +28,32 @@ import java.util.Observer;
 public class MapaVistaControlador {
 
     private static Mapa mapa;
-	private GridPane tableroView;
-	private Juego juego;
+	private static GridPane tableroView;
+	private static Juego juego;
 
-	public static boolean seleccionado;
-	public static Aldeano AldeanoSeleccionado;
+	private static boolean aldeanoSeleccionado;
+	private static boolean arqueroSeleccionada;
+	private static boolean espadachinSeleccionada;
+	private static boolean castilloSeleccionada;
+	private static boolean plazaSeleccionada;
+	private static boolean cuartelSeleccionada;
+	private static boolean armAsedioSeleccionada;
+
+
+	private static Aldeano aldeano;
+	private static Arquero arquero;
+	private static Espadachin espadachin;
+	private static PlazaCentral plaza;
+	private static Cuartel cuartel;
+	private static Castillo castillo;
+	private static ArmaDeAsedio armaDeAsedio;
+
 	
-	public MapaVistaControlador(Juego unJuego, GridPane unGrid){
+	public  MapaVistaControlador(Juego unJuego, GridPane unGrid){
 		tableroView=unGrid;
 		mapa =unJuego.getMapa();
 		juego=unJuego;
-		seleccionado=false;
+		this.desSeleccionarUnidades();
 	}
 
 	public static Mapa getMapa(){
@@ -76,6 +92,113 @@ public class MapaVistaControlador {
 		}
 	}
 
+	public static boolean tengoAlgunaUnidadSeleccionada(){
+		return (cuartelSeleccionada == true || plazaSeleccionada == true || aldeanoSeleccionado== true ||
+		espadachinSeleccionada== true || armAsedioSeleccionada==true ||	arqueroSeleccionada==true ||castilloSeleccionada==true);
+	}
+	public static void desSeleccionarUnidades(){
+		cuartelSeleccionada=false;
+		plazaSeleccionada=false;
+		aldeanoSeleccionado=false;
+		espadachinSeleccionada=false;
+		armAsedioSeleccionada=false;
+		arqueroSeleccionada=false;
+		castilloSeleccionada=false;
+	}
+
+	public static void seleccionarAldeano(Aldeano unidad){
+		aldeano = unidad;
+		aldeanoSeleccionado=true;
+	}
+	public static void seleccionarArquero(Arquero unidad){
+		arquero = unidad;
+		arqueroSeleccionada=true;
+	}
+	public static void seleccionarEspadachin(Espadachin unidad){
+		espadachin = unidad;
+		espadachinSeleccionada=true;
+	}
+	public static void seleccionarArmaAsedio(ArmaDeAsedio unidad){
+		armaDeAsedio = unidad;
+		armAsedioSeleccionada=true;
+	}
+	public static void seleccionarPlaza(PlazaCentral unidad){
+		plaza = unidad;
+		plazaSeleccionada=true;
+	}
+	public static void seleccionarCastillo(Castillo unidad){
+		castillo = unidad;
+		castilloSeleccionada=true;
+	}
+	public static void seleccionarCuartel(Cuartel unidad){
+		cuartel = unidad;
+		cuartelSeleccionada=true;
+	}
+
+	public static boolean tengoAldeanoSeleccionado(){
+		return aldeanoSeleccionado;
+	}
+	public static boolean tengoArqueroSeleccionado(){
+		return arqueroSeleccionada;
+	}
+	public static boolean tengoEspadachinSeleccionado(){
+		return espadachinSeleccionada;
+	}
+	public static boolean tengoArmaAsedioSeleccionado(){
+		return armAsedioSeleccionada;
+	}
+	public static boolean tengoCuartelSeleccionado(){
+		return cuartelSeleccionada;
+	}
+	public static boolean tengoPlazaSeleccionado(){
+		return plazaSeleccionada;
+	}
+	public static boolean tengoCastilloSeleccionado(){
+		return castilloSeleccionada;
+	}
+
+	public static Castillo getCastilloSeleccionado(){
+		if(castilloSeleccionada){
+			return castillo;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static ArmaDeAsedio getArmaDeAsedioSeleccionado(){
+		if(armAsedioSeleccionada){
+			return armaDeAsedio;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static Espadachin getEspadachinSeleccionado(){
+		if(espadachinSeleccionada){
+			return espadachin;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static Arquero getArqueroSeleccionado(){
+		if(arqueroSeleccionada){
+			return arquero;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static PlazaCentral getPlazaSeleccionado(){
+		if(plazaSeleccionada){
+			return plaza;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static Cuartel getCuartelSeleccionado(){
+		if(cuartelSeleccionada){
+			return cuartel;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
+	public static Aldeano getAldeanoSeleccionado(){
+		if(aldeanoSeleccionado){
+			return aldeano;
+		}
+		throw new NoHayUnidadSeleccionadaException();
+	}
 	//https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
 	//TODO XXSentinela  explota esto de aca abajo
 	public void ubicarAldeano(Aldeano aldeano, int x, int y){
@@ -95,13 +218,30 @@ public class MapaVistaControlador {
 	//	botonAlgo = (Button) tableroView.getChildren().get()
 		botonAldeano.setText("A");
 		botonAldeano.setStyle("-fx-background-color: #1E90FF");
-
-
 			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
 		 botonAldeano.setOnMouseClicked(seleccionAldeanoHandler);
 
+	}
+
+	public void ubicarArquero(Arquero arquero, int x, int y){
+		Button botonArquero;
+
+		//XXSentinelabotonAlgo = (Button) tableroView.getChildren().get((mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1);
+		//XXSentinelabotonAlgo.setText(unaldeano.getNombre());
+		//	botonAlgo = (Button) tableroView.getChildren().get((mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1);
+		//	botonAlgo.setText("tester");
+
+		//XXSentinela	SeleccionAldeanoHandler seleccionaldeanoHandler = new SeleccionAldeanoHandler(aldeano);
+		//XXSentinela botonAlgo.setOnMouseClicked(seleccionaldeanoHandler);
 
 
+		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
+		botonArquero = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ; //
+		//	botonAlgo = (Button) tableroView.getChildren().get()
+		botonArquero.setText("Arq");
+		botonArquero.setStyle("-fx-background-color: #1A91FF");
+		SeleccionArqueroHandler seleccionArqueroHandler = new SeleccionArqueroHandler(arquero);
+		botonArquero.setOnMouseClicked(seleccionArqueroHandler);
 
 	}
 

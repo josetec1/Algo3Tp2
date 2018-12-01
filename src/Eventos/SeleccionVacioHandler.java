@@ -23,38 +23,14 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 			MenuInferior.getLog().appendText("\nCasillero: "+cuadrante.getX() +"," + cuadrante.getY());
 		}
 		if ("Mover"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
-			if (MapaVistaControlador.seleccionado==false){
-				MenuInferior.getLog().appendText("\nSoy una posicion");
-				}
-				else{
-					//Mover y terminar turno
-					try{
-						//XXSentinela	TableroVistaControlador.AldeanoSeleccionado.mover(coordenada, ContenedorPrincipal.juego.getMapa());
-						//XXSentinela	MenuInferior.log.appendText("\naldeano: mover a posicion " + coordenada.getX() + " , " + coordenada.getY());
-						ContenedorPrincipal.getJuego().pasarJugada();
-					}
-					catch (PosicionInvalidaException e){
-						MenuInferior.getLog().appendText("\nMovimiento fuera de rango");
-					}
-
-					
-					MapaVistaControlador.seleccionado=false;
-					
-					
-				}
+			if (MapaVistaControlador.tengoAlgunaUnidadSeleccionada()){
+				MapaVistaControlador.desSeleccionarUnidades();
+			}
+			MenuInferior.getLog().appendText("\nSoy una posicion");
 		}
 		if ("Atacar"==MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
-			if (MapaVistaControlador.seleccionado==false){
-				
-				MenuInferior.getLog().appendText("\nPor favor, seleccione un aldeano");
-			}
-			else{
-				//TableroVistaControlador.aldeanoSeleccionado.getJugador().atacar(coordenada, ContenedorPrincipal.juego.getTablero());
-				//XXSentinela MenuInferior.log.appendText("\n" + TableroVistaControlador.aldeanoSeleccionado.getNombre()+" :ataque fallido!");
-				ContenedorPrincipal.getJuego().pasarJugada();
-				MapaVistaControlador.seleccionado=false;
-				//Atacar a lugar vacio
-			}
+
+			MenuInferior.getLog().appendText("\nPor favor, seleccione una unidad");
 		}
 	}
 }
