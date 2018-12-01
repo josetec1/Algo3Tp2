@@ -14,15 +14,17 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Jugador implements ObservableJugador{
+public class Jugador extends Observable implements Observer {
 
     private String nombre;
     private int oro;
     private EstadoJugador estadoInicial;
     private List<Manipulable> unidades;
     private List<Manipulable> edificios;
-    private ArrayList<ObservadorJugador> observadores;
+
 
     private final int POBLACION_MAXIMA = 50;
     private final int ORO_INICIAL = 100;
@@ -35,7 +37,7 @@ public class Jugador implements ObservableJugador{
         this.unidades = new ArrayList<>();
         this.edificios = new ArrayList<>();
         this.estadoInicial = new JugadorSinIniciar();
-        this.observadores = new ArrayList<>();
+
         this.edificios.add(castillo);
 
     }
@@ -48,6 +50,9 @@ public class Jugador implements ObservableJugador{
          for (Aldeano aldeano: listaAldeanos){
              if (esMio(aldeano)) {throw new PiezaYaAgregadaException();}
              this.unidades.add(aldeano);
+
+             aldeano.addObserver(this); //agrego el observador que me va a avisar cambios en la unidad
+
          }
         this.edificios.add(plaza);
         this.estadoInicial = new JugadorIniciado();
@@ -74,6 +79,8 @@ public class Jugador implements ObservableJugador{
         this.descontarOro(pieza.getCosto()); //este lanza excepcion si no hay oro
 
         this.unidades.add(pieza);
+         pieza.addObserver(this);
+
 
     }
     public void agregarPieza(Edificio pieza) {
@@ -101,9 +108,7 @@ public class Jugador implements ObservableJugador{
         if (oro<0) {throw new OroNegativoException();}
         this.oro += oro;
     }
-    public void agregarObservador(ObservadorJugador unObservador) {
-        this.observadores.add(unObservador);
-    }
+
     public ArrayList<Atacable> getPiezas (){
 
         ArrayList<Atacable> lista= new ArrayList<>();
@@ -149,5 +154,12 @@ public class Jugador implements ObservableJugador{
 
         return aldeanos;
 
+    }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.setChanged(); //esto es propio del Observer, si no llamas a esto no notifica.
+        this.notifyObservers(); //le notifico a la vista que hubo un cambio
     }
 }

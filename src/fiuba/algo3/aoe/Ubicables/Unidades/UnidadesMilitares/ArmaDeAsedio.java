@@ -11,6 +11,9 @@ import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.EstadoM
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.IEstadoMaquinariaMilitar;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibreTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import javafx.beans.InvalidationListener;
+
+import java.util.Observer;
 
 public class ArmaDeAsedio extends UnidadMilitar{
     protected IEstadoMaquinariaMilitar estado;
@@ -63,6 +66,9 @@ public class ArmaDeAsedio extends UnidadMilitar{
     public void desmontar(){
         this.cambiarEstado ( new EstadoDesmontandose () );
     }
+
+
+
 }
 
 //TODO Refactor unidad MilitarMaquinaria,UnidadMilitarTropaUnidadMilitar

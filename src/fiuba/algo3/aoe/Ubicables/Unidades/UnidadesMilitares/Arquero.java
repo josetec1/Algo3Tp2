@@ -7,6 +7,8 @@ import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibreTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
+import java.util.Observer;
+
 public class Arquero extends UnidadMilitarTropa {
 
     public Arquero(  ){
@@ -18,5 +20,6 @@ public class Arquero extends UnidadMilitarTropa {
         this.distanciaAtaque = 3;
         this.estado = new EstadoLibreTropa();
     }
+
 
 }

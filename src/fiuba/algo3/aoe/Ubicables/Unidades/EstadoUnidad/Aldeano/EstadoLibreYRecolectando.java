@@ -31,7 +31,9 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
        if (mapa.puedoColocar(destino,aldeano.getTamanio())) {
             mapa.moverElemento(aldeano, destino);
             aldeano.cambiarAMoviendose();
-        }
+            aldeano.setCambio();
+            aldeano.notifyObservers(aldeano);
+       }
     }
 
     @Override

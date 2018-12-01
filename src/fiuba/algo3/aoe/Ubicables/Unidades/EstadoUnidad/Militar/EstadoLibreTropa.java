@@ -21,6 +21,7 @@ public class EstadoLibreTropa implements IEstadoUnidadMilitarTropa {
         if (mapa.puedoColocar(destino,unidad.getTamanio())) {
             mapa.moverElemento(unidad, destino);
             unidad.setMoviendose();
+            //unidad.notifyObservers();
         }
     }
 

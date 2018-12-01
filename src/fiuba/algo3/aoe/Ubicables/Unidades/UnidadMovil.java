@@ -7,7 +7,11 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
-public  abstract class UnidadMovil implements Manipulable  {
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
+public  abstract class UnidadMovil extends Observable implements Manipulable {
     private final int TAMANIO = 1;
 
     protected Posicion posicion; //TODO esto Privado y con metos protegidos se cambia.
@@ -15,6 +19,7 @@ public  abstract class UnidadMovil implements Manipulable  {
     protected int vidaActual;
     protected int costo;
     protected int tamanio = TAMANIO;
+    protected ArrayList<Observer> observadores =new ArrayList<>();
 
 
     public int getVidaMaxima(){

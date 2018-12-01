@@ -16,10 +16,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ContenedorPrincipal extends BorderPane {
+public class ContenedorPrincipal extends BorderPane implements Observer {
 
     BarraDeMenu menuBar;
     public static MenuInferior menuInferior;
@@ -35,17 +36,10 @@ public class ContenedorPrincipal extends BorderPane {
         this.juego = unJuego;
 
         this.setTablero(unJuego); //dibuja el mapa
+
         this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos(),vbox1,vbox2); // dibujar nombres en pantalla, obtener y presentar Piezas, suscribir observadores que tiene que ser la vista
-
-
-
-         /*
-           Falta
-         juego.agregarobservadores (this)     // este me va a avisar cuando el juego termina
-
-
-         */
-        //XXSentinela juego.suscribir(vistaTablero);
+        unJuego.getJugadorUno().addObserver(this);
+        unJuego.getJugadorDos().addObserver(this);
 	}
 
 
@@ -56,10 +50,10 @@ public class ContenedorPrincipal extends BorderPane {
     	JugadorVista vistaJugador1 = new JugadorVista(vbox1,jugadorUno);
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
-    	vistaJugador1.dibujarJugador();
-    	vistaJugador2.dibujarJugador();
-    	vistaJugador1.dibujarInfoTerreno();
-    	vistaJugador2.dibujarInfoBonus();
+    	vistaJugador1.dibujarJugador(this.juego.getJugadorActual());
+    	vistaJugador2.dibujarJugador(this.juego.getJugadorActual());
+    	vistaJugador1.dibujarInfoUnidades();
+    	vistaJugador2.dibujarInfoEdificios();
     	this.setLeft(vbox1);
     	this.setRight(vbox2);
     	vbox1.setTranslateX(20);
@@ -165,4 +159,8 @@ public class ContenedorPrincipal extends BorderPane {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+       this.actualizarTodo();
+    }
 }

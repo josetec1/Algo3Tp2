@@ -6,8 +6,9 @@ import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoMoviendoseTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.IEstadoUnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import javafx.beans.InvalidationListener;
 
-public class UnidadMilitarTropa extends UnidadMilitar{
+public abstract class UnidadMilitarTropa extends UnidadMilitar{
 
     protected IEstadoUnidadMilitarTropa estado;
 
@@ -26,4 +27,6 @@ public class UnidadMilitarTropa extends UnidadMilitar{
 
     }
     public void setMoviendose(){this.estado= new EstadoMoviendoseTropa();}
+
+
 }

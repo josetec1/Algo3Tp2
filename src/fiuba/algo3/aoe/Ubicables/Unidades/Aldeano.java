@@ -9,6 +9,8 @@ import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionInvalidaException;
 
+import java.util.Observer;
+
 public class Aldeano extends UnidadMovil  {
 
     private IEstadoUnidadAldeano estado;
@@ -65,5 +67,9 @@ public class Aldeano extends UnidadMovil  {
         this.vidaActual-= vida;
     }
     public void entregarElOro (Jugador jugador){jugador.sumarOro(ORO_PRODUCIDO);}
+
+    public void setCambio (){this.setChanged();}
+
+
 
 }

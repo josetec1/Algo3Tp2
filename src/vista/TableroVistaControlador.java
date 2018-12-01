@@ -105,7 +105,8 @@ public class TableroVistaControlador   {
 
 
 	}
-	
+
+	/*
 	public void quitarAldeano(int x, int y){
 		Button botonAlgo=new Button();
 
@@ -116,7 +117,7 @@ public class TableroVistaControlador   {
 		SeleccionVacioHandler seleccionVacioHandler = new SeleccionVacioHandler(cuadrante);
 		botonAlgo.setOnMouseClicked(seleccionVacioHandler);
 	}
-
+*/
 
 	//XXSentinela
 	/*
@@ -150,7 +151,7 @@ public class TableroVistaControlador   {
 	}
 	}
 	*///XXSentinela
-
+/*
 	//XXSentinela@Override
 	public void notificartableroCreado(int ancho, int alto) {
 		// TODO Auto-generated method stub
@@ -208,9 +209,9 @@ public class TableroVistaControlador   {
 		MenuInferior.log.appendText("\n Se completo la Fusion"  );
 		//this.juego.pasarTurno();
 
-
-
 */
+
+
 
 
 

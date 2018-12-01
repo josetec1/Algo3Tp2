@@ -7,6 +7,8 @@ import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibreTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
+import java.util.Observer;
+
 public class Espadachin extends UnidadMilitarTropa {
 
     public Espadachin(  ){
@@ -19,6 +21,7 @@ public class Espadachin extends UnidadMilitarTropa {
         this.distanciaAtaque = 1;
         this.estado = new EstadoLibreTropa();
     }
+
 
 
 }

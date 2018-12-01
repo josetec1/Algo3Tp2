@@ -10,27 +10,26 @@ import javafx.scene.text.Text;
 public class JugadorVista {
 	VBox vbox;
 	Jugador jugador;
-	int lado;
 
 	
 	public JugadorVista(VBox unVBox,Jugador unJugador){
 		vbox=unVBox;
 		jugador=unJugador;
 	}
-	public void dibujarJugador(){
+	public void dibujarJugador(Jugador jugadorActual){
 		
 		Label j= new Label(jugador.getNombre());
 		vbox.getChildren().add(j);
 		j.setFont(new Font("Arial",20));
 		vbox.setTranslateY(150);
-		//XXSentinela  cambio este if
-		//if(jugador.getEstado()=="activo"){
-	//		MenuInferior.log.insertText(0, "\nEs turno de " + jugador.getNombre());
-	//	}
-		MenuInferior.log.insertText(0, "\nEs turno de " + jugador.getNombre());
-		//XXSentinela
+
+		if(this.jugador == jugadorActual){
+			MenuInferior.log.insertText(0, "\nEs turno de " + jugador.getNombre());
+			this.dibujarJugadorActual();
+		}
+
 	}
-	public void dibujarInfoTerreno(){
+	public void dibujarInfoUnidades(){
 		Label titulo= new Label("\n\nUnidades:");
 		titulo.setFont(new Font("Arial",16));
 		vbox.getChildren().add(titulo);
@@ -39,12 +38,22 @@ public class JugadorVista {
 		titulo.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
 	}
-	public void dibujarInfoBonus(){
+	public void dibujarInfoEdificios(){
 		Label titulo= new Label("\n\nEdificios:");
 		titulo.setFont(new Font("Arial",16));
 		vbox.getChildren().add(titulo);
 		Text info = new Text();
 		info.setText("\nCeleste: Castillo\nRojo: Plaza Central\nAmarillo: Cuartel");
+		titulo.setFont(new Font("Arial",14));
+		vbox.getChildren().add(info);
+	}
+
+	public void dibujarJugadorActual(){
+		Label titulo= new Label("\n\nJugadorActual:");
+		titulo.setFont(new Font("Arial",16));
+		vbox.getChildren().add(titulo);
+		Text info = new Text();
+		info.setText( this.jugador.getNombre());
 		titulo.setFont(new Font("Arial",14));
 		vbox.getChildren().add(info);
 	}
