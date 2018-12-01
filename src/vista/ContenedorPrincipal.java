@@ -24,7 +24,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     BarraDeMenu menuBar;
     public static MenuInferior menuInferior;
-    MapaVistaControlador vistaTablero;
+    MapaVistaControlador vistaMapa;
     public static Juego juego;  //OJO
 
    // Canvas canvasCentral;
@@ -69,9 +69,9 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         GridPane grid=new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setGridLinesVisible(true);
-        vistaTablero = new MapaVistaControlador(unJuego,grid);
+        vistaMapa = new MapaVistaControlador(unJuego,grid);
         //esto lo cambie de orden
-        this.vistaTablero.dibujarTablero();
+        this.vistaMapa.dibujarTablero();
         this.setCenter(grid);
 
     }
@@ -110,19 +110,28 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     private void actualizarPiezas (Jugador jugadorUno, Jugador jugadorDos){
 
+
+
         for(Aldeano value: jugadorUno.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
-                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
+                vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
             }
         }
 
         for(Aldeano value: jugadorDos.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
-                vistaTablero.ubicarAldeano(value, casilla.getX(), casilla.getY());
+                vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
             }
         }
+
+        //castillo
+        vistaMapa.ubicarCastillo (jugadorUno.getCastillo());
+        vistaMapa.ubicarCastillo (jugadorDos.getCastillo());
+
+        vistaMapa.ubicarPlaza(jugadorUno.getPlaza());
+        vistaMapa.ubicarPlaza (jugadorDos.getPlaza());
     }
     private void actualizarMapa(){ //regenero el tablero
         this.setMapa(this.juego);

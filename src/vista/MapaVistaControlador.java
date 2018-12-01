@@ -1,10 +1,14 @@
 package vista;
 
 import Eventos.SeleccionAldeanoHandler;
+import Eventos.SeleccionCastilloHandler;
+import Eventos.SeleccionPlazaHandler;
 import Eventos.SeleccionVacioHandler;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -73,7 +77,7 @@ public class MapaVistaControlador {
 	//https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
 	//TODO XXSentinela  explota esto de aca abajo
 	public void ubicarAldeano(Aldeano aldeano, int x, int y){
-		Button botonAlgo;
+		Button botonAldeano;
 
 		//XXSentinelabotonAlgo = (Button) tableroView.getChildren().get((mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1);
 		//XXSentinelabotonAlgo.setText(unaldeano.getNombre());
@@ -85,18 +89,50 @@ public class MapaVistaControlador {
 
 
 		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
-		botonAlgo = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ; //
+		botonAldeano = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ; //
 	//	botonAlgo = (Button) tableroView.getChildren().get()
-		botonAlgo.setText("A");
-		botonAlgo.setStyle("-fx-background-color: #1E90FF");
+		botonAldeano.setText("A");
+		botonAldeano.setStyle("-fx-background-color: #1E90FF");
 
 
 			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
-		 botonAlgo.setOnMouseClicked(seleccionAldeanoHandler);
+		 botonAldeano.setOnMouseClicked(seleccionAldeanoHandler);
 
 
 
 
+	}
+
+	public void ubicarCastillo (Castillo castillo){
+		Button botonCastillo;
+		Posicion posicion = castillo.getPosicion();
+		int x;
+		int y;
+		for (Cuadrante cuadrante : posicion.getCasilleros()){
+			x = cuadrante.getX();
+			y= cuadrante.getY();
+			botonCastillo = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ;
+			botonCastillo.setText("C");
+			botonCastillo.setStyle("-fx-background-color: #FF4500");
+			SeleccionCastilloHandler seleccionCastilloHandler = new SeleccionCastilloHandler(castillo);
+			botonCastillo.setOnMouseClicked(seleccionCastilloHandler);
+		}
+	}
+
+	public void ubicarPlaza (PlazaCentral plaza){
+		Button botonPlaza ;
+		Posicion posicion = plaza.getPosicion();
+		int x;
+		int y;
+		for (Cuadrante cuadrante : posicion.getCasilleros()){
+			x = cuadrante.getX();
+			y= cuadrante.getY();
+			botonPlaza  = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ;
+			botonPlaza.setText("P");
+			botonPlaza.setStyle("-fx-background-color: #FFD700");
+			SeleccionPlazaHandler seleccionPlazaHandler = new SeleccionPlazaHandler(plaza);
+			botonPlaza.setOnMouseClicked(seleccionPlazaHandler);
+		}
 	}
 
 	/*

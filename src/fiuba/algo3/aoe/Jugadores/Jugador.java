@@ -156,6 +156,22 @@ public class Jugador extends Observable implements Observer {
 
     }
 
+    //XXSentinela
+    public Castillo getCastillo(){
+
+        Castillo castillo = (Castillo)this.edificios.get(0);
+        return castillo;
+
+    }
+
+    //XXSentinela
+    public PlazaCentral getPlaza(){
+
+        PlazaCentral Plaza = (PlazaCentral) this.edificios.get(1);
+        return Plaza;
+
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {
