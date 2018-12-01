@@ -178,4 +178,12 @@ public class Jugador extends Observable implements Observer {
         this.setChanged(); //esto es propio del Observer, si no llamas a esto no notifica.
         this.notifyObservers(); //le notifico a la vista que hubo un cambio
     }
+
+    public int getOro() {
+        return this.oro;
+    }
+
+    public int getPoblacionActual() {
+        return this.unidades.size();
+    }
 }
