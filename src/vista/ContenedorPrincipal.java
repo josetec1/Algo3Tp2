@@ -117,9 +117,9 @@ public class ContenedorPrincipal extends BorderPane {
 
 
     }
-    private void actualizarTablero (){
 
-        this.vistaTablero.dibujarTablero();
+    private void actualizarTablero (){
+        this.setTablero(this.juego);
 
     }
 
@@ -136,7 +136,7 @@ public class ContenedorPrincipal extends BorderPane {
         grid.setGridLinesVisible(true);
         vistaTablero = new TableroVistaControlador(unJuego,grid);
          //esto lo cambie de orden
-        this.actualizarTablero();
+        this.vistaTablero.dibujarTablero();
         this.setCenter(grid);
 
 	}
