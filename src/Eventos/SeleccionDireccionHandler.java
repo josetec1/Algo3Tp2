@@ -23,14 +23,14 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
         //hay un aldeano seleccionado?
         //para mas adelante hay que contemplar los casos de que se seleccione un edificio, esos no se pueden mover
         if (!MapaVistaControlador.seleccionado) {
-            MenuInferior.log.appendText("\n Primer debe seleccionar una unidad");}
+            MenuInferior.getLog().appendText("\n Primer debe seleccionar una unidad");}
         else{
             //mover al muchacho
-            Mapa mapita = MapaVistaControlador.mapa;
-            Jugador jugador = ContenedorPrincipal.juego.getJugadorActual(); //???????!!!!!!!!
+            Mapa mapita = MapaVistaControlador.getMapa();
+            Jugador jugador = ContenedorPrincipal.getJuego().getJugadorActual(); //???????!!!!!!!!
 
             if (!MapaVistaControlador.AldeanoSeleccionado.estasDisponible()){
-                MenuInferior.log.appendText("\n Aldeano Ocupado");
+                MenuInferior.getLog().appendText("\n Aldeano Ocupado");
             }else {
                 MapaVistaControlador.AldeanoSeleccionado.mover(mapita, this.direccion, jugador);
             }

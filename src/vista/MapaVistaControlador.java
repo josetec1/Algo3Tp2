@@ -26,7 +26,7 @@ import java.util.Observer;
 //TODO ojo el obsvador juego....
 public class MapaVistaControlador {
 
-    public static Mapa mapa;
+    private static Mapa mapa;
 	GridPane tableroView;
 	Juego juego;
 
@@ -40,7 +40,9 @@ public class MapaVistaControlador {
 		seleccionado=false;
 	}
 
-
+	public static Mapa getMapa(){
+		return mapa;
+	}
 
 	public void dibujarTablero() {
 		tableroView.setOnMousePressed(null);

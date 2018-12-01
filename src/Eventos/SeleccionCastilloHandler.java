@@ -15,7 +15,7 @@ public class SeleccionCastilloHandler implements EventHandler<MouseEvent> {
 
         if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
 
-                    MenuInferior.log.appendText("\nCastillo Seleccionado");
+                    MenuInferior.getLog().appendText("\nCastillo Seleccionado");
 
         }
 

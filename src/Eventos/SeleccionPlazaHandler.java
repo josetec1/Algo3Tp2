@@ -16,7 +16,7 @@ public class SeleccionPlazaHandler implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
         if ("Mover" == MenuInferior.selecOpciones.getSelectionModel().getSelectedItem().toString()) {
 
-            MenuInferior.log.appendText("\nPlaza Seleccionada");
+            MenuInferior.getLog().appendText("\nPlaza Seleccionada");
 
         }
     }
