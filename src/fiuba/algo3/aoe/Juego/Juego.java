@@ -12,6 +12,8 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
@@ -64,12 +66,18 @@ public class Juego extends Observable implements ObservadorCastillo {
             aldeanos.add(aldeano);
         }
 
+
+
         j1= new Jugador(jugador1,castillo, plazaCentral, aldeanos);
         this.jugador1 = j1;
         jugadores.add (j1);
 
-        //Inicializo jugador 2
+        //Prueba vista con arquero colocado
+        //Arquero arquero = new Arquero();
+       // mapa.colocar(arquero,new Posicion(new Cuadrante(8,8)));
+      //  j1.agregarPieza(arquero);
 
+        //Inicializo jugador 2
         castillo = new Castillo();
         castillo.agregarObservador(this);
         mapa.colocar(castillo,new Posicion (anchoMapa- 4, altoMapa - 4));

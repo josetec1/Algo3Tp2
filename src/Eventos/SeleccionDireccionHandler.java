@@ -9,6 +9,10 @@ import vista.MenuInferior;
 import vista.MapaVistaControlador;
 import vista.ContenedorPrincipal;
 
+import java.awt.*;
+
+import static java.awt.SystemColor.menu;
+
 public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
 
     Direccionable direccion;
@@ -49,7 +53,8 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
 
             //arquero
             if(MapaVistaControlador.tengoArqueroSeleccionado()){
-                    MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
+                MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
+                MenuInferior.getLog().appendText("\n arquero movido");
             }
 
             //espadachin

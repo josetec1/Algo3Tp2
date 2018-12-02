@@ -11,6 +11,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -59,7 +60,6 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     }
 
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
-
     	JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno);
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
@@ -174,14 +174,13 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     }
     private void actualizarPiezas (Jugador jugador){
 
-
-
         for(Aldeano value: jugador.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
                 vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
             }
         }
+
 
         //castillo
         vistaMapa.ubicarCastillo (jugador.getCastillo());

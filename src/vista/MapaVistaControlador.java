@@ -218,8 +218,8 @@ public class MapaVistaControlador {
 	//	botonAlgo = (Button) tableroView.getChildren().get()
 		botonAldeano.setText("A");
 		botonAldeano.setStyle("-fx-background-color: #1E90FF");
-			SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
-		 botonAldeano.setOnMouseClicked(seleccionAldeanoHandler);
+		SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
+		botonAldeano.setOnMouseClicked(seleccionAldeanoHandler);
 
 	}
 
@@ -238,11 +238,10 @@ public class MapaVistaControlador {
 		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
 		botonArquero = (Button) tableroView.getChildren().get(((mapa.getAlto()*x)-1) - (y-2) ) ; //
 		//	botonAlgo = (Button) tableroView.getChildren().get()
-		botonArquero.setText("Arq");
-		botonArquero.setStyle("-fx-background-color: #1A91FF");
+		botonArquero.setText("A");
+		botonArquero.setStyle("-fx-background-color: GREEN");
 		SeleccionArqueroHandler seleccionArqueroHandler = new SeleccionArqueroHandler(arquero);
 		botonArquero.setOnMouseClicked(seleccionArqueroHandler);
-
 	}
 
 	public void ubicarCastillo (Castillo castillo){

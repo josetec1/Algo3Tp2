@@ -64,7 +64,7 @@ public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
                     //si no esta seleccionado, entonces lo selecciono
                     MenuInferior.getLog().appendText("\nArquero Seleccionado, ahora elegi que atacar!!!!");
                     MapaVistaControlador.seleccionarArquero(arquero);
-                } else { //Seleccionado=true
+                } /*else { //Seleccionado=true
 
                     //ATACAR
                     try {
@@ -79,7 +79,7 @@ public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
 
 
                     }
-                }
+                }*/
 
             }
         }

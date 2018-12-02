@@ -49,7 +49,7 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 					}
 				} else {
 
-					MenuInferior.getLog().appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");
+					MenuInferior.getLog().appendText("\nHay un aldeano ya seleccionado, movimiento no valido");
 					MapaVistaControlador.desSeleccionarUnidades();
 
 				} //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
