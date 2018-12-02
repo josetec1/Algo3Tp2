@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.Jugadores.Piezas;
 
 import fiuba.algo3.aoe.Jugadores.*;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -174,6 +175,12 @@ public class ListaDePiezas {
     public void cambioDeTurno (Jugador jugador){
         for (Manipulable manipulable : this.getPiezas()){
             manipulable.huboUnCambioDeTurno(jugador);
+        }
+    }
+
+    public void eliminarMuertos (Jugador jugador, Jugador enemigo, Mapa mapa){
+        for (Manipulable manipulable : this.getPiezas()){
+            manipulable.eliminarMuerto(jugador,enemigo,mapa);
         }
     }
 

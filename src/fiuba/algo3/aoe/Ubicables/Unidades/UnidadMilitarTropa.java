@@ -16,6 +16,7 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar{
     public void mover(Mapa mapa, Direccionable direccion, Jugador jugador) {
         if (!jugador.esMio(this)) {throw new NoEsMiJugadorException();}
         this.estado.mover (this, mapa, direccion);
+
     }
 
     public boolean estasDisponible() {

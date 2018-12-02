@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
@@ -34,6 +35,11 @@ public class PlazaCentral extends Edificio {
     @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
+    }
+
+    @Override
+    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
+        throw  new FaltaImplementarException();
     }
 
     public void crearAldeano( Jugador jugadorActivo, Mapa mapa, Posicion posicion){

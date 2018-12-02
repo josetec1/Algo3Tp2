@@ -206,6 +206,13 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+
+	    //1 hay que preguntarle siempre al juego si finalizo
+      //   if (this.juego.finalizo()) {mostrar al ganador}
+      // recargar el mapa y deshabilitar to do que no se pueda hacer mas nada o nose, lo que sea.
+
+      //2 si el juego no termino, actualizar la vista, osea estas cosas de aca abajo
+
         this.actualizarMapa();
         this.actualizarPiezas(this.juego.getJugadorUno());
         this.actualizarPiezas(this.juego.getJugadorDos());

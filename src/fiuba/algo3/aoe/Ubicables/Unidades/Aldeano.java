@@ -68,7 +68,7 @@ public class Aldeano extends UnidadMovil  {
     }
     public void entregarElOro (Jugador jugador){jugador.sumarOro(ORO_PRODUCIDO);}
 
-    public void setCambio (){this.setChanged();}
+
 
 
 

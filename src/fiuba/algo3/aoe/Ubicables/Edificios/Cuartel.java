@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
@@ -38,6 +39,11 @@ public class Cuartel extends Edificio {
         this.estado.nuevoTurno(this,CURACION);
     }
 
+    @Override
+    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
+        throw  new FaltaImplementarException();
+    }
+
     public void crearArquero( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
         Arquero arquero= new  Arquero ();
         if(!mapa.puedoColocar ( posicion,arquero.getTamanio () )){return;}
@@ -53,4 +59,6 @@ public class Cuartel extends Edificio {
         jugadorActivo.agregarPieza ( espadachin );
         mapa.colocar ( espadachin,posicion );
     }
+
+
 }

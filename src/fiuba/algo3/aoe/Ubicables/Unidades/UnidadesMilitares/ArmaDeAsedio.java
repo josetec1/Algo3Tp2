@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares;
 
+import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
@@ -39,6 +40,11 @@ public class ArmaDeAsedio extends UnidadMilitar{
     @Override
     public void huboUnCambioDeTurno(Jugador unJugador) {
         this.estado.nuevoTurno ( this);
+    }
+
+    @Override
+    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
+        throw new FaltaImplementarException();
     }
 
     public void cambiarEstado ( IEstadoMaquinariaMilitar estado ) {

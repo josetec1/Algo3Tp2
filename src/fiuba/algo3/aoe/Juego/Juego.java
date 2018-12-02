@@ -4,7 +4,10 @@ import fiuba.algo3.aoe.Juego.Turno.Turno;
 import fiuba.algo3.aoe.Juego.estadoJuego.EnCurso;
 import fiuba.algo3.aoe.Juego.estadoJuego.Ijuego;
 
+import fiuba.algo3.aoe.Juego.estadoJuego.JuegoFinalizadoException;
+import fiuba.algo3.aoe.Juego.estadoJuego.TamanioDeMapaInvalidoException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Jugadores.ObservadorCastillo;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
@@ -13,8 +16,9 @@ import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public class Juego extends Observable {
+public class Juego extends Observable implements ObservadorCastillo {
 
     private Jugador jugador1;
     private Jugador jugador2;
@@ -29,9 +33,7 @@ public class Juego extends Observable {
 
     }
 
-
-
-    public void inicializar ( String jugador1, String jugador2, int anchoMapa, int altoMapa) {
+    private void inicializar ( String jugador1, String jugador2, int anchoMapa, int altoMapa) {
         Mapa mapa= new Mapa(anchoMapa, altoMapa);
 
 
@@ -47,7 +49,7 @@ public class Juego extends Observable {
         //Inicializo jugador 1
         castillo = new Castillo();
         mapa.colocar(castillo,new Posicion(1,1));
-
+        castillo.agregarObservador(this);
 
         //agrego plaza central
         plazaCentral = new PlazaCentral();
@@ -69,7 +71,7 @@ public class Juego extends Observable {
         //Inicializo jugador 2
 
         castillo = new Castillo();
-
+        castillo.agregarObservador(this);
         mapa.colocar(castillo,new Posicion (anchoMapa- 4, altoMapa - 4));
 
 
@@ -97,11 +99,18 @@ public class Juego extends Observable {
 
     }
 
-
     public void pasarJugada() {
 
-        if (this.juego.juegoTerminado()) {      } //excepcion
+        if (this.juego.juegoTerminado()) { throw new JuegoFinalizadoException();}
+           //1) paso turno y cada unidad del jugador activo hace lo que tiene que hacer
         this.juego.cambiarTurno(this.turno);
+        // 2) chequeo muertos para que se eliminen,
+        // //aca salta si es fin de juego por que el castillo me va a mandar un mensaje y ahi me cambio a juego finalizado
+        // y le notifico a la vista.
+        // la vista siempre ante una notificacion hace  juego.finalizado()  si le da true muetra al ganador  y fin
+        jugador1.revisarMuertos(jugador2, this.mapa);
+        jugador2.revisarMuertos(jugador1,this.mapa);
+        //3) ahora notifico a observadores, osea la vista vuelve a cargar las cosas devuelta.
         this.setChanged();
         this.notifyObservers();
 
@@ -116,5 +125,24 @@ public class Juego extends Observable {
         return mapa;
     }
 
+    // el controlador antes de hacer pasar jugada tiene que preguntar.
+    // si el juego finalizo, no tiene que pasar turno
+    // tiene que evitar cargar el castillo y mostrar el ganador (recordemos que el castillo no se elimina del modelo)
+    // osea jugador.getCastillo ... va a seguir estando
+    public boolean finalizo(){
+        return this.juego.juegoTerminado();
+    }
 
+
+
+    @Override
+    public void gano(Jugador victorioso) {//aca me avisa el castillo que murio
+        //tengo que cambiar a estado finalizado.
+        // estado finalizado se deberia crearse con el jugador victorioso
+        // this.juego= new Finalizado (o.);
+
+        //me parece que aca no hace falta actualizar, por que la llamada de esto viene en pasar jugada
+        // y despues de esta llamada, en pasar juegada, viene la notificacion a observadores
+
+    }
 }

@@ -3,6 +3,7 @@ package fiuba.algo3.aoe.Jugadores;
 
 import fiuba.algo3.aoe.Jugadores.Piezas.ListaDePiezas;
 import fiuba.algo3.aoe.Jugadores.Piezas.PiezaAgenaException;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -192,4 +193,11 @@ public class Jugador extends Observable implements Observer {
         return this.piezas.getCantidadDeUnidades();
 
     }
+
+    public void revisarMuertos(Jugador enemigo, Mapa mapa){
+        //todo aca podriamos chequear que el jugador enemigo no sea el mismo que yo....
+       this.piezas.eliminarMuertos(this, enemigo, mapa);// aca el castillo revisa si murio
+    }
+
+
 }

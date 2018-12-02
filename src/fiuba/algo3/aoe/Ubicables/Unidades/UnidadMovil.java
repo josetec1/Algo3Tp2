@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
+import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
@@ -55,4 +56,11 @@ public  abstract class UnidadMovil extends Observable implements Manipulable {
     }
 
     public abstract  void mover(Mapa mapa, Direccionable direccion, Jugador jugador);
+
+    public void setCambio (){this.setChanged();} //esta la uso para que aplique el setChange del observarble pq no se puede desde afuera
+
+    @Override
+    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
+            throw  new FaltaImplementarException();
+    }
 }

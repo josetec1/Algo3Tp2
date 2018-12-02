@@ -1,6 +1,5 @@
 package fiuba.algo3.aoe.Juego;
 
-import fiuba.algo3.aoe.Juego.estadoJuego.JuegoNoIniciadoException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

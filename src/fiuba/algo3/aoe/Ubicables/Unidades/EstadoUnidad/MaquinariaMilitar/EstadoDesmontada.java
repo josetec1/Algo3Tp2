@@ -14,7 +14,8 @@ public class EstadoDesmontada implements IEstadoMaquinariaMilitar {
         Posicion destino = armaDeAsedio.obtenerPosicionDeAvance(direccion);
         if (mapa.puedoColocar(destino,armaDeAsedio.getTamanio ())) {
             mapa.moverElemento(armaDeAsedio, destino);
-            //armaDeAsedio.notifyObservers();
+            armaDeAsedio.setCambio();
+            armaDeAsedio.notifyObservers(armaDeAsedio);
 
         }
         armaDeAsedio.cambiarEstado ( new EstadoMoviendose (this) );
