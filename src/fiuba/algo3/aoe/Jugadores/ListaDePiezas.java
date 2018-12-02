@@ -1,9 +1,12 @@
 package fiuba.algo3.aoe.Jugadores;
 
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
@@ -35,9 +38,21 @@ public class ListaDePiezas {
 
     }
 
-    public boolean puedoAgregar(){
-        return (getCantidadDeUnidades()< UNIDADES_MAXIMAS);
+    public boolean puedoAgregar(Edificio edificio){
+        if (this.existe(edificio)) {return false;}
+        else return true;
+
     }
+    public boolean puedoAgregar(UnidadMovil unidad){
+
+        if (!this.existe(unidad)&(getCantidadDeUnidades()< UNIDADES_MAXIMAS)) {return true;}
+        return false;
+
+    }
+
+
+
+
 
     //esto es para que la vista pueda mostrar la cantidad
     public int getCantidadDeUnidades(){
@@ -47,22 +62,32 @@ public class ListaDePiezas {
                                            //Setters
             **********************************************************************  */
     public void agregar (Aldeano aldeano){
+        if (this.existe(aldeano)) {throw new PiezaYaAgregadaException();}
+        if (!(getCantidadDeUnidades()< UNIDADES_MAXIMAS)) {throw new LimiteDePoblacionAlcanzadoException();}
         this.aldeanos.add(aldeano);
     }
     public void agregar (Espadachin espadachin){
+        if (this.existe(espadachin)) {throw new PiezaYaAgregadaException();}
+        if (!(getCantidadDeUnidades()< UNIDADES_MAXIMAS)) {throw new LimiteDePoblacionAlcanzadoException();}
         this.espadachins.add(espadachin);
     }
     public void agregar (Arquero arquero){
+        if (this.existe(arquero)) {throw new PiezaYaAgregadaException();}
+        if (!(getCantidadDeUnidades()< UNIDADES_MAXIMAS)) {throw new LimiteDePoblacionAlcanzadoException();}
         this.arqueros.add(arquero);
     }
     public void agregar (ArmaDeAsedio armaDeAsedio){
+        if (this.existe(armaDeAsedio)) {throw new PiezaYaAgregadaException();}
+        if (!(getCantidadDeUnidades()< UNIDADES_MAXIMAS)) {throw new LimiteDePoblacionAlcanzadoException();}
         this.armasDeAsedio.add(armaDeAsedio);
     }
     public void agregar (PlazaCentral plaza){
+        if (this.existe(plaza)) {throw new PiezaYaAgregadaException();}
         this.plazaCentrales.add(plaza);
     }
 
     public void agregar (Cuartel cuartel){
+        if (this.existe(cuartel)) {throw new PiezaYaAgregadaException();}
         this.cuarteles.add(cuartel);
     }
 
@@ -74,43 +99,71 @@ public class ListaDePiezas {
         return this.castillo;
     }
 
+    public List<PlazaCentral> getPlazas() {
+        return this.plazaCentrales;
+    }
+
+    public List<Cuartel> getCuarteles() {
+        return this.cuarteles;
+    }
+
+    public List<Aldeano> getAldeanos() {
+        return this.aldeanos;
+    }
+    public List<ArmaDeAsedio> getArmasDeAsedio() {
+        return this.armasDeAsedio;
+    }
+    public List<Espadachin> getEspadachines() {
+        return this.espadachins;
+    }
+    public List<Arquero> getArqueros() {
+        return this.arqueros;
+    }
+
+    public List <Atacable> getPiezas (){
+
+        ArrayList<Atacable> lista= new ArrayList<>();
+        lista.add (this.castillo);
+        lista.addAll(this.aldeanos);
+        lista.addAll(this.espadachins);
+        lista.addAll(this.arqueros);
+        lista.addAll(this.armasDeAsedio);
+        lista.addAll(this.plazaCentrales);
+        lista.addAll(this.cuarteles);
+        return lista;
+    }
+
     /* ************************************************************************
                                            //Deleters
             **********************************************************************  */
 
-    public void eliminar (Aldeano aldeano){
 
-      if  (this.aldeanos.contains(aldeano)) {this.aldeanos.remove(aldeano);}
+    public void eliminar (Manipulable pieza){ //TODO REFACTOR
 
+        if (pieza == this.castillo) {throw new NoSePuedeEliminarElCastilloException();}
+        if (!existe (pieza)){throw new PiezaAgenaException();}
 
-    }
-
-    public void eliminar (Manipulable pieza){
-        if (pieza ==this.castillo){} //no se puede eliminar un castillo
-
-        if (existe (pieza)) {   //aca podria ir otra exepcion
-            this.aldeanos.remove(pieza);
-            this.espadachins.remove(pieza);
-            this.arqueros.remove(pieza);
-            this.armasDeAsedio.remove(pieza);
-            this.plazaCentrales.remove(pieza);
-            this.cuarteles.remove(pieza);
-        }
+        if (this.aldeanos.remove(pieza))  return;
+        if (this.espadachins.remove(pieza))  return;
+        if (this.arqueros.remove(pieza))  return;
+        if (this.armasDeAsedio.remove(pieza))  return;
+        if (this.plazaCentrales.remove(pieza))  return;
+        this.cuarteles.remove(pieza);
 
     }
 
-    public boolean existe (Manipulable pieza){
-        boolean aldeano,espadachin,arquero,arma,plaza,cuartel,castillo;
+    public boolean existe (Manipulable pieza){ //TODO REFACTOR
 
-        aldeano =this.aldeanos.contains(pieza);
-        espadachin =this.espadachins.contains(pieza);
-        arquero =this.arqueros.contains(pieza);
-        arma =this.armasDeAsedio.contains(pieza);
-        plaza =this.plazaCentrales.contains(pieza);
-        cuartel =this.cuarteles.contains(pieza);
-        castillo =this.castillo == pieza;
 
-        return (aldeano||espadachin||arquero||arma||plaza||cuartel||castillo);
+        if (this.aldeanos.contains(pieza))  return true;
+        if (this.espadachins.contains(pieza))  return true;
+        if (this.arqueros.contains(pieza))  return true;
+        if (this.armasDeAsedio.contains(pieza))  return true;
+        if (this.plazaCentrales.contains(pieza))  return true;
+        if (this.cuarteles.contains(pieza))  return true;
+        if (this.castillo == pieza)  return true;
+
+        return false;
 
     }
 }
