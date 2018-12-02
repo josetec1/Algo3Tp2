@@ -53,11 +53,18 @@ public class IntegracionTest {
         Mockito.when(mockAldeano.getCosto()).thenReturn(1);
 
         Assert.assertFalse(jugador.puedoAgregar(mockAldeano));
-        jugador.esTuTurno(); //turno 1
-        jugador.esTuTurno(); //turno 2
-        jugador.esTuTurno(); //turno 3
+        jugador.esTuTurno(); //turno 1 (3 aldeanos * 20) = 60
+        jugador.esTuTurno(); //turno 2 = 120
+        jugador.esTuTurno(); //turno 3 = 180
 
-        Assert.assertFalse(jugador.puedoAgregar(mockAldeano));
+        Aldeano mockAldeano180 = Mockito.mock (Aldeano.class);
+        Mockito.when(mockAldeano180.getCosto()).thenReturn(180);
+
+        Aldeano mockAldeano181 = Mockito.mock (Aldeano.class);
+        Mockito.when(mockAldeano181.getCosto()).thenReturn(181);
+
+        Assert.assertTrue(jugador.puedoAgregar(mockAldeano180));
+        Assert.assertFalse(jugador.puedoAgregar(mockAldeano181));
 
     }
     @Test
@@ -76,16 +83,22 @@ public class IntegracionTest {
         Aldeano mockAldeano = Mockito.mock (Aldeano.class);
         Mockito.when(mockAldeano.getCosto()).thenReturn(1);
 
-        jugador.esTuTurno(); //turno 1
-        jugador.esTuTurno(); //turno 2
-        jugador.esTuTurno(); //turno 3
-        jugador.esTuTurno(); //turno 4
+        jugador.esTuTurno(); //turno 1   60
+        jugador.esTuTurno(); //turno 2   120
+        jugador.esTuTurno(); //turno 3  180
+        jugador.esTuTurno(); //turno 4  240 +20 del aldeano libre
 
-        Mockito.when(mockAldeano.getCosto()).thenReturn(20);
-        Assert.assertTrue(jugador.puedoAgregar(mockAldeano)); //20 aporta el aldeano
 
-        Mockito.when(mockAldeano.getCosto()).thenReturn(21);
-        Assert.assertFalse(jugador.puedoAgregar(mockAldeano));
+        Aldeano mockAldeano260 = Mockito.mock (Aldeano.class);
+        Mockito.when(mockAldeano260.getCosto()).thenReturn(260);
+
+        Aldeano mockAldeano261 = Mockito.mock (Aldeano.class);
+        Mockito.when(mockAldeano261.getCosto()).thenReturn(261);
+
+        Assert.assertTrue(jugador.puedoAgregar(mockAldeano260));
+        Assert.assertFalse(jugador.puedoAgregar(mockAldeano261));
+
+
     }
 
 }

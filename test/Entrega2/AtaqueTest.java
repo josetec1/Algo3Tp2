@@ -20,14 +20,14 @@ public class AtaqueTest {
     private Jugador jugadorAtacante;
     private Jugador jugadorEnemigo;
 
-    private UnidadMilitar arqueroAtacante;
-    private UnidadMilitar espadachinAtacante;
+    private Arquero arqueroAtacante;
+    private Espadachin espadachinAtacante;
 
-    private UnidadMilitar arqueroEnemigo;
-    private UnidadMilitar espadachinEnemigo;
-    private Edificio plazaCentralEnemiga;
-    private Edificio cuartelEnemigo;
-    private UnidadMovil aldeanoEnemigo;
+    private Arquero arqueroEnemigo;
+    private Espadachin espadachinEnemigo;
+    private PlazaCentral plazaCentralEnemiga;
+    private Cuartel cuartelEnemigo;
+    private Aldeano aldeanoEnemigo;
     private Castillo castillo;
 
     /***************** PRUEBAS ARQUERO ATACANDO *******************************************/
@@ -277,7 +277,7 @@ public class AtaqueTest {
         mapa.colocar(espadachinAtacante,new Posicion(4,4));
         mapa.colocar(arqueroEnemigo, new Posicion(3,4));
 
-        int cantidadPiezasEnemigas = jugadorEnemigo.getPiezas().size();
+        int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
@@ -286,7 +286,7 @@ public class AtaqueTest {
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), 0);
         Assert.assertTrue(mapa.puedoColocar(new Posicion(3,4), 1));
-        Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getPiezas().size());
+        Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
 
@@ -296,7 +296,7 @@ public class AtaqueTest {
         mapa.colocar(espadachinAtacante,new Posicion(4,4));
         mapa.colocar(cuartelEnemigo, new Posicion(5,5));
 
-        int cantidadPiezasEnemigas = jugadorEnemigo.getPiezas().size();
+        int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
         while (cuartelEnemigo.getVidaActual()>0)
             espadachinAtacante.atacar(cuartelEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
@@ -304,7 +304,7 @@ public class AtaqueTest {
 
         Assert.assertEquals(cuartelEnemigo.getVidaActual(), 0);
         Assert.assertTrue(mapa.puedoColocar(new Posicion(5,5), 2));
-        Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getPiezas().size());
+        Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
 
@@ -361,7 +361,7 @@ public class AtaqueTest {
         jugador.recibirAtaqueCastillo(castilloEnemigo);
 
         PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.getAldeanos().get(2); // pos (7,7)
+        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima()-20);
 
@@ -384,9 +384,9 @@ public class AtaqueTest {
         jugador.recibirAtaqueCastillo(castilloEnemigo);
 
         PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.getAldeanos().get(2); // pos (7,7)
-        Aldeano aldeano2 = espia.getAldeanos().get(1); // pos (6,6)
-        Aldeano aldeano3 = espia.getAldeanos().get(0); // pos (5,5)
+        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
+        Aldeano aldeano2 = espia.obtenerAldeanos().get(1); // pos (6,6)
+        Aldeano aldeano3 = espia.obtenerAldeanos().get(0); // pos (5,5)
         Castillo castillo = espia.getCastillos().get(0); // pos (1,1) a (4,4)
 
         Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima()-20);
@@ -409,9 +409,9 @@ public class AtaqueTest {
         jugador.inicializar(new Posicion(1,1));
 
         PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.getAldeanos().get(2); // pos (7,7)
-        Aldeano aldeano2 = espia.getAldeanos().get(1); // pos (6,6)
-        Aldeano aldeano3 = espia.getAldeanos().get(0); // pos (5,5)
+        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
+        Aldeano aldeano2 = espia.obtenerAldeanos().get(1); // pos (6,6)
+        Aldeano aldeano3 = espia.obtenerAldeanos().get(0); // pos (5,5)
         Castillo castillo = espia.getCastillos().get(0); // pos (1,1) a (4,4)
 
         jugador.recibirAtaqueCastillo(castillo);

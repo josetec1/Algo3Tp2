@@ -657,7 +657,7 @@ public class AldeanoTest {
 
         Aldeano unAldeano = Mockito.mock(Aldeano.class);
         PlazaCentral plaza =new PlazaCentral();
-        plaza.comenzarConstruccion(unAldeano);
+        plaza.comenzarConstruccion(unAldeano, jugador);
         plaza.finalizarConstruccion();
 
        Assert.assertFalse(plaza.puedoConstruir());

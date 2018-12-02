@@ -18,9 +18,9 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
                 || (!edificio.puedoConstruir()) ) {throw new NoSePuedeConstruir();
         }
 
-        edificio.construir (unAldeano);
+        edificio.construir (unAldeano,jugador);
         mapa.colocar(edificio,posicion);
-        jugador.agregarPieza(edificio);
+
         unAldeano.cambiarAContruyendo();
     }
 

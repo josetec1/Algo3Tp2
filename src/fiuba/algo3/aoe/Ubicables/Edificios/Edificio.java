@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
@@ -62,7 +63,7 @@ public abstract class Edificio implements Manipulable {
         this.disminuirVida(unAtacante.getDanioGeneradoAEdificio());
     }
 
-    public abstract void comenzarConstruccion(Aldeano aldeano); //TODO este metodo es el que tendria que notificar la creacion a la vista
+    public abstract void comenzarConstruccion(Aldeano aldeano, Jugador jugador); //TODO este metodo es el que tendria que notificar la creacion a la vista
 
     public abstract void comenzarReparacion(Aldeano aldeano);
 
@@ -87,7 +88,7 @@ public abstract class Edificio implements Manipulable {
         this.estado.reparar ( this,aldeano );
     }
 
-    public void construir(Aldeano aldeano){
-        this.estado.construir ( this,aldeano );
+    public void construir(Aldeano aldeano, Jugador jugador){
+        this.estado.construir ( this,aldeano, jugador );
     }
 }

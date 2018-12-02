@@ -18,7 +18,7 @@ public class ReglasDePoblacionTest {
         jugador.agregarObservador(espia);
         jugador.inicializar();
         jugador.sumarOro(9999999);
-        jugador.construirCuartel(espia.getAldeanos().get(0),new Posicion(new Cuadrante(80,80)));
+        jugador.construirCuartel(espia.obtenerAldeanos().get(0),new Posicion(new Cuadrante(80,80)));
         Cuartel cuartel = espia.getCuartels().get(0);
         cuartel.construir();
         cuartel.construir();
@@ -39,7 +39,7 @@ public class ReglasDePoblacionTest {
         jugador.agregarObservador(espia);
         jugador.inicializar();
         jugador.sumarOro(50);
-        jugador.construirCuartel(espia.getAldeanos().get(0),new Posicion(new Cuadrante(80,80)));
+        jugador.construirCuartel(espia.obtenerAldeanos().get(0),new Posicion(new Cuadrante(80,80)));
         Cuartel cuartel = espia.getCuartels().get(0);
         cuartel.construir();
         cuartel.construir();
@@ -126,13 +126,13 @@ public class ReglasDePoblacionTest {
         jugador.inicializar();
         jugador.descontarOro(100);
 
-        Aldeano aldeano = espia.getAldeanos().get(0);
+        Aldeano aldeano = espia.obtenerAldeanos().get(0);
         jugador.habilitar();
 
 
         jugador.construirCuartel(aldeano,new Posicion(new Cuadrante(9,9)));
-        jugador.eliminarUnidad(espia.getAldeanos().get(1));
-        jugador.eliminarUnidad(espia.getAldeanos().get(2));
+        jugador.eliminarUnidad(espia.obtenerAldeanos().get(1));
+        jugador.eliminarUnidad(espia.obtenerAldeanos().get(2));
 
         aldeano.cambiarARecolectando();
 
@@ -154,10 +154,10 @@ public class ReglasDePoblacionTest {
         jugador.agregarObservador(espia);
         jugador.descontarOro(100);
         jugador.inicializar();
-        jugador.eliminarUnidad(espia.getAldeanos().get(1));
-        jugador.eliminarUnidad(espia.getAldeanos().get(2));
+        jugador.eliminarUnidad(espia.obtenerAldeanos().get(1));
+        jugador.eliminarUnidad(espia.obtenerAldeanos().get(2));
         PlazaCentral plaza = espia.getPlazaCentrals().get(0);
-        Aldeano aldeano = espia.getAldeanos().get(0);
+        Aldeano aldeano = espia.obtenerAldeanos().get(0);
 
         jugador.habilitar();
 
@@ -168,7 +168,7 @@ public class ReglasDePoblacionTest {
         jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(50,50)));
         jugador.reclutarAldeano(plaza,new Posicion(new Cuadrante(51,51)));
         jugador.habilitar();
-        jugador.construirCuartel(espia.getAldeanos().get(1),new Posicion(new Cuadrante(60,60)));
+        jugador.construirCuartel(espia.obtenerAldeanos().get(1),new Posicion(new Cuadrante(60,60)));
     }
     */
 

@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.Jugador;
 
-import fiuba.algo3.aoe.Jugadores.*;
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Jugadores.Piezas.*;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
@@ -15,6 +16,8 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class ListaDePiezasTest {
 
@@ -32,7 +35,7 @@ public class ListaDePiezasTest {
         Castillo castillo = Mockito.mock(Castillo.class);
         ListaDePiezas piezas = new ListaDePiezas(castillo);
 
-        Assert.assertSame(piezas.getCastillo(),castillo);
+        Assert.assertSame(piezas.obtenerCastle(),castillo);
     }
 
     @Test
@@ -325,7 +328,7 @@ public class ListaDePiezasTest {
 
         }
 
-        Assert.assertThat(piezas.getPlazas().size(), is(100));
+        Assert.assertThat(piezas.obtenerPlazas().size(), is(100));
     }
 
     @Test
@@ -583,7 +586,7 @@ public class ListaDePiezasTest {
 
         }
 
-        Assert.assertThat(piezas.getCuarteles().size(), is(100));
+        Assert.assertThat(piezas.obtenerCuartels().size(), is(100));
     }
 
 
@@ -607,10 +610,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getAldeanos().size(), is(3));
-        Assert.assertTrue(piezas.getAldeanos().contains(pieza1));
-        Assert.assertTrue(piezas.getAldeanos().contains(pieza2));
-        Assert.assertTrue(piezas.getAldeanos().contains(pieza3));
+        Assert.assertThat(piezas.obtenerAldeanos().size(), is(3));
+        Assert.assertTrue(piezas.obtenerAldeanos().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerAldeanos().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerAldeanos().contains(pieza3));
 
     }
     @Test
@@ -627,12 +630,12 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getAldeanos().size(), is(3));
-        Assert.assertTrue(piezas.getAldeanos().contains(pieza1));
-        Assert.assertTrue(piezas.getAldeanos().contains(pieza2));
+        Assert.assertThat(piezas.obtenerAldeanos().size(), is(3));
+        Assert.assertTrue(piezas.obtenerAldeanos().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerAldeanos().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getAldeanos().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerAldeanos().contains(pieza3));
 
 
     }
@@ -651,10 +654,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getEspadachines().size(), is(3));
-        Assert.assertTrue(piezas.getEspadachines().contains(pieza1));
-        Assert.assertTrue(piezas.getEspadachines().contains(pieza2));
-        Assert.assertTrue(piezas.getEspadachines().contains(pieza3));
+        Assert.assertThat(piezas.obtenerEspadachins().size(), is(3));
+        Assert.assertTrue(piezas.obtenerEspadachins().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerEspadachins().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerEspadachins().contains(pieza3));
 
     }
     @Test
@@ -671,12 +674,12 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getEspadachines().size(), is(3));
-        Assert.assertTrue(piezas.getEspadachines().contains(pieza1));
-        Assert.assertTrue(piezas.getEspadachines().contains(pieza2));
+        Assert.assertThat(piezas.obtenerEspadachins().size(), is(3));
+        Assert.assertTrue(piezas.obtenerEspadachins().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerEspadachins().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getEspadachines().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerEspadachins().contains(pieza3));
 
 
     }
@@ -695,10 +698,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getArqueros().size(), is(3));
-        Assert.assertTrue(piezas.getArqueros().contains(pieza1));
-        Assert.assertTrue(piezas.getArqueros().contains(pieza2));
-        Assert.assertTrue(piezas.getArqueros().contains(pieza3));
+        Assert.assertThat(piezas.obtenerArquers().size(), is(3));
+        Assert.assertTrue(piezas.obtenerArquers().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerArquers().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerArquers().contains(pieza3));
 
     }
     @Test
@@ -715,12 +718,12 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getArqueros().size(), is(3));
-        Assert.assertTrue(piezas.getArqueros().contains(pieza1));
-        Assert.assertTrue(piezas.getArqueros().contains(pieza2));
+        Assert.assertThat(piezas.obtenerArquers().size(), is(3));
+        Assert.assertTrue(piezas.obtenerArquers().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerArquers().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getArqueros().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerArquers().contains(pieza3));
 
 
     }
@@ -739,10 +742,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getArmasDeAsedio().size(), is(3));
-        Assert.assertTrue(piezas.getArmasDeAsedio().contains(pieza1));
-        Assert.assertTrue(piezas.getArmasDeAsedio().contains(pieza2));
-        Assert.assertTrue(piezas.getArmasDeAsedio().contains(pieza3));
+        Assert.assertThat(piezas.obtenerArmasDeAsedio().size(), is(3));
+        Assert.assertTrue(piezas.obtenerArmasDeAsedio().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerArmasDeAsedio().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerArmasDeAsedio().contains(pieza3));
 
     }
     @Test
@@ -759,12 +762,12 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getArmasDeAsedio().size(), is(3));
-        Assert.assertTrue(piezas.getArmasDeAsedio().contains(pieza1));
-        Assert.assertTrue(piezas.getArmasDeAsedio().contains(pieza2));
+        Assert.assertThat(piezas.obtenerArmasDeAsedio().size(), is(3));
+        Assert.assertTrue(piezas.obtenerArmasDeAsedio().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerArmasDeAsedio().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getArmasDeAsedio().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerArmasDeAsedio().contains(pieza3));
 
 
     }
@@ -783,10 +786,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getPlazas().size(), is(3));
-        Assert.assertTrue(piezas.getPlazas().contains(pieza1));
-        Assert.assertTrue(piezas.getPlazas().contains(pieza2));
-        Assert.assertTrue(piezas.getPlazas().contains(pieza3));
+        Assert.assertThat(piezas.obtenerPlazas().size(), is(3));
+        Assert.assertTrue(piezas.obtenerPlazas().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerPlazas().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerPlazas().contains(pieza3));
 
     }
     @Test
@@ -803,12 +806,12 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getPlazas().size(), is(3));
-        Assert.assertTrue(piezas.getPlazas().contains(pieza1));
-        Assert.assertTrue(piezas.getPlazas().contains(pieza2));
+        Assert.assertThat(piezas.obtenerPlazas().size(), is(3));
+        Assert.assertTrue(piezas.obtenerPlazas().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerPlazas().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getPlazas().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerPlazas().contains(pieza3));
 
 
     }
@@ -827,10 +830,10 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getCuarteles().size(), is(3));
-        Assert.assertTrue(piezas.getCuarteles().contains(pieza1));
-        Assert.assertTrue(piezas.getCuarteles().contains(pieza2));
-        Assert.assertTrue(piezas.getCuarteles().contains(pieza3));
+        Assert.assertThat(piezas.obtenerCuartels().size(), is(3));
+        Assert.assertTrue(piezas.obtenerCuartels().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerCuartels().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerCuartels().contains(pieza3));
 
     }
     @Test
@@ -847,19 +850,19 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza2);
         piezas.agregar(pieza3);
 
-        Assert.assertThat(piezas.getCuarteles().size(), is(3));
-        Assert.assertTrue(piezas.getCuarteles().contains(pieza1));
-        Assert.assertTrue(piezas.getCuarteles().contains(pieza2));
+        Assert.assertThat(piezas.obtenerCuartels().size(), is(3));
+        Assert.assertTrue(piezas.obtenerCuartels().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerCuartels().contains(pieza2));
 
         piezas.eliminar(pieza3);
-        Assert.assertFalse(piezas.getCuarteles().contains(pieza3));
+        Assert.assertFalse(piezas.obtenerCuartels().contains(pieza3));
 
 
     }
     //*******************  TODAS LAS PIEZAS   ****************************************
 
     @Test
-    public void test43GetPiezasDevuelveLasPiezasAgregadasPreviamente(){
+    public void test43GetAtacablesDevuelveLasPiezasAgregadasPreviamente(){
 
         Castillo castillo = Mockito.mock(Castillo.class);
         ListaDePiezas piezas = new ListaDePiezas(castillo);
@@ -878,19 +881,19 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza5);
         piezas.agregar(pieza6);
 
-        Assert.assertThat(piezas.getPiezas().size(), is(7));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza1));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza2));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza3));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza4));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza5));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza6));
-        Assert.assertTrue(piezas.getPiezas().contains(castillo));
+        Assert.assertThat(piezas.obtenerAtacables().size(), is(7));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza3));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza4));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza5));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza6));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(castillo));
 
     }
 
     @Test
-    public void test44GetPiezasDevuelveLasPiezasAgregadasPreviamenteSinLasPiezasEliminadas(){
+    public void test45GetAtacablesDevuelveLasPiezasAgregadasPreviamenteSinLasPiezasEliminadas(){
 
         Castillo castillo = Mockito.mock(Castillo.class);
         ListaDePiezas piezas = new ListaDePiezas(castillo);
@@ -908,43 +911,69 @@ public class ListaDePiezasTest {
         piezas.agregar(pieza5);
         piezas.agregar(pieza6);
 
-        Assert.assertThat(piezas.getPiezas().size(), is(7));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza1));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza2));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza3));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza4));
-        Assert.assertTrue(piezas.getPiezas().contains(pieza5));
-        Assert.assertTrue(piezas.getPiezas().contains(castillo));
+        Assert.assertThat(piezas.obtenerAtacables().size(), is(7));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza1));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza2));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza3));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza4));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(pieza5));
+        Assert.assertTrue(piezas.obtenerAtacables().contains(castillo));
 
         piezas.eliminar(pieza6);
-        Assert.assertFalse(piezas.getPiezas().contains(pieza6));
+        Assert.assertFalse(piezas.obtenerAtacables().contains(pieza6));
 
 
     }
 
     @Test
-    public void test45EliminarDebeLanzarExcepcionSiLaPiezaNoExiste(){
+    public void test46EliminarDebeLanzarExcepcionSiLaPiezaNoExiste(){
 
         Castillo castillo = Mockito.mock(Castillo.class);
         ListaDePiezas piezas = new ListaDePiezas(castillo);
-       /* Aldeano pieza1 = new Aldeano();
-        Arquero pieza2 = new Arquero();
-        Espadachin pieza3 = new Espadachin();
-        ArmaDeAsedio pieza4 = new ArmaDeAsedio();
-        PlazaCentral pieza5 = new PlazaCentral();*/
         Cuartel pieza6 = new Cuartel();
 
         thrown.expect(PiezaAgenaException.class);
          piezas.eliminar(pieza6);
     }
     @Test
-    public void test46EliminarDebeLanzarExcepcionSiIntentoEliminarElCastillo(){
+    public void test47EliminarDebeLanzarExcepcionSiIntentoEliminarElCastillo(){
 
         Castillo castillo = Mockito.mock(Castillo.class);
         ListaDePiezas piezas = new ListaDePiezas(castillo);
 
         thrown.expect(NoSePuedeEliminarElCastilloException.class);
         piezas.eliminar(castillo);
+    }
+
+    @Test
+    public void test48cambioDeTurnoAvisaATodasLasPiezasQueHuboUnCambioDeTurno(){
+
+        Castillo castillo = Mockito.mock(Castillo.class);
+        Jugador jugador1 = Mockito.mock (Jugador.class);
+        ListaDePiezas piezas = new ListaDePiezas(castillo);
+
+        Aldeano aldeano = Mockito.mock (Aldeano.class);
+        Espadachin espadachin = Mockito.mock (Espadachin.class);
+        Arquero arquero= Mockito.mock (Arquero.class);
+        ArmaDeAsedio arma= Mockito.mock (ArmaDeAsedio.class);
+        PlazaCentral plaza = Mockito.mock (PlazaCentral.class);
+        Cuartel cuartel = Mockito.mock (Cuartel.class);
+
+        piezas.agregar(aldeano);
+        piezas.agregar(espadachin);
+        piezas.agregar(arquero);
+        piezas.agregar(arma);
+        piezas.agregar(plaza);
+        piezas.agregar(cuartel);
+
+        piezas.cambioDeTurno(jugador1);
+        verify(aldeano, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(espadachin, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(arquero, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(arma, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(plaza, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(cuartel, times(1)).huboUnCambioDeTurno(jugador1);
+        verify(castillo, times(1)).huboUnCambioDeTurno(jugador1);
     }
 
 }

@@ -1,5 +1,6 @@
-package fiuba.algo3.aoe.Jugadores;
+package fiuba.algo3.aoe.Jugadores.Piezas;
 
+import fiuba.algo3.aoe.Jugadores.*;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
@@ -95,34 +96,34 @@ public class ListaDePiezas {
                                            //Getters
             **********************************************************************  */
 
-    public Castillo getCastillo() {
+    public Castillo obtenerCastle() {
         return this.castillo;
     }
 
-    public List<PlazaCentral> getPlazas() {
+    public List<PlazaCentral> obtenerPlazas() {
         return this.plazaCentrales;
     }
 
-    public List<Cuartel> getCuarteles() {
+    public List<Cuartel> obtenerCuartels() {
         return this.cuarteles;
     }
 
-    public List<Aldeano> getAldeanos() {
+    public List<Aldeano> obtenerAldeanos() {
         return this.aldeanos;
     }
-    public List<ArmaDeAsedio> getArmasDeAsedio() {
+    public List<ArmaDeAsedio> obtenerArmasDeAsedio() {
         return this.armasDeAsedio;
     }
-    public List<Espadachin> getEspadachines() {
+    public List<Espadachin> obtenerEspadachins() {
         return this.espadachins;
     }
-    public List<Arquero> getArqueros() {
+    public List<Arquero> obtenerArquers() {
         return this.arqueros;
     }
 
-    public List <Atacable> getPiezas (){
+    private List <Manipulable> getPiezas (){
 
-        ArrayList<Atacable> lista= new ArrayList<>();
+        ArrayList<Manipulable> lista= new ArrayList<>();
         lista.add (this.castillo);
         lista.addAll(this.aldeanos);
         lista.addAll(this.espadachins);
@@ -131,6 +132,9 @@ public class ListaDePiezas {
         lista.addAll(this.plazaCentrales);
         lista.addAll(this.cuarteles);
         return lista;
+    }
+    public List <Atacable> obtenerAtacables(){
+        return new ArrayList<>(this.getPiezas());
     }
 
     /* ************************************************************************
@@ -166,4 +170,11 @@ public class ListaDePiezas {
         return false;
 
     }
+
+    public void cambioDeTurno (Jugador jugador){
+        for (Manipulable manipulable : this.getPiezas()){
+            manipulable.huboUnCambioDeTurno(jugador);
+        }
+    }
+
 }

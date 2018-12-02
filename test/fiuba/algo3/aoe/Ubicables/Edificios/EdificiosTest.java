@@ -16,6 +16,10 @@ import static org.mockito.Mockito.mock;
 
 public class EdificiosTest {
 
+    private Castillo castillo= new Castillo();
+    private Jugador jugador = new Jugador("Armando",castillo);
+
+
     @Test
     public void test01CrearPlazaCentralPuedoConstruirPeroNoReparar(){
         PlazaCentral plazaCentral = new PlazaCentral();
@@ -40,7 +44,7 @@ public class EdificiosTest {
     @Test
     public void test04PlazaCentralComenzarConstruccionNoPuedoRepararNoPuedoConstruir(){
         PlazaCentral plazaCentral = new PlazaCentral();
-        plazaCentral.comenzarConstruccion ( new Aldeano () );
+        plazaCentral.comenzarConstruccion ( new Aldeano (),jugador );
         Assert.assertFalse(plazaCentral.puedoReparar());
         Assert.assertFalse (plazaCentral.puedoConstruir());
     }
@@ -48,7 +52,7 @@ public class EdificiosTest {
     @Test
     public void test05CuartelComenzarConstruccionNoPuedoRepararNoPuedoConstruir(){
         Cuartel cuartel = new Cuartel ();
-        cuartel.comenzarConstruccion ( new Aldeano () );
+        cuartel.comenzarConstruccion ( new Aldeano (),jugador );
         Assert.assertFalse(cuartel.puedoReparar());
         Assert.assertFalse (cuartel.puedoConstruir());
     }
@@ -60,13 +64,13 @@ public class EdificiosTest {
     public void test06CastilloComenzarConstruccionLanzaEdificioNoConstruibleException(){
         Castillo castillo = new Castillo ();
         thrown.expect (EdificioNoConstruibleSinCostoException.class);
-        castillo.comenzarConstruccion ( new Aldeano () );
+        castillo.comenzarConstruccion ( new Aldeano () ,jugador);
     }
 
     @Test
     public void test07CuartelComenzarConstruccionEn3TurnospuedoCrearUnidad(){
         Cuartel cuartel = new Cuartel ();
-        cuartel.comenzarConstruccion ( new Aldeano () );
+        cuartel.comenzarConstruccion ( new Aldeano (),jugador );
         cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -82,7 +86,7 @@ public class EdificiosTest {
     @Test
     public void test09PlazaComenzarConstruccionEn3TurnospuedoCrearUnidad(){
         PlazaCentral plazaCentral = new PlazaCentral ();
-        plazaCentral.comenzarConstruccion ( new Aldeano () );
+        plazaCentral.comenzarConstruccion ( new Aldeano (),jugador );
         plazaCentral.huboUnCambioDeTurno ( mock( Jugador.class ) );
         plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
         plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -104,7 +108,7 @@ public class EdificiosTest {
     @Test
     public void test11PlazaConstruidaRepararLanzaEdificioSinDaniarException(){
         PlazaCentral plazaCentral = new PlazaCentral ();
-        plazaCentral.comenzarConstruccion ( new Aldeano () );
+        plazaCentral.comenzarConstruccion ( new Aldeano () ,jugador);
         plazaCentral.huboUnCambioDeTurno ( mock( Jugador.class ) );
         plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
         plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -115,7 +119,7 @@ public class EdificiosTest {
     @Test
     public void test12CuartelConstruidaRepararLanzaEdificioSinDaniarException(){
         Cuartel cuartel = new Cuartel ();
-        cuartel.comenzarConstruccion ( new Aldeano () );
+        cuartel.comenzarConstruccion ( new Aldeano () ,jugador);
         cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -192,7 +196,7 @@ public class EdificiosTest {
     @Test
     public void test20CuartelConstruirNoPuedoConstruirDeNuevoNoPuedoReparar(){
         Cuartel cuartel = new Cuartel ();
-        cuartel.construir ( new Aldeano () );
+        cuartel.construir ( new Aldeano () ,jugador);
         Assert.assertFalse ( cuartel.puedoConstruir () );
         Assert.assertFalse ( cuartel.puedoReparar () );
     }
@@ -201,7 +205,7 @@ public class EdificiosTest {
     @Test
     public void test21CuartelConstruirRepararLanzaExcepcionEdificioNoPuedeRepararseEnEsteMomentoException(){
         Cuartel cuartel = new Cuartel ();
-        cuartel.construir ( new Aldeano () );
+        cuartel.construir ( new Aldeano (),jugador );
         thrown.expect ( EdificioNoPuedeRepararseEnEsteMomentoException.class );
         cuartel.reparar ( new Aldeano () );
     }
@@ -213,7 +217,7 @@ public class EdificiosTest {
         cuartel.disminuirVida ( 50);
         cuartel.reparar ( new Aldeano () );
         thrown.expect ( EdificioYaConstruidoException.class );
-        cuartel.construir (new Aldeano ()  );
+        cuartel.construir (new Aldeano () ,jugador );
     }
 
 

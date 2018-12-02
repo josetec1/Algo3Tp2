@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import org.junit.Assert;
@@ -14,6 +15,8 @@ import static org.mockito.Mockito.when;
 
 public class EstadoEdificiosTest {
 
+    private Castillo castillo = new Castillo();
+    private Jugador jugador = new Jugador("Maradona", castillo);
     @Test
     public void test01EstadoEdificioAConstruirPuedoConstruirNoPuedoReparar(){
         EstadoEdificio estado = new EstadoAConstruir ();
@@ -28,9 +31,9 @@ public class EstadoEdificiosTest {
     public void test02EstadoEdificioAConstruirConstruirLlamaCorrectamenteAEdificioIniciarConstruccion(){
         EstadoEdificio estado = new EstadoAConstruir ();
         PlazaCentral plaza = new PlazaCentral ();
-        estado.construir ( plaza,new Aldeano () );
+        estado.construir ( plaza,new Aldeano (),jugador );
         thrown.expect ( EdificioEnConstruccionException.class );
-        plaza.construir ( new Aldeano () );
+        plaza.construir ( new Aldeano (),jugador );
     }
 
     @Test
@@ -67,7 +70,7 @@ public class EstadoEdificiosTest {
     public void test07EstadoEdificioDaniadoConstruirLanzaEdificioYaConstruidoException(){
         EstadoEdificio estado = new EstadoDaniado ();
         thrown.expect ( EdificioYaConstruidoException.class );
-        estado.construir ( new PlazaCentral (),new Aldeano () );
+        estado.construir ( new PlazaCentral (),new Aldeano (),jugador );
     }
 
     @Test
@@ -119,7 +122,7 @@ public class EstadoEdificiosTest {
     public void test15EstadoEdificioEnConstruccionConstruirLanzaEdificioEnConstruccionException(){
         EstadoEdificio estado = new EstadoEnConstruccion (new Aldeano (),1);
         thrown.expect ( EdificioEnConstruccionException.class );
-        estado.construir ( new PlazaCentral (),new Aldeano () );
+        estado.construir ( new PlazaCentral (),new Aldeano (),jugador );
 
     }
 
@@ -166,7 +169,7 @@ public class EstadoEdificiosTest {
     public void test21EstadoEdificioEnReparacionConstruirLanzaEdificioEnConstruccionException(){
         EstadoEdificio estado = new EstadoEnReparacion (new Aldeano ());
         thrown.expect ( EdificioYaConstruidoException.class );
-        estado.construir ( new PlazaCentral (),new Aldeano () );
+        estado.construir ( new PlazaCentral (),new Aldeano (),jugador );
 
     }
 
@@ -209,7 +212,7 @@ public class EstadoEdificiosTest {
         EstadoEdificio estado = new EstadoNormal ();
         PlazaCentral plaza = new PlazaCentral ();
         thrown.expect ( EdificioYaConstruidoException.class );
-        estado.construir ( plaza,new Aldeano () );
+        estado.construir ( plaza,new Aldeano (),jugador );
     }
 
     @Test

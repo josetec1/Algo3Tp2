@@ -1,6 +1,9 @@
 package fiuba.algo3.aoe.Jugador;
 import fiuba.algo3.aoe.Jugadores.*;
-import fiuba.algo3.aoe.Jugadores.EstadoJugador.JugadorYaIniciadoException;
+import fiuba.algo3.aoe.Jugadores.Piezas.LimiteDePoblacionAlcanzadoException;
+import fiuba.algo3.aoe.Jugadores.Piezas.NoSePuedeEliminarElCastilloException;
+import fiuba.algo3.aoe.Jugadores.Piezas.PiezaAgenaException;
+import fiuba.algo3.aoe.Jugadores.Piezas.PiezaYaAgregadaException;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
@@ -12,18 +15,19 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-//Todo esto vuela.
+
 public class JugadorTest {
+
 private Castillo castillo= new Castillo ();
+
     @Test
     public void test01CrearJugadorCreaJugadorConNombreMauricio(){
-      //  Mapa mapa = new Mapa(10,20);
-
         Jugador jugador1 = new Jugador("Mauricio", castillo );
         Assert.assertEquals(jugador1.getNombre(), "Mauricio");
 
@@ -31,24 +35,18 @@ private Castillo castillo= new Castillo ();
 
     @Test
     public void test02CrearJugadorCreaJugadorCon100DeOro(){
-       // Mapa mapa = new Mapa(10,20);
-
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
-
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(100);
-
         Jugador jugador1 = new Jugador("Maradona",castillo );
-
         jugador1.agregarPieza(unidad);
-
     }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void test03CrearJugadorCreaJugadorCon100DeOroYNoPuedeAgregarAlgoQueCueste101(){
-        // Mapa mapa = new Mapa(10,20);
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(101);
         Jugador jugador1 = new Jugador("Diego",castillo );
 
@@ -57,66 +55,116 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test04CrearJugadorCreaJugadorCon0UnidadesYElMaximoQuePuedeTenerSon50(){
-        // Mapa mapa = new Mapa(10,20);
-
-        UnidadMovil unidad;
-        UnidadMovil unidad50 = Mockito.mock (UnidadMovil.class);
+    public void test04CrearJugadorCreaJugadorCon3UnidadesYElMaximoQuePuedeTenerSon50(){
+        Aldeano unidad;
+        Aldeano unidad50 = Mockito.mock (Aldeano.class);
         Mockito.when(unidad50.getCosto()).thenReturn(0);
-
-
         Jugador jugador1 = new Jugador("D10S",castillo );
 
-        for (int i = 0; i <50 ; i++) {
+        for (int i = 0; i <47 ; i++) {
 
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(0);
             jugador1.agregarPieza(unidad);
         }
 
-        thrown.expect((LimiteDePoblacionAlcanzadoException.class));
+        thrown.expect((NoSePuedeAgregarPiezaException.class));
         jugador1.agregarPieza(unidad50);
-
-
     }
 
 
     @Test
-    public void test05LosEdificiosNoCuentanComoLimiteDePoblacion(){
-        // Mapa mapa = new Mapa(10,20);
+    public void test05CrearJugadorDebeLanzarExcepcionSiLeEnvioMasDeTresAldeanos(){
+        PlazaCentral plaza = new PlazaCentral();
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano()); //4
 
-        UnidadMovil unidad;
-        UnidadMovil unidad50 = Mockito.mock (UnidadMovil.class);
+        thrown.expect(CantidadIncorrectaAldeanosException.class);
+        Jugador jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos );
+    }
+
+    @Test
+    public void test06CrearJugadorDebeLanzarExcepcionSiLeEnvioMenosDeTresAldeanos(){
+
+
+        PlazaCentral plaza = new PlazaCentral();
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());//2
+
+
+        thrown.expect(CantidadIncorrectaAldeanosException.class);
+        Jugador jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos );
+    }
+
+    @Test
+    public void test07CrearJugadorDebeLanzarExcepcionSiLeEnvioAldeanosRepetidos(){
+        PlazaCentral plaza = new PlazaCentral();
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        Aldeano aldeanoRepetido= new Aldeano();
+
+        aldeanos.add(new Aldeano());
+        aldeanos.add(aldeanoRepetido);
+        aldeanos.add(aldeanoRepetido);
+
+        thrown.expect(PiezaYaAgregadaException.class);
+        Jugador jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos );
+    }
+
+
+    @Test
+    public void test08AlCrearJugadorContieneLosElementosConLosQueSeConstruyo(){
+
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        PlazaCentral plaza = new PlazaCentral();
+        Aldeano aldeano1 = new Aldeano();
+        Aldeano aldeano2 = new Aldeano();
+        Aldeano aldeano3 = new Aldeano();
+        aldeanos.add(aldeano1);
+        aldeanos.add(aldeano2);
+        aldeanos.add(aldeano3);
+        Jugador jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos );
+
+        Assert.assertTrue(jugador1.esMio(aldeano1));
+        Assert.assertTrue(jugador1.esMio(aldeano2));
+        Assert.assertTrue(jugador1.esMio(aldeano3));
+        Assert.assertTrue(jugador1.esMio(plaza));
+        Assert.assertTrue( jugador1.esMio(castillo));
+    }
+
+    @Test
+    public void test09LosEdificiosNoCuentanComoLimiteDePoblacion(){
+
+        Aldeano unidad;
+        Aldeano unidad50 = Mockito.mock (Aldeano.class);
         Mockito.when(unidad50.getCosto()).thenReturn(0);
-
-
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i <50 ; i++) {
-
+        for (int i = 0; i <47 ; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(0);
             jugador1.agregarPieza(unidad);
         }
 
         for (int i = 0; i <1500 ; i++) {
-
-            Edificio edificio = Mockito.mock (Edificio.class);
+            PlazaCentral edificio = Mockito.mock (PlazaCentral.class);
             Mockito.when(edificio.getCosto()).thenReturn(0);
             jugador1.agregarPieza(edificio);
         }
 
-        thrown.expect((LimiteDePoblacionAlcanzadoException.class));
+        thrown.expect((NoSePuedeAgregarPiezaException.class));
         jugador1.agregarPieza(unidad50);
-
-
     }
 
 
 
 
     @Test
-    public void test06PuedoAgregarDebeDarTrueCuandoLaUnidadNoFueAgregadaPreviamente(){
+    public void test10PuedoAgregarDebeDarTrueCuandoLaUnidadNoFueAgregadaPreviamente(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(0);
@@ -127,7 +175,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test07PuedoAgregarDebeDarFalseCuandoLaUnidadFueAgregadaPreviamente(){
+    public void test11PuedoAgregarDebeDarFalseCuandoLaUnidadFueAgregadaPreviamente(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(0);
@@ -139,7 +187,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test08PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale100(){
+    public void test12PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale100(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(100);
@@ -151,7 +199,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test09PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale101(){
+    public void test13PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarUnidadQueVale101(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(101);
@@ -161,10 +209,10 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test10PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnaUnidad(){
+    public void test14PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnaUnidad(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
-        UnidadMovil otraUnidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
+        Aldeano otraUnidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(100);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -175,50 +223,47 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test11PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorSeAgregan50Unidades(){
+    public void test15PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorSeAgregan47Unidades(){
 
-        UnidadMovil unidad;
-        UnidadMovil unidad51 = Mockito.mock (Aldeano.class);
-        Mockito.when(unidad51.getCosto()).thenReturn(1);
+        Aldeano unidad;
+        Aldeano unidad48 = Mockito.mock (Aldeano.class);
+        Mockito.when(unidad48.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 47; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(1);
             jugador1.agregarPieza(unidad);
         }
-
-
-        Assert.assertFalse( jugador1.puedoAgregar(unidad51));
+        Assert.assertFalse( jugador1.puedoAgregar(unidad48));
     }
 
     @Test
-    public void test12PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan49Unidades(){
+    public void test16PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan46Unidades(){
 
-        UnidadMovil unidad;
-        UnidadMovil unidad50 = Mockito.mock (Aldeano.class);
+        Aldeano unidad;
+        Aldeano unidad50 = Mockito.mock (Aldeano.class);
         Mockito.when(unidad50.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i < 49; i++) {
+        for (int i = 0; i < 46; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(1);
             jugador1.agregarPieza(unidad);
         }
-
 
         Assert.assertTrue( jugador1.puedoAgregar(unidad50));
     }
 
     @Test
-    public void test13PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan50UnidadesYSeAgreganEdificios(){
+    public void test17PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan47UnidadesYSeAgreganEdificios(){
 
-        UnidadMovil unidad;
+        Aldeano unidad;
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 47; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(1);
             jugador1.agregarPieza(unidad);
@@ -228,7 +273,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test14PuedoAgregarDebeDarTrueCuandoElEdificioNoFueAgregadaPreviamente(){
+    public void test18PuedoAgregarDebeDarTrueCuandoElEdificioNoFueAgregadaPreviamente(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
@@ -240,9 +285,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test15PuedoAgregarDebeDarFalseCuandoElEdificioFueAgregadaPreviamente(){
+    public void test19PuedoAgregarDebeDarFalseCuandoElEdificioFueAgregadaPreviamente(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -252,7 +297,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test16PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale100(){
+    public void test20PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale100(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(100);
@@ -264,7 +309,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test17PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale101(){
+    public void test21PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale101(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(101);
@@ -276,9 +321,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test18PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnEdificio(){
+    public void test22PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregaUnEdificio(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Edificio otroEdificio = Mockito.mock (Edificio.class);
         Mockito.when(otroEdificio.getCosto()).thenReturn(1);
@@ -293,9 +338,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test19AgregarPiezaAgregaLaUnidad(){
+    public void test23AgregarPiezaAgregaLaUnidad(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -308,9 +353,9 @@ private Castillo castillo= new Castillo ();
 
 
     @Test
-    public void test20AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficiente(){
+    public void test24AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficiente(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(101);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -319,41 +364,41 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test21AgregarPiezaDebeLanzarExcepcionCuandoLaUnidadFueAgregadaPreviamente(){
+    public void test25AgregarPiezaDebeLanzarExcepcionCuandoLaUnidadFueAgregadaPreviamente(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(100);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
         jugador1.agregarPieza(unidad);
 
-        thrown.expect(PiezaYaAgregadaException.class);
+        thrown.expect(NoSePuedeAgregarPiezaException.class);
         jugador1.agregarPieza(unidad);
     }
 
     @Test
-    public void test22AgregarPiezaDebeLanzarExcepcionCuandoSeAgregaronPreviamente50Unidades(){
+    public void test26AgregarPiezaDebeLanzarExcepcionCuandoSeAgregaronPreviamente47Unidades(){
 
-        UnidadMovil unidad;
-        UnidadMovil unidad51 = Mockito.mock(Aldeano.class);
-        Mockito.when(unidad51.getCosto()).thenReturn(1);
+        Aldeano unidad;
+        Aldeano unidad48 = Mockito.mock(Aldeano.class);
+        Mockito.when(unidad48.getCosto()).thenReturn(1);
 
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 47; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(1);
             jugador1.agregarPieza(unidad);
         }
 
-        thrown.expect(LimiteDePoblacionAlcanzadoException.class);
-        jugador1.agregarPieza(unidad51);
+        thrown.expect(NoSePuedeAgregarPiezaException.class);
+        jugador1.agregarPieza(unidad48);
     }
 
     @Test
-    public void test23AgregarPiezaAgregaElEdificio(){
+    public void test27AgregarPiezaAgregaElEdificio(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        PlazaCentral edificio = Mockito.mock (PlazaCentral.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -364,9 +409,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test24AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficienteParaElEdificio(){
+    public void test28AgregarPiezaDebeLanzarExcepcionCuandoNoHayOroSuficienteParaElEdificio(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(101);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -376,22 +421,22 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test25AgregarPiezaDebeLanzarExcepcionCuandoElEdificioFueAgregadaPreviamente(){
+    public void test29AgregarPiezaDebeLanzarExcepcionCuandoElEdificioFueAgregadaPreviamente(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        PlazaCentral edificio = Mockito.mock (PlazaCentral.class);
         Mockito.when(edificio.getCosto()).thenReturn(100);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
         jugador1.agregarPieza(edificio);
 
-        thrown.expect(PiezaYaAgregadaException.class);
+        thrown.expect(NoSePuedeAgregarPiezaException.class);
         jugador1.agregarPieza(edificio);
     }
 
     @Test
-    public void test26EliminarPiezaEliminaLaPieza(){
+    public void test30EliminarPiezaEliminaLaPieza(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -403,7 +448,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test27EliminarPiezaDebeLanzarExcepcionSiLaPiezaNoFueAgregadaPreviamente(){
+    public void test31EliminarPiezaDebeLanzarExcepcionSiLaPiezaNoFueAgregadaPreviamente(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
@@ -414,28 +459,28 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test28EliminarPiezaCuandoSeAgregaron50unidadesYEliminoUnaUnidadPermiteQueSePuedaVolverAAgregarOtraUnidad(){
+    public void test32EliminarPiezaCuandoSeAgregaron47unidadesYEliminoUnaUnidadPermiteQueSePuedaVolverAAgregarOtraUnidad(){
 
-        UnidadMovil unidad;
-        UnidadMovil unidad50 = Mockito.mock(Aldeano.class);
-        Mockito.when(unidad50.getCosto()).thenReturn(1);
+        Aldeano unidad;
+        Aldeano unidad47 = Mockito.mock(Aldeano.class);
+        Mockito.when(unidad47.getCosto()).thenReturn(1);
 
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
-        for (int i = 0; i < 49; i++) {
+        for (int i = 0; i < 46; i++) {
             unidad = Mockito.mock (Aldeano.class);
             Mockito.when(unidad.getCosto()).thenReturn(1);
             jugador1.agregarPieza(unidad);
         }
-        jugador1.agregarPieza(unidad50);
-        jugador1.eliminarPieza(unidad50);
-        Assert.assertTrue(jugador1.puedoAgregar(unidad50));
+        jugador1.agregarPieza(unidad47);
+        jugador1.eliminarPieza(unidad47);
+        Assert.assertTrue(jugador1.puedoAgregar(unidad47));
     }
 
     @Test
-    public void test29EsMioDebeDarFalseSiNoSeAgregoPreviamenteLaUnidad(){
+    public void test33EsMioDebeDarFalseSiNoSeAgregoPreviamenteLaUnidad(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(500000000);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -443,9 +488,9 @@ private Castillo castillo= new Castillo ();
         Assert.assertFalse( jugador1.esMio(unidad));
     }
     @Test
-    public void test30EsMioDebeDarTrueSiSeAgregoPreviamenteLaUnidad(){
+    public void test34EsMioDebeDarTrueSiSeAgregoPreviamenteLaUnidad(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
         jugador1.agregarPieza(unidad);
@@ -455,9 +500,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test31EsMioDebeDarFalseLuegoDeEliminarLaUnidadPreviamenteAgregada(){
+    public void test35EsMioDebeDarFalseLuegoDeEliminarLaUnidadPreviamenteAgregada(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
         jugador1.agregarPieza(unidad);
@@ -468,7 +513,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test32EsMioDebeDarFalseSiNoSeAgregoPreviamenteElEdificio(){
+    public void test36EsMioDebeDarFalseSiNoSeAgregoPreviamenteElEdificio(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
@@ -477,9 +522,9 @@ private Castillo castillo= new Castillo ();
         Assert.assertFalse( jugador1.esMio(edificio));
     }
     @Test
-    public void test33EsMioDebeDarTrueSiSeAgregoPreviamenteElEdificio(){
+    public void test37EsMioDebeDarTrueSiSeAgregoPreviamenteElEdificio(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
         jugador1.agregarPieza(edificio);
@@ -489,9 +534,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test34EsMioDebeDarFalseLuegoDeEliminarElEdificioPreviamenteAgregada(){
+    public void test38EsMioDebeDarFalseLuegoDeEliminarElEdificioPreviamenteAgregada(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
         jugador1.agregarPieza(edificio);
@@ -501,7 +546,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test35SumarOro50PermiteAgregarPiezaQueCuesta150AlCrearseElAldeanoCon100DeOro(){
+    public void test39SumarOro50PermiteAgregarPiezaQueCuesta150AlCrearseElAldeanoCon100DeOro(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(150);
@@ -515,9 +560,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test36SumarOro50YAgregarPiezaDe150ConLos100DelJugadorYaNoPermiteAgregarMasPiezasDeValorMayorACero(){
+    public void test40SumarOro50YAgregarPiezaDe150ConLos100DelJugadorYaNoPermiteAgregarMasPiezasDeValorMayorACero(){
 
-        UnidadMovil unidad150 = Mockito.mock (Aldeano.class);
+        Aldeano unidad150 = Mockito.mock (Aldeano.class);
         Mockito.when(unidad150.getCosto()).thenReturn(150);
 
         UnidadMovil unidadVale1 = Mockito.mock (Aldeano.class);
@@ -531,7 +576,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test37SumarOroDebeLanzarExcepcionSiSeSumaUnNumeroNegativo(){
+    public void test41SumarOroDebeLanzarExcepcionSiSeSumaUnNumeroNegativo(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
@@ -543,7 +588,7 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test38puedoAgregarDebeDarFalseSiLaUnidadTieneCostoNegativo(){
+    public void test42puedoAgregarDebeDarFalseSiLaUnidadTieneCostoNegativo(){
 
         UnidadMovil unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(-1);
@@ -554,7 +599,7 @@ private Castillo castillo= new Castillo ();
 
     }
     @Test
-    public void test39puedoAgregarDebeDarFalseSiElEdificioTieneCostoNegativo(){
+    public void test43puedoAgregarDebeDarFalseSiElEdificioTieneCostoNegativo(){
 
         Edificio edificio = Mockito.mock (Edificio.class);
         Mockito.when(edificio.getCosto()).thenReturn(-1);
@@ -566,9 +611,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test40AgregarDebeLanzarExcepcionSiAgregoUnidadDeCostoNegativo(){
+    public void test44AgregarDebeLanzarExcepcionSiAgregoUnidadDeCostoNegativo(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(-1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -579,9 +624,9 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test41AgregarDebeLanzarExcepcionSiAgregoEdificioDeCostoNegativo(){
+    public void test45AgregarDebeLanzarExcepcionSiAgregoEdificioDeCostoNegativo(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(-1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -593,15 +638,15 @@ private Castillo castillo= new Castillo ();
 
 
     @Test
-    public void test42GetPiezasDevuelveTodasLasPiezasPreviamenteAgregadasEdificiosYUnidades(){
+    public void test46GetAtacablesDevuelveTodasLasPiezasPreviamenteAgregadasEdificiosYUnidades(){
 
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
-        UnidadMovil otraUnidad = Mockito.mock (Aldeano.class);
+        Aldeano otraUnidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
-        UnidadMovil unidadNoIncluida = Mockito.mock (Aldeano.class);
+        Aldeano unidadNoIncluida = Mockito.mock (Aldeano.class);
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
         Edificio edificioNoIncluido = Mockito.mock (Edificio.class);
 
@@ -611,7 +656,7 @@ private Castillo castillo= new Castillo ();
         jugador1.agregarPieza(otraUnidad);
         jugador1.agregarPieza(edificio);
 
-       ArrayList<Atacable> lista = jugador1.getPiezas();
+         List<Atacable> lista = jugador1.getAtacables();
 
 
         Assert.assertTrue( lista.contains(unidad));
@@ -622,12 +667,12 @@ private Castillo castillo= new Castillo ();
     }
 
     @Test
-    public void test43EsTuTurnoAvisaATodasSusPiezas(){
+    public void test47EsTuTurnoAvisaATodasSusPiezas(){
 
         Jugador jugador1 = new Jugador("Maradona",castillo );
-        UnidadMovil unidad = Mockito.mock (Aldeano.class);
+        Aldeano unidad = Mockito.mock (Aldeano.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
-        Edificio edificio = Mockito.mock (Edificio.class);
+        Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
 
         jugador1.agregarPieza(unidad);
@@ -639,151 +684,26 @@ private Castillo castillo= new Castillo ();
         verify(edificio, times(1)).huboUnCambioDeTurno(jugador1);
     }
 
-    @Test
-    public void test44InicilizarDebeLanzarExcepcionSiLeEnvioMasDeTresAldeanos(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano()); //4
-
-        thrown.expect(CantidadIncorrectaAldeanosException.class);
-        jugador1.inicializar(plaza,aldeanos);
-
-    }
 
     @Test
-    public void test45InicilizarDebeLanzarExcepcionSiLeEnvioMenosDeTresAldeanos(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());//2
-
-
-        thrown.expect(CantidadIncorrectaAldeanosException.class);
-        jugador1.inicializar(plaza,aldeanos);
-    }
-
-    @Test
-    public void test46InicilizarDebeLanzarExcepcionSiLeEnvioAldeanosRepetidos(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        Aldeano aldeanoRepetido= new Aldeano();
-
-        aldeanos.add(new Aldeano());
-        aldeanos.add(aldeanoRepetido);
-        aldeanos.add(aldeanoRepetido);
-
-        thrown.expect(PiezaYaAgregadaException.class);
-        jugador1.inicializar(plaza,aldeanos);
-
-    }
-
-    @Test
-    public void test47InicilizarDebeLanzarExcepcionSiLeEnvioAldeanosAgregadosPreviamente(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        Aldeano aldeanoAgregadoPreviamente= new Aldeano();
-        jugador1.agregarPieza(aldeanoAgregadoPreviamente);
-
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());
-        aldeanos.add(aldeanoAgregadoPreviamente);
-
-        thrown.expect(PiezaYaAgregadaException.class);
-        jugador1.inicializar(plaza,aldeanos);
-    }
-
-
-
-    @Test
-    public void test48InicilizarDebeLanzarExcepcionSiLeEnvioUnaPlazaCentralYaAgregada(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        for (int i = 0; i <3 ; i++) {
-            aldeanos.add(new Aldeano());
-        }
-
-        jugador1.agregarPieza(plaza);
-        thrown.expect(PiezaYaAgregadaException.class);
-        jugador1.inicializar(plaza,aldeanos);
-
-    }
-
-    @Test
-    public void test49InicilizarDebeLanzarExcepcionSiYaSeInicializoPreviamente(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        PlazaCentral plaza = new PlazaCentral();
-
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        for (int i = 0; i <3 ; i++) {
-            aldeanos.add(new Aldeano());
-        }
-        jugador1.inicializar(plaza,aldeanos);
-
-        thrown.expect(JugadorYaIniciadoException.class);
-        jugador1.inicializar(plaza,aldeanos);
-    }
-
-    @Test
-    public void test50InicilizarAgregaLosElementosAlJugador(){
+    public void test48EliminarPiezaAlEnviarElCastilloDebeLanzarExcepcion(){
 
         Jugador jugador1 = new Jugador("Maradona",castillo );
         ArrayList<Aldeano> aldeanos = new ArrayList<>();
 
-        PlazaCentral plaza = new PlazaCentral();
-        Aldeano aldeano1 = new Aldeano();
-        Aldeano aldeano2 = new Aldeano();
-        Aldeano aldeano3 = new Aldeano();
-        aldeanos.add(aldeano1);
-        aldeanos.add(aldeano2);
-        aldeanos.add(aldeano3);
-        jugador1.inicializar(plaza,aldeanos);
-
-        Assert.assertTrue(jugador1.esMio(aldeano1));
-        Assert.assertTrue(jugador1.esMio(aldeano2));
-        Assert.assertTrue(jugador1.esMio(aldeano3));
-        Assert.assertTrue(jugador1.esMio(plaza));
-
-    }
-/*
-    @Test
-    public void test51AlCrearJugadorContieneElCastilloQueSeLePasaPorParametro(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-
-       Assert.assertTrue( jugador1.esMio(castillo));
-
-
-    }
-
-    @Test
-    public void test52NoSePuedeEliminarElCastilloDelJugador(){
-
-        Jugador jugador1 = new Jugador("Maradona",castillo );
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-
-
+        thrown.expect(NoSePuedeEliminarElCastilloException.class);
         jugador1.eliminarPieza(castillo);
-        Assert.assertTrue( jugador1.esMio(castillo));
-
-
     }
-*/
+
+    @Test
+    public void test49EliminarPiezaAlEnviarElCastilloAgenoDebeLanzarExcepcion(){
+
+        Jugador jugador1 = new Jugador("Maradona",castillo );
+        ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        Castillo castilloAgeno = new Castillo();
+
+        thrown.expect(PiezaAgenaException.class);
+        jugador1.eliminarPieza(castilloAgeno);
+    }
+
 }

@@ -54,8 +54,8 @@ public class IntegracionTest {
         Assert.assertEquals(jugador1.getOro(),100);
         Assert.assertEquals(jugador2.getOro(),100);
 
-        Assert.assertEquals(observadorJugador1.getAldeanos().size() , 3);
-        Assert.assertEquals(observadorJugador2.getAldeanos().size() , 3);
+        Assert.assertEquals(observadorJugador1.obtenerAldeanos().size() , 3);
+        Assert.assertEquals(observadorJugador2.obtenerAldeanos().size() , 3);
 
         Assert.assertEquals(observadorJugador1.getPlazaCentrals().size() , 1);
         Assert.assertEquals(observadorJugador2.getPlazaCentrals().size() , 1);
@@ -69,8 +69,8 @@ public class IntegracionTest {
     public void test003AlInicioDeJuegoLasUnidadesYEdificiosTienePosicionesValidas(){
 
         for(int i = 0; i<=2; i++) {
-            Assert.assertTrue(observadorJugador1.getAldeanos().get(i).getPosicion().estasDentroDe(ANCHOMAPA,ALTOMAPA));
-            Assert.assertTrue(observadorJugador2.getAldeanos().get(i).getPosicion().estasDentroDe(ANCHOMAPA,ALTOMAPA)) ;
+            Assert.assertTrue(observadorJugador1.obtenerAldeanos().get(i).getPosicion().estasDentroDe(ANCHOMAPA,ALTOMAPA));
+            Assert.assertTrue(observadorJugador2.obtenerAldeanos().get(i).getPosicion().estasDentroDe(ANCHOMAPA,ALTOMAPA)) ;
         }
 
         Assert.assertTrue(observadorJugador1.getCastillos().get(0).getPosicion().estasDentroDe(ANCHOMAPA,ALTOMAPA));
@@ -85,8 +85,8 @@ public class IntegracionTest {
     public void test003AlInicioDeJuegoElMapaContieneAlosEdificiosYUnidadesIniciales(){
 
         for(int i = 0; i<=2; i++) {
-            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.getAldeanos().get(i).getPosicion() ) );
-            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador2.getAldeanos().get(i).getPosicion() ) );
+            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.obtenerAldeanos().get(i).getPosicion() ) );
+            Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador2.obtenerAldeanos().get(i).getPosicion() ) );
         }
 
         Assert.assertTrue(mapa.estaDentroDeLosMargenesDelTablero(observadorJugador1.getCastillos().get(0).getPosicion() ) );

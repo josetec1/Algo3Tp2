@@ -1,5 +1,6 @@
 package fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 
@@ -13,7 +14,7 @@ public class EstadoNormal implements EstadoEdificio {
     }
 
 
-    public void construir( Edificio edificio, Aldeano aldeano ){
+    public void construir( Edificio edificio, Aldeano aldeano, Jugador jugador ){
         throw new EdificioYaConstruidoException();
     }
 

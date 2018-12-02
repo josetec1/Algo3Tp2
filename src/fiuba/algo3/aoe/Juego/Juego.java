@@ -23,7 +23,7 @@ public class Juego extends Observable {
     private Ijuego juego;
 
     public Juego(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
-                //chequear minimos
+                //TODO chequear minimos
         this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
 
 
@@ -47,7 +47,7 @@ public class Juego extends Observable {
         //Inicializo jugador 1
         castillo = new Castillo();
         mapa.colocar(castillo,new Posicion(1,1));
-        j1= new Jugador(jugador1,castillo);
+
 
         //agrego plaza central
         plazaCentral = new PlazaCentral();
@@ -61,7 +61,8 @@ public class Juego extends Observable {
             mapa.colocar(aldeano,new Posicion(7 + (i*3), (i*2+3)));
             aldeanos.add(aldeano);
         }
-        j1.inicializar(plazaCentral,aldeanos);
+
+        j1= new Jugador(jugador1,castillo, plazaCentral, aldeanos);
         this.jugador1 = j1;
         jugadores.add (j1);
 
@@ -70,7 +71,7 @@ public class Juego extends Observable {
         castillo = new Castillo();
 
         mapa.colocar(castillo,new Posicion (anchoMapa- 4, altoMapa - 4));
-        j2= new Jugador(jugador2,castillo);
+
 
         plazaCentral = new PlazaCentral();
         mapa.colocar(plazaCentral,new Posicion(anchoMapa -7, altoMapa - 4));
@@ -83,7 +84,8 @@ public class Juego extends Observable {
             aldeanos.add(aldeano);
 
         }
-        j2.inicializar(plazaCentral,aldeanos);
+
+        j2= new Jugador(jugador2,castillo, plazaCentral,aldeanos);
         this.jugador2=j2;
         jugadores.add (j2);
 

@@ -16,7 +16,7 @@ public class MovimientoTest {
     public void test01MoverAldeanoArribaMueveCorrectamente(){
         Mapa mapa = new Mapa(20,20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2,2);
         Posicion calculada= new Posicion(2,3);
@@ -33,7 +33,7 @@ public class MovimientoTest {
     public void test02MoverAldeanoALaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(2, 1);
@@ -49,7 +49,7 @@ public class MovimientoTest {
     public void test03MoverAldeanoALaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 1);
@@ -65,7 +65,7 @@ public class MovimientoTest {
     public void test04MoverAldeanoAbajoDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(1, 1);
@@ -81,7 +81,7 @@ public class MovimientoTest {
     public void test05MoverAldeanoArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
@@ -97,7 +97,7 @@ public class MovimientoTest {
     public void test06MoverAldeanoArribaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 1);
         Posicion calculada = new Posicion(1, 2);
@@ -113,7 +113,7 @@ public class MovimientoTest {
     public void test07MoverAldeanoAbajoIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(2, 2);
         Posicion calculada = new Posicion(1, 1);
@@ -129,7 +129,7 @@ public class MovimientoTest {
     public void test08MoverAldeanoAbajoDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         Posicion origen = new Posicion(1, 2);
         Posicion calculada = new Posicion(2, 1);
@@ -145,7 +145,7 @@ public class MovimientoTest {
     public void test09MoverArqueroArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil arquero = new Arquero();
+        Arquero arquero = new Arquero();
         jugador.agregarPieza(arquero);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);
@@ -161,7 +161,7 @@ public class MovimientoTest {
     public void test010MoverEspadachinArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
         Jugador jugador = new Jugador("Mauricio",castillo );
-        UnidadMovil espadachin = new Espadachin();
+        Espadachin espadachin = new Espadachin();
         jugador.agregarPieza(espadachin);
         Posicion origen = new Posicion(1, 1);
         Posicion calculada = new Posicion(2, 2);

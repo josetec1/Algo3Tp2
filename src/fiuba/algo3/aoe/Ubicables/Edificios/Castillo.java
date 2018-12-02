@@ -32,7 +32,7 @@ public class Castillo extends Edificio implements Atacante {
     } // TODO necesito que devuelva 0
       //TODO esto esta mal, si el castillo no tiene costo entonces no se cumple  "es un" edificio que tiene costo"
 
-    public void comenzarConstruccion(Aldeano aldeano){
+    public void comenzarConstruccion(Aldeano aldeano, Jugador jugador){
         throw new EdificioNoConstruibleSinCostoException ();
     }
 

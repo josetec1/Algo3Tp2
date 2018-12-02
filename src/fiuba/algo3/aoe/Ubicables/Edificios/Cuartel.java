@@ -24,8 +24,9 @@ public class Cuartel extends Edificio {
 
     }
 
-    public void comenzarConstruccion(Aldeano aldeano){
+    public void comenzarConstruccion(Aldeano aldeano, Jugador jugador){
         estado = new EstadoEnConstruccion (aldeano,this.TURNOSPARACONSTRUCCION);
+        jugador.agregarPieza(this);
     }
 
     public void comenzarReparacion(Aldeano aldeano){

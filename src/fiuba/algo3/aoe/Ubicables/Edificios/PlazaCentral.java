@@ -22,8 +22,9 @@ public class PlazaCentral extends Edificio {
         this.tamanio =TAMANIO;
     }
 
-    public void comenzarConstruccion(Aldeano aldeano){
+    public void comenzarConstruccion(Aldeano aldeano, Jugador jugador){
         this.estado = new EstadoEnConstruccion (aldeano,TURNOSPARACONSTRUCCION);
+        jugador.agregarPieza(this);
     }
 
     public void comenzarReparacion(Aldeano aldeano){

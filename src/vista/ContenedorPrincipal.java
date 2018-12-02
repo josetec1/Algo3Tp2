@@ -7,6 +7,7 @@ import Eventos.SeleccionUpdateHandler;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
@@ -185,7 +186,18 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         //castillo
         vistaMapa.ubicarCastillo (jugador.getCastillo());
 
-        vistaMapa.ubicarPlaza(jugador.getPlaza());
+        //Plazas
+        for (PlazaCentral plaza : jugador.getPlazas()){ vistaMapa.ubicarPlaza(plaza);}
+
+        //Arqueros
+        for (Arquero arquero : jugador.getArqueros()){
+
+           int x = arquero.getPosicion().getCasilleros().get(0).getX();
+           int y = arquero.getPosicion().getCasilleros().get(0).getY();
+            vistaMapa.ubicarArquero(arquero,x,y);
+
+        }
+
     }
     private void actualizarMapa(){ //regenero el tablero
         this.setMapa(this.juego);
