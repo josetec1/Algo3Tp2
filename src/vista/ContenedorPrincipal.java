@@ -1,12 +1,11 @@
 package vista;
 
 
-import Eventos.SeleccionDireccionHandler;
-import Eventos.SeleccionPasarTurnoHandler;
-import Eventos.SeleccionUpdateHandler;
+import Eventos.*;
 import fiuba.algo3.aoe.Juego.Juego;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
+import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
@@ -101,6 +100,19 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.crearBotonesDireccion(vbox1);
         this.crearBotonPasarTurno(vbox1);
         this.crearBotonActualizar(vbox1);
+        this.crearBotonesEdificiosConstruccion(vbox1);
+    }
+
+    private void crearBotonesEdificiosConstruccion(VBox vBox){
+        Button plazaCentral = new Button ( "Plaza Central" );
+        SeleccionarPlazaParaConstruirHandler plazaHandler= new SeleccionarPlazaParaConstruirHandler();
+        plazaCentral.setOnMouseClicked(plazaHandler);
+        vBox.getChildren ().add ( plazaCentral );
+
+        Button cuartel = new Button ( "Cuartel" );
+        SeleccionarCuartelParaConstruirHandler cuartelHandler= new SeleccionarCuartelParaConstruirHandler();
+        cuartel.setOnMouseClicked(cuartelHandler);
+        vBox.getChildren ().add ( cuartel );
     }
 
     private void crearBotonActualizar(VBox vbox1){
@@ -187,6 +199,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
         //Plazas
         for (PlazaCentral plaza : jugador.getPlazas()){ vistaMapa.ubicarPlaza(plaza);}
+        for (Cuartel cuartel : jugador.getCuarteles()){vistaMapa.ubicarCuartel(cuartel);}
 
         //Arqueros
         for (Arquero arquero : jugador.getArqueros()){

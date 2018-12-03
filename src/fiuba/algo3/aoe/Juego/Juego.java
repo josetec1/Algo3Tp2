@@ -116,8 +116,8 @@ public class Juego extends Observable implements ObservadorCastillo {
         // //aca salta si es fin de juego por que el castillo me va a mandar un mensaje y ahi me cambio a juego finalizado
         // y le notifico a la vista.
         // la vista siempre ante una notificacion hace  juego.finalizado()  si le da true muetra al ganador  y fin
-        jugador1.revisarMuertos(jugador2, this.mapa);
-        jugador2.revisarMuertos(jugador1,this.mapa);
+       // jugador1.revisarMuertos(jugador2, this.mapa);
+       // jugador2.revisarMuertos(jugador1,this.mapa);
         //3) ahora notifico a observadores, osea la vista vuelve a cargar las cosas devuelta.
         this.setChanged();
         this.notifyObservers();

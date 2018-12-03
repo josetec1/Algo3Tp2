@@ -1,6 +1,7 @@
 package Eventos;
 
 
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadFueraDeRangoDeAtaqueException;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
@@ -58,6 +59,17 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 			if("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 				//TODO ATAQUE
 				MenuInferior.getLog().appendText("\nAldeano no puede Atacar");
+			}
+			if("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+				if (!MapaVistaControlador.tengoAldeanoSeleccionado()) {
+					//si no esta seleccionado, entonces lo selecciono
+					if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(this.aldeano)){
+						MenuInferior.getLog().appendText("\nNo es tuyo");
+					}else{
+						MenuInferior.getLog().appendText("\nAldeano Seleccionado");
+						MapaVistaControlador.seleccionarAldeano(aldeano);
+					}
+				}
 			}
 		}
 	}

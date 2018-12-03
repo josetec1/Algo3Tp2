@@ -15,7 +15,8 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
     public void construir(Aldeano unAldeano, Edificio edificio, Mapa mapa,Posicion posicion, Jugador jugador) {
         //Chequeos
         if (!jugador.puedoAgregar(edificio) || (!mapa.puedoColocar(posicion,edificio.getTamanio()))
-                || (!edificio.puedoConstruir()) ) {throw new NoSePuedeConstruir();
+                || (!edificio.puedoConstruir()) ) {
+            throw new NoSePuedeConstruir();
         }
 
         edificio.construir (unAldeano,jugador);
