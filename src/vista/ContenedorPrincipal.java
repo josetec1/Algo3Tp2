@@ -132,53 +132,53 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     private void crearBotonesDireccion(VBox vbox1){
         //Arriba
         Button arribaButton = new Button ( "Arriba" );
-        SeleccionDireccionHandler seleccionDireccionHandlerArriba = new SeleccionDireccionHandler(new DireccionArriba());
+        SeleccionDireccionHandler seleccionDireccionHandlerArriba = new SeleccionDireccionHandler(new DireccionArriba(), this);
         arribaButton.setOnMouseClicked(seleccionDireccionHandlerArriba);
         arribaButton.setAlignment(Pos.BASELINE_CENTER);
         vbox1.getChildren ().add ( arribaButton );
 
         //Abajo
         Button abajoButton = new Button ( "Abajo" );
-        SeleccionDireccionHandler seleccionDireccionHandlerAbajo = new SeleccionDireccionHandler(new DireccionAbajo());
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajo = new SeleccionDireccionHandler(new DireccionAbajo(), this);
         abajoButton.setOnMouseClicked(seleccionDireccionHandlerAbajo);
         abajoButton.setAlignment(Pos.BASELINE_CENTER);
         vbox1.getChildren ().add ( abajoButton );
 
         //Derecha
         Button derechaButton = new Button ( "Derecha" );
-        SeleccionDireccionHandler seleccionDireccionHandler = new SeleccionDireccionHandler(new DireccionDerecha());
+        SeleccionDireccionHandler seleccionDireccionHandler = new SeleccionDireccionHandler(new DireccionDerecha(), this);
         derechaButton.setOnMouseClicked(seleccionDireccionHandler);
         derechaButton.setAlignment(Pos.TOP_CENTER);
         vbox1.getChildren ().add ( derechaButton );
 
         //Izquierda
         Button izquierdaButton = new Button ( "Izquierda" );
-        SeleccionDireccionHandler seleccionDireccionHandlerIzquierda = new SeleccionDireccionHandler(new DireccionIzquierda());
+        SeleccionDireccionHandler seleccionDireccionHandlerIzquierda = new SeleccionDireccionHandler(new DireccionIzquierda(), this);
         izquierdaButton.setOnMouseClicked(seleccionDireccionHandlerIzquierda);
         izquierdaButton.setAlignment(Pos.TOP_CENTER);
         vbox1.getChildren ().add ( izquierdaButton);
 
         //Arriba Derecha
         Button arribaYDerechaButton = new Button ( "Arriba Derecha" );
-        SeleccionDireccionHandler seleccionDireccionHandlerArribaDerecha = new SeleccionDireccionHandler(new DireccionArribaDerecha());
+        SeleccionDireccionHandler seleccionDireccionHandlerArribaDerecha = new SeleccionDireccionHandler(new DireccionArribaDerecha(), this);
         arribaYDerechaButton.setOnMouseClicked(seleccionDireccionHandlerArribaDerecha);
         vbox1.getChildren ().add ( arribaYDerechaButton );
 
         //Arriba Izquierda
         Button arribaIzquierdaButton = new Button ( "Arriba Izquierda" );
-        SeleccionDireccionHandler seleccionDireccionHandlerArribaIzquierda = new SeleccionDireccionHandler(new DireccionArribaIzquierda());
+        SeleccionDireccionHandler seleccionDireccionHandlerArribaIzquierda = new SeleccionDireccionHandler(new DireccionArribaIzquierda(), this);
         arribaIzquierdaButton.setOnMouseClicked(seleccionDireccionHandlerArribaIzquierda);
         vbox1.getChildren ().add ( arribaIzquierdaButton );
 
         //Abajo Derecha
         Button abajoDerechaButton = new Button ( "Abajo Derecha" );
-        SeleccionDireccionHandler seleccionDireccionHandlerAbajoDerecha = new SeleccionDireccionHandler(new DireccionAbajoDerecha());
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajoDerecha = new SeleccionDireccionHandler(new DireccionAbajoDerecha(), this);
         abajoDerechaButton.setOnMouseClicked(seleccionDireccionHandlerAbajoDerecha);
         vbox1.getChildren ().add ( abajoDerechaButton );
 
         //Abajo Izquierda
         Button abajoIzquierdaButton = new Button ( "Abajo Izquierda" );
-        SeleccionDireccionHandler seleccionDireccionHandlerAbajoIzquierda = new SeleccionDireccionHandler(new DireccionAbajoIzquierda());
+        SeleccionDireccionHandler seleccionDireccionHandlerAbajoIzquierda = new SeleccionDireccionHandler(new DireccionAbajoIzquierda(), this);
         abajoIzquierdaButton.setOnMouseClicked(seleccionDireccionHandlerAbajoIzquierda);
         vbox1.getChildren ().add ( abajoIzquierdaButton );
 

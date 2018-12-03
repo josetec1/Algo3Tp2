@@ -15,11 +15,12 @@ import static java.awt.SystemColor.menu;
 
 public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
 
-    Direccionable direccion;
+    private Direccionable direccion;
+    private ContenedorPrincipal contenedor;
 
-
-    public SeleccionDireccionHandler (Direccionable direccion){
+    public SeleccionDireccionHandler (Direccionable direccion, ContenedorPrincipal contenedor ){
         this.direccion = direccion;
+        this.contenedor = contenedor;
     }
 
     @Override
@@ -39,6 +40,9 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                     MenuInferior.getLog().appendText("\n Aldeano Ocupado");
                 }else {
                     MapaVistaControlador.getAldeanoSeleccionado().mover(mapita, this.direccion, jugador);
+                    // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
+                    contenedor.update(null,null);
+
                 }
             }
 
@@ -48,18 +52,23 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                     MenuInferior.getLog().appendText("\n ArmaAsedio No puede moverseEnEsteEstado");
                 }else {
                     MapaVistaControlador.getArmaDeAsedioSeleccionado().mover(mapita, this.direccion, jugador);
+                    contenedor.update(null,null);
                 }
             }
 
             //arquero
             if(MapaVistaControlador.tengoArqueroSeleccionado()){
                 MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
+                // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
+                contenedor.update(null,null);
                 MenuInferior.getLog().appendText("\n arquero movido");
             }
 
             //espadachin
             if(MapaVistaControlador.tengoEspadachinSeleccionado()){
                 MapaVistaControlador.getEspadachinSeleccionado().mover(mapita, this.direccion, jugador);
+                // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
+                contenedor.update(null,null);
             }
             //Edificios
 
