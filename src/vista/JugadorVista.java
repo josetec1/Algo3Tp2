@@ -25,7 +25,7 @@ public class JugadorVista {
 		j.setTranslateY(15);
 
 		if(this.jugador == jugadorActual){
-			MenuInferior.getLog().insertText(0, "\nEs turno de " + jugador.getNombre());
+			MenuInferior.getLog().appendText("\nEs turno de " + jugador.getNombre());
 			//this.dibujarJugadorActual();
 		}
 

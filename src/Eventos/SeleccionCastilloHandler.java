@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import vista.ContenedorPrincipal;
 import vista.MapaVistaControlador;
 import vista.MenuInferior;
 
@@ -35,14 +36,44 @@ public class SeleccionCastilloHandler implements EventHandler<MouseEvent> {
 
                     MenuInferior.getLog().appendText("\nCastillo Seleccionado");
 
-        }else if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-            //TODO
         }else if ("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 
             MenuInferior.getLog().appendText("\nCastillo ya esta creado");
         }else if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
             MapaVistaControlador.seleccionarCastillo(castillo);
             MenuInferior.getLog().appendText("\nCastillo Seleccionado");
+        }else if("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+            if(!MapaVistaControlador.tengoAlgunaUnidadSeleccionada()){
+                MenuInferior.getLog().appendText("\n Primero seleccione una unidad Atacante y luego el blanco nuevamente");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else if(MapaVistaControlador.tengoAldeanoSeleccionado()){
+                MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
+                try {
+                    MapaVistaControlador.getEspadachinSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                }catch (Error e){
+                    MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }
+            }else if (MapaVistaControlador.tengoArqueroSeleccionado()){
+                try {
+                    MapaVistaControlador.getArqueroSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                }catch (Error e){
+                    MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }
+            }
+        }else{
+            MenuInferior.getLog().appendText("\n Elija una accion, y las piezas correctas nuevamente");
+            MapaVistaControlador.desSeleccionarEdificio();
+            MapaVistaControlador.desSeleccionarUnidades();
+            MapaVistaControlador.desSeleccionarUnidadParaCrear();
+            MapaVistaControlador.desSeleccionarPosicion();
         }
     }
 }

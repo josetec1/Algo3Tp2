@@ -40,7 +40,7 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
     ******************************************************/
         @Override
         public void huboUnCambioDeTurno(Jugador jugador) {
-         throw  new FaltaImplementarException();
+         // TODO IMPLEMENTAR throw  new FaltaImplementarException();
         }
 
     /*******************************************************

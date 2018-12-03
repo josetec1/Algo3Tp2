@@ -49,22 +49,56 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
 
                 } //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
                 //TODO MOVIMIENTO
-            }
-            if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-                //TODO ATAQUE
-                if (!MapaVistaControlador.tengoAlgunaUnidadSeleccionada()) {
-                    //si no esta seleccionado, entonces lo selecciono
-                    MenuInferior.getLog().appendText("\nEspadachin Seleccionado, ahora elegi que atacar!!!!");
-                    MapaVistaControlador.seleccionarEspadachin(espadachin);
-                } else{
-
-                }
-            }if("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+            }else if("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
                 //TODO ATAQUE
                 MenuInferior.getLog().appendText("\nEspadachin no puede crear edificio");
-            }if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+            }else if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
                 //TODO ATAQUE
                 MenuInferior.getLog().appendText("\nEspadachin no puede crear Unidad");
+            }else if("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+                if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(espadachin) && !MapaVistaControlador.tengoAlgunaUnidadSeleccionada() ){
+                    MenuInferior.getLog().appendText("\n No es tuyo");
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
+
+                }else if(!MapaVistaControlador.tengoAlgunaUnidadSeleccionada() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(espadachin) ){
+                    MapaVistaControlador.seleccionarEspadachin(espadachin);
+                    MenuInferior.getLog().appendText("\n espadachin Seleccionado");
+                }else if(MapaVistaControlador.tengoAldeanoSeleccionado()){
+                    MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
+                    try {
+                        MapaVistaControlador.getEspadachinSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                        MenuInferior.getLog().appendText("\nEspadachin ataca Espadachin");
+
+                        MapaVistaControlador.desSeleccionarEdificio();
+                        MapaVistaControlador.desSeleccionarUnidades();
+                    }catch (Error e){
+                        MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
+                        MapaVistaControlador.desSeleccionarEdificio();
+                        MapaVistaControlador.desSeleccionarUnidades();
+                    }
+                }else if (MapaVistaControlador.tengoArqueroSeleccionado()){
+                    try {
+                        MapaVistaControlador.getArqueroSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                        MenuInferior.getLog().appendText("\nArquero ataca espadachin");
+
+                        MapaVistaControlador.desSeleccionarEdificio();
+                        MapaVistaControlador.desSeleccionarUnidades();
+                    }catch (Error e){
+                        MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este arquero, seleccione nuevamente atacante y blanco");
+                        MapaVistaControlador.desSeleccionarEdificio();
+                        MapaVistaControlador.desSeleccionarUnidades();
+                    }
+                }
+            }else{
+                MenuInferior.getLog().appendText("\n Elija una accion, y las piezas correctas nuevamente");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+                MapaVistaControlador.desSeleccionarUnidadParaCrear();
+                MapaVistaControlador.desSeleccionarPosicion();
             }
         }
     }
