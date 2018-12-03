@@ -20,6 +20,7 @@ public class PlazaCentral extends EdificioConstruible {
         estado = new EstadoEnConstruccion(aldeano,this.TURNOSPARACONSTRUCCION);
         jugador.agregarPieza(this);
     }
+
     public void crearAldeano( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         Aldeano aldeano= new Aldeano ();
         if(!mapa.puedoColocar (posicionReal,aldeano.getTamanio () )){return;}

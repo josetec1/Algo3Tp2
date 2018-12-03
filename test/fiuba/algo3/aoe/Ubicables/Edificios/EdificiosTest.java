@@ -183,19 +183,8 @@ public class EdificiosTest {
         Assert.assertTrue ( plazaCentral.getCosto () == 100);
     }
 
-    //TODO necesito que no tire esa excepcion
-    /*
-    @Test
-    public void test19InicializarCastilloGetCostoLanzaEdificioNoConstruibleSinCostroException(){
-        Castillo castillo = new Castillo ();
-        Assert.assertTrue ( castillo.getVidaActual () == 1000 );
-        Assert.assertTrue ( castillo.getVidaMaxima () == 1000 );
-        Assert.assertTrue ( castillo.getDanioGeneradoAEdificio () == 20 );
-        Assert.assertTrue ( castillo.getDanioGeneradoAUnidad () == 20 );
-        thrown.expect ( EdificioNoConstruibleSinCostoException.class );
-        castillo.getCosto ();
-    }
-    */
+
+
 
     @Test
     public void test20CuartelConstruirNoPuedoConstruirDeNuevoNoPuedoReparar(){

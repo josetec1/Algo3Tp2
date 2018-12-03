@@ -125,8 +125,11 @@ public class Juego extends Observable implements ObservadorCastillo {
     public Jugador getJugadorActual() {
         return this.juego.getJugadorActivo(this.turno);
     }
-    public Jugador getJugadorUno (){return this.jugador1;}
-    public   Jugador getJugadorDos (){return this.jugador2;}
+    public Jugador getJugadorInactivo() {
+        return this.juego.getJugadorInactivo(this.turno);
+    }
+    public Jugador getJugadorUno (){return this.jugador1;}  //TODO ELIMINAR
+    public   Jugador getJugadorDos (){return this.jugador2;}//TODO ELIMINAR
     public Mapa getMapa(){
         return mapa;
     }
