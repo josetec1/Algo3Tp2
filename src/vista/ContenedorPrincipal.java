@@ -29,12 +29,13 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     private MapaVistaControlador vistaMapa;
     private static Juego juego;  //OJO
 
+
    // Canvas canvasCentral;
 
     
 	public ContenedorPrincipal(Stage unStage, Juego unJuego){
-        final VBox vbox1=new VBox(); VBox vbox2=new VBox();
-        this.setRight(vbox2);
+        final VBox vbox1=new VBox();
+
         this.setLeft(vbox1);
         vbox1.setTranslateX(5);
         vbox1.setTranslateY(10);
@@ -46,7 +47,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.setMapa(unJuego);
 
         // dibujar nombres en pantalla, obtener y presentar Piezas,
-        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos(),vbox1,vbox2);
+        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos());
 
         //suscribir observadores que tiene que ser la vista
         unJuego.getJugadorUno().addObserver(this);
@@ -58,8 +59,14 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 	    return juego;
     }
 
-    private void setJugadores(Jugador jugadorUno, Jugador jugadorDos,VBox vbox1,VBox vbox2) {
-    	JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno);
+    private void setJugadores(Jugador jugadorUno, Jugador jugadorDos) {
+
+        this.actualizarPiezas(jugadorUno);
+        this.actualizarPiezas(jugadorDos);
+
+        VBox vbox2=new VBox();
+        this.setRight(vbox2);
+	    JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno);
     	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
     	
     	vistaJugador1.dibujarJugador(this.juego.getJugadorActual());
@@ -72,8 +79,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         vistaJugador2.dibujarInfoEdificios();
 
 
-    	this.actualizarPiezas(jugadorUno);
-        this.actualizarPiezas(jugadorDos);
+
     }
     private void setMapa(Juego unJuego) {
         // TODO Auto-generated method stub
@@ -233,7 +239,8 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
       //2 si el juego no termino, actualizar la vista, osea estas cosas de aca abajo
 
         this.actualizarMapa();
-        this.actualizarPiezas(this.juego.getJugadorUno());
-        this.actualizarPiezas(this.juego.getJugadorDos());
+        //this.actualizarPiezas(this.juego.getJugadorUno());
+       // this.actualizarPiezas(this.juego.getJugadorDos());
+        this.setJugadores(this.juego.getJugadorUno(),this.juego.getJugadorDos());
     }
 }

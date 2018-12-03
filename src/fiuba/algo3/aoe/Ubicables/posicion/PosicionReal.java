@@ -91,7 +91,8 @@ public class PosicionReal extends Posicion {
         Cuadrante miCuadrante;
         Cuadrante cuadrateOtraPosicion;
 
-        int distancia = 1000;
+       int distancia = 1000;
+
 
         if (!otraPosicion.getIterador().hasNext()) {throw  new PosicionNulaException();}
 
