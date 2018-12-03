@@ -9,6 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import javafx.geometry.Pos;
@@ -190,6 +191,13 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
                 vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
+            }
+        }
+        //Espadachin
+        for(Espadachin value: jugador.getEspadachines()){
+            ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
+            for (Cuadrante casilla : cuadrantes ) {
+                vistaMapa.ubicarEspadachin(value, casilla.getX(), casilla.getY());
             }
         }
 
