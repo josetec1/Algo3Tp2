@@ -3,9 +3,9 @@ package fiuba.algo3.aoe.Mapa;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -20,9 +20,9 @@ public class MapaTest {
     public void test01AlCrearElTableroPuedoColocarDeberiaDarTrueSiLaPosicionPerteneceAlTablero() {
 
          Mapa mapa = new Mapa( 10,10);
-         Posicion posicionDentroDeTablero = new Posicion(1,1);
+         PosicionReal posicionRealDentroDeTablero = new PosicionReal(1,1);
 
-        Assert.assertThat( mapa.puedoColocar(posicionDentroDeTablero,1), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(posicionRealDentroDeTablero,1), is( true ) );
    }
 
 
@@ -31,42 +31,42 @@ public class MapaTest {
     public void test02AlCrearElTableroPuedoColocarDeberiaDarFalseSiLaPosicionNoPerteneceAlTablero() {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicionFueraDeTablero = new Posicion(11,1);
-        Assert.assertFalse( mapa.puedoColocar(posicionFueraDeTablero,1) );
+        PosicionReal posicionRealFueraDeTablero = new PosicionReal(11,1);
+        Assert.assertFalse( mapa.puedoColocar(posicionRealFueraDeTablero,1) );
     }
 
     @Test
     public void test03PuedoColocarDebeDarTrueSiLaPosicionNoEstaOcupada() {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicion = new Posicion(1,1);
-        Assert.assertThat( mapa.puedoColocar(posicion,1), is( true ) );
+        PosicionReal posicionReal = new PosicionReal(1,1);
+        Assert.assertThat( mapa.puedoColocar(posicionReal,1), is( true ) );
     }
 
     @Test
     public void test04PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorUnidad()  {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicion = new Posicion(1,1);
+        PosicionReal posicionReal = new PosicionReal(1,1);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicion);
+        mapa.colocar(elemento, posicionReal);
 
-        Assert.assertThat( mapa.puedoColocar(posicion,elemento.getTamanio()), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicionReal,elemento.getTamanio()), is( false ) );
     }
 
     @Test
     public void test05PuedoColocarDebeDarTrueLuegoDeQuitarUnidadAnterior()  {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicion = new Posicion(1,1);
+        PosicionReal posicionReal = new PosicionReal(1,1);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        Assert.assertEquals( mapa.puedoColocar(posicion,elemento.getTamanio()), true );
-        mapa.colocar(elemento,posicion);
-        Assert.assertEquals(mapa.puedoColocar(posicion,elemento.getTamanio()), false);
+        Assert.assertEquals( mapa.puedoColocar(posicionReal,elemento.getTamanio()), true );
+        mapa.colocar(elemento, posicionReal);
+        Assert.assertEquals(mapa.puedoColocar(posicionReal,elemento.getTamanio()), false);
         mapa.remover(elemento);
-        Assert.assertEquals( mapa.puedoColocar(posicion,elemento.getTamanio()),  true  );
+        Assert.assertEquals( mapa.puedoColocar(posicionReal,elemento.getTamanio()),  true  );
     }
 
 
@@ -76,11 +76,11 @@ public class MapaTest {
     public void test06AgregarDebeLanzarExcepcionSiIntentoColocarUnidadFueraDelTablero() {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicionFueraDeTablero = new Posicion(11,1);
+        PosicionReal posicionRealFueraDeTablero = new PosicionReal(11,1);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         thrown.expect(FueraDelMapaException.class);
-        mapa.colocar(elemento,posicionFueraDeTablero);
+        mapa.colocar(elemento, posicionRealFueraDeTablero);
       }
 
    @Test
@@ -88,17 +88,17 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 100,11000);
 
-        Posicion unaPosicion = new Posicion(60,66);
+        PosicionReal unaPosicionReal = new PosicionReal(60,66);
 
-        Posicion posicionSuperpuesta = new Posicion(60,66);
+        PosicionReal posicionRealSuperpuesta = new PosicionReal(60,66);
 
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
         Ubicable elementoSuperpuesto = new Aldeano();
-        mapa.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento, unaPosicionReal);
 
         thrown.expect(PosicionDelMapaOcupadaException.class);
-        mapa.colocar(elementoSuperpuesto,posicionSuperpuesta);
+        mapa.colocar(elementoSuperpuesto, posicionRealSuperpuesta);
     }
 
     @Test
@@ -106,29 +106,29 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
 
-        Posicion unaPosicion = new Posicion(3,3);
-        Posicion otraPosicion = new Posicion(4,4);
+        PosicionReal unaPosicionReal = new PosicionReal(3,3);
+        PosicionReal otraPosicionReal = new PosicionReal(4,4);
 
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento, unaPosicionReal);
 
         thrown.expect(ElElementoYaExisteException.class);
-        mapa.colocar(elemento,otraPosicion);
+        mapa.colocar(elemento, otraPosicionReal);
     }
     @Test
     public void test09PuedoColocarDebeDarFalseSiLaPosicionEstaOcupadaPorPosicionVariosCasilleros()  {
 
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicion = new Posicion(1,1);
-        posicion.agregar(new Cuadrante(1,2));
-        posicion.agregar(new Cuadrante(2,2));
-        posicion.agregar(new Cuadrante(2,1));
+        PosicionReal posicionReal = new PosicionReal(1,1);
+        posicionReal.agregar(new Cuadrante(1,2));
+        posicionReal.agregar(new Cuadrante(2,2));
+        posicionReal.agregar(new Cuadrante(2,1));
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicion);
+        mapa.colocar(elemento, posicionReal);
 
-        Assert.assertThat( mapa.puedoColocar(posicion,elemento.getTamanio()), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicionReal,elemento.getTamanio()), is( false ) );
     }
 
     @Test
@@ -149,47 +149,47 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         Jugador jugador = new Jugador("Mauricio", castillo);
-        Posicion unaPosicion = new Posicion(3,3);
+        PosicionReal unaPosicionReal = new PosicionReal(3,3);
         Ubicable elemento= new Aldeano();
 
-        mapa.colocar(elemento,unaPosicion);
+        mapa.colocar(elemento, unaPosicionReal);
 
         mapa.remover(elemento);
-        Assert.assertThat( mapa.puedoColocar(unaPosicion,elemento.getTamanio()), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(unaPosicionReal,elemento.getTamanio()), is( true ) );
 
     }
 
     @Test
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicion = new Posicion(10,10);
+        PosicionReal posicionReal = new PosicionReal(10,10);
         Jugador jugador = new Jugador("Mauricio", castillo);
 
 
-        Posicion posicionFueraDeMapa =new Posicion (11,10);
+        PosicionReal posicionRealFueraDeMapa =new PosicionReal(11,10);
 
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicion);
+        mapa.colocar(elemento, posicionReal);
 
         thrown.expect(NoSePuedeMoverElElementoException.class);
-        mapa.moverElemento(elemento,posicionFueraDeMapa);
+        mapa.moverElemento(elemento, posicionRealFueraDeMapa);
     }
 
     @Test
     public void test13AlMoverLaPosicionOriginalQuedaLibreYElDestinoOcupado(){
         Mapa mapa = new Mapa( 10,10);
-        Posicion posicionInicial = new Posicion(9,10);
+        PosicionReal posicionRealInicial = new PosicionReal(9,10);
 
-        Posicion posicionDestino = new Posicion(10,10);
+        PosicionReal posicionRealDestino = new PosicionReal(10,10);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicionInicial);
+        mapa.colocar(elemento, posicionRealInicial);
 
 
-        mapa.moverElemento(elemento,posicionDestino);
+        mapa.moverElemento(elemento, posicionRealDestino);
 
-        Assert.assertThat( mapa.puedoColocar(posicionInicial,elemento.getTamanio()), is( true ) );
-        Assert.assertThat( mapa.puedoColocar(posicionDestino,elemento.getTamanio()), is( false ) );
+        Assert.assertThat( mapa.puedoColocar(posicionRealInicial,elemento.getTamanio()), is( true ) );
+        Assert.assertThat( mapa.puedoColocar(posicionRealDestino,elemento.getTamanio()), is( false ) );
 
     }
 
@@ -197,14 +197,14 @@ public class MapaTest {
     public void test14MoverDebeLanzarExcepcionSiElElementoNoFueAgregadoPreviamente(){
         Mapa mapa = new Mapa( 10,10);
 
-        Posicion unaPosicion = new Posicion(3,3);
+        PosicionReal unaPosicionReal = new PosicionReal(3,3);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento= new Aldeano();
 
 
 
         thrown.expect(NoExisteElementoException.class);
-        mapa.moverElemento(elemento, unaPosicion);
+        mapa.moverElemento(elemento, unaPosicionReal);
 
     }
 
@@ -213,44 +213,44 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
 
 
-        Posicion posicionInicial = new Posicion(9,10);
-        Posicion posicionDestino = new Posicion(10,10);
+        PosicionReal posicionRealInicial = new PosicionReal(9,10);
+        PosicionReal posicionRealDestino = new PosicionReal(10,10);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicionInicial);
+        mapa.colocar(elemento, posicionRealInicial);
 
         Ubicable elemento2 = new Aldeano();
-        mapa.colocar(elemento2,posicionDestino);
+        mapa.colocar(elemento2, posicionRealDestino);
 
         thrown.expect(NoSePuedeMoverElElementoException.class);
-        mapa.moverElemento(elemento,posicionDestino);
+        mapa.moverElemento(elemento, posicionRealDestino);
    }
 
     @Test
     public void test16MoverNoRetiraElElementoSiNoPuedeMoverlo(){
 
         Mapa mapa = new Mapa( 20,20);
-        Posicion posicionInicial = new Posicion(5,5);
-        Posicion posicionDestino = new Posicion(10,10);
-        Posicion posicionLibre = new Posicion(7,7);
+        PosicionReal posicionRealInicial = new PosicionReal(5,5);
+        PosicionReal posicionRealDestino = new PosicionReal(10,10);
+        PosicionReal posicionRealLibre = new PosicionReal(7,7);
 
         Ubicable elemento = new Aldeano();
-        mapa.colocar(elemento,posicionInicial);
+        mapa.colocar(elemento, posicionRealInicial);
 
         Ubicable elemento2 = new Aldeano();
-        mapa.colocar(elemento2,posicionDestino);
+        mapa.colocar(elemento2, posicionRealDestino);
 
         try {
-            mapa.moverElemento(elemento, posicionDestino);
+            mapa.moverElemento(elemento, posicionRealDestino);
         }catch (Exception e){
             //nada
         }
 
 
 
-        Assert.assertFalse(mapa.puedoColocar(posicionInicial,1));
+        Assert.assertFalse(mapa.puedoColocar(posicionRealInicial,1));
         thrown.expect(ElElementoYaExisteException.class);
-        mapa.colocar(elemento,posicionLibre);
+        mapa.colocar(elemento, posicionRealLibre);
     }
 
 
@@ -259,13 +259,13 @@ public class MapaTest {
     public void test17MapaColocarPlazaColocaEnPosicionCorrecta(){
        PlazaCentral plaza = new PlazaCentral();
        Mapa mapa = new Mapa(200,200);
-       Posicion posicion = new Posicion(1,1);
-       mapa.colocar(plaza,posicion);
-       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new Posicion(1,2)),true);
-       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new Posicion(2,2)),true);
-       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new Posicion(2,1)),true);
-       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new Posicion(1,1)),true);
-       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new Posicion(3,2)),false);
+       PosicionReal posicionReal = new PosicionReal(1,1);
+       mapa.colocar(plaza, posicionReal);
+       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new PosicionReal(1,2)),true);
+       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new PosicionReal(2,2)),true);
+       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new PosicionReal(2,1)),true);
+       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new PosicionReal(1,1)),true);
+       Assert.assertEquals(plaza.getPosicion().seSuperponeCon(new PosicionReal(3,2)),false);
     }
 
 
@@ -273,13 +273,13 @@ public class MapaTest {
     public void test18MapaPuedoColocarPlazaEnPosicion12DevuelveFalse(){
         PlazaCentral plaza = new PlazaCentral();
         Mapa mapa = new Mapa(200,200);
-        Posicion posicion = new Posicion(1,1);
-        mapa.puedoColocar(posicion,plaza.getTamanio());
-        Assert.assertEquals( mapa.puedoColocar(posicion,plaza.getTamanio()),true);
-        mapa.colocar(plaza,posicion);
-        Assert.assertEquals( mapa.puedoColocar(posicion,plaza.getTamanio()),false);
-        Assert.assertEquals( mapa.puedoColocar(new Posicion(1,2),plaza.getTamanio()),false);
-        Assert.assertEquals( mapa.puedoColocar(new Posicion(1,3),plaza.getTamanio()),true);
+        PosicionReal posicionReal = new PosicionReal(1,1);
+        mapa.puedoColocar(posicionReal,plaza.getTamanio());
+        Assert.assertEquals( mapa.puedoColocar(posicionReal,plaza.getTamanio()),true);
+        mapa.colocar(plaza, posicionReal);
+        Assert.assertEquals( mapa.puedoColocar(posicionReal,plaza.getTamanio()),false);
+        Assert.assertEquals( mapa.puedoColocar(new PosicionReal(1,2),plaza.getTamanio()),false);
+        Assert.assertEquals( mapa.puedoColocar(new PosicionReal(1,3),plaza.getTamanio()),true);
 
 
     }

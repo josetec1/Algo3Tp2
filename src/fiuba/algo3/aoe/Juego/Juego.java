@@ -5,20 +5,16 @@ import fiuba.algo3.aoe.Juego.estadoJuego.EnCurso;
 import fiuba.algo3.aoe.Juego.estadoJuego.Ijuego;
 
 import fiuba.algo3.aoe.Juego.estadoJuego.JuegoFinalizadoException;
-import fiuba.algo3.aoe.Juego.estadoJuego.TamanioDeMapaInvalidoException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.ObservadorCastillo;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
-import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Juego extends Observable implements ObservadorCastillo {
 
@@ -50,19 +46,20 @@ public class Juego extends Observable implements ObservadorCastillo {
 
         //Inicializo jugador 1
         castillo = new Castillo();
-        mapa.colocar(castillo,new Posicion(1,1));
+        mapa.colocar(castillo,new PosicionReal(1,1));
         castillo.agregarObservador(this);
 
         //agrego plaza central
         plazaCentral = new PlazaCentral();
-        mapa.colocar(plazaCentral,new Posicion(5,1));
+        plazaCentral.finalizarConstruccion();
+        mapa.colocar(plazaCentral,new PosicionReal(5,1));
 
 
         //agrego aldeanos
         aldeanos = new ArrayList<>();
         for(int i = 0; i<3; i++){
             aldeano= new Aldeano();
-            mapa.colocar(aldeano,new Posicion(7 + (i*3), (i*2+3)));
+            mapa.colocar(aldeano,new PosicionReal(7 + (i*3), (i*2+3)));
             aldeanos.add(aldeano);
         }
 
@@ -80,17 +77,18 @@ public class Juego extends Observable implements ObservadorCastillo {
         //Inicializo jugador 2
         castillo = new Castillo();
         castillo.agregarObservador(this);
-        mapa.colocar(castillo,new Posicion (anchoMapa- 4, altoMapa - 4));
+        mapa.colocar(castillo,new PosicionReal(anchoMapa- 4, altoMapa - 4));
 
 
         plazaCentral = new PlazaCentral();
-        mapa.colocar(plazaCentral,new Posicion(anchoMapa -7, altoMapa - 4));
+        plazaCentral.finalizarConstruccion();
+        mapa.colocar(plazaCentral,new PosicionReal(anchoMapa -7, altoMapa - 4));
 
 
         aldeanos = new ArrayList<>();
         for(int i = 0; i<3; i++){
             aldeano= new Aldeano();
-            mapa.colocar(aldeano,new Posicion(anchoMapa - (10 + i), altoMapa -(4+i)));
+            mapa.colocar(aldeano,new PosicionReal(anchoMapa - (10 + i), altoMapa -(4+i)));
             aldeanos.add(aldeano);
 
         }

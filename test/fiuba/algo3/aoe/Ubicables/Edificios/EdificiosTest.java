@@ -1,12 +1,8 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioNoPuedeRepararseEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

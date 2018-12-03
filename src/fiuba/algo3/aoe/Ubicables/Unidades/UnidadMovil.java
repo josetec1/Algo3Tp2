@@ -4,37 +4,38 @@ import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public  abstract class UnidadMovil extends Observable implements Manipulable {
+public  abstract class UnidadMovil  implements Manipulable {
     private final int TAMANIO = 1;
 
-    protected Posicion posicion; //TODO esto Privado y con metos protegidos se cambia.
-    protected int vidaMaxima;
-    protected int vidaActual;
-    protected int costo;
-    protected int tamanio = TAMANIO;
-    protected ArrayList<Observer> observadores =new ArrayList<>();
+    private Posicion posicion;
+    private int vidaMaxima;
+    private int vidaActual;
+    private int costo;
+    private int tamanio;
 
 
-
-
-    public abstract  void mover(Mapa mapa, Direccionable direccion, Jugador jugador);
-    public Posicion obtenerPosicionDeAvance( Direccionable direccionable ){
-        return this.getPosicion().calcularPosicionSiguiente(direccionable);
+    public UnidadMovil (Posicion posicion, int vidaMaxima, int costo){
+        this.posicion = posicion;
+        this.vidaMaxima= vidaMaxima;
+        this.vidaActual=vidaMaxima;
+        this.costo = costo;
+        this.tamanio= TAMANIO;
     }
 
 
-    public void setCambio (){this.setChanged();} //esta la uso para que aplique el setChange del observarble pq no se puede desde afuera
-
+    public abstract  void mover(Mapa mapa, Direccionable direccion, Jugador jugador);
+    public Posicion obtenerPosicionDeAvance(Direccionable direccionable ){
+        return this.getPosicion().calcularPosicionSiguiente(direccionable);
+    }
 
     /*******************************************************
     // Metodos de Atacable
@@ -62,7 +63,6 @@ public  abstract class UnidadMovil extends Observable implements Manipulable {
      // Metodos de Notificable
      ******************************************************/
     public abstract  void huboUnCambioDeTurno (Jugador jugador);
-    public  void eliminarSiEstasMuerto (Jugador jugador){throw  new FaltaImplementarException();}
 
     /*******************************************************
      // Metodos de Ubicable
@@ -74,8 +74,7 @@ public  abstract class UnidadMovil extends Observable implements Manipulable {
         return this.costo;
     }
     public Posicion getPosicion() {
-        if (this.posicion==null){throw new UnidadSinPosicionException();}
-        return this.posicion;
+       return this.posicion;
     }
     public void colocarEn(Posicion posicion){
         this.posicion = posicion;

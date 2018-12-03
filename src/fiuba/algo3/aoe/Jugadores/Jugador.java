@@ -9,7 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Jugador extends Observable implements Observer {
+public class Jugador extends Observable  {
 
     private String nombre;
     private int oro;
@@ -55,7 +55,7 @@ public class Jugador extends Observable implements Observer {
 
         for (Aldeano aldeano: listaAldeanos){
              this.piezas.agregar(aldeano);    //si agregas repetidos salta aca
-             aldeano.addObserver(this); //agrego el observador que me va a avisar cambios en la unidad
+
          }
          this.piezas.agregar(plaza);
     }
@@ -82,7 +82,9 @@ public class Jugador extends Observable implements Observer {
         this.descontarOro(pieza.getCosto());
 
          this.piezas.agregar(pieza);
-         pieza.addObserver(this);
+         this.setChanged();
+         this.notifyObservers();
+
     }
     public void agregarPieza(Arquero pieza) {
 
@@ -93,7 +95,10 @@ public class Jugador extends Observable implements Observer {
         this.descontarOro(pieza.getCosto());
 
         this.piezas.agregar(pieza);
-        pieza.addObserver(this);
+
+        this.setChanged();
+        this.notifyObservers();
+
     }
     public void agregarPieza(Espadachin pieza) {
 
@@ -104,7 +109,9 @@ public class Jugador extends Observable implements Observer {
         this.descontarOro(pieza.getCosto());
 
         this.piezas.agregar(pieza);
-        pieza.addObserver(this);
+        this.setChanged();
+        this.notifyObservers();
+
     }
     public void agregarPieza(ArmaDeAsedio pieza) {
 
@@ -115,13 +122,17 @@ public class Jugador extends Observable implements Observer {
         this.descontarOro(pieza.getCosto());
 
         this.piezas.agregar(pieza);
-        pieza.addObserver(this);
+        this.setChanged();
+        this.notifyObservers();
+
     }
     public void agregarPieza(Cuartel cuartel) {
         //que no este repetida
         if (!this.piezas.puedoAgregar(cuartel)){throw new NoSePuedeAgregarPiezaException();}
         this.descontarOro(cuartel.getCosto()); //este lanza excepcion si no hay oro
         this.piezas.agregar(cuartel);
+        this.setChanged();
+        this.notifyObservers();
 
     }
     public void agregarPieza(PlazaCentral plaza) {
@@ -129,11 +140,15 @@ public class Jugador extends Observable implements Observer {
         if (!this.piezas.puedoAgregar(plaza)){throw new NoSePuedeAgregarPiezaException();}
         this.descontarOro(plaza.getCosto()); //este lanza excepcion si no hay oro
         this.piezas.agregar(plaza);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void eliminarPieza ( Manipulable pieza) {
         if(!this.esMio(pieza)){ throw new PiezaAgenaException();}
             this.piezas.eliminar(pieza);
+        this.setChanged();
+        this.notifyObservers();
      }
 
     public boolean esMio( Manipulable pieza) {
@@ -155,12 +170,13 @@ public class Jugador extends Observable implements Observer {
 
     public void esTuTurno(){this.piezas.cambioDeTurno(this);}
 
+    /*
     @Override
     public void update(Observable o, Object arg) {
         this.setChanged(); //esto es propio del Observer, si no llamas a esto no notifica.
         this.notifyObservers(); //le notifico a la vista que hubo un cambio
     }
-
+*/
 
     public Castillo getCastillo(){
         return this.piezas.obtenerCastle();
@@ -192,11 +208,6 @@ public class Jugador extends Observable implements Observer {
     public int getPoblacionActual() {
         return this.piezas.getCantidadDeUnidades();
 
-    }
-
-    public void revisarMuertos(Jugador enemigo, Mapa mapa){
-        //todo aca podriamos chequear que el jugador enemigo no sea el mismo que yo....
-       this.piezas.eliminarMuertos(this, enemigo, mapa);// aca el castillo revisa si murio
     }
 
 

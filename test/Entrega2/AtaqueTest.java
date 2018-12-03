@@ -4,12 +4,14 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.*;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.UnidadFueraDeRangoDeAtaqueException;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionNulaException;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,8 +67,8 @@ public class AtaqueTest {
     @Test
     public void test01AtacarArqueroDebeDisminuirSuVidaEn15(){
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion (3,3));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3,3));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -76,8 +78,8 @@ public class AtaqueTest {
     @Test
     public void test02AtacarEspadachinDebeDisminuirSuVidaEn15(){
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(espadachinEnemigo, new Posicion (4,4));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(espadachinEnemigo, new PosicionReal(4,4));
 
         arqueroAtacante.atacar(espadachinEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -87,8 +89,8 @@ public class AtaqueTest {
     @Test
     public void test03AtacarPlazaCentralDebeDisminuirSuVidaEn10(){
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(plazaCentralEnemiga, new Posicion (2,3));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(plazaCentralEnemiga, new PosicionReal(2,3));
 
         arqueroAtacante.atacar(plazaCentralEnemiga, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -98,8 +100,8 @@ public class AtaqueTest {
     @Test
     public void test04AtacarCastilloDebeDisminuirSuVidaEn10(){
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(castilloEnemigo, new Posicion (2,2));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(castilloEnemigo, new PosicionReal(2,2));
 
 
 
@@ -113,8 +115,8 @@ public class AtaqueTest {
     public void test05AtacarCuartelDebeDisminuirSuVidaEn10(){
 
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(cuartelEnemigo, new Posicion (2,2));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(cuartelEnemigo, new PosicionReal(2,2));
 
         arqueroAtacante.atacar(cuartelEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -125,8 +127,8 @@ public class AtaqueTest {
     public void test06AtacarArqueroEnSuRangoDeAtaque(){
 
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion (2,2));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(2,2));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -136,8 +138,8 @@ public class AtaqueTest {
     @Test
     public void test07AtacarArqueroEnElLimiteDelRangoDeAtaque(){
 
-        mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion (4,4));
+        mapa.colocar(arqueroAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(4,4));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -147,28 +149,28 @@ public class AtaqueTest {
     @Test(expected= UnidadFueraDeRangoDeAtaqueException.class)
     public void test08IntentarAtacarArqueroFueraDelRangoDeAtaque(){
 
-        mapa.colocar(arqueroAtacante,new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo,new Posicion(5, 5));
+        mapa.colocar(arqueroAtacante,new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo,new PosicionReal(5, 5));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), arqueroEnemigo.getVidaMaxima());
     }
 
-    @Test(expected= UnidadSinPosicionException.class)
+    @Test(expected= PosicionNulaException.class)
     public void test09IntentarAtacarUnidadAtacanteSinPosicion(){
 
-        mapa.colocar(arqueroEnemigo,new Posicion(5, 5));
+        mapa.colocar(arqueroEnemigo,new PosicionReal(5, 5));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), arqueroEnemigo.getVidaMaxima());
     }
 
-    @Test(expected= UnidadSinPosicionException.class)
+    @Test(expected= PosicionNulaException.class)
     public void test10IntentarAtacarAUnidadSinPosicion(){
 
-        mapa.colocar(arqueroAtacante ,new Posicion(5, 5));
+        mapa.colocar(arqueroAtacante ,new PosicionReal(5, 5));
 
         arqueroAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -180,8 +182,8 @@ public class AtaqueTest {
     @Test
     public void test11AtacarArqueroDebeDisminuirSuVidaEn25(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(1,2));
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -191,8 +193,8 @@ public class AtaqueTest {
     @Test
     public void test12AtacarEspadachinDebeDisminuirSuVidaEn25(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        mapa.colocar(espadachinEnemigo, new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(espadachinEnemigo, new PosicionReal(1,2));
 
         espadachinAtacante.atacar(espadachinEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -202,8 +204,8 @@ public class AtaqueTest {
     @Test
     public void test13AtacarPlazaCentralDebeDisminuirSuVidaEn15(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        mapa.colocar(plazaCentralEnemiga, new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(plazaCentralEnemiga, new PosicionReal(1,2));
 
         espadachinAtacante.atacar(plazaCentralEnemiga, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -224,8 +226,8 @@ public class AtaqueTest {
     @Test
     public void test15AtacarCuartelDebeDisminuirSuVidaEn15(){
 
-        mapa.colocar(espadachinAtacante, new  Posicion(1,1));
-        mapa.colocar(cuartelEnemigo, new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(cuartelEnemigo, new PosicionReal(1,2));
 
         espadachinAtacante.atacar(cuartelEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -235,8 +237,8 @@ public class AtaqueTest {
     @Test
     public void test16AtacarArqueroEnSuRangoDeAtaque(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(1,2));
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -246,28 +248,28 @@ public class AtaqueTest {
     @Test(expected=UnidadFueraDeRangoDeAtaqueException.class)
     public void test17IntentarAtacarArqueroFueraDelRangoDeAtaque(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        mapa.colocar(arqueroEnemigo, new Posicion(3, 3));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3, 3));
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), arqueroEnemigo.getVidaMaxima());
     }
 
-    @Test(expected= UnidadSinPosicionException.class)
+    @Test(expected= PosicionNulaException.class)
     public void test18IntentarAtacarArqueroAtacanteSinPosicion(){
 
-        mapa.colocar(arqueroEnemigo, new Posicion(3, 3));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3, 3));
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), arqueroEnemigo.getVidaMaxima());
     }
 
-    @Test(expected= UnidadSinPosicionException.class)
+    @Test(expected= PosicionNulaException.class)
     public void test19IntentarAtacarUnidadSinPosicion(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(3, 3));
+        mapa.colocar(espadachinAtacante, new PosicionReal(3, 3));
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
@@ -277,8 +279,8 @@ public class AtaqueTest {
     @Test
     public void test20EspadachinMataArqueroEnemigoSeDebeEliminarDelMapaYDelJugador(){
 
-        mapa.colocar(espadachinAtacante,new Posicion(4,4));
-        mapa.colocar(arqueroEnemigo, new Posicion(3,4));
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3,4));
 
         int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
@@ -288,7 +290,7 @@ public class AtaqueTest {
 
 
         Assert.assertEquals(arqueroEnemigo.getVidaActual(), 0);
-        Assert.assertTrue(mapa.puedoColocar(new Posicion(3,4), 1));
+        Assert.assertTrue(mapa.puedoColocar(new PosicionReal(3,4), 1));
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }

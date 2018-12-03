@@ -2,7 +2,10 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionNula;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionNulaException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,16 +15,7 @@ public class UnidadTest {
     //TODO esto esta mal vamosa tener que crear a las unidades con una posicion trucha o sino el constructor.
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    @Test
-    public void test01UnidadGetPosicionDebeLanzarExepcionSiNoTieneUnaPosicion(){
 
-        UnidadMovil aldeano = new Aldeano();
-
-        thrown.expect(UnidadSinPosicionException.class);
-        aldeano.getPosicion();
-
-
-    }
 
     @Test
     public void test02UnidadObtenerPosicionDeAvanceDebeLanzarExepcionSiNoTieneUnaPosicion(){
@@ -29,7 +23,7 @@ public class UnidadTest {
         UnidadMovil arquero = new Arquero();
         Direccionable direccion = new DireccionDerecha();
 
-        thrown.expect(UnidadSinPosicionException.class);
+        thrown.expect(PosicionNulaException.class);
         arquero.obtenerPosicionDeAvance(direccion);
 
     }

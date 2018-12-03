@@ -7,15 +7,11 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     private final int TAMANIO = 4;
@@ -97,12 +93,13 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
         }
     }
 */
-    public void crearArmaDeAsedio( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+    public void crearArmaDeAsedio( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         ArmaDeAsedio armaDeAsedio= new ArmaDeAsedio ();
-        if(!mapa.puedoColocar ( posicion,armaDeAsedio.getTamanio ())){return;}
+        if(!mapa.puedoColocar (posicionReal,armaDeAsedio.getTamanio ())){return;}
         if(!jugadorActivo.puedoAgregar (armaDeAsedio)){return; }
+
+        mapa.colocar ( armaDeAsedio, posicionReal);
         jugadorActivo.agregarPieza ( armaDeAsedio );
-        mapa.colocar ( armaDeAsedio,posicion );
     }
 
     @Override

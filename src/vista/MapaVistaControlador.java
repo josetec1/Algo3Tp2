@@ -7,25 +7,20 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 //TODO ojo el obsvador juego....
 public class MapaVistaControlador {
@@ -51,7 +46,7 @@ public class MapaVistaControlador {
 	private static Cuartel cuartel;
 	private static Castillo castillo;
 	private static ArmaDeAsedio armaDeAsedio;
-	private static Posicion posicionSeleccionada;
+	private static PosicionReal posicionRealSeleccionada;
 	private static boolean posicionEstaSeleccionada = false;
 	private static boolean edificioParaConstruccionEstaSeleccionado= false;
 
@@ -74,11 +69,11 @@ public class MapaVistaControlador {
 		return edificioSeleccionadoParaConstruccion;
 	}
 
-	public static Posicion getPosicionSeleccionada() {
+	public static PosicionReal getPosicionSeleccionada() {
 		if(!posicionEstaSeleccionada){
 			throw new NoHayPoscionSeleccionadaException();
 		}
-		return posicionSeleccionada;
+		return posicionRealSeleccionada;
 	}
 
 	public static void desSeleccionarPosicion() {
@@ -102,9 +97,9 @@ public class MapaVistaControlador {
 		edificioParaConstruccionEstaSeleccionado = true;
 	}
 
-	public static void seleccionarPosicion(Posicion posicion) {
+	public static void seleccionarPosicion(PosicionReal posicionReal) {
 		posicionEstaSeleccionada=true;
-		posicionSeleccionada = posicion;
+		posicionRealSeleccionada = posicionReal;
 	}
 
 	public void dibujarTablero() {
@@ -303,10 +298,10 @@ public class MapaVistaControlador {
 
 	public void ubicarCastillo (Castillo castillo){
 		Button botonCastillo;
-		Posicion posicion = castillo.getPosicion();
+		Posicion posicionReal = castillo.getPosicion();
 		int x;
 		int y;
-		for (Cuadrante cuadrante : posicion.getCasilleros()){
+		for (Cuadrante cuadrante : posicionReal.getCasilleros()){
 			x = cuadrante.getX();
 			y= cuadrante.getY();
 			botonCastillo = (Button) tableroView.getChildren().get((mapa.getAlto()*x-(y-1)));
@@ -319,10 +314,10 @@ public class MapaVistaControlador {
 
 	public void ubicarPlaza (PlazaCentral plaza){
 		Button botonPlaza ;
-		Posicion posicion = plaza.getPosicion();
+		Posicion posicionReal = plaza.getPosicion();
 		int x;
 		int y;
-		for (Cuadrante cuadrante : posicion.getCasilleros()){
+		for (Cuadrante cuadrante : posicionReal.getCasilleros()){
 			x = cuadrante.getX();
 			y= cuadrante.getY();
 			botonPlaza  = (Button) tableroView.getChildren().get((mapa.getAlto()*x-(y-1)));
@@ -335,10 +330,10 @@ public class MapaVistaControlador {
 
 	public void ubicarCuartel (Cuartel cuartel){
 		Button botonPlaza ;
-		Posicion posicion = cuartel.getPosicion();
+		Posicion posicionReal = cuartel.getPosicion();
 		int x;
 		int y;
-		for (Cuadrante cuadrante : posicion.getCasilleros()){
+		for (Cuadrante cuadrante : posicionReal.getCasilleros()){
 			x = cuadrante.getX();
 			y= cuadrante.getY();
 			botonPlaza  = (Button) tableroView.getChildren().get((mapa.getAlto()*x-(y-1)));;

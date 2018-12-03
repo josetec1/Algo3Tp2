@@ -4,23 +4,25 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.NoSePuedeConstruir;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
 
     @Override
-    public void construir(Aldeano unAldeano, Edificio edificio, Mapa mapa,Posicion posicion, Jugador jugador) {
+    public void construir(Aldeano unAldeano, Edificio edificio, Mapa mapa, PosicionReal posicionReal, Jugador jugador) {
         //Chequeos
-        if (!jugador.puedoAgregar(edificio) || (!mapa.puedoColocar(posicion,edificio.getTamanio()))
+        if (!jugador.puedoAgregar(edificio) || (!mapa.puedoColocar(posicionReal,edificio.getTamanio()))
                 || (!edificio.puedoConstruir()) ) {
             throw new NoSePuedeConstruir();
         }
 
+        mapa.colocar(edificio, posicionReal);
         edificio.construir (unAldeano,jugador);
-        mapa.colocar(edificio,posicion);
+
 
         unAldeano.cambiarAContruyendo();
     }
@@ -32,8 +34,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
        if (mapa.puedoColocar(destino,aldeano.getTamanio())) {
             mapa.moverElemento(aldeano, destino);
             aldeano.cambiarAMoviendose();
-            aldeano.setCambio();
-            aldeano.notifyObservers(aldeano);
+
        }
     }
 

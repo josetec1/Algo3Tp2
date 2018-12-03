@@ -1,12 +1,15 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.DireccionDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.NoSePuedeRepararException;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.AldeanoOcupadoException;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,7 +31,7 @@ public class AldeanoTest {
         Assert.assertEquals(aldeano.getVidaActual(), 50);
         Assert.assertEquals(aldeano.getCosto(),25);
     }
-
+/*
     @Test
     public void test02AldenoDisminuir25VidaDevuelveVida25(){
         Mapa mapa = new Mapa(10,10);
@@ -37,7 +40,7 @@ public class AldeanoTest {
         aldeano.disminuirVida(25);
         Assert.assertEquals(aldeano.getVidaActual(),25);
     }
-
+*/
     @Test
     public void test03AlCrearAldeanoEsteEstaDisponible(){
         Mapa mapa = new Mapa(10,10);
@@ -78,7 +81,7 @@ public class AldeanoTest {
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Aldeano aldeano = new Aldeano();
         Direccionable direccion = new DireccionDerecha();
-        mapa.colocar(aldeano,new Posicion(10,10));
+        mapa.colocar(aldeano,new PosicionReal(10,10));
         aldeano.mover(mapa,direccion,jugador);
 
         aldeano.huboUnCambioDeTurno(jugador);
@@ -98,7 +101,7 @@ public class AldeanoTest {
         Mapa mapa = Mockito.mock(Mapa.class);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = Mockito.mock(PlazaCentral.class);
         Mockito.when(unaPlaza.getTamanio()).thenReturn(1);
         Mockito.when(unaPlaza.puedoConstruir()).thenReturn(true);
@@ -106,16 +109,16 @@ public class AldeanoTest {
 
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        Mockito.when(mapa.puedoColocar(posicion,1)).thenReturn(true);
+        Mockito.when(mapa.puedoColocar(posicionReal,1)).thenReturn(true);
 
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
         Cuartel cuartel = Mockito.mock(Cuartel.class);
         Mockito.when(cuartel.getTamanio()).thenReturn(1);
         Mockito.when(cuartel.puedoConstruir()).thenReturn(true);
 
         thrown.expect(AldeanoOcupadoException.class);
-        aldeano.construirEdificio(cuartel,mapa,jugador,posicion);
+        aldeano.construirEdificio(cuartel,mapa,jugador, posicionReal);
     }
 
 
@@ -126,7 +129,7 @@ public class AldeanoTest {
         Mapa mapa = Mockito.mock(Mapa.class);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = Mockito.mock(PlazaCentral.class);
         Mockito.when(unaPlaza.getTamanio()).thenReturn(1);
         Mockito.when(unaPlaza.puedoConstruir()).thenReturn(true);
@@ -134,9 +137,9 @@ public class AldeanoTest {
 
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        Mockito.when(mapa.puedoColocar(posicion,1)).thenReturn(true);
+        Mockito.when(mapa.puedoColocar(posicionReal,1)).thenReturn(true);
 
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
         Assert.assertThat(aldeano.estasDisponible(), is(false));
     }
@@ -147,12 +150,12 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(100,100);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
 
         aldeano.huboUnCambioDeTurno(jugador);
@@ -169,12 +172,12 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(100,100);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
         aldeano.cambiarARecolectando();
         verify(jugador, times(0)).sumarOro(anyInt());
@@ -187,12 +190,12 @@ public class AldeanoTest {
          Mapa mapa = new Mapa(100,100);
          Jugador jugador = Mockito.mock(Jugador.class);
 
-         Posicion posicion = new Posicion(2,2);
+         PosicionReal posicionReal = new PosicionReal(2,2);
          PlazaCentral unaPlaza = new PlazaCentral();
          Aldeano aldeano = new Aldeano();
          Mockito.when(jugador.esMio(any())).thenReturn(true);
          Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-         aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+         aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
          aldeano.cambiarARecolectando();
          aldeano.huboUnCambioDeTurno(jugador);
@@ -230,7 +233,7 @@ public class AldeanoTest {
         Jugador jugador = new Jugador("Mauricio",castillo);
         Aldeano aldeano = new Aldeano();
        jugador.agregarPieza(aldeano);
-        mapa.colocar(aldeano,new Posicion(5,5));
+        mapa.colocar(aldeano,new PosicionReal(5,5));
         aldeano.mover(mapa,direccion,jugador);
 
         Assert.assertFalse(aldeano.estasDisponible());
@@ -244,7 +247,7 @@ public class AldeanoTest {
         Jugador jugador = new Jugador("Mauricio",castillo);
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
-        mapa.colocar(aldeano,new Posicion(5,5));
+        mapa.colocar(aldeano,new PosicionReal(5,5));
         aldeano.mover(mapa,direccion,jugador);
 
         aldeano.huboUnCambioDeTurno(jugador);
@@ -260,7 +263,7 @@ public class AldeanoTest {
         Jugador jugador = new Jugador("Mauricio",castillo);
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
-        mapa.colocar(aldeano,new Posicion(5,5));
+        mapa.colocar(aldeano,new PosicionReal(5,5));
         aldeano.mover(mapa,direccion,jugador);
 
 
@@ -276,9 +279,9 @@ public class AldeanoTest {
         Jugador jugador = new Jugador("Mauricio",castillo);
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
-        Posicion origen = new Posicion(5,5);
+        PosicionReal origen = new PosicionReal(5,5);
         Posicion primerMovimiento = origen.calcularPosicionSiguiente(direccion);
-        Posicion posicionFinal = primerMovimiento.calcularPosicionSiguiente(direccion);
+        Posicion posicionRealFinal = primerMovimiento.calcularPosicionSiguiente(direccion);
 
         mapa.colocar(aldeano,origen);
         aldeano.mover(mapa,direccion,jugador);
@@ -286,7 +289,7 @@ public class AldeanoTest {
 
         aldeano.mover(mapa,direccion,jugador);
 
-        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionFinal));
+        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionRealFinal));
 
     }
             //MoverConConstruccion
@@ -295,12 +298,12 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(100,100);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
         Assert.assertFalse(aldeano.estasDisponible());
     }
@@ -310,12 +313,12 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(100,100);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         PlazaCentral unaPlaza = new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
        aldeano.cambiarARecolectando();
        Assert.assertThat(aldeano.estasDisponible(), is(true));
@@ -328,13 +331,13 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(100,100);
         Jugador jugador = Mockito.mock(Jugador.class);
 
-        Posicion posicion = new Posicion(2,2);
+        PosicionReal posicionReal = new PosicionReal(2,2);
         Direccionable direccion = new DireccionDerecha();
         PlazaCentral unaPlaza = new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
-        aldeano.construirEdificio(unaPlaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(unaPlaza,mapa,jugador, posicionReal);
 
 
 
@@ -352,19 +355,19 @@ public class AldeanoTest {
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(500);
 
-        Posicion origen = new Posicion(5,5);
-        Posicion posicionFinal = origen.calcularPosicionSiguiente(direccion);
+        Posicion origen = new PosicionReal(5,5);
+        Posicion posicionRealFinal = origen.calcularPosicionSiguiente(direccion);
 
         mapa.colocar(aldeano,origen);
         PlazaCentral plaza = new PlazaCentral();
-        Posicion posicionPlaza = new Posicion(50,5);
-        aldeano.construirEdificio(plaza,mapa,jugador,posicionPlaza);
+        PosicionReal posicionRealPlaza = new PosicionReal(50,5);
+        aldeano.construirEdificio(plaza,mapa,jugador, posicionRealPlaza);
 
         aldeano.cambiarARecolectando();
 
         aldeano.mover(mapa,direccion,jugador);
 
-        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionFinal));
+        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionRealFinal));
 
     }
 
@@ -421,8 +424,8 @@ public class AldeanoTest {
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Aldeano aldeano = new Aldeano();
 
-        Posicion origen = new Posicion(5,5);
-        Posicion posicionFinal = origen.calcularPosicionSiguiente(direccion);
+        PosicionReal origen = new PosicionReal(5,5);
+        Posicion posicionRealFinal = origen.calcularPosicionSiguiente(direccion);
         Edificio unEdificio = Mockito.mock (Castillo.class);
         mapa.colocar(aldeano,origen);
         when(unEdificio.puedoReparar()).thenReturn(true);
@@ -430,7 +433,7 @@ public class AldeanoTest {
 
         aldeano.cambiarARecolectando(); //mensaje enviado por el edificio
         aldeano.mover(mapa,direccion,jugador);
-        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionFinal));
+        Assert.assertTrue(aldeano.getPosicion().seSuperponeCon(posicionRealFinal));
     }
 
 
@@ -483,7 +486,7 @@ public class AldeanoTest {
 
         thrown.expect(AldeanoOcupadoException.class);
 
-        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new Posicion(10,10));
+        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new PosicionReal(10,10));
 
     }
 
@@ -587,7 +590,7 @@ public class AldeanoTest {
         Aldeano aldeano = new Aldeano();
         Aldeano otroAldeano = new Aldeano();
 
-       otroAldeano.construirEdificio(plaza,mapa,jugador,new Posicion(3,3));
+       otroAldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(3,3));
 
 
         thrown.expect(NoSePuedeRepararException.class);
@@ -605,12 +608,12 @@ public class AldeanoTest {
         Direccionable direccion = new DireccionDerecha();
 
         Aldeano aldeano = new Aldeano();
-        Posicion origen = new Posicion(5,5);
+        PosicionReal origen = new PosicionReal(5,5);
 
         mapa.colocar(aldeano,origen);
         aldeano.mover(mapa,direccion,jugador);
         thrown.expect(AldeanoOcupadoException.class);
-        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new Posicion(3,3));
+        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new PosicionReal(3,3));
     }
 
     @Test
@@ -620,7 +623,7 @@ public class AldeanoTest {
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
         Aldeano aldeano = new Aldeano();
-        Posicion origen = new Posicion(5,5);
+        PosicionReal origen = new PosicionReal(5,5);
 
         Edificio unEdificio = Mockito.mock (Castillo.class);
         mapa.colocar(aldeano,origen);
@@ -639,7 +642,7 @@ public class AldeanoTest {
         Mockito.when(jugador.esMio(any())).thenReturn(true);
         Mockito.when(jugador.puedoAgregar(any(Edificio.class))).thenReturn(true);
         Aldeano aldeano = new Aldeano();
-        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new Posicion(3,3));
+        aldeano.construirEdificio(new PlazaCentral(),mapa,jugador,new PosicionReal(3,3));
         Edificio unEdificio = Mockito.mock (Castillo.class);
 
         thrown.expect(AldeanoOcupadoException.class);
@@ -664,7 +667,7 @@ public class AldeanoTest {
        Aldeano otroAldeano = new Aldeano();
 
        thrown.expect(NoSePuedeConstruir.class);
-       otroAldeano.construirEdificio(plaza,mapa,jugador,new Posicion(3,3));
+       otroAldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(3,3));
     }
 
     @Test
@@ -681,7 +684,7 @@ public class AldeanoTest {
         Aldeano otroAldeano = new Aldeano();
 
         thrown.expect(NoSePuedeConstruir.class);
-        otroAldeano.construirEdificio(plaza,mapa,jugador,new Posicion(30,30));
+        otroAldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(30,30));
 
     }
 
@@ -695,7 +698,7 @@ public class AldeanoTest {
         jugador.agregarPieza(aldeano); //se queda con 75 de oro y la plaza vale 100
 
         thrown.expect(NoSePuedeConstruir.class);
-        aldeano.construirEdificio(plaza,mapa,jugador,new Posicion(3,3));
+        aldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(3,3));
     }
 
     // TEST DE JUGADOR NO PROPIO
@@ -710,7 +713,7 @@ public class AldeanoTest {
 
 
         thrown.expect(NoEsMiJugadorException.class);
-        aldeano.construirEdificio(plaza,mapa,jugador,new Posicion(3,3));
+        aldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(3,3));
 
     }
 
@@ -721,7 +724,7 @@ public class AldeanoTest {
         Direccionable direccion = new DireccionDerecha();
         Jugador jugador = new Jugador("Toledo", castillo);
         Aldeano aldeano = new Aldeano();
-        mapa.colocar(aldeano,new Posicion(5,5));
+        mapa.colocar(aldeano,new PosicionReal(5,5));
 
         thrown.expect(NoEsMiJugadorException.class);
         aldeano.mover(mapa,direccion, jugador);

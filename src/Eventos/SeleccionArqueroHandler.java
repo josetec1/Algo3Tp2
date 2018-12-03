@@ -1,10 +1,6 @@
 package Eventos;
 
 
-import fiuba.algo3.aoe.Juego.Juego;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadFueraDeRangoDeAtaqueException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.event.EventHandler;
@@ -14,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 import vista.ContenedorPrincipal;
 import vista.MenuInferior;
 import vista.MapaVistaControlador;
-
-import java.util.ArrayList;
 
 public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
 

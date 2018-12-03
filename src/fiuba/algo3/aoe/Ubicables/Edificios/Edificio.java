@@ -4,17 +4,17 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacante;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.FuegoAmigoException;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public abstract class Edificio implements Manipulable {
     protected int vidaMaxima;
     protected int vidaActual;
-    protected Posicion posicion;
+    protected Posicion posicionReal;
     protected int costo;
     protected int tamanio;
     protected EstadoEdificio estado ;
@@ -27,12 +27,12 @@ public abstract class Edificio implements Manipulable {
         return this.tamanio;
     }
 
-    public void colocarEn ( Posicion posicion ) {
-        this.posicion = posicion;
+    public void colocarEn (Posicion posicion) {
+        this.posicionReal = posicion;
     }
 
     public Posicion getPosicion () {
-        return this.posicion;
+        return this.posicionReal;
     }
 
     public int getVidaMaxima () {

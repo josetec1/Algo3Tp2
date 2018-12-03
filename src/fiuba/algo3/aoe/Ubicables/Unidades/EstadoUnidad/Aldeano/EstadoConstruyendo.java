@@ -4,16 +4,16 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.AldeanoOcupadoException;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.AldeanoOcupadoException;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class EstadoConstruyendo implements IEstadoUnidadAldeano {
 
 
 
     @Override
-    public void construir(Aldeano unAldeano, Edificio unEdificio, Mapa mapa, Posicion posicion, Jugador jugador) {
+    public void construir(Aldeano unAldeano, Edificio unEdificio, Mapa mapa, PosicionReal posicionReal, Jugador jugador) {
         throw new AldeanoOcupadoException();
     }
 

@@ -1,9 +1,7 @@
 package Eventos;
 
 
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadFueraDeRangoDeAtaqueException;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -12,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 import vista.ContenedorPrincipal;
 import vista.MenuInferior;
 import vista.MapaVistaControlador;
-
-import java.util.ArrayList;
 
 public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 

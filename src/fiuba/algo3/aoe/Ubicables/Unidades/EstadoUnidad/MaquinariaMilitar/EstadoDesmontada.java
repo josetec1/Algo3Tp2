@@ -6,6 +6,7 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class EstadoDesmontada implements IEstadoMaquinariaMilitar {
 
@@ -14,8 +15,7 @@ public class EstadoDesmontada implements IEstadoMaquinariaMilitar {
         Posicion destino = armaDeAsedio.obtenerPosicionDeAvance(direccion);
         if (mapa.puedoColocar(destino,armaDeAsedio.getTamanio ())) {
             mapa.moverElemento(armaDeAsedio, destino);
-            armaDeAsedio.setCambio();
-            armaDeAsedio.notifyObservers(armaDeAsedio);
+
 
         }
         armaDeAsedio.cambiarEstado ( new EstadoMoviendose (this) );

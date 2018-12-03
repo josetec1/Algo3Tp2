@@ -5,8 +5,8 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -18,7 +18,7 @@ public class IntegracionTest {
     @Test
     public void test01AldeanoAlContruirEdificioYpasar3TurnosQuedaLibre(){
         Mapa mapa = new Mapa(500,500);
-        Posicion posicion = new Posicion(10,10);
+        PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         Edificio plaza = new PlazaCentral();
@@ -26,7 +26,7 @@ public class IntegracionTest {
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
 
-        aldeano.construirEdificio(plaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(plaza,mapa,jugador, posicionReal);
 
         jugador.esTuTurno(); //turno 1
         Assert.assertFalse( aldeano.estasDisponible());
@@ -40,14 +40,14 @@ public class IntegracionTest {
     public void test02AldeanoConstruyendoAlPasar3TurnosNoSumaOro(){
 
         Mapa mapa = new Mapa(500,500);
-        Posicion posicion = new Posicion(10,10);
+        PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         Edificio plaza = new PlazaCentral();
         Jugador jugador = new Jugador("Estambul",castillo);
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
-        aldeano.construirEdificio(plaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(plaza,mapa,jugador, posicionReal);
 
         Aldeano mockAldeano = Mockito.mock (Aldeano.class);
         Mockito.when(mockAldeano.getCosto()).thenReturn(1);
@@ -71,14 +71,14 @@ public class IntegracionTest {
     public void test03AldeanoConstruyendoAlPasar4TurnosSumaOro(){
 
         Mapa mapa = new Mapa(500,500);
-        Posicion posicion = new Posicion(10,10);
+        PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         Edificio plaza = new PlazaCentral();
         Jugador jugador = new Jugador("Estambul",castillo);
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
-        aldeano.construirEdificio(plaza,mapa,jugador,posicion);
+        aldeano.construirEdificio(plaza,mapa,jugador, posicionReal);
 
         Aldeano mockAldeano = Mockito.mock (Aldeano.class);
         Mockito.when(mockAldeano.getCosto()).thenReturn(1);

@@ -1,12 +1,11 @@
 package fiuba.algo3.aoe.Jugador;
 import fiuba.algo3.aoe.Jugadores.*;
-import fiuba.algo3.aoe.Jugadores.Piezas.LimiteDePoblacionAlcanzadoException;
 import fiuba.algo3.aoe.Jugadores.Piezas.NoSePuedeEliminarElCastilloException;
 import fiuba.algo3.aoe.Jugadores.Piezas.PiezaAgenaException;
 import fiuba.algo3.aoe.Jugadores.Piezas.PiezaYaAgregadaException;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Edificios.*;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import org.junit.Assert;
 import org.junit.Rule;

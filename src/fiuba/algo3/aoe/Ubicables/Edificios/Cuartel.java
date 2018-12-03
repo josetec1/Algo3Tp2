@@ -1,17 +1,15 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
-import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class Cuartel extends Edificio {
     private final int TAMANIO = 2;
@@ -42,20 +40,21 @@ public class Cuartel extends Edificio {
     }
 
 
-    public void crearArquero( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+    public void crearArquero( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         Arquero arquero= new  Arquero ();
-        if(!mapa.puedoColocar ( posicion,arquero.getTamanio () )){return;}
+        if(!mapa.puedoColocar (posicionReal,arquero.getTamanio () )){return;}
         if(!jugadorActivo.puedoAgregar (arquero)){return;}
+
+        mapa.colocar ( arquero, posicionReal);
         jugadorActivo.agregarPieza ( arquero );
-        mapa.colocar ( arquero,posicion );
     }
 
-    public void crearEspadachin( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+    public void crearEspadachin( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         Espadachin espadachin= new  Espadachin ();
-        if(!mapa.puedoColocar ( posicion,espadachin.getTamanio () )){return;}
+        if(!mapa.puedoColocar (posicionReal,espadachin.getTamanio () )){return;}
         if(!jugadorActivo.puedoAgregar (espadachin)){return;}
+        mapa.colocar ( espadachin, posicionReal);
         jugadorActivo.agregarPieza ( espadachin );
-        mapa.colocar ( espadachin,posicion );
     }
 
 

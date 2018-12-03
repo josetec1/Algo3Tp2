@@ -4,9 +4,6 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadFueraDeRangoDeAtaqueException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadSinPosicionException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 
 public class EstadoMontada implements IEstadoMaquinariaMilitar{

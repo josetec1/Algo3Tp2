@@ -1,16 +1,13 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
-import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class PlazaCentral extends Edificio {
 // TODO refactor constantes
@@ -42,12 +39,13 @@ public class PlazaCentral extends Edificio {
 
 
 
-    public void crearAldeano( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
+    public void crearAldeano( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         Aldeano aldeano= new Aldeano ();
-        if(!mapa.puedoColocar ( posicion,aldeano.getTamanio () )){return;}
+        if(!mapa.puedoColocar (posicionReal,aldeano.getTamanio () )){return;}
         if(!jugadorActivo.puedoAgregar (aldeano)){return;}
+        mapa.colocar ( aldeano, posicionReal);
         jugadorActivo.agregarPieza ( aldeano );
-        mapa.colocar ( aldeano,posicion );
+
     }
 
 

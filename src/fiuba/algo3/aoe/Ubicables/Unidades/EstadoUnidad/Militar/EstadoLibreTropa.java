@@ -2,10 +2,10 @@ package fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar;
 
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.UnidadYaRealizoMovimientoEsteTurnoException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitar;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMilitarTropa;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.UnidadMilitar;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.UnidadMilitarTropa;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public class EstadoLibreTropa implements IEstadoUnidadMilitarTropa {
 
@@ -21,8 +21,7 @@ public class EstadoLibreTropa implements IEstadoUnidadMilitarTropa {
         if (mapa.puedoColocar(destino,unidad.getTamanio())) {
             mapa.moverElemento(unidad, destino);
             unidad.setMoviendose();
-            unidad.setCambio();
-            unidad.notifyObservers(unidad);
+
 
         }
     }

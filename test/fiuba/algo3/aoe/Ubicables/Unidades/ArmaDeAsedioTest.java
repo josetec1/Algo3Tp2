@@ -1,22 +1,13 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArriba;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.EstadoMontada;
-import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.UnidadYaRealizoMovimientoEsteTurnoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
+
 import static org.mockito.Matchers.any;
 
-
-import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;

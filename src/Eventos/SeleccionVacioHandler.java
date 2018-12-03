@@ -5,10 +5,8 @@ import fiuba.algo3.aoe.Jugadores.RecursoInsuficienteException;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionInvalidaException;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import vista.ContenedorPrincipal;
 import vista.MenuInferior;
@@ -50,15 +48,15 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 			else{
 				String edificioParaConstruccion = MapaVistaControlador.getEdificioSeleccionadoParaConstruccion();
 				if("Plaza Central" == edificioParaConstruccion){
-					Posicion posicion= new Posicion(cuadrante);
-					if(!MapaVistaControlador.getMapa().puedoColocar(posicion,2)){
+					PosicionReal posicionReal = new PosicionReal(cuadrante);
+					if(!MapaVistaControlador.getMapa().puedoColocar(posicionReal,2)){
 						MenuInferior.getLog().appendText("\nPosicion Ocupada, seleccione otra posicion vacia");
 						MapaVistaControlador.desSeleccionarEdificio();
 						MapaVistaControlador.desSeleccionarUnidades();
 						MapaVistaControlador.desSeleccionarUnidades();
 					}else{
 						try {
-							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new PlazaCentral(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(),posicion);
+							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new PlazaCentral(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
 							MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
 							MapaVistaControlador.desSeleccionarUnidades();
 							MapaVistaControlador.desSeleccionarEdificio();
@@ -72,15 +70,15 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 
 				}
 				else if ("Cuartel" == edificioParaConstruccion){
-					Posicion posicion= new Posicion(cuadrante);
-					if(!MapaVistaControlador.getMapa().puedoColocar(posicion,2)){
+					PosicionReal posicionReal = new PosicionReal(cuadrante);
+					if(!MapaVistaControlador.getMapa().puedoColocar(posicionReal,2)){
 						MenuInferior.getLog().appendText("\nPosicion Ocupada, seleccione otra posicion vacia");
 						MapaVistaControlador.desSeleccionarUnidades();
 						MapaVistaControlador.desSeleccionarEdificio();
 						MapaVistaControlador.desSeleccionarPosicion();
 					}else{
 						try {
-							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new Cuartel(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(),posicion);
+							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new Cuartel(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
 							MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
 							MapaVistaControlador.desSeleccionarUnidades();
 							MapaVistaControlador.desSeleccionarEdificio();

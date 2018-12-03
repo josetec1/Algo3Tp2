@@ -25,34 +25,34 @@ public class Mapa {
     }
 
 
-    public Boolean puedoColocar( Posicion unaPosicion,int tamanio) {
-        Posicion posicionAColocar = unaPosicion.expandir(tamanio);
+    public Boolean puedoColocar(Posicion unaPosicion, int tamanio) {
+        Posicion posicionRealAColocar = unaPosicion.expandir(tamanio);
 
-       if(!this.estaDentroDeLosMargenesDelMapa(posicionAColocar)){return false;}
+       if(!this.estaDentroDeLosMargenesDelMapa(posicionRealAColocar)){return false;}
 
-        return this.estaLibre(posicionAColocar);
+        return this.estaLibre(posicionRealAColocar);
 
     }
 
-    private Boolean estaLibre (Posicion unaPosicion){
+    private Boolean estaLibre (Posicion unaPosicionReal){
         for (Ubicable elemento : this.ubicables){
-            if  (elemento.getPosicion().seSuperponeCon(unaPosicion)){return false;}
+            if  (elemento.getPosicion().seSuperponeCon(unaPosicionReal)){return false;}
         }
         return  true;
 
     }
 
-    private Boolean estaDentroDeLosMargenesDelMapa(Posicion unaPosicion ){
-        return unaPosicion.estasDentroDe(this.ancho,this.alto);
+    private Boolean estaDentroDeLosMargenesDelMapa(Posicion unaPosicionReal){
+        return unaPosicionReal.estasDentroDe(this.ancho,this.alto);
     }
 
 
-    public void colocar (Ubicable unElemento, Posicion posicion)  {
-        Posicion posicionNueva = posicion.expandir(unElemento.getTamanio());
-        if (!this.estaDentroDeLosMargenesDelMapa(posicionNueva)) {throw new FueraDelMapaException();}
-        if(!this.estaLibre(posicionNueva)) {throw new PosicionDelMapaOcupadaException();}
+    public void colocar (Ubicable unElemento, Posicion posicionReal)  {
+        Posicion posicionRealNueva = posicionReal.expandir(unElemento.getTamanio());
+        if (!this.estaDentroDeLosMargenesDelMapa(posicionRealNueva)) {throw new FueraDelMapaException();}
+        if(!this.estaLibre(posicionRealNueva)) {throw new PosicionDelMapaOcupadaException();}
         if (this.estaEnElMapa(unElemento)){throw new ElElementoYaExisteException();}
-        unElemento.colocarEn(posicionNueva);
+        unElemento.colocarEn(posicionRealNueva);
         this.ubicables.add (unElemento);
     }
 

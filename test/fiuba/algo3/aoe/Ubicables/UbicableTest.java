@@ -8,6 +8,7 @@ import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class UbicableTest {
         Mapa mapa = new Mapa(10,10);
         Jugador jugador = new Jugador("Mauricio", castillo);
         Ubicable lanzaPiedras = new ArmaDeAsedio();
-        Posicion origen = new Posicion(2,5);
+        PosicionReal origen = new PosicionReal(2,5);
         mapa.colocar(lanzaPiedras,origen);
         Assert.assertThat(mapa.puedoColocar(origen,lanzaPiedras.getTamanio()), is(false) );
         Assert.assertEquals(lanzaPiedras.getPosicion().seSuperponeCon(origen),true);
@@ -36,7 +37,7 @@ public class UbicableTest {
         UnidadMovil lanzaPiedras = new ArmaDeAsedio();
         Direccionable direccion = new DireccionDerecha();
 
-        Posicion origen = new Posicion(2,5);
+        Posicion origen = new PosicionReal(2,5);
         Posicion calculada = origen.calcularPosicionSiguiente(direccion);
         mapa.colocar(lanzaPiedras,origen);
 
