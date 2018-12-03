@@ -11,6 +11,7 @@ public class Turno {
 
     private List <Jugador> jugadores;
     private Jugador jugadorActual;
+    private Jugador jugadorInactivo;
     private Iterator<Jugador> it;
     private final int JUGADORES_ADMITIDOS = 2;
 
@@ -26,21 +27,27 @@ public class Turno {
 
     private void inicializarTurno(ModoInicio semilla){
         this.jugadorActual = this.it.next();
+        this.jugadorInactivo = jugadores.get(1);
         for (int i = 0; i < (semilla.getOrden()); i++) {
             if (!this.it.hasNext()) {this.it = jugadores.iterator();}
+            this.jugadorInactivo = this.jugadorActual;
             this.jugadorActual= this.it.next();
         }
     }
 
     public void pasarTurno () {
         if (!this.it.hasNext()) {this.it = jugadores.iterator();}
-     //   this.jugadorActual.deshabilitar();
+
+        this.jugadorInactivo = this.jugadorActual;
         this.jugadorActual= this.it.next();
-       this.jugadorActual.esTuTurno();
+        this.jugadorActual.esTuTurno();
      }
 
     public Jugador getJugadorActual () {
         return this.jugadorActual;
+    }
+    public Jugador getJugadorInactivo () {
+        return this.jugadorInactivo;
     }
 
 }

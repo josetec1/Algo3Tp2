@@ -10,10 +10,17 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.isNotNull;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class TurnoTest {
@@ -155,66 +162,169 @@ public class TurnoTest {
         Turno turno = new Turno(jugadores,inicioFirst);
     }
 
-
-
-
-
-
-/*
     @Test
-    public void test07CrearTurnoNotificaAlJugadorUnoQueEstaHabilitado(){
+        public void test10GetJugadorInactivoDebeDevolverAlSegundoJugadorAlCrearTurnoConFirstParaArrancar(){
 
         List<Jugador> jugadores = new ArrayList <>();
 
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+
+        Turno turno = new Turno(jugadores,inicioFirst);
+
+        Assert.assertEquals(turno.getJugadorInactivo(),jugador2);
+    }
+
+    @Test
+    public void test11GetJugadorInactivoDebeDevolverAlPrimerJugadorAlCrearTurnoConSecondParaArrancar(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.SECOND);
+
+        Turno turno = new Turno(jugadores,inicioFirst);
+
+        Assert.assertEquals(turno.getJugadorInactivo(),jugador1);
+    }
+
+    @Test
+    public void test12GetJugadorInactivoNoEsIgualAlJugadorActivoAlCrearTurnoConSecondParaArrancar(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.SECOND);
+
+        Turno turno = new Turno(jugadores,inicioFirst);
+
+        Assert.assertThat(turno.getJugadorInactivo(),is(not(turno.getJugadorActual())));
+    }
+
+    @Test
+    public void test13GetJugadorInactivoNoEsIgualAlJugadorActivoAlCrearTurnoConFirstParaArrancar(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+
+        Turno turno = new Turno(jugadores,inicioFirst);
+
+        Assert.assertThat(turno.getJugadorInactivo(),is(not(turno.getJugadorActual())));
+    }
+
+    @Test
+    public void test14GetJugadorInactivoCambiaAlPasarTurno(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Turno turno = new Turno(jugadores,inicioFirst);
+
+         turno.pasarTurno();
+
+        Assert.assertThat(turno.getJugadorActual(),is(jugador2));
+        Assert.assertThat(turno.getJugadorInactivo(),is (jugador1));
+
+        Assert.assertThat(turno.getJugadorActual(),is(not(jugador1)));
+        Assert.assertThat(turno.getJugadorInactivo(),is(not(jugador2)));
+
+    }
+
+
+    @Test
+    public void test15CrearTurnoNONotificaAlJugadorUnoQueEstaHabilitado(){
+
+        List<Jugador> jugadores = new ArrayList <>();
 
         Jugador jugador1 = Mockito.mock(Jugador.class);
         Jugador jugador2 = Mockito.mock(Jugador.class);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-        Turno turno = new Turno(jugadores);
+        ModoInicio inicioSecond= new ModoInicioEspecifico(TipoOrden.SECOND);
 
-        verify(jugador1, times(1)).habilitar();
-        verify(jugador2, times(0)).habilitar();
+        Turno turno = new Turno(jugadores,inicioSecond);
+
+        verify(jugador1, never()).esTuTurno();
+
+        verify(jugador2, never()).esTuTurno();
 
     }
 
     @Test
-    public void test08PasarTurnoNotificaAlJugadorAnteriorComoDeshabilitadoYHabilitadoAlSiguiente(){
+    public void test16PasarTurnoNotificaAlJugadorSiguienteComoHabilitado(){
 
         List<Jugador> jugadores = new ArrayList <>();
-
 
         Jugador jugador1 = Mockito.mock(Jugador.class);
         Jugador jugador2 = Mockito.mock(Jugador.class);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-        Turno turno = new Turno(jugadores);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+        Turno turno = new Turno(jugadores,inicioFirst);
+
         turno.pasarTurno();
 
-        verify(jugador1, times(1)).deshabilitar();
-        verify(jugador2, times(1)).habilitar();
+        verify(jugador1, never()).esTuTurno();
+        verify(jugador2, times(1)).esTuTurno();
+
 
     }
 
     @Test
-    public void test09PasarDosTurnosNotificaAlPrimerJugadorDosVecesHabilitadoYUnaVezDeshabilitado(){
+    public void test17PasarDosTurnosNotificaAlPrimerJugadorUnaVecesHabilitadoYUnaVezAlJugador2(){
 
         List<Jugador> jugadores = new ArrayList <>();
-
 
         Jugador jugador1 = Mockito.mock(Jugador.class);
         Jugador jugador2 = Mockito.mock(Jugador.class);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-        Turno turno = new Turno(jugadores);
+        ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
+        Turno turno = new Turno(jugadores,inicioFirst);
+
         turno.pasarTurno();
         turno.pasarTurno();
 
-        verify(jugador1, times(1)).deshabilitar();
-        verify(jugador1, times(2)).habilitar();
+        verify(jugador1, times(1)).esTuTurno();
+        verify(jugador2, times(1)).esTuTurno();
 
-        verify(jugador2, times(1)).habilitar();
-        verify(jugador2, times(1)).deshabilitar();
+    }
 
-    }*/
+    @Test
+    public void test18PasarTurnoInicioSecondNotificaAlJugadorSiguienteComoHabilitado(){
+
+        List<Jugador> jugadores = new ArrayList <>();
+
+        Jugador jugador1 = Mockito.mock(Jugador.class);
+        Jugador jugador2 = Mockito.mock(Jugador.class);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ModoInicio inicioSecond= new ModoInicioEspecifico(TipoOrden.SECOND);
+        Turno turno = new Turno(jugadores,inicioSecond);
+
+        turno.pasarTurno();
+
+        verify(jugador2, never()).esTuTurno();
+        verify(jugador1, times(1)).esTuTurno();
+
+
+    }
+
 }

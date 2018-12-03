@@ -24,6 +24,11 @@ public class EnCurso implements Ijuego {
     }
 
     @Override
+    public Jugador getJugadorInactivo(Turno turno) {
+        return turno.getJugadorInactivo();
+    }
+
+    @Override
     public boolean juegoTerminado() {
         return false;
     }
