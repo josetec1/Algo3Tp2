@@ -28,16 +28,18 @@ public class AtaqueTest {
     private PlazaCentral plazaCentralEnemiga;
     private Cuartel cuartelEnemigo;
     private Aldeano aldeanoEnemigo;
-    private Castillo castillo;
+    private Castillo castilloAtacante;
+    private Castillo castilloEnemigo;
 
     /***************** PRUEBAS ARQUERO ATACANDO *******************************************/
 
     @Before
     public void setUp(){
-
+        castilloAtacante = new Castillo();
+        castilloEnemigo = new Castillo();
         mapa = new Mapa(50, 50);
-        jugadorAtacante = new Jugador("Diego", castillo);
-        jugadorEnemigo = new Jugador ("Maradona",castillo );
+        jugadorAtacante = new Jugador("Diego", castilloAtacante);
+        jugadorEnemigo = new Jugador ("Maradona",castilloEnemigo );
 
         jugadorAtacante.sumarOro(3000);
         jugadorEnemigo.sumarOro(3000);
@@ -57,6 +59,7 @@ public class AtaqueTest {
         jugadorEnemigo.agregarPieza(cuartelEnemigo);
         aldeanoEnemigo = new Aldeano();
         jugadorEnemigo.agregarPieza(aldeanoEnemigo);
+
     }
 
     @Test
@@ -92,19 +95,19 @@ public class AtaqueTest {
         Assert.assertEquals(plazaCentralEnemiga.getVidaActual(), plazaCentralEnemiga.getVidaMaxima() - 10);
     }
 
-    /*@Test // Observer del Castillo Enemigo
+    @Test
     public void test04AtacarCastilloDebeDisminuirSuVidaEn10(){
 
         mapa.colocar(arqueroAtacante, new Posicion(1,1));
-        mapa.colocar(castilloEn, new Posicion (2,3));
+        mapa.colocar(castilloEnemigo, new Posicion (2,2));
 
-        arqueroAtacante.colocarEn(new Posicion(1,1));
-        castillo.colocarEn(new Posicion(2, 2));
 
-        arqueroAtacante.atacar(castillo, jugadorAtacante);
 
-        Assert.assertEquals(castillo.getVidaActual(), castillo.getVidaMaxima() - 10);
-    }*/
+        arqueroAtacante.atacar(castilloEnemigo,jugadorAtacante,jugadorEnemigo,mapa);
+
+
+        Assert.assertEquals(castilloEnemigo.getVidaActual(), (castilloEnemigo.getVidaMaxima() - 10));
+    }
 
     @Test
     public void test05AtacarCuartelDebeDisminuirSuVidaEn10(){
@@ -289,7 +292,7 @@ public class AtaqueTest {
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
-
+/*
     @Test
     public void test21EspadachinDestruyeCuartelEnemigoSeDebeEliminarDelMapaYDelJugador(){
 
@@ -307,7 +310,7 @@ public class AtaqueTest {
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
-
+*/
     /***************** PRUEBAS CASTILLO ATACANDO *******************************************/
 /*
     @Test

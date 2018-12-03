@@ -17,7 +17,7 @@ public class EstadoMontada implements IEstadoMaquinariaMilitar{
 
     @Override
     public void nuevoTurno ( ArmaDeAsedio unidadMaquinaria ) { }
-
+/*
     public void atacar ( ArmaDeAsedio armaDeAsedio, int distanciaAtaque,
                          Manipulable receptorDelAtaque, Jugador jugadorAtacante, Jugador jugadorEnemigo, Mapa mapa ) {
 
@@ -29,6 +29,7 @@ public class EstadoMontada implements IEstadoMaquinariaMilitar{
 
         if(distanciaAtaque >= armaDeAsedio.getPosicion ().distancia(receptorDelAtaque.getPosicion()))
             receptorDelAtaque.serAtacadoPor(armaDeAsedio);
+
         else
             throw new UnidadFueraDeRangoDeAtaqueException();
 
@@ -37,7 +38,7 @@ public class EstadoMontada implements IEstadoMaquinariaMilitar{
             jugadorEnemigo.eliminarPieza(receptorDelAtaque);
         }
     }
-
+*/
     @Override
     public boolean puedeMoverse () {
         return false;
@@ -46,5 +47,10 @@ public class EstadoMontada implements IEstadoMaquinariaMilitar{
     @Override
     public boolean puedeAtacar () {
         return true;
+    }
+
+    @Override
+    public void atacar(ArmaDeAsedio armaDeAsedio, int distanciaAtaque, Manipulable receptorDelAtaque, Jugador atacante, Jugador jugadorAtacante, Mapa mapa) {
+
     }
 }

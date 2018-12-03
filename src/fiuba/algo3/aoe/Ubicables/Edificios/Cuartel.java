@@ -3,7 +3,9 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoAConstruir;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
@@ -39,10 +41,6 @@ public class Cuartel extends Edificio {
         this.estado.nuevoTurno(this,CURACION);
     }
 
-    @Override
-    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
-        throw  new FaltaImplementarException();
-    }
 
     public void crearArquero( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
         Arquero arquero= new  Arquero ();
@@ -58,6 +56,21 @@ public class Cuartel extends Edificio {
         if(!jugadorActivo.puedoAgregar (espadachin)){return;}
         jugadorActivo.agregarPieza ( espadachin );
         mapa.colocar ( espadachin,posicion );
+    }
+
+
+    @Override
+    public void disminuirVida(int vida, Jugador miJugador, Mapa mapa) {
+
+        this.vidaActual = this.vidaActual - vida;
+        if (this.vidaActual <= 0) {
+            // el edificio murio
+            mapa.remover(this);
+            miJugador.eliminarPieza(this);
+        }
+        else{
+            this.estado = new EstadoDaniado();
+        }
     }
 
 

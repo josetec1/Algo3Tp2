@@ -1,12 +1,10 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
-import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Jugadores.ObservableCastillo;
-import fiuba.algo3.aoe.Jugadores.ObservadorCastillo;
-import fiuba.algo3.aoe.Jugadores.ObservadorJugador;
+import fiuba.algo3.aoe.Jugadores.*;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
@@ -50,7 +48,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
         this.estado = new EstadoEnReparacion (aldeano);
     }
 
-
+/*
     public void atacar(Atacable unAtacable, Jugador jugadorAtacante) {
 
         if(!jugadorAtacante.esMio(this))
@@ -59,7 +57,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
         if(distanciaAtaque >= posicion.distancia(unAtacable.getPosicion()))
             unAtacable.serAtacadoPor(this);
     }
-
+*/
     @Override
     public int getDanioGeneradoAUnidad() {
         return danio;
@@ -71,10 +69,22 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     }
 
     @Override
+    public int getDistanciaAtaque() {
+        return 0;
+    }
+
+    @Override
+    public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
+
+    }
+
+
+    @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
     }
 
+    /*
     @Override
     public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
         if (this.vidaActual <= 0){
@@ -86,7 +96,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
             }
         }
     }
-
+*/
     public void crearArmaDeAsedio( Jugador jugadorActivo, Mapa mapa, Posicion posicion){
         ArmaDeAsedio armaDeAsedio= new ArmaDeAsedio ();
         if(!mapa.puedoColocar ( posicion,armaDeAsedio.getTamanio ())){return;}
@@ -98,6 +108,23 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     @Override
     public void agregarObservador(ObservadorCastillo unObservador) {
         this.observadores.add(unObservador);
+    }
+
+
+    @Override
+    public void disminuirVida(int vida, Jugador miJugador, Mapa mapa) {
+        this.vidaActual = this.vidaActual - vida;
+        if (this.vidaActual <= 0) {
+
+            mapa.remover(this);
+            //notifica a observadores
+            for (ObservadorCastillo observador : this.observadores){
+                observador.gano(miJugador);
+            }
+        }
+        else{
+            this.estado = new EstadoDaniado();
+        }
     }
 
 

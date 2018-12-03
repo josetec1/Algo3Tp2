@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Unidades.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.EstadoDesmontada;
@@ -33,20 +34,22 @@ public class ArmaDeAsedio extends UnidadMilitar{
     public void mover ( Mapa mapa, Direccionable direccion , Jugador jugador) {
         this.estado.mover ( mapa,direccion,this );
     }
-
+/*
     public void atacar( Manipulable receptorDelAtaque, Jugador jugadorAtacante, Jugador jugadorEnemigo, Mapa mapa){
         this.estado.atacar (this,distanciaAtaque,receptorDelAtaque,jugadorAtacante,jugadorEnemigo,mapa  );
     }
+*/
+
     @Override
     public void huboUnCambioDeTurno(Jugador unJugador) {
         this.estado.nuevoTurno ( this);
     }
-
+/*
     @Override
     public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
         throw new FaltaImplementarException();
     }
-
+*/
     public void cambiarEstado ( IEstadoMaquinariaMilitar estado ) {
         this.estado = estado;
     }
@@ -74,7 +77,10 @@ public class ArmaDeAsedio extends UnidadMilitar{
     }
 
 
+    @Override
+    public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
 
+    }
 }
 
 //TODO Refactor unidad MilitarMaquinaria,UnidadMilitarTropaUnidadMilitar

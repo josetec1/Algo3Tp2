@@ -6,5 +6,5 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 public interface Notificable {
 
      void huboUnCambioDeTurno (Jugador jugador);
-     void eliminarMuerto (Jugador jugador, Jugador enemigo, Mapa mapa);
+
 }

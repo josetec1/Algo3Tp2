@@ -18,7 +18,7 @@ public class ArqueroTest {
         Assert.assertEquals(arquero1.getDistanciaAtaque(),3);
     }
 
-
+/*
     @Test
     public void test02Disminuir50VidaArmaDeAsedioDevuelve25DeVida() {
 
@@ -27,4 +27,5 @@ public class ArqueroTest {
 
         Assert.assertEquals(arquero.getVidaActual(), arquero.getVidaMaxima() - 50);
     }
+    */
 }

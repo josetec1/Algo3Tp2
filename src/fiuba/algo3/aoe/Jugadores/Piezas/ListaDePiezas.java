@@ -180,7 +180,7 @@ public class ListaDePiezas {
 
     public void eliminarMuertos (Jugador jugador, Jugador enemigo, Mapa mapa){
         for (Manipulable manipulable : this.getPiezas()){
-            manipulable.eliminarMuerto(jugador,enemigo,mapa);
+           // manipulable.eliminarMuerto(jugador,enemigo,mapa);
         }
     }
 

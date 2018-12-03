@@ -53,6 +53,7 @@ public class Aldeano extends UnidadMovil  {
     public void cambiarAReparando(Edificio unEdificio) {
         this.estado = new EstadoReparando(this, unEdificio);}
 
+
     @Override
     public void huboUnCambioDeTurno(Jugador jugador) {
         if (!jugador.esMio(this)) {throw new NoEsMiJugadorException();}

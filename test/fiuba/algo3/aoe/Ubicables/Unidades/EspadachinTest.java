@@ -18,11 +18,12 @@ public class EspadachinTest {
         Assert.assertEquals(espadachin1.getDanioGeneradoAEdificio(),15);
         Assert.assertEquals(espadachin1.getDistanciaAtaque(),1);
     }
-
+/*
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
         Espadachin espadachin = new Espadachin();
         espadachin.disminuirVida(50);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
     }
+    */
 }

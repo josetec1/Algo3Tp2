@@ -180,7 +180,7 @@ public class EstadoEdificiosTest {
         estado.liberarAldeano ();
         Assert.assertTrue ( aldeano.estasDisponible () );
     }
-
+/*
     @Test
     public void test23EstadoEdificioEnReparacion1TurnoCambiaAEdificioNormal(){
         Aldeano aldeano = new Aldeano ();
@@ -191,7 +191,7 @@ public class EstadoEdificiosTest {
         estado.nuevoTurno (plaza,25 );
         Assert.assertFalse ( plaza.puedoReparar ());
     }
-
+*/
     @Test
     public void test24EstadoEdificioReparacionPuedoConstruirUnidadDevuelveFalse(){
         EstadoEdificio estado = new EstadoEnReparacion (new Aldeano ());

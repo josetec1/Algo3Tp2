@@ -2,11 +2,13 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEdificio;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
 import fiuba.algo3.aoe.Ubicables.Unidades.Aldeano;
+import fiuba.algo3.aoe.Ubicables.Unidades.FuegoAmigoException;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
 public abstract class Edificio implements Manipulable {
@@ -41,13 +43,10 @@ public abstract class Edificio implements Manipulable {
         return this.vidaActual;
     }
 
-    public void disminuirVida ( int unaCantidad ) {
-        this.vidaActual = this.vidaActual - unaCantidad;
-        this.estado = new EstadoDaniado ();
-        if (this.vidaActual < 0) {
-            this.vidaActual = 0;
-        }
-    }
+
+
+    @Override
+    public abstract void disminuirVida(int vida, Jugador miJugador, Mapa mapa);
 
     public void aumentarVida ( int unaCantidad ) {
         vidaActual += unaCantidad;
@@ -58,10 +57,12 @@ public abstract class Edificio implements Manipulable {
         }
     }
 
-    public void serAtacadoPor ( Atacante unAtacante ) {
-
-        this.disminuirVida(unAtacante.getDanioGeneradoAEdificio());
+    public void serAtacadoPor(Atacante unAtacante, Jugador jugadorAtacante, Jugador miJugador,Mapa mapa) {
+        if (jugadorAtacante.esMio(this)){throw new FuegoAmigoException();}
+        this.disminuirVida(unAtacante.getDanioGeneradoAEdificio(),miJugador,mapa);
     }
+
+
 
     public abstract void comenzarConstruccion(Aldeano aldeano, Jugador jugador); //TODO este metodo es el que tendria que notificar la creacion a la vista
 
@@ -91,4 +92,7 @@ public abstract class Edificio implements Manipulable {
     public void construir(Aldeano aldeano, Jugador jugador){
         this.estado.construir ( this,aldeano, jugador );
     }
+
+
+
 }
