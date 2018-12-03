@@ -9,7 +9,7 @@ public interface Ubicable{
 
      void colocarEn(Posicion posicion);
 
-     int getCosto();
+
 
       int getTamanio ();
 }

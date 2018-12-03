@@ -1,7 +1,7 @@
 package Entrega2;
 
 import fiuba.algo3.aoe.Juego.Turno.Turno;
-import fiuba.algo3.aoe.Jugador.ObservadorDeJugadorFicticio;
+
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import org.junit.Assert;
@@ -19,8 +19,7 @@ public class IntegracionTest {
     private Jugador jugador2;
     private List<Jugador> jugadores;
     private Turno turno;
-    private ObservadorDeJugadorFicticio observadorJugador1;
-    private ObservadorDeJugadorFicticio observadorJugador2;
+
 
 /*
     @Before

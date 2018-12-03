@@ -5,10 +5,7 @@ import fiuba.algo3.aoe.Jugadores.Piezas.ListaDePiezas;
 import fiuba.algo3.aoe.Jugadores.Piezas.PiezaAgenaException;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
-import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.Edificios.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
@@ -67,7 +64,7 @@ public class Jugador extends Observable  {
                 this.piezas.puedoAgregar(pieza)&& (pieza.getCosto()>=0) );
 
         }
-    public Boolean puedoAgregar(Edificio pieza){
+    public Boolean puedoAgregar(EdificioConstruible pieza){
         return (this.hayOroSuficiente(pieza.getCosto()) &&
                 this.piezas.puedoAgregar(pieza) && (pieza.getCosto()>=0) );
     }

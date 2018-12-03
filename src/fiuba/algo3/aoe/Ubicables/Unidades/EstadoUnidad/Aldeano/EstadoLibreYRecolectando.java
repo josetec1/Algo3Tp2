@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -13,7 +14,7 @@ public class EstadoLibreYRecolectando implements IEstadoUnidadAldeano {
 
 
     @Override
-    public void construir(Aldeano unAldeano, Edificio edificio, Mapa mapa, PosicionReal posicionReal, Jugador jugador) {
+    public void construir(Aldeano unAldeano, EdificioConstruible edificio, Mapa mapa, PosicionReal posicionReal, Jugador jugador) {
         //Chequeos
         if (!jugador.puedoAgregar(edificio) || (!mapa.puedoColocar(posicionReal,edificio.getTamanio()))
                 || (!edificio.puedoConstruir()) ) {

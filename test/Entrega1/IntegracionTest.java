@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
@@ -21,7 +22,7 @@ public class IntegracionTest {
         PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
-        Edificio plaza = new PlazaCentral();
+        EdificioConstruible plaza = new PlazaCentral();
         Jugador jugador = new Jugador("Estambul",castillo);
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
@@ -43,7 +44,7 @@ public class IntegracionTest {
         PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
-        Edificio plaza = new PlazaCentral();
+        EdificioConstruible plaza = new PlazaCentral();
         Jugador jugador = new Jugador("Estambul",castillo);
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
@@ -74,7 +75,7 @@ public class IntegracionTest {
         PosicionReal posicionReal = new PosicionReal(10,10);
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
-        Edificio plaza = new PlazaCentral();
+        EdificioConstruible plaza = new PlazaCentral();
         Jugador jugador = new Jugador("Estambul",castillo);
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);

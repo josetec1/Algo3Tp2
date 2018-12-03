@@ -2,9 +2,10 @@ package fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 
-public class EstadoAConstruir implements EstadoEdificio{
+public class EstadoAConstruir implements EstadoEdificioConstruible {
 
     public boolean puedoConstruir(){
         return true;
@@ -15,7 +16,7 @@ public class EstadoAConstruir implements EstadoEdificio{
     }
 
 
-    public void construir(Edificio edificio, Aldeano aldeano, Jugador jugador){
+    public void construir(EdificioConstruible edificio, Aldeano aldeano, Jugador jugador){
         edificio.comenzarConstruccion ( aldeano, jugador );
 
     }
@@ -25,7 +26,7 @@ public class EstadoAConstruir implements EstadoEdificio{
     }
 
     @Override
-    public void nuevoTurno (Edificio edificio,int curacion) {
+    public void nuevoTurno (EdificioConstruible edificio,int curacion) {
 
     }
 

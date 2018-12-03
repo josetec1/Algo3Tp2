@@ -298,8 +298,8 @@ public class AtaqueTest {
     @Test
     public void test21EspadachinDestruyeCuartelEnemigoSeDebeEliminarDelMapaYDelJugador(){
 
-        mapa.colocar(espadachinAtacante,new Posicion(4,4));
-        mapa.colocar(cuartelEnemigo, new Posicion(5,5));
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+        mapa.colocar(cuartelEnemigo, new PosicionReal(5,5));
 
         int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
@@ -308,7 +308,7 @@ public class AtaqueTest {
 
 
         Assert.assertEquals(cuartelEnemigo.getVidaActual(), 0);
-        Assert.assertTrue(mapa.puedoColocar(new Posicion(5,5), 2));
+        Assert.assertTrue(mapa.puedoColocar(new PosicionReal(5,5), 2));
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }

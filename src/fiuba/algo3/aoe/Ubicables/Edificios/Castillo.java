@@ -1,98 +1,65 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
+import fiuba.algo3.aoe.FaltaImplementarException;
 import fiuba.algo3.aoe.Jugadores.*;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoDaniado;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnReparacion;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoNormal;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.EstadoDaniadoCastillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.EstadoNormalCastillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.IEstadoCastillo;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionNula;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 import java.util.ArrayList;
 
 public class Castillo extends Edificio implements Atacante, ObservableCastillo {
-    private final int TAMANIO = 4;
-    private int distanciaAtaque = 3;
-    private int danio = 20;
+
+    private final int DISTANCIA_ATAQUE = 3;
+    private final int DANIO = 20;
     private final int CURACION = 15;
     private ArrayList<ObservadorCastillo> observadores;
-    //TODO implementar multiton
+    private IEstadoCastillo estado;
 
-    public Castillo( ){
-       vidaActual = 1000;
-       vidaMaxima = 1000;
-       this.tamanio = TAMANIO;
-       this.estado = new EstadoNormal ();
-       this.observadores = new ArrayList<>();
-
+    public Castillo() {
+        super(1000, new PosicionNula(), 4);
+        this.observadores = new ArrayList<>();
+        this.estado = new EstadoNormalCastillo();
     }
 
-    public int getCosto(){
-       // return this.costo;
-        throw new EdificioNoConstruibleSinCostoException(); //TODO esto hay que refactorizarlo
-    } // TODO necesito que devuelva 0
-      //TODO esto esta mal, si el castillo no tiene costo entonces no se cumple  "es un" edificio que tiene costo"
 
-    public void comenzarConstruccion(Aldeano aldeano, Jugador jugador){
-        throw new EdificioNoConstruibleSinCostoException ();
+
+    @Override
+    public void aumentarVida(int unaCantidad) {
+        throw  new FaltaImplementarException();
     }
 
     public void comenzarReparacion(Aldeano aldeano){
-        this.estado = new EstadoEnReparacion (aldeano);
-    }
-
-/*
-    public void atacar(Atacable unAtacable, Jugador jugadorAtacante) {
-
-        if(!jugadorAtacante.esMio(this))
-            throw new NoEsMiJugadorException(); //TODO reeveer excepcion
-
-        if(distanciaAtaque >= posicion.distancia(unAtacable.getPosicion()))
-            unAtacable.serAtacadoPor(this);
-    }
-*/
-    @Override
-    public int getDanioGeneradoAUnidad() {
-        return danio;
+        throw  new FaltaImplementarException();
+       // this.estado = new EstadoEnReparacion (aldeano);
     }
 
     @Override
-    public int getDanioGeneradoAEdificio() {
-        return danio;
+    public boolean puedoReparar() {
+        throw  new FaltaImplementarException();
     }
 
     @Override
-    public int getDistanciaAtaque() {
-        return 0;
+    public void reparar(Aldeano aldeano) {
+        throw  new FaltaImplementarException();
     }
 
     @Override
-    public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
-
+    public boolean puedocrearUnidad() {
+        throw  new FaltaImplementarException();
     }
 
 
-    @Override
-    public void huboUnCambioDeTurno ( Jugador jugador ) {
-        this.estado.nuevoTurno(this,CURACION);
-    }
 
-    /*
-    @Override
-    public void eliminarMuerto(Jugador jugador, Jugador enemigo, Mapa mapa) {
-        if (this.vidaActual <= 0){
-            //el tipo murio.
-            //me saco del tablero
-            mapa.remover(this);
-            for (ObservadorCastillo observador : this.observadores){ //le aviso a mi observador, que es el juego.
-                observador.gano(enemigo);
-            }
-        }
-    }
-*/
+
+
     public void crearArmaDeAsedio( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         ArmaDeAsedio armaDeAsedio= new ArmaDeAsedio ();
         if(!mapa.puedoColocar (posicionReal,armaDeAsedio.getTamanio ())){return;}
@@ -102,27 +69,66 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
         jugadorActivo.agregarPieza ( armaDeAsedio );
     }
 
+
+    @Override
+    public void huboUnCambioDeTurno ( Jugador jugador ) {
+        this.estado.nuevoTurno(this,CURACION);
+    }
     @Override
     public void agregarObservador(ObservadorCastillo unObservador) {
         this.observadores.add(unObservador);
     }
 
+    /*******************************************************
+     // Metodos de Atacante
+     ******************************************************/
+    @Override
+    public int getDanioGeneradoAUnidad() {
+        return DANIO;
+    }
+    @Override
+    public int getDanioGeneradoAEdificio() {
+        return DANIO;
+    }
+    @Override
+    public int getDistanciaAtaque() {
+        return DISTANCIA_ATAQUE;
+    }
+
+    @Override
+    public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
+     throw  new FaltaImplementarException();
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void disminuirVida(int vida, Jugador miJugador, Mapa mapa) {
-        this.vidaActual = this.vidaActual - vida;
-        if (this.vidaActual <= 0) {
 
+        int vidaAux = this.getVidaActual() - vida;
+
+        if (vidaAux <= 0) {
+            // el edificio murio
             mapa.remover(this);
             //notifica a observadores
-            for (ObservadorCastillo observador : this.observadores){
-                observador.gano(miJugador);
-            }
+            for (ObservadorCastillo observador : this.observadores){ observador.perdio(miJugador);}
         }
         else{
-            this.estado = new EstadoDaniado();
+            this.estado = new EstadoDaniadoCastillo();
         }
+        this.setVida(vidaAux);
     }
+
+    /*******************************************************
+     // Metodos de
+     ******************************************************/
 
 
 }

@@ -258,7 +258,7 @@ private Castillo castillo= new Castillo ();
     public void test17PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorSeAgregan47UnidadesYSeAgreganEdificios(){
 
         Aldeano unidad;
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -274,7 +274,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test18PuedoAgregarDebeDarTrueCuandoElEdificioNoFueAgregadaPreviamente(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -298,7 +298,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test20PuedoAgregarDebeDarTrueCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale100(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(100);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -310,7 +310,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test21PuedoAgregarDebeDarFalseCuandoAlCrearseJugadorCon100DeOroQuieroAgregarEdificioQueVale101(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(101);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -324,7 +324,7 @@ private Castillo castillo= new Castillo ();
 
         Cuartel edificio = Mockito.mock (Cuartel.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
-        Edificio otroEdificio = Mockito.mock (Edificio.class);
+        EdificioConstruible otroEdificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(otroEdificio.getCosto()).thenReturn(1);
         UnidadMovil unidad = Mockito.mock (UnidadMovil.class);
         Mockito.when(unidad.getCosto()).thenReturn(1);
@@ -449,7 +449,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test31EliminarPiezaDebeLanzarExcepcionSiLaPiezaNoFueAgregadaPreviamente(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -514,7 +514,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test36EsMioDebeDarFalseSiNoSeAgregoPreviamenteElEdificio(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 
@@ -600,7 +600,7 @@ private Castillo castillo= new Castillo ();
     @Test
     public void test43puedoAgregarDebeDarFalseSiElEdificioTieneCostoNegativo(){
 
-        Edificio edificio = Mockito.mock (Edificio.class);
+        EdificioConstruible edificio = Mockito.mock (EdificioConstruible.class);
         Mockito.when(edificio.getCosto()).thenReturn(-1);
         Jugador jugador1 = new Jugador("Maradona",castillo );
 

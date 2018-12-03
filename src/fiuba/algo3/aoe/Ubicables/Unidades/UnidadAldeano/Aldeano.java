@@ -4,6 +4,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Aldeano.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadMovil;
@@ -28,7 +29,7 @@ public class Aldeano extends UnidadMovil {
         this.estado.mover(this, mapa,direccion);
     }
 
-    public void construirEdificio (Edificio edificio, Mapa mapa, Jugador jugador, PosicionReal posicionReal){
+    public void construirEdificio (EdificioConstruible edificio, Mapa mapa, Jugador jugador, PosicionReal posicionReal){
         if (!jugador.esMio(this)) {throw new NoEsMiJugadorException();}
         this.estado.construir(this,edificio, mapa, posicionReal,jugador);
     }

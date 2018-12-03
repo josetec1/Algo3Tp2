@@ -5,6 +5,7 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Jugadores.Manipulable;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacante;
+import fiuba.algo3.aoe.Ubicables.Costeable;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public  abstract class UnidadMovil  implements Manipulable {
+public  abstract class UnidadMovil  implements Manipulable, Costeable {
     private final int TAMANIO = 1;
 
     private Posicion posicion;
@@ -21,7 +22,6 @@ public  abstract class UnidadMovil  implements Manipulable {
     private int vidaActual;
     private int costo;
     private int tamanio;
-
 
     public UnidadMovil (Posicion posicion, int vidaMaxima, int costo){
         this.posicion = posicion;
@@ -33,6 +33,7 @@ public  abstract class UnidadMovil  implements Manipulable {
 
 
     public abstract  void mover(Mapa mapa, Direccionable direccion, Jugador jugador);
+
     public Posicion obtenerPosicionDeAvance(Direccionable direccionable ){
         return this.getPosicion().calcularPosicionSiguiente(direccionable);
     }
@@ -70,13 +71,18 @@ public  abstract class UnidadMovil  implements Manipulable {
     public int getTamanio(){
         return this.tamanio;
     }
-    public int getCosto(){
-        return this.costo;
-    }
+
     public Posicion getPosicion() {
        return this.posicion;
     }
     public void colocarEn(Posicion posicion){
         this.posicion = posicion;
+    }
+
+    /*******************************************************
+     // Metodos de Costeable
+     ******************************************************/
+    public int getCosto(){
+        return this.costo;
     }
 }

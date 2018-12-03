@@ -142,7 +142,7 @@ public class Juego extends Observable implements ObservadorCastillo {
 
 
     @Override
-    public void gano(Jugador victorioso) {//aca me avisa el castillo que murio
+    public void perdio(Jugador perdedor) {//aca me avisa el castillo que murio
         //tengo que cambiar a estado finalizado.
         // estado finalizado se deberia crearse con el jugador victorioso
         // this.juego= new Finalizado (o.);

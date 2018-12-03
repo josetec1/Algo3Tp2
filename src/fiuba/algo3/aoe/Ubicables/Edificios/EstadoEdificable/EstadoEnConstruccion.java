@@ -2,14 +2,15 @@ package fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Edificio;
+import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 
-public class EstadoEnConstruccion implements EstadoEdificio{
+public class EstadoEnConstruccion implements EstadoEdificioConstruible {
 
     private Aldeano aldeano;
     private int turnosParaConstruccion;
 
-    public EstadoEnConstruccion( Aldeano aldeano,int turnosParaConstruccion){
+    public EstadoEnConstruccion(Aldeano aldeano, int turnosParaConstruccion){
         this.aldeano = aldeano;
         this.turnosParaConstruccion = turnosParaConstruccion;
     }
@@ -23,7 +24,7 @@ public class EstadoEnConstruccion implements EstadoEdificio{
     }
 
 
-    public void construir( Edificio edificio, Aldeano aldeano, Jugador jugador ){
+    public void construir( EdificioConstruible edificio, Aldeano aldeano, Jugador jugador ){
         throw new EdificioEnConstruccionException();
     }
 
@@ -32,7 +33,7 @@ public class EstadoEnConstruccion implements EstadoEdificio{
     }
 
     @Override
-    public void nuevoTurno (Edificio edificio,int curacion) {
+    public void nuevoTurno (EdificioConstruible edificio, int curacion) {
         turnosParaConstruccion-=1;
         if (turnosParaConstruccion == 0){
             this.liberarAldeano ();
