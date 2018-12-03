@@ -35,7 +35,6 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     
 	public ContenedorPrincipal(Stage unStage, Juego unJuego){
         final VBox vbox1=new VBox();
-
         this.setLeft(vbox1);
         vbox1.setTranslateX(5);
         vbox1.setTranslateY(10);
@@ -108,6 +107,14 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.crearBotonActualizar(vbox1);
         this.crearBotonesEdificiosConstruccion(vbox1);
         this.crearBotonesCreacionUnidades(vbox1);
+        this.crearBotonDesseleccionar(vbox1);
+    }
+
+    private void crearBotonDesseleccionar(VBox vBox){
+        Button desseleccion = new Button ( "Deshacer seleccion" );
+        DesHacerSeleccionHandler desHacerSeleccionHandler= new DesHacerSeleccionHandler();
+        desseleccion.setOnMouseClicked(desHacerSeleccionHandler);
+        vBox.getChildren ().add ( desseleccion );
     }
 
     private void crearBotonesCreacionUnidades(VBox vBox){

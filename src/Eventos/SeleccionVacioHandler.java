@@ -167,6 +167,10 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 					MapaVistaControlador.desSeleccionarEdificio();
 				}
 			}
+		}else if("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+			MenuInferior.getLog().appendText("\n En esta posicion no hay una unidad, selecciona al atacante y al blanco nuevamente");
+			MapaVistaControlador.desSeleccionarEdificio();
+			MapaVistaControlador.desSeleccionarUnidades();
 		}
 	}
 }
