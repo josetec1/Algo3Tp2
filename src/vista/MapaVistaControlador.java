@@ -25,6 +25,8 @@ import javafx.scene.layout.RowConstraints;
 //TODO ojo el obsvador juego....
 public class MapaVistaControlador {
 
+	private static String unidadSeleccionadaParaCrear;
+	private static boolean unidadParaCrearEstaSeleccionada;
     private static Mapa mapa;
 	private static GridPane tableroView;
 	private static Juego juego;
@@ -56,6 +58,26 @@ public class MapaVistaControlador {
 		mapa =unJuego.getMapa();
 		juego=unJuego;
 		this.desSeleccionarUnidades();
+	}
+
+	public static String getUnidadSeleccionadaParaCrear(){
+		if(!tengoUnidadSeleccionadaParaCrear()){
+			throw new NoHayUnidadSeleccionadaException();
+		}
+		return unidadSeleccionadaParaCrear;
+	}
+
+	public static boolean tengoUnidadSeleccionadaParaCrear(){
+		return unidadParaCrearEstaSeleccionada;
+	}
+
+	public static void seleccionarUnidadParaCreacion(String unidad){
+		unidadParaCrearEstaSeleccionada=true;
+		unidadSeleccionadaParaCrear=unidad;
+	}
+
+	public static void desSeleccionarUnidadParaCrear(){
+		unidadParaCrearEstaSeleccionada = false;
 	}
 
 	public static Mapa getMapa(){
@@ -102,6 +124,10 @@ public class MapaVistaControlador {
 		posicionRealSeleccionada = posicionReal;
 	}
 
+	public static boolean tengoAlgunEdificioSeleccionado() {
+		return castilloSeleccionada==true || plazaSeleccionada==true || cuartelSeleccionada == true;
+	}
+
 	public void dibujarTablero() {
 		tableroView.setOnMousePressed(null);
 		for (int i = 0; i<(mapa.getAncho()); i++){
@@ -135,8 +161,7 @@ public class MapaVistaControlador {
 	}
 
 	public static boolean tengoAlgunaUnidadSeleccionada(){
-		return (cuartelSeleccionada == true || plazaSeleccionada == true || aldeanoSeleccionado== true ||
-		espadachinSeleccionada== true || armAsedioSeleccionada==true ||	arqueroSeleccionada==true ||castilloSeleccionada==true);
+		return (aldeanoSeleccionado== true || espadachinSeleccionada== true || armAsedioSeleccionada==true ||arqueroSeleccionada==true ||castilloSeleccionada==true);
 	}
 	public static void desSeleccionarUnidades(){
 		cuartelSeleccionada=false;
@@ -276,7 +301,7 @@ public class MapaVistaControlador {
 	}
 
 	public void ubicarEspadachin (Espadachin espadachin, int x, int y){
-		Button botonArquero;
+		Button botonEspadachin;
 
 		//XXSentinelabotonAlgo = (Button) tableroView.getChildren().get((mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1);
 		//XXSentinelabotonAlgo.setText(unaldeano.getNombre());
@@ -288,12 +313,12 @@ public class MapaVistaControlador {
 
 
 		//int a = (mapa.getAlto()*x) + y + (mapa.getAlto()* mapa.getAncho())+1;
-		botonArquero = (Button) tableroView.getChildren().get((mapa.getAlto()*x-(y-1)));
+		botonEspadachin = (Button) tableroView.getChildren().get((mapa.getAlto()*x-(y-1)));
 		//	botonAlgo = (Button) tableroView.getChildren().get()
-		botonArquero.setText("A");
-		botonArquero.setStyle("-fx-background-color: GREEN");
-		SeleccionArqueroHandler seleccionArqueroHandler = new SeleccionArqueroHandler(arquero);
-		botonArquero.setOnMouseClicked(seleccionArqueroHandler);
+		botonEspadachin.setText("E");
+		botonEspadachin.setStyle("-fx-background-color: BROWN");
+		SeleccionEspadachinHandler seleccionEspadachinHandler = new SeleccionEspadachinHandler(espadachin);
+		botonEspadachin.setOnMouseClicked(seleccionEspadachinHandler);
 	}
 
 	public void ubicarCastillo (Castillo castillo){

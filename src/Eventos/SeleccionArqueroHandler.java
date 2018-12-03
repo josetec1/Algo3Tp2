@@ -28,10 +28,9 @@ public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
             alert.setTitle("Observar arquero");
             Cuadrante cuadrante = arquero.getPosicion().getCasilleros().get(0); // esto lo uso para que veamos que cambio de posicion
             alert.setHeaderText( "Arquero ");
-            alert.setContentText("Vida actual: " + arquero.getVidaActual() + "\nPoder: " + arquero.getVidaActual()
-                    + " (Costo: " + arquero.getCosto() + ")\nVelocidad: " + arquero.getCosto()
-                    + " (Posicion: X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\nRango de ataque: "
-                    + arquero.getCosto());
+            alert.setContentText("Vida actual: " + arquero.getVidaActual() + "\nDanio contra unidad: " + arquero.getDanioGeneradoAUnidad()
+                    + "\n Danio contra edificios "+ arquero.getDanioGeneradoAEdificio()+ "\nCosto: " + arquero.getCosto()
+                    + " \nPosicion: (X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\n");
             alert.showAndWait();
         } else {
 
@@ -58,23 +57,15 @@ public class SeleccionArqueroHandler implements EventHandler<MouseEvent> {
                     //si no esta seleccionado, entonces lo selecciono
                     MenuInferior.getLog().appendText("\nArquero Seleccionado, ahora elegi que atacar!!!!");
                     MapaVistaControlador.seleccionarArquero(arquero);
-                } /*else { //Seleccionado=true
+                }else{
 
-                    //ATACAR
-                    try {
-
-                        MenuInferior.getLog().appendText("\n Ya seleccionaste antes una unidad y ahora se ataca a arquero!");
-
-                        if(MapaVistaControlador.tengoEspadachinSeleccionado()){
-                           // Ataco
-                            // MapaVistaControlador.getEspadachinSeleccionado().atacar(arquero,Atacante,atacado,MapaVistaControlador.getMapa());
-                        }
-                    } catch (UnidadFueraDeRangoDeAtaqueException e) {
-
-
-                    }
-                }*/
-
+                }
+            }if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                //TODO ATAQUE
+                MenuInferior.getLog().appendText("\nAldeano no puede crear Unidad");
+            }if("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                //TODO ATAQUE
+                MenuInferior.getLog().appendText("\nAldeano no puede crear edificio");
             }
         }
     }

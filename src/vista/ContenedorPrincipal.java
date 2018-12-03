@@ -107,6 +107,24 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.crearBotonPasarTurno(vbox1);
         this.crearBotonActualizar(vbox1);
         this.crearBotonesEdificiosConstruccion(vbox1);
+        this.crearBotonesCreacionUnidades(vbox1);
+    }
+
+    private void crearBotonesCreacionUnidades(VBox vBox){
+        Button aldeano = new Button ( "Aldeano" );
+        SeleccionAldeanoParaCrearUnidadHandler aldeanoCrearHandler= new SeleccionAldeanoParaCrearUnidadHandler();
+        aldeano.setOnMouseClicked(aldeanoCrearHandler);
+        vBox.getChildren ().add ( aldeano );
+
+        Button arquero = new Button ( "Arquero" );
+        SeleccionArqueroParaCrearUnidadHandler arqueroCrearHandler= new SeleccionArqueroParaCrearUnidadHandler();
+        arquero.setOnMouseClicked(arqueroCrearHandler);
+        vBox.getChildren ().add ( arquero );
+
+        Button espadachin = new Button ( "Espadachin" );
+        SeleccionEspadachinParaCrearUnidadHandler espadachinCrearHandler= new SeleccionEspadachinParaCrearUnidadHandler();
+        espadachin.setOnMouseClicked(espadachinCrearHandler);
+        vBox.getChildren ().add ( espadachin );
     }
 
     private void crearBotonesEdificiosConstruccion(VBox vBox){

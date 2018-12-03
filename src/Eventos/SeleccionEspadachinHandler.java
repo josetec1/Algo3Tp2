@@ -28,13 +28,11 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
             alert.setTitle("Observar Espadachin");
             Cuadrante cuadrante = espadachin.getPosicion().getCasilleros().get(0); // esto lo uso para que veamos que cambio de posicion
             alert.setHeaderText( "Espadachin ");
-            alert.setContentText("Vida actual: " + espadachin.getVidaActual()
-                    + " (Costo: " + espadachin.getCosto()
-                    + " (Posicion: X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\nRango de ataque: "
-                    + espadachin.getCosto());
+            alert.setContentText("Vida actual: " + espadachin.getVidaActual() + "\nDanio contra unidad: " + espadachin.getDanioGeneradoAUnidad()
+                    + "\n Danio contra edificios "+ espadachin.getDanioGeneradoAEdificio()+ "\nCosto: " + espadachin.getCosto()
+                    + " \nPosicion: (X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\n");
             alert.showAndWait();
         } else {
-
             if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
                 if (!MapaVistaControlador.tengoArqueroSeleccionado()) {
                     //si no esta seleccionado, entonces lo selecciono
@@ -58,23 +56,15 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
                     //si no esta seleccionado, entonces lo selecciono
                     MenuInferior.getLog().appendText("\nEspadachin Seleccionado, ahora elegi que atacar!!!!");
                     MapaVistaControlador.seleccionarEspadachin(espadachin);
-                } /*else { //Seleccionado=true
+                } else{
 
-                    //ATACAR
-                    try {
-
-                        MenuInferior.getLog().appendText("\n Ya seleccionaste antes una unidad y ahora se ataca a arquero!");
-
-                        if(MapaVistaControlador.tengoEspadachinSeleccionado()){
-                           // Ataco
-                            // MapaVistaControlador.getEspadachinSeleccionado().atacar(arquero,Atacante,atacado,MapaVistaControlador.getMapa());
-                        }
-                    } catch (UnidadFueraDeRangoDeAtaqueException e) {
-
-
-                    }
-                }*/
-
+                }
+            }if("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                //TODO ATAQUE
+                MenuInferior.getLog().appendText("\nEspadachin no puede crear edificio");
+            }if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
+                //TODO ATAQUE
+                MenuInferior.getLog().appendText("\nEspadachin no puede crear Unidad");
             }
         }
     }
