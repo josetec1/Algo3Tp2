@@ -29,7 +29,8 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
     }
 
     public boolean estasDisponible() {
-        return false;
+        return this.estado.estasDisponible(); //todo implementar esto que esta mal  refac001
+
     }
     public void setMoviendose(){this.estado= new EstadoMoviendoseTropa();}
 
@@ -40,7 +41,8 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
     ******************************************************/
         @Override
         public void huboUnCambioDeTurno(Jugador jugador) {
-         throw  new FaltaImplementarException();
+         //throw  new FaltaImplementarException();  //todo implementar esto que esta mal  refac001
+            this.estado = new EstadoLibreTropa();
         }
 
     /*******************************************************

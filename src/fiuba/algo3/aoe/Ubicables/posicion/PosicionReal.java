@@ -9,10 +9,11 @@ public class PosicionReal extends Posicion {
     private int tamanio;
 
 
-    public PosicionReal(){
+    protected PosicionReal(){
 
     }
    //sobrecarga con Cuadrante
+
     public PosicionReal(Cuadrante unCuadrante){
         this.agregar(unCuadrante);
     }
@@ -109,4 +110,6 @@ public class PosicionReal extends Posicion {
         return distancia;
 
     }
+
+
 }

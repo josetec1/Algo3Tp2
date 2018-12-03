@@ -21,6 +21,7 @@ public class Cuartel extends EdificioConstruible {
     }
 
     public void crearArquero( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
+        if (!this.estado.puedoCrearUnidad()){throw  new NoSePuedeCrearUnidadException();} //todo implementar esto que esta mal  refac001
         Arquero arquero= new  Arquero ();
         if(!mapa.puedoColocar (posicionReal,arquero.getTamanio () )){return;}
         if(!jugadorActivo.puedoAgregar (arquero)){return;}
@@ -29,6 +30,7 @@ public class Cuartel extends EdificioConstruible {
         jugadorActivo.agregarPieza ( arquero );
     }
     public void crearEspadachin( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
+        if (!this.estado.puedoCrearUnidad()){throw  new NoSePuedeCrearUnidadException();} //todo implementar esto que esta mal  refac001
         Espadachin espadachin= new  Espadachin ();
         if(!mapa.puedoColocar (posicionReal,espadachin.getTamanio () )){return;}
         if(!jugadorActivo.puedoAgregar (espadachin)){return;}

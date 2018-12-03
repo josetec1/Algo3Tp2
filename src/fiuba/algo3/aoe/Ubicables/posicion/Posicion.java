@@ -19,4 +19,5 @@ public abstract class Posicion {
 
     protected Iterator<Cuadrante> getIterador(){return cuadrantes.iterator();}
 
+
 }
