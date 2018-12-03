@@ -32,11 +32,11 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
         MouseButton button = event.getButton();
         if (button == MouseButton.SECONDARY) { //Observar
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Observar arquero");
+            alert.setTitle("Observar Espadachin");
             Cuadrante cuadrante = espadachin.getPosicion().getCasilleros().get(0); // esto lo uso para que veamos que cambio de posicion
-            alert.setHeaderText( "Arquero ");
-            alert.setContentText("Vida actual: " + espadachin.getVidaActual() + "\nPoder: " + espadachin.getVidaActual()
-                    + " (Costo: " + espadachin.getCosto() + ")\nVelocidad: " + espadachin.getCosto()
+            alert.setHeaderText( "Espadachin ");
+            alert.setContentText("Vida actual: " + espadachin.getVidaActual()
+                    + " (Costo: " + espadachin.getCosto()
                     + " (Posicion: X: " + cuadrante.getX() +" Y :"+ cuadrante.getY() +")\nRango de ataque: "
                     + espadachin.getCosto());
             alert.showAndWait();
@@ -48,12 +48,12 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
                     if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(this.espadachin)){
                         MenuInferior.getLog().appendText("\nNo es tuyo");
                     }else{
-                        MenuInferior.getLog().appendText("\nArqueroSeleccionado Seleccionado");
+                        MenuInferior.getLog().appendText("\nEspadachin Seleccionado Seleccionado");
                         MapaVistaControlador.seleccionarEspadachin(espadachin);
                     }
                 } else {
 
-                    MenuInferior.getLog().appendText("\nHay otro aldeano en esta ubicacion, movimiento no valido");
+                    MenuInferior.getLog().appendText("\nHay otra unidad en esta ubicacion, movimiento no valido");
                     MapaVistaControlador.desSeleccionarUnidades();
 
                 } //el movimiento se realiza cuando hay un aldeano seleccionado y se hace click en un boton vacio
@@ -63,7 +63,7 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
                 //TODO ATAQUE
                 if (!MapaVistaControlador.tengoAlgunaUnidadSeleccionada()) {
                     //si no esta seleccionado, entonces lo selecciono
-                    MenuInferior.getLog().appendText("\nArquero Seleccionado, ahora elegi que atacar!!!!");
+                    MenuInferior.getLog().appendText("\nEspadachin Seleccionado, ahora elegi que atacar!!!!");
                     MapaVistaControlador.seleccionarEspadachin(espadachin);
                 } /*else { //Seleccionado=true
 
