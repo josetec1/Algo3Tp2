@@ -108,6 +108,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.crearBotonesEdificiosConstruccion(vbox1);
         this.crearBotonesCreacionUnidades(vbox1);
         this.crearBotonDesseleccionar(vbox1);
+        this.crearBotonPasarFinJuego(vbox1); //todo sacar
     }
 
     private void crearBotonDesseleccionar(VBox vBox){
@@ -158,6 +159,14 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         SeleccionPasarTurnoHandler seleccionPasarTurnoHandler = new SeleccionPasarTurnoHandler(this);
         pasarTurnoButton.setOnMouseClicked(seleccionPasarTurnoHandler);
         vbox1.getChildren ().add ( pasarTurnoButton );
+    }
+
+    //borrar TODO
+    private void crearBotonPasarFinJuego(VBox vbox1){
+        Button FinButton = new Button ( "Simular Fin" );
+        SeleccionFinJuegoHandler seleccionFinJuegoHandler = new SeleccionFinJuegoHandler (this);
+        FinButton.setOnMouseClicked(seleccionFinJuegoHandler);
+        vbox1.getChildren ().add ( FinButton );
     }
 
     private void crearBotonesDireccion(VBox vbox1){
@@ -257,15 +266,25 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-	    //1 hay que preguntarle siempre al juego si finalizo
-      //   if (this.juego.finalizo()) {mostrar al ganador}
-      // recargar el mapa y deshabilitar to do que no se pueda hacer mas nada o nose, lo que sea.
-
-      //2 si el juego no termino, actualizar la vista, osea estas cosas de aca abajo
-
+	    //1 actualizo to do SIMPRE
         this.actualizarMapa();
-        //this.actualizarPiezas(this.juego.getJugadorUno());
-       // this.actualizarPiezas(this.juego.getJugadorDos());
         this.setJugadores(this.juego.getJugadorUno(),this.juego.getJugadorDos());
+
+        //2 ahora pregunto si el juego finalizo para mostrar al ganador
+        if (this.juego.finalizo()){
+            // mostrar al ganador, podriamos deshabilitar botones no?
+
+           this.vistaMapa.finalizoJuego(this.juego.getWinner());
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }

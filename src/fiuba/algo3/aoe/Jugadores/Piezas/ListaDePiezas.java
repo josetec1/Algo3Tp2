@@ -156,7 +156,7 @@ public class ListaDePiezas {
         this.cuarteles.remove(pieza);
 
     }
-
+/*
     public boolean existe (Manipulable pieza){ //TODO REFACTOR
 
 
@@ -171,6 +171,22 @@ public class ListaDePiezas {
         return false;
 
     }
+*/
+    public boolean existe (Atacable pieza){ //TODO REFACTOR
+
+
+        if (this.aldeanos.contains(pieza))  return true;
+        if (this.espadachins.contains(pieza))  return true;
+        if (this.arqueros.contains(pieza))  return true;
+        if (this.armasDeAsedio.contains(pieza))  return true;
+        if (this.plazaCentrales.contains(pieza))  return true;
+        if (this.cuarteles.contains(pieza))  return true;
+        if (this.castillo == pieza)  return true;
+
+        return false;
+
+    }
+
 
     public void cambioDeTurno (Jugador jugador){
         for (Manipulable manipulable : this.getPiezas()){
@@ -178,10 +194,6 @@ public class ListaDePiezas {
         }
     }
 
-    public void eliminarMuertos (Jugador jugador, Jugador enemigo, Mapa mapa){
-        for (Manipulable manipulable : this.getPiezas()){
-           // manipulable.eliminarMuerto(jugador,enemigo,mapa);
-        }
-    }
+
 
 }

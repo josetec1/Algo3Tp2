@@ -2,6 +2,7 @@ package fiuba.algo3.aoe.Juego;
 import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioRandom;
 import fiuba.algo3.aoe.Juego.Turno.Turno;
 import fiuba.algo3.aoe.Juego.estadoJuego.EnCurso;
+import fiuba.algo3.aoe.Juego.estadoJuego.Finalizado;
 import fiuba.algo3.aoe.Juego.estadoJuego.Ijuego;
 
 import fiuba.algo3.aoe.Juego.estadoJuego.JuegoFinalizadoException;
@@ -145,13 +146,16 @@ public class Juego extends Observable implements ObservadorCastillo {
 
 
     @Override
-    public void perdio(Jugador perdedor) {//aca me avisa el castillo que murio
-        //tengo que cambiar a estado finalizado.
-        // estado finalizado se deberia crearse con el jugador victorioso
-        // this.juego= new Finalizado (o.);
+    public void castilloEliminado() {//aca me avisa el castillo que murio
 
-        //me parece que aca no hace falta actualizar, por que la llamada de esto viene en pasar jugada
-        // y despues de esta llamada, en pasar juegada, viene la notificacion a observadores
+        //tengo que cambiar a estado finalizado.
+        this.juego= new Finalizado(this.getJugadorActual());
+
+        //notificar a observadores.
+        this.setChanged();
+        this.notifyObservers();
 
     }
+
+    public Jugador getWinner(){return this.juego.getGanador();}
 }

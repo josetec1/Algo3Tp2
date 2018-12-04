@@ -15,7 +15,7 @@ public class EnCurso implements Ijuego {
 
     @Override
     public Jugador getGanador() {
-        return null;
+        throw new JuegoEnCursoException();
     }
 
     @Override

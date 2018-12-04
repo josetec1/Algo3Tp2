@@ -148,7 +148,7 @@ public class Jugador extends Observable  {
         this.notifyObservers();
      }
 
-    public boolean esMio( Manipulable pieza) {
+    public boolean esMio( Atacable pieza) {
        return this.piezas.existe(pieza);
      }
 

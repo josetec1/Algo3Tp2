@@ -55,5 +55,6 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
             throw new UnidadFueraDeRangoDeAtaqueException();
         }
         objetivoEnemigo.serAtacadoPor(this,miJugador,jugadorEnemigo,mapa);
-    }
+
+}
 }

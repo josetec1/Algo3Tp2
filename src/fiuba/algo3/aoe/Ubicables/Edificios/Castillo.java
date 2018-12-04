@@ -118,7 +118,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
             // el edificio murio
             mapa.remover(this);
             //notifica a observadores
-            for (ObservadorCastillo observador : this.observadores){ observador.perdio(miJugador);}
+            for (ObservadorCastillo observador : this.observadores){ observador.castilloEliminado();}
         }
         else{
             this.estado = new EstadoDaniadoCastillo();
