@@ -11,17 +11,37 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class AldeanoTest {
-    private Castillo castillo= new Castillo ();
+
+
+
+    private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("Pelusa",castillo,plaza,aldeanos);
+
+    }
+
     @Test
     public void test01SeCreaCorrectamenteAldeano(){
         Mapa mapa = new Mapa(10,10);
@@ -44,7 +64,7 @@ public class AldeanoTest {
     @Test
     public void test03AlCrearAldeanoEsteEstaDisponible(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
 
         Assert.assertTrue(aldeano.estasDisponible());
@@ -53,7 +73,7 @@ public class AldeanoTest {
     @Test
     public void test04AlCrearAldeanoEsteSePuedeMover(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
 
         Assert.assertTrue(aldeano.estasDisponible());
@@ -230,7 +250,7 @@ public class AldeanoTest {
         Castillo castillo = new Castillo();
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Mauricio",castillo);
+
         Aldeano aldeano = new Aldeano();
        jugador.agregarPieza(aldeano);
         mapa.colocar(aldeano,new PosicionReal(5,5));
@@ -244,7 +264,7 @@ public class AldeanoTest {
         Castillo castillo = new Castillo();
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Mauricio",castillo);
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         mapa.colocar(aldeano,new PosicionReal(5,5));
@@ -260,7 +280,7 @@ public class AldeanoTest {
         Castillo castillo = new Castillo();
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Mauricio",castillo);
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         mapa.colocar(aldeano,new PosicionReal(5,5));
@@ -276,7 +296,7 @@ public class AldeanoTest {
         Castillo castillo = new Castillo();
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Mauricio",castillo);
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(5,5);
@@ -350,7 +370,7 @@ public class AldeanoTest {
         Castillo castillo = new Castillo();
         Mapa mapa = new Mapa(101,101);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(500);
@@ -692,7 +712,7 @@ public class AldeanoTest {
     public void test40ConstruirEdificioDebeLanzarExcepcionSiNoSePuedeAgregarElEdificioPorFaltaDeOro (){
 
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Toledo", castillo);
+
         PlazaCentral plaza =new PlazaCentral();
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano); //se queda con 75 de oro y la plaza vale 100
@@ -707,7 +727,7 @@ public class AldeanoTest {
     public void test41ConstruirEdificioDebeLanzarExcepcionSiLaUnidadNoEsDelJugadorPasado (){
 
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Toledo", castillo);
+
         PlazaCentral plaza =new PlazaCentral();
         Aldeano aldeano = new Aldeano();
 
@@ -722,7 +742,7 @@ public class AldeanoTest {
 
         Mapa mapa = new Mapa(100,100);
         Direccionable direccion = new DireccionDerecha();
-        Jugador jugador = new Jugador("Toledo", castillo);
+
         Aldeano aldeano = new Aldeano();
         mapa.colocar(aldeano,new PosicionReal(5,5));
 
@@ -734,7 +754,7 @@ public class AldeanoTest {
     public void test42RepararDebeLanzarExcepcionSiLaUnidadNoEsDelJugadorPasado (){
 
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Toledo", castillo);
+
         PlazaCentral plaza =new PlazaCentral();
         Aldeano aldeano = new Aldeano();
 
@@ -747,7 +767,7 @@ public class AldeanoTest {
 
         Castillo castillo = Mockito.mock (Castillo.class);
         Aldeano aldeano = new Aldeano();
-        Jugador jugador = new Jugador("Madrid",castillo);
+
 
         thrown.expect(NoEsMiJugadorException.class);
         aldeano.huboUnCambioDeTurno(jugador);

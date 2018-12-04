@@ -6,10 +6,16 @@ import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.EstadoDaniadoCastillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.EstadoEnReparacionCastillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.EstadoNormalCastillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoCastillo.IEstadoCastillo;
+import fiuba.algo3.aoe.Ubicables.Unidades.EnemigoSinJugadorException;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstoyEnDosJugadoresException;
+import fiuba.algo3.aoe.Ubicables.Unidades.FuegoAmigoException;
+import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.UnidadFueraDeRangoDeAtaqueException;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionNula;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
@@ -33,31 +39,33 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
 
     @Override
     public void aumentarVida(int unaCantidad) {
-        throw  new FaltaImplementarException();
+        int vidaAux = this.getVidaActual() + unaCantidad;
+
+        if (vidaAux >= this.getVidaMaxima()) {
+            this.setVida(this.getVidaMaxima());
+            this.estado = new EstadoNormalCastillo();
+        }else{ this.setVida(vidaAux);}
     }
 
     public void comenzarReparacion(Aldeano aldeano){
-        throw  new FaltaImplementarException();
-       // this.estado = new EstadoEnReparacion (aldeano);
+        this.estado = new EstadoEnReparacionCastillo(aldeano);
     }
 
     @Override
     public boolean puedoReparar() {
-        throw  new FaltaImplementarException();
+        return this.estado.puedoReparar();
     }
 
     @Override
     public void reparar(Aldeano aldeano) {
-        throw  new FaltaImplementarException();
+        this.estado.reparar(this,aldeano);
     }
 
+    //todo refactor
     @Override
     public boolean puedocrearUnidad() {
-        throw  new FaltaImplementarException();
+        return this.estado.puedoCrearUnidad();
     }
-
-
-
 
 
     public void crearArmaDeAsedio( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
@@ -73,6 +81,8 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     @Override
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
+
+
     }
     @Override
     public void agregarObservador(ObservadorCastillo unObservador) {
@@ -97,16 +107,34 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
 
     @Override
     public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
-     throw  new FaltaImplementarException();
+        if (!miJugador.esMio(this)){throw new NoEsMiJugadorException();}
+        if (miJugador.esMio(objetivoEnemigo)){throw new FuegoAmigoException();}
+
+        if (jugadorEnemigo.esMio(this)){throw new EstoyEnDosJugadoresException();}
+        if (!jugadorEnemigo.esMio(objetivoEnemigo)){throw new EnemigoSinJugadorException();}
+
+
+        if(!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
+            throw new UnidadFueraDeRangoDeAtaqueException();
+        }
+        objetivoEnemigo.serAtacadoPor(this,jugadorEnemigo,mapa);
     }
 
+    @Override
+    public boolean puedoAtacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
+
+        if (!miJugador.esMio(this)){return false;}
+        if (miJugador.esMio(objetivoEnemigo)){return false;}
+
+        if (jugadorEnemigo.esMio(this)){return false;}
+        if (!jugadorEnemigo.esMio(objetivoEnemigo)){return false;}
 
 
-
-
-
-
-
+        if(!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
+            return false;
+        }
+        return true;
+    }
 
 
     @Override
@@ -127,8 +155,18 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     }
 
     /*******************************************************
-     // Metodos de
-     ******************************************************/
+     // propios
+     * *****************************************************/
 
+    public void atacarAlJugador(Jugador miJugador, Jugador enemigo,Mapa mapa){
 
+        if (!miJugador.esMio(this)) {throw  new NoEsMiJugadorException();}
+        if (enemigo.esMio(this)) {throw new FuegoAmigoException();}
+        for (Atacable atacable : enemigo.getAtacables()){
+
+            if (this.puedoAtacar(atacable,miJugador,enemigo,mapa)){
+                this.atacar(atacable,miJugador,enemigo,mapa);
+            }
+        }
+   }
 }

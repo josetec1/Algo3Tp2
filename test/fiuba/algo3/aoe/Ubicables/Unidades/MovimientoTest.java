@@ -4,19 +4,41 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.*;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 
 public class MovimientoTest {
-    private Castillo castillo = new Castillo();
+
+    private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("ElDiego",castillo,plaza,aldeanos);
+    }
+
+
+
+
+
     @Test
     public void test01MoverAldeanoArribaMueveCorrectamente(){
         Mapa mapa = new Mapa(20,20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(2,2);
@@ -33,7 +55,7 @@ public class MovimientoTest {
     @Test
     public void test02MoverAldeanoALaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(2, 2);
@@ -49,7 +71,7 @@ public class MovimientoTest {
     @Test
     public void test03MoverAldeanoALaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(1, 1);
@@ -65,7 +87,7 @@ public class MovimientoTest {
     @Test
     public void test04MoverAldeanoAbajoDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(1, 2);
@@ -81,7 +103,7 @@ public class MovimientoTest {
     @Test
     public void test05MoverAldeanoArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(1, 1);
@@ -97,7 +119,7 @@ public class MovimientoTest {
     @Test
     public void test06MoverAldeanoArribaIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(2, 1);
@@ -113,7 +135,7 @@ public class MovimientoTest {
     @Test
     public void test07MoverAldeanoAbajoIzquierdaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(2, 2);
@@ -129,7 +151,7 @@ public class MovimientoTest {
     @Test
     public void test08MoverAldeanoAbajoDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Aldeano aldeano = new Aldeano();
         jugador.agregarPieza(aldeano);
         PosicionReal origen = new PosicionReal(1, 2);
@@ -145,7 +167,7 @@ public class MovimientoTest {
     @Test
     public void test09MoverArqueroArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Arquero arquero = new Arquero();
         jugador.agregarPieza(arquero);
         PosicionReal origen = new PosicionReal(1, 1);
@@ -161,7 +183,7 @@ public class MovimientoTest {
     @Test
     public void test010MoverEspadachinArribaDerechaDePosicionMueveCorrectamente() {
         Mapa mapa = new Mapa(20, 20);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         Espadachin espadachin = new Espadachin();
         jugador.agregarPieza(espadachin);
         PosicionReal origen = new PosicionReal(1, 1);

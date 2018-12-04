@@ -6,19 +6,40 @@ import fiuba.algo3.aoe.Ubicables.Direccion.DireccionArribaDerecha;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.MaquinariaMilitar.*;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
 
 public class EstadoArmaMaquinariaTest {
+    private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador1;
+    private Jugador jugador2;
 
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador1 = new Jugador("Pelusa",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Armando",castillo,plaza,aldeanos);
+
+    }
     @Test
     public void test01EstadoMontadaPuedeAtacarNoPuedeMoverse(){
         EstadoMontada estado = new EstadoMontada ();
@@ -44,17 +65,16 @@ public class EstadoArmaMaquinariaTest {
         thrown.expect ( DebeDesmontarsePrimeroException.class );
         estado.mover ( mock( Mapa.class),mock( Direccionable.class ),mock(ArmaDeAsedio.class) );
     }
-/*
+
     @Test
     public void test04EstadoMontadaAtacarArmaDeAsedioACuartelDevuelveVida(){
         EstadoMontada estado = new EstadoMontada ();
         Cuartel cuartel = new Cuartel ();
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio ();
         Mapa mapa = new Mapa ( 200,200 );
-        Posicion posicion1 = new Posicion ( 1,1 );
-        Posicion posicion2 = new Posicion ( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+        Posicion posicion1 = new PosicionReal ( 1,1 );
+        Posicion posicion2 = new PosicionReal ( 2,2 );
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -62,10 +82,10 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( armaDeAsedio,posicion1 );
         mapa.colocar ( cuartel,posicion2 );
 
-        estado.atacar (armaDeAsedio,armaDeAsedio.getDistanciaAtaque (),cuartel,jugador1,jugador2,mapa  );
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa  );
         Assert.assertThat ( cuartel.getVidaActual () ,is(175) );
     }
-*/
+
     @Test
     public void test05EstadoDesmontadaPuedeMoverseNoPuedeAtacar(){
         EstadoDesmontada estado = new EstadoDesmontada ();
@@ -91,8 +111,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -101,7 +120,7 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( cuartel, posicionReal2);
 
         thrown.expect ( DebeMontarsePrimeroException.class );
-        estado.atacar (armaDeAsedio,5,cuartel,jugador1,jugador2,mapa);
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa);
     }
 
     @Test
@@ -111,7 +130,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
+
 
         jugador1.sumarOro ( 999 );
 
@@ -156,8 +175,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -165,7 +183,7 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( armaDeAsedio, posicionReal1);
         mapa.colocar ( cuartel, posicionReal2);
         thrown.expect ( DebeMontarsePrimeroException.class );
-        estado.atacar (armaDeAsedio,armaDeAsedio.getDistanciaAtaque (),cuartel,jugador1,jugador2,mapa  );
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa  );
     }
 
     @Test
@@ -200,8 +218,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -209,7 +226,7 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( armaDeAsedio, posicionReal1);
         mapa.colocar ( cuartel, posicionReal2);
         thrown.expect ( UnidadYaRealizoMovimientoEsteTurnoException.class );
-        estado.atacar (armaDeAsedio,armaDeAsedio.getDistanciaAtaque (),cuartel,jugador1,jugador2,mapa  );
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa  );
     }
 
     @Test
@@ -244,8 +261,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -253,7 +269,7 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( armaDeAsedio, posicionReal1);
         mapa.colocar ( cuartel, posicionReal2);
         thrown.expect ( UnidadYaRealizoMovimientoEsteTurnoException.class );
-        estado.atacar (armaDeAsedio,armaDeAsedio.getDistanciaAtaque (),cuartel,jugador1,jugador2,mapa  );
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa  );
     }
 
     @Test
@@ -288,8 +304,7 @@ public class EstadoArmaMaquinariaTest {
         Mapa mapa = new Mapa ( 200,200 );
         PosicionReal posicionReal1 = new PosicionReal( 1,1 );
         PosicionReal posicionReal2 = new PosicionReal( 2,2 );
-        Jugador jugador1 = new Jugador ( "Mauricio",mock( Castillo.class ) );
-        Jugador jugador2 = new Jugador ( "Mauricio2",mock ( Castillo.class ));
+
         jugador1.sumarOro ( 999 );
         jugador2.sumarOro ( 999 );
         jugador1.agregarPieza ( armaDeAsedio );
@@ -297,7 +312,7 @@ public class EstadoArmaMaquinariaTest {
         mapa.colocar ( armaDeAsedio, posicionReal1);
         mapa.colocar ( cuartel, posicionReal2);
         thrown.expect ( UnidadYaRealizoMovimientoEsteTurnoException.class );
-        estado.atacar (armaDeAsedio,armaDeAsedio.getDistanciaAtaque (),cuartel,jugador1,jugador2,mapa  );
+        estado.atacar (armaDeAsedio,cuartel,jugador1,jugador2,mapa  );
     }
 
 

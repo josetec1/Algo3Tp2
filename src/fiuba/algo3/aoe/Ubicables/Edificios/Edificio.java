@@ -7,6 +7,7 @@ import fiuba.algo3.aoe.Ubicables.Atacante;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.FuegoAmigoException;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 
 public abstract class Edificio implements Manipulable {
 
@@ -58,8 +59,8 @@ public abstract class Edificio implements Manipulable {
         return this.vidaActual;
     }
     @Override
-    public void serAtacadoPor(Atacante unAtacante, Jugador jugadorAtacante, Jugador miJugador,Mapa mapa) {
-        if (jugadorAtacante.esMio(this)){throw new FuegoAmigoException();}
+    public void serAtacadoPor(Atacante unAtacante,Jugador miJugador,Mapa mapa) {
+
         this.disminuirVida(unAtacante.getDanioGeneradoAEdificio(),miJugador,mapa);
     }
 

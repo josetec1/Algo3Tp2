@@ -1,19 +1,37 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 
 public class EdificiosTest {
 
     private Castillo castillo= new Castillo();
-    private Jugador jugador = new Jugador("Armando",castillo);
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("ElDiego",castillo,plaza,aldeanos);
+    }
+
+
 
 
     @Test
@@ -299,4 +317,10 @@ public class EdificiosTest {
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
     }
     */
-}
+
+
+
+
+   }
+
+

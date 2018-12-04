@@ -6,7 +6,10 @@ import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioEspecifico;
 import fiuba.algo3.aoe.Juego.Turno.ModosDeInicio.ModoInicioRandom;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,14 +27,33 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class TurnoTest {
-    private Castillo castillo= new Castillo ();
+
+    private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador1;
+    private Jugador jugador2;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+
+    }
+
+
+
+
     @Test
     public void test01CrearTurnoInicializaTurnoConNumero1SiUsoFirstParaArrancar(){
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
+
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
@@ -46,8 +68,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.SECOND);
@@ -61,8 +83,8 @@ public class TurnoTest {
     public void test03CrearTurnoConInicioRandomLuegoDeMuchasIteracionesElJugadorInicialEsElUnoYElDos(){
 
         List<Jugador> jugadores = new ArrayList <>();
-        Jugador jugador1 = new Jugador("Diego", castillo);
-        Jugador jugador2 = new Jugador("Maradona", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
@@ -88,8 +110,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores,inicioFirst);
@@ -102,8 +124,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores,inicioFirst);
@@ -129,7 +151,8 @@ public class TurnoTest {
     @Test
     public void test07InicializarTurnoConListaDeJugadoresConUnJugadorLanzajugadoresInvalidosExeption(){
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+
         List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         thrown.expect(JugadoresInvalidosException.class);
@@ -139,9 +162,11 @@ public class TurnoTest {
     @Test
     public void test08InicializarTurnoConListaDeJugadoresDeMasDeDosJugadoresLanzajugadoresInvalidosExeption(){
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Maradona", castillo);
-        Jugador jugadorQueSobra = new Jugador("Messi", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
+
+        Jugador jugadorQueSobra = new Jugador("Messi",castillo,plaza,aldeanos);
+
         List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
@@ -154,7 +179,8 @@ public class TurnoTest {
     @Test
     public void test09InicializarTurnoConListaDeJugadoresConDosJugadoresIgualesDebeLanzajugadoresInvalidosExeption(){
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+
         List<Jugador> jugadores = new ArrayList <>();
         jugadores.add(jugador1);
         jugadores.add(jugador1);
@@ -167,8 +193,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
@@ -183,8 +209,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.SECOND);
@@ -199,8 +225,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.SECOND);
@@ -215,8 +241,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
 
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
@@ -231,8 +257,8 @@ public class TurnoTest {
 
         List<Jugador> jugadores = new ArrayList <>();
         ModoInicio inicioFirst= new ModoInicioEspecifico(TipoOrden.FIRST);
-        Jugador jugador1 = new Jugador("Mauricio", castillo);
-        Jugador jugador2 = new Jugador("Jose", castillo);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Diego",castillo,plaza,aldeanos);
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Turno turno = new Turno(jugadores,inicioFirst);

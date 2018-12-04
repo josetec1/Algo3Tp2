@@ -5,9 +5,13 @@ import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Atacable;
 import fiuba.algo3.aoe.Ubicables.Direccion.Direccionable;
+import fiuba.algo3.aoe.Ubicables.Unidades.EnemigoSinJugadorException;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoAtacandoTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoLibreTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.EstadoMoviendoseTropa;
 import fiuba.algo3.aoe.Ubicables.Unidades.EstadoUnidad.Militar.IEstadoUnidadMilitarTropa;
+import fiuba.algo3.aoe.Ubicables.Unidades.EstoyEnDosJugadoresException;
+import fiuba.algo3.aoe.Ubicables.Unidades.FuegoAmigoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.NoEsMiJugadorException;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 
@@ -33,7 +37,7 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
 
     }
     public void setMoviendose(){this.estado= new EstadoMoviendoseTropa();}
-
+    public void setAtacando () {this.estado= new EstadoAtacandoTropa();}
 
 
     /*******************************************************
@@ -41,20 +45,43 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
     ******************************************************/
         @Override
         public void huboUnCambioDeTurno(Jugador jugador) {
-         //throw  new FaltaImplementarException();  //todo implementar esto que esta mal  refac001
-            this.estado = new EstadoLibreTropa();
+          this.estado = new EstadoLibreTropa();
         }
 
     /*******************************************************
      // Metodos de Atacante
      ******************************************************/
-    @Override
-    public void atacar(Atacable objetivoEnemigo,Jugador miJugador,Jugador jugadorEnemigo, Mapa mapa){
-        if (!miJugador.esMio(this)){throw new NoEsMiJugadorException();}
-        if(!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
-            throw new UnidadFueraDeRangoDeAtaqueException();
-        }
-        objetivoEnemigo.serAtacadoPor(this,miJugador,jugadorEnemigo,mapa);
 
-}
+    public void atacar(Atacable objetivoEnemigo,Jugador miJugador,Jugador jugadorEnemigo, Mapa mapa){
+
+        this.estado.atacar (this, objetivoEnemigo, miJugador, jugadorEnemigo,  mapa);
+    }
+
+    //todo refactor
+    public boolean puedoAtacar(Atacable objetivoEnemigo, Jugador miJugador,Jugador jugadorEnemigo, Mapa mapa){
+
+        if (this.estado.estasDisponible()) {
+
+            if (!miJugador.esMio(this)) {
+                return false;
+            }
+            if (miJugador.esMio(objetivoEnemigo)) {
+                return false;
+            }
+
+            if (jugadorEnemigo.esMio(this)) {
+                return false;
+            }
+            if (!jugadorEnemigo.esMio(objetivoEnemigo)) {
+                return false;
+            }
+
+            if (!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+
+    }
 }

@@ -9,12 +9,27 @@ import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+
 public class IntegracionTest {
 
+    private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
 
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("ElDiego",castillo,plaza,aldeanos);
+    }
 
     @Test
     public void test01AldeanoAlContruirEdificioYpasar3TurnosQuedaLibre(){
@@ -23,7 +38,7 @@ public class IntegracionTest {
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         EdificioConstruible plaza = new PlazaCentral();
-        Jugador jugador = new Jugador("Estambul",castillo);
+
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
 
@@ -45,7 +60,7 @@ public class IntegracionTest {
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         EdificioConstruible plaza = new PlazaCentral();
-        Jugador jugador = new Jugador("Estambul",castillo);
+
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
         aldeano.construirEdificio(plaza,mapa,jugador, posicionReal);
@@ -76,7 +91,7 @@ public class IntegracionTest {
         Castillo castillo = new Castillo();
         Aldeano aldeano = new Aldeano();
         EdificioConstruible plaza = new PlazaCentral();
-        Jugador jugador = new Jugador("Estambul",castillo);
+
         jugador.agregarPieza(aldeano);
         jugador.sumarOro(25);
         aldeano.construirEdificio(plaza,mapa,jugador, posicionReal);

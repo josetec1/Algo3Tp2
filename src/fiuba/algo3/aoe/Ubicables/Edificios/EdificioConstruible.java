@@ -64,6 +64,7 @@ public abstract  class EdificioConstruible extends Edificio implements Costeable
         int vidaAux = this.getVidaActual() - vida;
         if (vidaAux <= 0) {
             // el edificio murio
+            vidaAux=0;
             mapa.remover(this);
             miJugador.eliminarPieza(this);
 

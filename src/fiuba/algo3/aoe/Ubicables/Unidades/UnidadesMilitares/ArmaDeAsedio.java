@@ -53,15 +53,30 @@ public class ArmaDeAsedio extends UnidadMilitar{
 
     @Override
     public void atacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
-        throw  new FaltaImplementarException();
+        this.estado.atacar(this,objetivoEnemigo,miJugador,jugadorEnemigo,mapa);
+
     }
-/*
-    public void atacar( Manipulable receptorDelAtaque, Jugador jugadorAtacante, Jugador jugadorEnemigo, Mapa mapa){
-        this.estado.atacar (this,distanciaAtaque,receptorDelAtaque,jugadorAtacante,jugadorEnemigo,mapa  );
-    }
-*/
+
+    //todo refactor
+    @Override
+    public boolean puedoAtacar(Atacable objetivoEnemigo, Jugador miJugador, Jugador jugadorEnemigo, Mapa mapa) {
+        if  (this.estado.puedeAtacar()){
+
+            if (!miJugador.esMio(this)){return false;}
+            if (miJugador.esMio(objetivoEnemigo)){return false;}
+
+            if (jugadorEnemigo.esMio(this)){return false;}
+            if (!jugadorEnemigo.esMio(objetivoEnemigo)){return false;}
 
 
+            if(!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
+                return false;
+            }
+            return true;
+
+        }
+        return false;
+    }
 
 
 }

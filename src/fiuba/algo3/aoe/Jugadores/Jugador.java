@@ -26,19 +26,19 @@ public class Jugador extends Observable  {
     private final int ORO_INICIAL = 100;
     private final int ALDEANOS_INICIALES = 3;
 
-
+/*
     public Jugador(String nombre, Castillo castillo){
         this.nombre = nombre;
         this.oro = ORO_INICIAL;
         this.piezas = new ListaDePiezas(castillo);
 
         //TODO este constructor muere
-        ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano());
-        this.inicializar(new PlazaCentral(), aldeanos);
+       // ArrayList<Aldeano> aldeanos = new ArrayList<>();
+        //aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano());
+        //this.inicializar(new PlazaCentral(), aldeanos);
 
     }
-
+*/
     public Jugador(String nombre, Castillo castillo, PlazaCentral plaza, ArrayList<Aldeano> aldeanos){
         this.nombre = nombre;
         this.oro = ORO_INICIAL;

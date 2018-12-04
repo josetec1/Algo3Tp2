@@ -42,8 +42,8 @@ public  abstract class UnidadMovil  implements Manipulable, Costeable {
     // Metodos de Atacable
     ******************************************************/
 
-    public void serAtacadoPor(Atacante unAtacante, Jugador jugadorAtacante, Jugador miJugador,Mapa mapa) {
-        if (jugadorAtacante.esMio(this)){throw new FuegoAmigoException();}
+    public void serAtacadoPor(Atacante unAtacante,Jugador miJugador,Mapa mapa) {
+
         this.disminuirVida(unAtacante.getDanioGeneradoAUnidad(),miJugador,mapa);
     }
 

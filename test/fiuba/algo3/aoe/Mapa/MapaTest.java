@@ -8,13 +8,30 @@ import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import fiuba.algo3.aoe.Ubicables.Ubicable;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.CoreMatchers.is;
 
 public class MapaTest {
     private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("Pelusa",castillo,plaza,aldeanos);
+
+    }
 
     @Test
     public void test01AlCrearElTableroPuedoColocarDeberiaDarTrueSiLaPosicionPerteneceAlTablero() {
@@ -48,7 +65,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         PosicionReal posicionReal = new PosicionReal(1,1);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento, posicionReal);
 
@@ -60,7 +77,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         PosicionReal posicionReal = new PosicionReal(1,1);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         Assert.assertEquals( mapa.puedoColocar(posicionReal,elemento.getTamanio()), true );
         mapa.colocar(elemento, posicionReal);
@@ -77,7 +94,7 @@ public class MapaTest {
 
         Mapa mapa = new Mapa( 10,10);
         PosicionReal posicionRealFueraDeTablero = new PosicionReal(11,1);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         thrown.expect(FueraDelMapaException.class);
         mapa.colocar(elemento, posicionRealFueraDeTablero);
@@ -92,7 +109,7 @@ public class MapaTest {
 
         PosicionReal posicionRealSuperpuesta = new PosicionReal(60,66);
 
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         Ubicable elementoSuperpuesto = new Aldeano();
         mapa.colocar(elemento, unaPosicionReal);
@@ -109,7 +126,7 @@ public class MapaTest {
         PosicionReal unaPosicionReal = new PosicionReal(3,3);
         PosicionReal otraPosicionReal = new PosicionReal(4,4);
 
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento, unaPosicionReal);
 
@@ -124,7 +141,7 @@ public class MapaTest {
         posicionReal.agregar(new Cuadrante(1,2));
         posicionReal.agregar(new Cuadrante(2,2));
         posicionReal.agregar(new Cuadrante(2,1));
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento, posicionReal);
 
@@ -135,7 +152,7 @@ public class MapaTest {
     public void test10RemoverDebeLanzarExcepcionSiElElementoNoFueColocadoPreviamente(){
 
         Mapa mapa = new Mapa( 10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento= new Aldeano();
 
 
@@ -148,7 +165,7 @@ public class MapaTest {
     public void test11RemoverRemueveElElementoColocadoPreviamente(){
 
         Mapa mapa = new Mapa( 10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         PosicionReal unaPosicionReal = new PosicionReal(3,3);
         Ubicable elemento= new Aldeano();
 
@@ -163,7 +180,7 @@ public class MapaTest {
     public void test12MoverDebeLanzarExcepcionSiElDestinoEstaFueraDelTablero(){
         Mapa mapa = new Mapa( 10,10);
         PosicionReal posicionReal = new PosicionReal(10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
 
 
         PosicionReal posicionRealFueraDeMapa =new PosicionReal(11,10);
@@ -181,7 +198,7 @@ public class MapaTest {
         PosicionReal posicionRealInicial = new PosicionReal(9,10);
 
         PosicionReal posicionRealDestino = new PosicionReal(10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento, posicionRealInicial);
 
@@ -198,7 +215,7 @@ public class MapaTest {
         Mapa mapa = new Mapa( 10,10);
 
         PosicionReal unaPosicionReal = new PosicionReal(3,3);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento= new Aldeano();
 
 
@@ -215,7 +232,7 @@ public class MapaTest {
 
         PosicionReal posicionRealInicial = new PosicionReal(9,10);
         PosicionReal posicionRealDestino = new PosicionReal(10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Ubicable elemento = new Aldeano();
         mapa.colocar(elemento, posicionRealInicial);
 

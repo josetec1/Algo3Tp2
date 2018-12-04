@@ -10,13 +10,17 @@ public interface IEstadoCastillo {
 
     void nuevoTurno(Castillo castillo, int CURACION);
 
-
-
     boolean puedoReparar();
-
     void reparar(Edificio edificio , Aldeano aldeano );
     boolean puedoCrearUnidad();
     void liberarAldeano();
+
+
+
+
+
+
+
 
 
 }

@@ -11,7 +11,7 @@ public interface Atacable  extends Ubicable{
     int getVidaMaxima(); // para que???
 
     void disminuirVida( int vida, Jugador miJugador, Mapa mapa );
-    void serAtacadoPor(Atacante unAtacante,Jugador jugadorAtacante, Jugador miJugador, Mapa mapa);
+    void serAtacadoPor(Atacante unAtacante,Jugador miJugador, Mapa mapa);
 
 
 

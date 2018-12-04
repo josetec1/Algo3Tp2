@@ -25,7 +25,7 @@ public class EstadoNormal implements EstadoEdificioConstruible {
 
     @Override
     public void nuevoTurno (EdificioConstruible edificio, int curacion) {
-
+            //no hacer nada
     }
 
     public boolean puedoCrearUnidad(){

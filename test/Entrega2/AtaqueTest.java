@@ -14,7 +14,13 @@ import fiuba.algo3.aoe.Ubicables.posicion.PosicionNulaException;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
+
+import static org.hamcrest.core.Is.is;
 
 public class AtaqueTest {
 
@@ -33,6 +39,11 @@ public class AtaqueTest {
     private Castillo castilloAtacante;
     private Castillo castilloEnemigo;
 
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private ArrayList<Aldeano> aldeanosEnemigos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private PlazaCentral plazaEnemiga;
+
     /***************** PRUEBAS ARQUERO ATACANDO *******************************************/
 
     @Before
@@ -40,8 +51,19 @@ public class AtaqueTest {
         castilloAtacante = new Castillo();
         castilloEnemigo = new Castillo();
         mapa = new Mapa(50, 50);
-        jugadorAtacante = new Jugador("Diego", castilloAtacante);
-        jugadorEnemigo = new Jugador ("Maradona",castilloEnemigo );
+
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+
+        plazaEnemiga = new PlazaCentral();
+        aldeanosEnemigos.add(new Aldeano());
+        aldeanosEnemigos.add(new Aldeano());
+        aldeanosEnemigos.add(new Aldeano());
+
+        jugadorAtacante = new Jugador("Diego",castilloAtacante, plaza,aldeanos);
+        jugadorEnemigo = new Jugador ("Maradona",castilloEnemigo,plazaEnemiga,aldeanosEnemigos );
 
         jugadorAtacante.sumarOro(3000);
         jugadorEnemigo.sumarOro(3000);
@@ -211,18 +233,18 @@ public class AtaqueTest {
 
         Assert.assertEquals(plazaCentralEnemiga.getVidaActual(), plazaCentralEnemiga.getVidaMaxima() - 15);
     }
-/*
+
     @Test
     public void test14AtacarCastilloDebeDisminuirSuVidaEn15(){
 
-        mapa.colocar(espadachinAtacante, new Posicion(1,1));
-        castillo.colocarEn(new Posicion(1,2));
+        mapa.colocar(espadachinAtacante, new PosicionReal(1,1));
+        castilloEnemigo.colocarEn(new PosicionReal(1,2));
 
-        espadachinAtacante.atacar(castillo, , jugadorEnemigo, mapa);
+        espadachinAtacante.atacar(castilloEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
-        Assert.assertEquals(castillo.getVidaActual(), castillo.getVidaMaxima() - 15);
+        Assert.assertEquals(castilloEnemigo.getVidaActual(), castilloEnemigo.getVidaMaxima() - 15);
     }
-*/ // TODO como agregar castillo
+ // TODO como agregar castillo
     @Test
     public void test15AtacarCuartelDebeDisminuirSuVidaEn15(){
 
@@ -285,7 +307,9 @@ public class AtaqueTest {
         int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
+        espadachinAtacante.huboUnCambioDeTurno(jugadorAtacante);
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
+        espadachinAtacante.huboUnCambioDeTurno(jugadorAtacante);
         espadachinAtacante.atacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
 
 
@@ -294,7 +318,139 @@ public class AtaqueTest {
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
-/*
+// test jose *********************************************
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void test89AlAtacarAUnAmigoDebeLanzarExcepcion(){
+
+        Arquero arqueroAmigo = arqueroAtacante;
+
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+        mapa.colocar(arqueroAmigo, new PosicionReal(3,4));
+
+
+        thrown.expect(FuegoAmigoException.class);
+        espadachinAtacante.atacar(arqueroAmigo, jugadorAtacante, jugadorEnemigo, mapa);
+    }
+
+    @Test
+    public void test90SiAlAtacarElJugadorAtacanteYEnemigoEsElMismoDebeLanzarExcepcion(){
+
+       Mapa miMapa = new Mapa(100,100);
+
+        Jugador mijugadorAtacante = new Jugador("Diego", castilloAtacante,plaza,aldeanos);
+        mijugadorAtacante.sumarOro(3000);
+
+        Arquero miArqueroAtacante = new Arquero();
+        mijugadorAtacante.agregarPieza(miArqueroAtacante);
+
+        Espadachin miEspadachinEnemigo = new Espadachin();
+
+        miMapa.colocar(miArqueroAtacante,new PosicionReal(5,5));
+        miMapa.colocar(miEspadachinEnemigo,new PosicionReal(6,6));
+
+        thrown.expect(EstoyEnDosJugadoresException.class);
+        miArqueroAtacante.atacar(miEspadachinEnemigo,mijugadorAtacante,mijugadorAtacante,mapa);
+
+    }
+
+    @Test
+    public void test91SiAlAtacarElObjetivoEnemigoNoEsDelJugadorEnemigoDebeLanzarExcepcion(){
+
+        Mapa miMapa = new Mapa(100,100);
+
+        Jugador mijugadorAtacante = new Jugador("Diego", castilloAtacante,plaza,aldeanos);
+        Jugador mijugadorEnemigo = new Jugador("Diego", castilloEnemigo,plazaEnemiga,aldeanosEnemigos);
+        mijugadorAtacante.sumarOro(3000);
+
+        Arquero miArqueroAtacante = new Arquero();
+        mijugadorAtacante.agregarPieza(miArqueroAtacante);
+
+        Espadachin miEspadachinEnemigo = new Espadachin();
+
+        miMapa.colocar(miArqueroAtacante,new PosicionReal(5,5));
+        miMapa.colocar(miEspadachinEnemigo,new PosicionReal(6,6));
+
+        thrown.expect(EnemigoSinJugadorException.class);
+        miArqueroAtacante.atacar(miEspadachinEnemigo,mijugadorAtacante,mijugadorEnemigo,mapa);
+
+    }
+/*******************************
+ *
+ *  testeo los puedo atacar de la unidad militar
+ */
+
+    @Test
+    public void test92PuedoAtacarDebeDarFalseAlAtacarAUnAmigo(){
+
+        Arquero arqueroAmigo = arqueroAtacante;
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+        mapa.colocar(arqueroAmigo, new PosicionReal(3,4));
+
+        Assert.assertFalse(espadachinAtacante.puedoAtacar(arqueroAmigo, jugadorAtacante, jugadorEnemigo, mapa));
+    }
+
+    @Test
+    public void test93PuedoAtacarDebeDarFalseSiAlAtacarElJugadorAtacanteYEnemigoEsElMismo(){
+
+        Mapa miMapa = new Mapa(100,100);
+
+        Jugador mijugadorAtacante = new Jugador("Diego", castilloAtacante,plaza,aldeanos);
+        mijugadorAtacante.sumarOro(3000);
+
+        Arquero miArqueroAtacante = new Arquero();
+        mijugadorAtacante.agregarPieza(miArqueroAtacante);
+
+        Espadachin miEspadachinEnemigo = new Espadachin();
+
+        miMapa.colocar(miArqueroAtacante,new PosicionReal(5,5));
+        miMapa.colocar(miEspadachinEnemigo,new PosicionReal(6,6));
+
+        Assert.assertFalse(miArqueroAtacante.puedoAtacar(miEspadachinEnemigo,mijugadorAtacante,mijugadorAtacante,mapa));
+
+
+    }
+
+    @Test
+    public void test94PuedoAtacarDebeDarFalseSiAlAtacarElObjetivoEnemigoNoEsDelJugadorEnemigo(){
+
+        Mapa miMapa = new Mapa(100,100);
+
+
+        Jugador mijugadorAtacante = new Jugador("Diego", castilloAtacante,plaza,aldeanos);
+        Jugador mijugadorEnemigo = new Jugador("Diego", castilloEnemigo,plazaEnemiga,aldeanosEnemigos);
+        mijugadorAtacante.sumarOro(3000);
+
+        Arquero miArqueroAtacante = new Arquero();
+        mijugadorAtacante.agregarPieza(miArqueroAtacante);
+
+        Espadachin miEspadachinEnemigo = new Espadachin();
+
+        miMapa.colocar(miArqueroAtacante,new PosicionReal(5,5));
+        miMapa.colocar(miEspadachinEnemigo,new PosicionReal(6,6));
+
+
+        Assert.assertFalse(miArqueroAtacante.puedoAtacar(miEspadachinEnemigo,mijugadorAtacante,mijugadorEnemigo,mapa));
+
+    }
+
+    @Test
+    public void test95PuedoAtacarDebeDarTrueConJugadoresDistintosYPosicionEnRangoDeAtaque(){
+
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3,4));
+
+        Assert.assertTrue(espadachinAtacante.puedoAtacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa));
+
+
+
+    }
+
+// fin test jose *********************************************
+
+
     @Test
     public void test21EspadachinDestruyeCuartelEnemigoSeDebeEliminarDelMapaYDelJugador(){
 
@@ -303,8 +459,11 @@ public class AtaqueTest {
 
         int cantidadPiezasEnemigas = jugadorEnemigo.getAtacables().size();
 
-        while (cuartelEnemigo.getVidaActual()>0)
+        while (cuartelEnemigo.getVidaActual()>0) {
             espadachinAtacante.atacar(cuartelEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
+            espadachinAtacante.huboUnCambioDeTurno(jugadorAtacante);
+
+        }
 
 
         Assert.assertEquals(cuartelEnemigo.getVidaActual(), 0);
@@ -312,121 +471,160 @@ public class AtaqueTest {
         Assert.assertEquals(cantidadPiezasEnemigas - 1 , jugadorEnemigo.getAtacables().size());
 
     }
-*/
+
     /***************** PRUEBAS CASTILLO ATACANDO *******************************************/
-/*
+
     @Test
     public void test020CastilloAtacaAldeano(){
 
-        castilloAtacante.colocarEn(new Posicion(1,1));
-        aldeano.colocarEn(new Posicion(2,2));
+        castilloAtacante.colocarEn(new PosicionReal(1,1));
+        aldeanoEnemigo.colocarEn(new PosicionReal(2,2));
 
-        castilloAtacante.atacar(aldeano,jugadorAtacante, jugadorEnemigo, mapa);
+        castilloAtacante.atacar(aldeanoEnemigo,jugadorAtacante, jugadorEnemigo, mapa);
 
-        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima() - 20);
+        Assert.assertEquals(aldeanoEnemigo.getVidaActual(), aldeanoEnemigo.getVidaMaxima() - 20);
     }
 
     @Test
     public void test021CastilloAtacaAldeanoEnElLimiteDeSuRango(){
 
-        castilloAtacante.colocarEn(new Posicion(1,1));
-        aldeano.colocarEn(new Posicion(4,4));
+        castilloAtacante.colocarEn(new PosicionReal(1,1));
+        aldeanoEnemigo.colocarEn(new PosicionReal(4,4));
 
-        castilloAtacante.atacar(aldeano,jugadorAtacante, jugadorEnemigo, mapa);
+        castilloAtacante.atacar(aldeanoEnemigo,jugadorAtacante, jugadorEnemigo, mapa);
 
-        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima() - 20);
+        Assert.assertEquals(aldeanoEnemigo.getVidaActual(), aldeanoEnemigo.getVidaMaxima() - 20);
     }
 
     @Test
-    public void test022CastilloIntentaAtacarAldeanoFueraDeSuRango(){
+    public void test022CastilloIntentaAtacarAldeanoFueraDeSuRangoDebeLanzarExcepcion(){
 
-        castilloAtacante.colocarEn(new Posicion(1,1));
-        aldeano.colocarEn(new Posicion(5,5));
+        castilloAtacante.colocarEn(new PosicionReal(1,1));
+        aldeanoEnemigo.colocarEn(new PosicionReal(5,5));
 
-        castilloAtacante.atacar(aldeano, jugadorAtacante, jugadorEnemigo, mapa);
+        thrown.expect(UnidadFueraDeRangoDeAtaqueException.class);
+        castilloAtacante.atacar(aldeanoEnemigo, jugadorAtacante, jugadorEnemigo, mapa);
+    }
 
-        Assert.assertEquals(aldeano.getVidaActual(), aldeano.getVidaMaxima());
+    @Test
+    public void test022PuedoAtacarDebeDarFalseCuandoCastilloIntentaAtacarAldeanoFueraDeSuRango(){
+
+        castilloAtacante.colocarEn(new PosicionReal(1,1));
+        aldeanoEnemigo.colocarEn(new PosicionReal(5,5));
+
+        Assert.assertFalse(castilloAtacante.puedoAtacar(aldeanoEnemigo, jugadorAtacante, jugadorEnemigo, mapa));
     }
 
     /***************** PRUEBAS JUGADOR RECIBE ATAQUE DE CASTILLO *******************************************/
-/*//TODO A Eliminar como implementamos ataque de castillo
+
     @Test
-    public void test23JugadorRecibeAtaqueDeCastilloEnemigoDebeAtacarAlaPlazaUnicamente(){
-
+    public void test23CastilloAtacaATodasLasUnidadesDelJugadorEnemigoDentroDeSuRango(){
+        Castillo castilloObjetivo = new Castillo();
         Mapa mapa = new Mapa(100,100);
-        Jugador jugador = new Jugador("D10S", mapa);
-        ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
-        jugador.agregarObservador(espia);
 
-        jugador.inicializar(new Posicion(1,1));
+        PlazaCentral plazaRango = new PlazaCentral();
+        PlazaCentral plazaFueraRango = new PlazaCentral();
+        Aldeano aldeanoObjetivo = new Aldeano();
+        Aldeano aldeanoFueraRango = new Aldeano();
+        Aldeano aldeanoFueraRango2 = new Aldeano();
 
-        Castillo castilloEnemigo = new Castillo();
-        mapa.colocar(castilloEnemigo,new Posicion(11,11));
+        ArrayList<Aldeano> aldeanosEnemigos = new ArrayList<>();
+        aldeanosEnemigos.add(aldeanoObjetivo);
+        aldeanosEnemigos.add(aldeanoFueraRango);
+        aldeanosEnemigos.add(aldeanoFueraRango2);
 
-        jugador.recibirAtaqueCastillo(castilloEnemigo);
+        Jugador jugadorObjetivo = new Jugador("D10S", castilloObjetivo,plazaRango,aldeanosEnemigos);
+        jugadorObjetivo.sumarOro(100000);
+        jugadorObjetivo.agregarPieza(plazaFueraRango);
 
-        PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
+        Castillo castilloAtacante = new Castillo();
+        Jugador jugadorAtacante = new Jugador("Maradona", castilloAtacante,plaza,aldeanos);
 
-        Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima()-20);
+        mapa.colocar(castilloAtacante,new PosicionReal(90,90));
+        mapa.colocar(plazaRango,new PosicionReal(90,87));
+        mapa.colocar(plazaFueraRango,new PosicionReal(98,98));
+        mapa.colocar(aldeanoObjetivo, new PosicionReal(90,94));
+        mapa.colocar(aldeanoFueraRango, new PosicionReal(80,94));
+        mapa.colocar(aldeanoFueraRango2, new PosicionReal(79,94));
+        mapa.colocar(castilloObjetivo, new PosicionReal(10,10));
 
-        Assert.assertEquals(aldeano.getVidaActual(),aldeano.getVidaMaxima());
+        castilloAtacante.atacarAlJugador(jugadorAtacante,jugadorObjetivo,mapa);
+
+        Assert.assertThat(plazaRango.getVidaActual(),is(plazaRango.getVidaMaxima()-20));
+        Assert.assertThat(plazaFueraRango.getVidaActual(),is(plazaFueraRango.getVidaMaxima()));
+        Assert.assertThat(aldeanoObjetivo.getVidaActual(),is(aldeanoObjetivo.getVidaMaxima()-20));
     }
 
     @Test
-    public void test24JugadorRecibeAtaqueDeCastilloEnemigoDebeAtacarAPlazaCentralYAldeanosUnicamente(){
-
+    public void test24CastilloAtacaATodasLasUnidadesDelJugadorDebeLanzarExcepcionCuandoEsSuPropioJugador(){
+        Castillo castilloObjetivo = new Castillo();
         Mapa mapa = new Mapa(100,100);
-        Jugador jugador = new Jugador("D10S", mapa);
-        ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
-        jugador.agregarObservador(espia);
 
-        jugador.inicializar(new Posicion(1,1));
+        PlazaCentral plazaRango = new PlazaCentral();
+        PlazaCentral plazaFueraRango = new PlazaCentral();
+        Aldeano aldeanoObjetivo = new Aldeano();
+        Aldeano aldeanoFueraRango = new Aldeano();
+        Aldeano aldeanoFueraRango2 = new Aldeano();
 
-        Castillo castilloEnemigo = new Castillo();
-        mapa.colocar(castilloEnemigo,new Posicion(5,8));//pos (5,8)a (8,11)
+        ArrayList<Aldeano> aldeanosEnemigos = new ArrayList<>();
+        aldeanosEnemigos.add(aldeanoObjetivo);
+        aldeanosEnemigos.add(aldeanoFueraRango);
+        aldeanosEnemigos.add(aldeanoFueraRango2);
 
-        jugador.recibirAtaqueCastillo(castilloEnemigo);
+        Jugador jugadorObjetivo = new Jugador("D10S", castilloObjetivo,plazaRango,aldeanosEnemigos);
+        jugadorObjetivo.sumarOro(100000);
+        jugadorObjetivo.agregarPieza(plazaFueraRango);
 
-        PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
-        Aldeano aldeano2 = espia.obtenerAldeanos().get(1); // pos (6,6)
-        Aldeano aldeano3 = espia.obtenerAldeanos().get(0); // pos (5,5)
-        Castillo castillo = espia.getCastillos().get(0); // pos (1,1) a (4,4)
+        Castillo castilloAtacante = new Castillo();
+        Jugador jugadorAtacante = new Jugador("Maradona", castilloAtacante,plaza,aldeanos);
 
-        Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima()-20);
-        Assert.assertEquals(aldeano.getVidaActual(),aldeano.getVidaMaxima()-20);
-        Assert.assertEquals(aldeano2.getVidaActual(),aldeano2.getVidaMaxima()-20);
-        Assert.assertEquals(aldeano3.getVidaActual(),aldeano3.getVidaMaxima()-20);
+        mapa.colocar(castilloAtacante,new PosicionReal(90,90));
+        mapa.colocar(plazaRango,new PosicionReal(90,87));
+        mapa.colocar(plazaFueraRango,new PosicionReal(98,98));
+        mapa.colocar(aldeanoObjetivo, new PosicionReal(90,94));
+        mapa.colocar(aldeanoFueraRango, new PosicionReal(75,94));
+        mapa.colocar(aldeanoFueraRango2, new PosicionReal(80,94));
+        mapa.colocar(castilloObjetivo, new PosicionReal(10,10));
 
-        Assert.assertEquals(castillo.getVidaActual(),castillo.getVidaMaxima());
+        thrown.expect(FuegoAmigoException.class);
+        castilloAtacante.atacarAlJugador(jugadorAtacante,jugadorAtacante,mapa);
 
     }
 
     @Test
-    public void test25JugadorIntentaRecibirAtaqueDeSuPropioCastillo(){
-
+    public void test25CastilloAtacaATodasLasUnidadesDelJugadorDebeLanzarExcepcionCuandoNoEsSuJugador(){
+        Castillo castilloObjetivo = new Castillo();
         Mapa mapa = new Mapa(100,100);
-        Jugador jugador = new Jugador("D10S", mapa);
-        ObservadorDeJugadorFicticio espia = new ObservadorDeJugadorFicticio();
-        jugador.agregarObservador(espia);
 
-        jugador.inicializar(new Posicion(1,1));
+        PlazaCentral plazaRango = new PlazaCentral();
+        PlazaCentral plazaFueraRango = new PlazaCentral();
+        Aldeano aldeanoObjetivo = new Aldeano();
+        Aldeano aldeanoFueraRango = new Aldeano();
+        Aldeano aldeanoFueraRango2 = new Aldeano();
 
-        PlazaCentral plazaCentral = espia.getPlazaCentrals().get(0); //en pos (9,9) a (10,10)
-        Aldeano aldeano = espia.obtenerAldeanos().get(2); // pos (7,7)
-        Aldeano aldeano2 = espia.obtenerAldeanos().get(1); // pos (6,6)
-        Aldeano aldeano3 = espia.obtenerAldeanos().get(0); // pos (5,5)
-        Castillo castillo = espia.getCastillos().get(0); // pos (1,1) a (4,4)
+        ArrayList<Aldeano> aldeanosEnemigos = new ArrayList<>();
+        aldeanosEnemigos.add(aldeanoObjetivo);
+        aldeanosEnemigos.add(aldeanoFueraRango);
+        aldeanosEnemigos.add(aldeanoFueraRango2);
 
-        jugador.recibirAtaqueCastillo(castillo);
+        Jugador jugadorObjetivo = new Jugador("D10S", castilloObjetivo,plazaRango,aldeanosEnemigos);
+        jugadorObjetivo.sumarOro(100000);
+        jugadorObjetivo.agregarPieza(plazaFueraRango);
 
-        Assert.assertEquals(plazaCentral.getVidaActual(), plazaCentral.getVidaMaxima());
-        Assert.assertEquals(aldeano.getVidaActual(),aldeano.getVidaMaxima());
-        Assert.assertEquals(aldeano2.getVidaActual(),aldeano2.getVidaMaxima());
-        Assert.assertEquals(aldeano3.getVidaActual(),aldeano3.getVidaMaxima());
-        Assert.assertEquals(castillo.getVidaActual(),castillo.getVidaMaxima());
+        Castillo castilloAtacante = new Castillo();
+        Jugador jugadorAtacante = new Jugador("Maradona", castilloAtacante,plaza,aldeanos);
+
+        mapa.colocar(castilloAtacante,new PosicionReal(90,90));
+        mapa.colocar(plazaRango,new PosicionReal(90,87));
+        mapa.colocar(plazaFueraRango,new PosicionReal(98,98));
+        mapa.colocar(aldeanoObjetivo, new PosicionReal(90,94));
+        mapa.colocar(aldeanoFueraRango, new PosicionReal(73,94));
+        mapa.colocar(aldeanoFueraRango2, new PosicionReal(80,94));
+        mapa.colocar(castilloObjetivo, new PosicionReal(10,10));
+
+        thrown.expect(NoEsMiJugadorException.class);
+        castilloAtacante.atacarAlJugador(jugadorObjetivo,jugadorObjetivo,mapa);
 
     }
-    */
+
 }

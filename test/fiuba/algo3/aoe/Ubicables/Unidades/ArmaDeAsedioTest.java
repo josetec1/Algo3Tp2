@@ -2,9 +2,14 @@ package fiuba.algo3.aoe.Ubicables.Unidades;
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.mockito.Matchers.any;
 
@@ -13,11 +18,28 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
 
 public class ArmaDeAsedioTest {
+
+
     private Castillo castillo= new Castillo();
+    private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private PlazaCentral plaza;
+    private Jugador jugador;
+
+    @Before
+    public void setUp(){
+        plaza = new PlazaCentral();
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        aldeanos.add(new Aldeano());
+        jugador = new Jugador("ElDiego",castillo,plaza,aldeanos);
+    }
+
+
+
     @Test
     public void test01SeCreaCorrectamenteArmaDeAsedio(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio",castillo );
+
         ArmaDeAsedio armaDeAsedio = new ArmaDeAsedio();
 
         Assert.assertEquals(armaDeAsedio.getVidaMaxima(), 150);

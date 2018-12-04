@@ -12,5 +12,6 @@ public interface Atacante {
     int getDistanciaAtaque();
 
     void atacar(Atacable objetivoEnemigo, Jugador miJugador,Jugador jugadorEnemigo, Mapa mapa);
+    boolean puedoAtacar(Atacable objetivoEnemigo, Jugador miJugador,Jugador jugadorEnemigo, Mapa mapa);
 
 }
