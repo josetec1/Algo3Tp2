@@ -66,18 +66,22 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 						MapaVistaControlador.desSeleccionarEdificio();
 						MapaVistaControlador.desSeleccionarUnidades();
 						MapaVistaControlador.desSeleccionarUnidades();
+					}else if (! ContenedorPrincipal.getJuego().getJugadorActual().puedoAgregar(new PlazaCentral())) {
+						MenuInferior.getLog().appendText("\n no se puede construir, revise oro y poblacion");
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarPosicion();
+					}else if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())) {
+						MenuInferior.getLog().appendText("\n Aldeano no es tuyo");
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarPosicion();
 					}else{
-						try {
-							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new PlazaCentral(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
-							MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
-							MapaVistaControlador.desSeleccionarUnidades();
-							MapaVistaControlador.desSeleccionarEdificio();
-							MapaVistaControlador.desSeleccionarPosicion();
-						}catch (RecursoInsuficienteException e){
-							MenuInferior.getLog().appendText("\nNo hay oro suficiente");
-						}catch (Error e){
-							MenuInferior.getLog().appendText("\nNo se puede construir en este Momento");
-						}
+						MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new PlazaCentral(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
+						MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarPosicion();
 					}
 
 				}
@@ -85,21 +89,25 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 					PosicionReal posicionReal = new PosicionReal(cuadrante);
 					if(!MapaVistaControlador.getMapa().puedoColocar(posicionReal,2)){
 						MenuInferior.getLog().appendText("\nPosicion Ocupada, seleccione otra posicion vacia");
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarUnidades();
+					}else if (! ContenedorPrincipal.getJuego().getJugadorActual().puedoAgregar(new Cuartel())) {
+						MenuInferior.getLog().appendText("\n no se puede construir, revise oro y poblacion");
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarPosicion();
+					}else if (!ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())) {
+						MenuInferior.getLog().appendText("\n Aldeano no es tuyo");
 						MapaVistaControlador.desSeleccionarUnidades();
 						MapaVistaControlador.desSeleccionarEdificio();
 						MapaVistaControlador.desSeleccionarPosicion();
 					}else{
-						try {
-							MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new Cuartel(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
-							MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
-							MapaVistaControlador.desSeleccionarUnidades();
-							MapaVistaControlador.desSeleccionarEdificio();
-							MapaVistaControlador.desSeleccionarPosicion();
-						}catch (RecursoInsuficienteException e){
-							MenuInferior.getLog().appendText("\nNo hay oro suficiente");
-						}catch (Error e){
-							MenuInferior.getLog().appendText("\nNo se puede construir en este Momento");
-						}
+						MapaVistaControlador.getAldeanoSeleccionado().construirEdificio(new Cuartel(),MapaVistaControlador.getMapa(),ContenedorPrincipal.getJuego().getJugadorActual(), posicionReal);
+						MenuInferior.getLog().appendText("\nConstruyendo,el edificio terminara de construirse en 3 turnos");
+						MapaVistaControlador.desSeleccionarUnidades();
+						MapaVistaControlador.desSeleccionarEdificio();
+						MapaVistaControlador.desSeleccionarPosicion();
 					}
 				}
 
