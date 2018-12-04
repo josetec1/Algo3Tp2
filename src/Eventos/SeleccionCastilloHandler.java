@@ -51,21 +51,45 @@ public class SeleccionCastilloHandler implements EventHandler<MouseEvent> {
                 MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
                 MapaVistaControlador.desSeleccionarEdificio();
                 MapaVistaControlador.desSeleccionarUnidades();
-            }else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
-                try {
-                    MapaVistaControlador.getEspadachinSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-                }catch (Error e){
-                    MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
+            }else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 2){
+                MenuInferior.getLog().appendText("\n Atacando castillo con espadachin");
+                MapaVistaControlador.getEspadachinSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+
+            }else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 4){
+                MenuInferior.getLog().appendText("\n Atacando castillo con arquero");
+                MapaVistaControlador.getArqueroSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else{
+                MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por esta Unidad, seleccione nuevamente atacante y blanco");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }
+        }else if("Reparar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+            if(!MapaVistaControlador.tengoAldeanoSeleccionado()){
+                MenuInferior.getLog().appendText("\n Primero debe seleccionar el aldeano para reparar,realice nuevamente la seleccion de unidad y edificio");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && !ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+                MenuInferior.getLog().appendText("\nEl aldeano seleccionado no es tuyo");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+                MenuInferior.getLog().appendText("\nEl castillo seleccionada no es tuya");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+            }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+                if(!MapaVistaControlador.getAldeanoSeleccionado().estasDisponible()){
+                    MenuInferior.getLog().appendText("\nEl aldeano seleccionado esta ocupado este turno,repita seleccion");
                     MapaVistaControlador.desSeleccionarEdificio();
                     MapaVistaControlador.desSeleccionarUnidades();
-                }
-            }else if (MapaVistaControlador.tengoArqueroSeleccionado()){
-                try {
-                    MapaVistaControlador.getArqueroSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-                }catch (Error e){
-                    MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
-                    MapaVistaControlador.desSeleccionarEdificio();
-                    MapaVistaControlador.desSeleccionarUnidades();
+                }else{
+                    MapaVistaControlador.getAldeanoSeleccionado().reparar(castillo,ContenedorPrincipal.getJuego().getJugadorActual());
+                    MenuInferior.getLog().appendText("\nReparando Castillo");
                 }
             }
         }else{

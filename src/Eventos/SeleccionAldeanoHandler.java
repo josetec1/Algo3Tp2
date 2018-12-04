@@ -79,30 +79,30 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 					MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
 					MapaVistaControlador.desSeleccionarEdificio();
 					MapaVistaControlador.desSeleccionarUnidades();
-				}else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
-					try {
-						MapaVistaControlador.getEspadachinSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-						MenuInferior.getLog().appendText("\nEspadachin ataca Aldeano");
+				}else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
+						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 2){
+					MenuInferior.getLog().appendText("\n Atacando aldeano con espadachin");
+					MapaVistaControlador.getEspadachinSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+					MapaVistaControlador.desSeleccionarEdificio();
+					MapaVistaControlador.desSeleccionarUnidades();
 
-						MapaVistaControlador.desSeleccionarEdificio();
-						MapaVistaControlador.desSeleccionarUnidades();
-					}catch (Error e){
-						MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
-						MapaVistaControlador.desSeleccionarEdificio();
-						MapaVistaControlador.desSeleccionarUnidades();
-					}
-				}else if (MapaVistaControlador.tengoArqueroSeleccionado()){
-					try {
-						MapaVistaControlador.getArqueroSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-						MenuInferior.getLog().appendText("\nArquero ataca aldeano");
-
-						MapaVistaControlador.desSeleccionarEdificio();
-						MapaVistaControlador.desSeleccionarUnidades();
-					}catch (Error e){
-						MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este arquero, seleccione nuevamente atacante y blanco");
-						MapaVistaControlador.desSeleccionarEdificio();
-						MapaVistaControlador.desSeleccionarUnidades();
-					}
+				}else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
+						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 4){
+					MenuInferior.getLog().appendText("\n Atacando aldeano con arquero");
+					MapaVistaControlador.getArqueroSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+					MapaVistaControlador.desSeleccionarEdificio();
+					MapaVistaControlador.desSeleccionarUnidades();
+				}else {
+					MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por esta Unidad, seleccione nuevamente atacante y blanco");
+					MapaVistaControlador.desSeleccionarEdificio();
+					MapaVistaControlador.desSeleccionarUnidades();
+				}
+			}else if("Reparar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+				if(!MapaVistaControlador.tengoAldeanoSeleccionado()){
+					MapaVistaControlador.seleccionarAldeano(aldeano);
+					MenuInferior.getLog().appendText("\n Aldeano seleccionado");
+				}else{
+					MenuInferior.getLog().appendText("\n Ya selecciono un aldeano para reparar, por favor seleccione el edificio a ser reparado");
 				}
 			}else{
 				MenuInferior.getLog().appendText("\n Elija una accion, y las piezas correctas nuevamente");

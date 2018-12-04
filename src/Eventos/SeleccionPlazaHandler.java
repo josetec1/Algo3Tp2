@@ -1,5 +1,6 @@
 package Eventos;
 
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
@@ -36,11 +37,7 @@ public class SeleccionPlazaHandler implements EventHandler<MouseEvent> {
         }else if ("Mover" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
 
             MenuInferior.getLog().appendText("\nPlaza plaza central no puede moverse");
-        }else if ("Atacar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-
-            //TODO MenuInferior.getLog().appendText("\nPlaza Seleccionada");
         }else if ("Crear Edificio" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()) {
-
             MenuInferior.getLog().appendText("\nPlaza ya esta creada");
         }else if("Crear Unidad" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
             MapaVistaControlador.seleccionarPlaza(plaza);
@@ -54,21 +51,45 @@ public class SeleccionPlazaHandler implements EventHandler<MouseEvent> {
                MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
                MapaVistaControlador.desSeleccionarEdificio();
                MapaVistaControlador.desSeleccionarUnidades();
-           }else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
-               try {
-                   MapaVistaControlador.getEspadachinSeleccionado().atacar(plaza, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-               }catch (Error e){
-                   MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
+           }else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(plaza) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(plaza.getPosicion()) < 2){
+                MenuInferior.getLog().appendText("\n Atacando plaza con espadachin");
+                MapaVistaControlador.getEspadachinSeleccionado().atacar(plaza, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+
+           }else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(plaza) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(plaza.getPosicion()) < 4){
+                MenuInferior.getLog().appendText("\n Atacando plaza con arquero");
+                MapaVistaControlador.getArqueroSeleccionado().atacar(plaza, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+           }else{
+                MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por esta Unidad, seleccione nuevamente atacante y blanco");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
+           }
+        }else if("Reparar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+           if(!MapaVistaControlador.tengoAldeanoSeleccionado()){
+               MenuInferior.getLog().appendText("\n Primero debe seleccionar el aldeano para reparar,realice nuevamente la seleccion de unidad y edificio");
+               MapaVistaControlador.desSeleccionarEdificio();
+               MapaVistaControlador.desSeleccionarUnidades();
+           }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && !ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+               MenuInferior.getLog().appendText("\nEl aldeano seleccionado no es tuyo");
+               MapaVistaControlador.desSeleccionarEdificio();
+               MapaVistaControlador.desSeleccionarUnidades();
+           }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && !ContenedorPrincipal.getJuego().getJugadorActual().esMio(plaza) && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+               MenuInferior.getLog().appendText("\nLa plaza seleccionada no es tuya");
+               MapaVistaControlador.desSeleccionarEdificio();
+               MapaVistaControlador.desSeleccionarUnidades();
+           }else if(MapaVistaControlador.tengoAldeanoSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(plaza) && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getAldeanoSeleccionado())){
+               if(!MapaVistaControlador.getAldeanoSeleccionado().estasDisponible()){
+                   MenuInferior.getLog().appendText("\nEl aldeano seleccionado esta ocupado este turno,repita seleccion");
                    MapaVistaControlador.desSeleccionarEdificio();
                    MapaVistaControlador.desSeleccionarUnidades();
-               }
-           }else if (MapaVistaControlador.tengoArqueroSeleccionado()){
-               try {
-                   MapaVistaControlador.getArqueroSeleccionado().atacar(plaza, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-               }catch (Error e){
-                   MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
-                   MapaVistaControlador.desSeleccionarEdificio();
-                   MapaVistaControlador.desSeleccionarUnidades();
+               }else{
+                   MapaVistaControlador.getAldeanoSeleccionado().reparar(plaza,ContenedorPrincipal.getJuego().getJugadorActual());
+                   MenuInferior.getLog().appendText("\nReparando plaza central");
                }
            }
         }else{

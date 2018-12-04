@@ -171,6 +171,10 @@ public class SeleccionVacioHandler implements EventHandler<MouseEvent>{
 			MenuInferior.getLog().appendText("\n En esta posicion no hay una unidad, selecciona al atacante y al blanco nuevamente");
 			MapaVistaControlador.desSeleccionarEdificio();
 			MapaVistaControlador.desSeleccionarUnidades();
+		} else if("Reparar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+			MenuInferior.getLog().appendText("\n En esta posicion no hayEdificio para reparar ni unidad que pueda reparar, selecciona nuevamente");
+			MapaVistaControlador.desSeleccionarEdificio();
+			MapaVistaControlador.desSeleccionarUnidades();
 		}
 	}
 }

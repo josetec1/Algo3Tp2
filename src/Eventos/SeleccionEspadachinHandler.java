@@ -68,31 +68,28 @@ public class SeleccionEspadachinHandler implements EventHandler<MouseEvent> {
                     MenuInferior.getLog().appendText("\n Aldeano no puede atacar, seleccione blanco y atacante nuevamente");
                     MapaVistaControlador.desSeleccionarEdificio();
                     MapaVistaControlador.desSeleccionarUnidades();
-                }else if (MapaVistaControlador.tengoEspadachinSeleccionado()){
-                    try {
-                        MapaVistaControlador.getEspadachinSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-                        MenuInferior.getLog().appendText("\nEspadachin ataca Espadachin");
+                }else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
+                        !ContenedorPrincipal.getJuego().getJugadorActual().esMio(espadachin) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(espadachin.getPosicion()) < 2){
+                    MenuInferior.getLog().appendText("\n Atacando plaza con espadachin");
+                    MapaVistaControlador.getEspadachinSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
 
-                        MapaVistaControlador.desSeleccionarEdificio();
-                        MapaVistaControlador.desSeleccionarUnidades();
-                    }catch (Error e){
-                        MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este espadachim, seleccione nuevamente atacante y blanco");
-                        MapaVistaControlador.desSeleccionarEdificio();
-                        MapaVistaControlador.desSeleccionarUnidades();
-                    }
-                }else if (MapaVistaControlador.tengoArqueroSeleccionado()){
-                    try {
-                        MapaVistaControlador.getArqueroSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
-                        MenuInferior.getLog().appendText("\nArquero ataca espadachin");
-
-                        MapaVistaControlador.desSeleccionarEdificio();
-                        MapaVistaControlador.desSeleccionarUnidades();
-                    }catch (Error e){
-                        MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por este arquero, seleccione nuevamente atacante y blanco");
-                        MapaVistaControlador.desSeleccionarEdificio();
-                        MapaVistaControlador.desSeleccionarUnidades();
-                    }
+                }else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(espadachin) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(espadachin.getPosicion()) < 4){
+                    MenuInferior.getLog().appendText("\n Atacando plaza con arquero");
+                    MapaVistaControlador.getArqueroSeleccionado().atacar(espadachin, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }else{
+                    MenuInferior.getLog().appendText("\nEl blanco seleccionado no puede ser atacado por esta Unidad, seleccione nuevamente atacante y blanco");
+                    MapaVistaControlador.desSeleccionarEdificio();
+                    MapaVistaControlador.desSeleccionarUnidades();
                 }
+            }else if("Reparar" == MenuInferior.getSelecOpciones().getSelectionModel().getSelectedItem().toString()){
+                MenuInferior.getLog().appendText("\n Espadachin no puede reparar ni ser reparado, seleccione nuevamente");
+                MapaVistaControlador.desSeleccionarEdificio();
+                MapaVistaControlador.desSeleccionarUnidades();
             }else{
                 MenuInferior.getLog().appendText("\n Elija una accion, y las piezas correctas nuevamente");
                 MapaVistaControlador.desSeleccionarEdificio();
