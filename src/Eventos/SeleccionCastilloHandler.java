@@ -52,14 +52,14 @@ public class SeleccionCastilloHandler implements EventHandler<MouseEvent> {
                 MapaVistaControlador.desSeleccionarEdificio();
                 MapaVistaControlador.desSeleccionarUnidades();
             }else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
-                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 2){
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 2 && MapaVistaControlador.getEspadachinSeleccionado().estasDisponible()){
                 MenuInferior.getLog().appendText("\n Atacando castillo con espadachin");
                 MapaVistaControlador.getEspadachinSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
                 MapaVistaControlador.desSeleccionarEdificio();
                 MapaVistaControlador.desSeleccionarUnidades();
 
             }else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
-                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 4){
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(castillo) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(castillo.getPosicion()) < 4 && MapaVistaControlador.getArqueroSeleccionado().estasDisponible()){
                 MenuInferior.getLog().appendText("\n Atacando castillo con arquero");
                 MapaVistaControlador.getArqueroSeleccionado().atacar(castillo, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
                 MapaVistaControlador.desSeleccionarEdificio();

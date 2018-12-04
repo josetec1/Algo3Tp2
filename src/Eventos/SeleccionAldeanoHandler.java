@@ -80,14 +80,14 @@ public class SeleccionAldeanoHandler implements EventHandler<MouseEvent> {
 					MapaVistaControlador.desSeleccionarEdificio();
 					MapaVistaControlador.desSeleccionarUnidades();
 				}else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
-						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 2){
+						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 2 && MapaVistaControlador.getEspadachinSeleccionado().estasDisponible()){
 					MenuInferior.getLog().appendText("\n Atacando aldeano con espadachin");
 					MapaVistaControlador.getEspadachinSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
 					MapaVistaControlador.desSeleccionarEdificio();
 					MapaVistaControlador.desSeleccionarUnidades();
 
 				}else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
-						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 4){
+						!ContenedorPrincipal.getJuego().getJugadorActual().esMio(aldeano) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(aldeano.getPosicion()) < 4 && MapaVistaControlador.getArqueroSeleccionado().estasDisponible()){
 					MenuInferior.getLog().appendText("\n Atacando aldeano con arquero");
 					MapaVistaControlador.getArqueroSeleccionado().atacar(aldeano, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
 					MapaVistaControlador.desSeleccionarEdificio();

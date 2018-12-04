@@ -36,10 +36,12 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
 
             //aldeano
             if(MapaVistaControlador.tengoAldeanoSeleccionado()){
-                if (!MapaVistaControlador.getAldeanoSeleccionado().estasDisponible()){
+                if (!MapaVistaControlador.getAldeanoSeleccionado().estasDisponible()) {
                     MenuInferior.getLog().appendText("\n Aldeano Ocupado");
-                }else {
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }else{
                     MapaVistaControlador.getAldeanoSeleccionado().mover(mapita, this.direccion, jugador);
+                    MapaVistaControlador.desSeleccionarUnidades();
                     // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
                     contenedor.update(null,null);
 
@@ -50,25 +52,40 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
             if(MapaVistaControlador.tengoArmaAsedioSeleccionado()){
                 if (!MapaVistaControlador.getArmaDeAsedioSeleccionado().puedeMoverse()){
                     MenuInferior.getLog().appendText("\n ArmaAsedio No puede moverseEnEsteEstado");
+                    MapaVistaControlador.desSeleccionarUnidades();
                 }else {
                     MapaVistaControlador.getArmaDeAsedioSeleccionado().mover(mapita, this.direccion, jugador);
+                    MapaVistaControlador.desSeleccionarUnidades();
                     contenedor.update(null,null);
                 }
             }
 
             //arquero
             if(MapaVistaControlador.tengoArqueroSeleccionado()){
-                MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
-                // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
-                contenedor.update(null,null);
-                MenuInferior.getLog().appendText("\n arquero movido");
+                if (!MapaVistaControlador.getArqueroSeleccionado().estasDisponible()){
+                    MenuInferior.getLog().appendText("\n Arquero Ocupado");
+                    MapaVistaControlador.desSeleccionarUnidades();
+
+                }else {
+                    MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
+                    MapaVistaControlador.desSeleccionarUnidades();
+                    // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
+                    contenedor.update(null, null);
+                    MenuInferior.getLog().appendText("\n arquero movido");
+                }
             }
 
             //espadachin
             if(MapaVistaControlador.tengoEspadachinSeleccionado()){
-                MapaVistaControlador.getEspadachinSeleccionado().mover(mapita, this.direccion, jugador);
-                // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
-                contenedor.update(null,null);
+                if (!MapaVistaControlador.getEspadachinSeleccionado().estasDisponible()) {
+                    MenuInferior.getLog().appendText("\n Espadachin Ocupado");
+                    MapaVistaControlador.desSeleccionarUnidades();
+                }else {
+                    MapaVistaControlador.getEspadachinSeleccionado().mover(mapita, this.direccion, jugador);
+                    MapaVistaControlador.desSeleccionarUnidades();
+                    // El controlador tiene que actualizar la vista SOLO PARA LOS MOVIMIENTOS.
+                    contenedor.update(null, null);
+                }
             }
             //Edificios
 

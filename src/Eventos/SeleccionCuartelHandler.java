@@ -50,14 +50,14 @@ public class SeleccionCuartelHandler implements EventHandler<MouseEvent> {
                 MapaVistaControlador.desSeleccionarEdificio();
                 MapaVistaControlador.desSeleccionarUnidades();
             }else if (MapaVistaControlador.tengoEspadachinSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getEspadachinSeleccionado()) &&
-                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(cuartel) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(cuartel.getPosicion()) < 2){
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(cuartel) && MapaVistaControlador.getEspadachinSeleccionado().getPosicion().distancia(cuartel.getPosicion()) < 2 && MapaVistaControlador.getEspadachinSeleccionado().estasDisponible()){
                 MenuInferior.getLog().appendText("\n Atacando cuartel con espadachin");
                 MapaVistaControlador.getEspadachinSeleccionado().atacar(cuartel, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
                 MapaVistaControlador.desSeleccionarEdificio();
                 MapaVistaControlador.desSeleccionarUnidades();
 
             }else if (MapaVistaControlador.tengoArqueroSeleccionado() && ContenedorPrincipal.getJuego().getJugadorActual().esMio(MapaVistaControlador.getArqueroSeleccionado()) &&
-                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(cuartel) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(cuartel.getPosicion()) < 4){
+                    !ContenedorPrincipal.getJuego().getJugadorActual().esMio(cuartel) && MapaVistaControlador.getArqueroSeleccionado().getPosicion().distancia(cuartel.getPosicion()) < 4 && MapaVistaControlador.getArqueroSeleccionado().estasDisponible()){
                 MenuInferior.getLog().appendText("\n Atacando cuartel con arquero");
                 MapaVistaControlador.getArqueroSeleccionado().atacar(cuartel, ContenedorPrincipal.getJuego().getJugadorActual(),ContenedorPrincipal.getJuego().getJugadorInactivo(),MapaVistaControlador.getMapa());
                 MapaVistaControlador.desSeleccionarEdificio();
