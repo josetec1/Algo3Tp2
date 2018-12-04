@@ -82,7 +82,6 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     public void huboUnCambioDeTurno ( Jugador jugador ) {
         this.estado.nuevoTurno(this,CURACION);
 
-
     }
     @Override
     public void agregarObservador(ObservadorCastillo unObservador) {

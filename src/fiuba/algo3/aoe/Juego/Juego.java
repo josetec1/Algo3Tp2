@@ -29,12 +29,10 @@ public class Juego extends Observable implements ObservadorCastillo {
                 //TODO chequear minimos
         this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
 
-
     }
 
     private void inicializar ( String jugador1, String jugador2, int anchoMapa, int altoMapa) {
         Mapa mapa= new Mapa(anchoMapa, altoMapa);
-
 
         //Variables auxiliares
         ArrayList<Jugador> jugadores= new ArrayList<>();
@@ -70,11 +68,6 @@ public class Juego extends Observable implements ObservadorCastillo {
         this.jugador1 = j1;
         jugadores.add (j1);
 
-        //Prueba vista con arquero colocado
-        //Arquero arquero = new Arquero();
-       // mapa.colocar(arquero,new Posicion(new Cuadrante(8,8)));
-      //  j1.agregarPieza(arquero);
-
         //Inicializo jugador 2
         castillo = new Castillo();
         castillo.agregarObservador(this);
@@ -109,15 +102,13 @@ public class Juego extends Observable implements ObservadorCastillo {
     public void pasarJugada() {
 
         if (this.juego.juegoTerminado()) { throw new JuegoFinalizadoException();}
-           //1) paso turno y cada unidad del jugador activo hace lo que tiene que hacer
+
+        //1) paso turno y cada unidad del jugador activo hace lo que tiene que hacer
         this.juego.cambiarTurno(this.turno);
-        // 2) chequeo muertos para que se eliminen,
-        // //aca salta si es fin de juego por que el castillo me va a mandar un mensaje y ahi me cambio a juego finalizado
-        // y le notifico a la vista.
-        // la vista siempre ante una notificacion hace  juego.finalizado()  si le da true muetra al ganador  y fin
-       // jugador1.revisarMuertos(jugador2, this.mapa);
-       // jugador2.revisarMuertos(jugador1,this.mapa);
-        //3) ahora notifico a observadores, osea la vista vuelve a cargar las cosas devuelta.
+
+        //el castillo que ataque
+        this.turno.getJugadorActual().getCastillo().atacarAlJugador(this.turno.getJugadorActual(),this.turno.getJugadorInactivo(),this.mapa);
+
         this.setChanged();
         this.notifyObservers();
 
@@ -135,10 +126,7 @@ public class Juego extends Observable implements ObservadorCastillo {
         return mapa;
     }
 
-    // el controlador antes de hacer pasar jugada tiene que preguntar.
-    // si el juego finalizo, no tiene que pasar turno
-    // tiene que evitar cargar el castillo y mostrar el ganador (recordemos que el castillo no se elimina del modelo)
-    // osea jugador.getCastillo ... va a seguir estando
+
     public boolean finalizo(){
         return this.juego.juegoTerminado();
     }
@@ -146,8 +134,8 @@ public class Juego extends Observable implements ObservadorCastillo {
 
 
     @Override
-    public void castilloEliminado() {//aca me avisa el castillo que murio
-
+    public void castilloEliminado() {
+        //aca me avisa el castillo que murio
         //tengo que cambiar a estado finalizado.
         this.juego= new Finalizado(this.getJugadorActual());
 

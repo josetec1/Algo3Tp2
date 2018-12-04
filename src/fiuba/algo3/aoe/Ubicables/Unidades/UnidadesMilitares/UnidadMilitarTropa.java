@@ -75,7 +75,7 @@ public abstract class UnidadMilitarTropa extends UnidadMilitar {
             if (!jugadorEnemigo.esMio(objetivoEnemigo)) {
                 return false;
             }
-
+            //Todo si es una PosicionNula, te va a dar una excepcion aca, hay que hacer un try
             if (!(this.getDistanciaAtaque() >= this.getPosicion().distancia(objetivoEnemigo.getPosicion()))) {
                 return false;
             }

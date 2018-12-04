@@ -17,7 +17,7 @@ public class JuegoTest {
         juego.pasarJugada();
     }
 */
-    @Test  //TODO OJO CON LOS MINIMOS DEL MAPA
+    @Test
     public void test02EmpiezaElJuegoCorrectamente(){
 
         Juego juego = new Juego("Maradona","Messi",500,500);

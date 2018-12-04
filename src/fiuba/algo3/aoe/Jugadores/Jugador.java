@@ -26,19 +26,7 @@ public class Jugador extends Observable  {
     private final int ORO_INICIAL = 100;
     private final int ALDEANOS_INICIALES = 3;
 
-/*
-    public Jugador(String nombre, Castillo castillo){
-        this.nombre = nombre;
-        this.oro = ORO_INICIAL;
-        this.piezas = new ListaDePiezas(castillo);
 
-        //TODO este constructor muere
-       // ArrayList<Aldeano> aldeanos = new ArrayList<>();
-        //aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano()); aldeanos.add(new Aldeano());
-        //this.inicializar(new PlazaCentral(), aldeanos);
-
-    }
-*/
     public Jugador(String nombre, Castillo castillo, PlazaCentral plaza, ArrayList<Aldeano> aldeanos){
         this.nombre = nombre;
         this.oro = ORO_INICIAL;
@@ -167,13 +155,7 @@ public class Jugador extends Observable  {
 
     public void esTuTurno(){this.piezas.cambioDeTurno(this);}
 
-    /*
-    @Override
-    public void update(Observable o, Object arg) {
-        this.setChanged(); //esto es propio del Observer, si no llamas a esto no notifica.
-        this.notifyObservers(); //le notifico a la vista que hubo un cambio
-    }
-*/
+
 
     public Castillo getCastillo(){
         return this.piezas.obtenerCastle();

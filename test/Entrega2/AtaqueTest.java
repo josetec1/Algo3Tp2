@@ -244,7 +244,7 @@ public class AtaqueTest {
 
         Assert.assertEquals(castilloEnemigo.getVidaActual(), castilloEnemigo.getVidaMaxima() - 15);
     }
- // TODO como agregar castillo
+
     @Test
     public void test15AtacarCuartelDebeDisminuirSuVidaEn15(){
 
@@ -447,6 +447,31 @@ public class AtaqueTest {
 
 
     }
+
+    @Test
+    public void test96AtacarDebeDarLanzarExcepcionCuandoLaPosicionDelAtacanteEsNula(){
+
+
+        mapa.colocar(arqueroEnemigo, new PosicionReal(3,4));
+
+        thrown.expect(PosicionNulaException.class);
+        Assert.assertTrue(espadachinAtacante.puedoAtacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa));
+
+    }
+
+    @Test
+    public void test97test96AtacarDebeDarLanzarExcepcionCuandoLaPosicionDelAtacableEsNula(){
+
+        mapa.colocar(espadachinAtacante,new PosicionReal(4,4));
+
+
+        thrown.expect(PosicionNulaException.class);
+        Assert.assertTrue(espadachinAtacante.puedoAtacar(arqueroEnemigo, jugadorAtacante, jugadorEnemigo, mapa));
+
+    }
+
+
+
 
 // fin test jose *********************************************
 

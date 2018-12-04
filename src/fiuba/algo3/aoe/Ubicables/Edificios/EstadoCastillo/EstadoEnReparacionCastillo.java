@@ -33,7 +33,7 @@ public class EstadoEnReparacionCastillo implements IEstadoCastillo {
 
     @Override
     public boolean puedoCrearUnidad() {
-        return true;
+        return false;
     }
 
     @Override

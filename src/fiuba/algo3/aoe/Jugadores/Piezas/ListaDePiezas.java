@@ -156,22 +156,7 @@ public class ListaDePiezas {
         this.cuarteles.remove(pieza);
 
     }
-/*
-    public boolean existe (Manipulable pieza){ //TODO REFACTOR
 
-
-        if (this.aldeanos.contains(pieza))  return true;
-        if (this.espadachins.contains(pieza))  return true;
-        if (this.arqueros.contains(pieza))  return true;
-        if (this.armasDeAsedio.contains(pieza))  return true;
-        if (this.plazaCentrales.contains(pieza))  return true;
-        if (this.cuarteles.contains(pieza))  return true;
-        if (this.castillo == pieza)  return true;
-
-        return false;
-
-    }
-*/
     public boolean existe (Atacable pieza){ //TODO REFACTOR
 
 
