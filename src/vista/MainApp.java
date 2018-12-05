@@ -102,9 +102,12 @@ public class MainApp extends Application {
         Scene scene = new Scene(contenedorPrincipal, 350, 250);
 
         //Seteamos la escena a la ventana.
-        primaryStage.setScene(scene);
+
+
+          primaryStage.setScene(scene);
 
         primaryStage.show();
+
 
 
 
