@@ -60,8 +60,6 @@ public class MainApp extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.show();
 
-        //Seteamos la escena a la ventana.
-
 
           primaryStage.setScene(scene);
 
@@ -90,6 +88,9 @@ public class MainApp extends Application {
         Button botonEnter1 = new Button();
         Button botonEnter2 = new Button();
         Button silenciarMusica = new Button();
+        silenciarMusica.setStyle("-fx-font: 10 arial; -fx-base: #000000;");
+        silenciarMusica.setText("Silenciar/ Reproducir musica");
+
 
         RestrictiveTextField textoJugadorUno = new RestrictiveTextField();
         RestrictiveTextField textoJugadorDos = new RestrictiveTextField();
@@ -136,6 +137,7 @@ public class MainApp extends Application {
         jugadorDosLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 16));
         jugadorDosLabel.setTextFill(Color.WHITE);
         this.ubicarNodo(botonComenzar, 600, 350);
+        this.ubicarNodo(silenciarMusica, 630, 250);
         this.ubicarNodo(botonEnter1, 640, 200);
         this.ubicarNodo(botonEnter2, 640, 200);
         this.ubicarNodo(textoJugadorUno, 670, 150);
@@ -144,7 +146,6 @@ public class MainApp extends Application {
         this.ubicarNodo(errorNombresIguales, 570, 178);
         this.ubicarNodo(jugadorUnoLabel, 500, 153);
         this.ubicarNodo(jugadorDosLabel, 475, 153);
-//        this.ubicarNodo(silenciarMusica, 900, 600);
 
 
 
