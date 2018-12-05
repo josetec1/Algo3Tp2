@@ -12,11 +12,17 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import vista.Colores.Amarillo;
+import vista.Colores.Rojo;
+import vista.Colores.Color;
+
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -60,8 +66,8 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos) {
 
-        this.actualizarPiezas(jugadorUno);
-        this.actualizarPiezas(jugadorDos);
+        this.actualizarPiezas(jugadorUno,new Amarillo());
+        this.actualizarPiezas(jugadorDos, new Rojo());
 
         VBox vbox2=new VBox();
         this.setRight(vbox2);
@@ -171,11 +177,25 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     private void crearBotonesDireccion(VBox vbox1){
         //Arriba
-        Button arribaButton = new Button ( "Arriba" );
+
+
+        Image imagen = new Image("file:src/media/arriba.png");
+        ImageView imageView = new ImageView(imagen);
+        imageView.setFitHeight(10);
+        imageView.setFitWidth(20);
+
+
+        Button arribaButton = new Button ( "Arriba" ,imageView);
+
         SeleccionDireccionHandler seleccionDireccionHandlerArriba = new SeleccionDireccionHandler(new DireccionArriba(), this);
         arribaButton.setOnMouseClicked(seleccionDireccionHandlerArriba);
         arribaButton.setAlignment(Pos.BASELINE_CENTER);
         vbox1.getChildren ().add ( arribaButton );
+
+
+
+
+
 
         //Abajo
         Button abajoButton = new Button ( "Abajo" );
@@ -224,36 +244,36 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
 
     }
-    private void actualizarPiezas (Jugador jugador){
+    private void actualizarPiezas (Jugador jugador, Color color){
 
         for(Aldeano value: jugador.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
-                vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY());
+                vistaMapa.ubicarAldeano(value, casilla.getX(), casilla.getY(),color);
             }
         }
         //Espadachin
         for(Espadachin value: jugador.getEspadachines()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
             for (Cuadrante casilla : cuadrantes ) {
-                vistaMapa.ubicarEspadachin(value, casilla.getX(), casilla.getY());
+                vistaMapa.ubicarEspadachin(value, casilla.getX(), casilla.getY(),color);
             }
         }
 
 
         //castillo
-        vistaMapa.ubicarCastillo (jugador.getCastillo());
+        vistaMapa.ubicarCastillo (jugador.getCastillo(),color);
 
         //Plazas
-        for (PlazaCentral plaza : jugador.getPlazas()){ vistaMapa.ubicarPlaza(plaza);}
-        for (Cuartel cuartel : jugador.getCuarteles()){vistaMapa.ubicarCuartel(cuartel);}
+        for (PlazaCentral plaza : jugador.getPlazas()){ vistaMapa.ubicarPlaza(plaza,color);}
+        for (Cuartel cuartel : jugador.getCuarteles()){vistaMapa.ubicarCuartel(cuartel,color);}
 
         //Arqueros
         for (Arquero arquero : jugador.getArqueros()){
 
            int x = arquero.getPosicion().getCasilleros().get(0).getX();
            int y = arquero.getPosicion().getCasilleros().get(0).getY();
-            vistaMapa.ubicarArquero(arquero,x,y);
+            vistaMapa.ubicarArquero(arquero,x,y,color);
 
         }
 

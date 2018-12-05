@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 
 public class UnidadTest {
 
-    //TODO esto esta mal vamosa tener que crear a las unidades con una posicion trucha o sino el constructor.
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -23,7 +23,7 @@ public class UnidadTest {
         UnidadMovil arquero = new Arquero();
         Direccionable direccion = new DireccionDerecha();
 
-        thrown.expect(PosicionNulaException.class);
+        thrown.expect(PosicionNulaException.class); // es la NullObjet implementada!
         arquero.obtenerPosicionDeAvance(direccion);
 
     }

@@ -48,6 +48,7 @@ public class MainApp extends Application {
         Application.launch(args);
     }
 
+
     @Override
     public void start(Stage primaryStage){
         stage = primaryStage;
@@ -58,6 +59,21 @@ public class MainApp extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.show();
+
+        //Seteamos la escena a la ventana.
+
+
+          primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+
+
+
+
+
+
+
     }
 
     public static void reproducirMusica(){
