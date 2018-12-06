@@ -13,7 +13,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.Cuadrante.Cuadrante;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
-import fiuba.algo3.aoe.vista.color.*;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,6 +22,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import fiuba.algo3.aoe.controlador.*;
+import javafx.scene.text.TextAlignment;
 
 
 //TODO ojo el obsvador juego....
@@ -150,8 +151,8 @@ public class MapaVistaControlador {
                 Button boton = new Button("");
                 boton.setAlignment(Pos.CENTER);
                 boton.setTranslateX(0);
-                boton.setPrefWidth(20);
-                boton.setPrefHeight(20);
+                boton.setPrefWidth(25);
+                boton.setPrefHeight(25);
                 Cuadrante cuadrante = new Cuadrante(i, mapa.getAlto() + 1 - j);
                 SeleccionVacioHandler seleccionVacioHandler = new SeleccionVacioHandler(cuadrante);
                 boton.setOnMouseClicked(seleccionVacioHandler);
@@ -289,34 +290,37 @@ public class MapaVistaControlador {
     }
     //https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
 
-    public void ubicarAldeano(Aldeano aldeano, int x, int y, Color color) {
+    public void ubicarAldeano(Aldeano aldeano, int x, int y, String color) {
 
         Button botonAldeano = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
         botonAldeano.setText("A");
-        botonAldeano.setStyle("-fx-background-color: LIGHTBLUE; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+        botonAldeano.setTextAlignment ( TextAlignment.CENTER );
+        botonAldeano.setStyle("-fx-background-color: LIGHTBLUE; -fx-border-color: " + color + "; -fx-border-width: 1px;");
         SeleccionAldeanoHandler seleccionAldeanoHandler = new SeleccionAldeanoHandler(aldeano);
         botonAldeano.setOnMouseClicked(seleccionAldeanoHandler);
     }
 
-    public void ubicarArquero(Arquero arquero, int x, int y, Color color) {
+    public void ubicarArquero(Arquero arquero, int x, int y, String color) {
         Button botonArquero;
         botonArquero = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
         botonArquero.setText("A");
-        botonArquero.setStyle("-fx-background-color: GREEN; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+        botonArquero.setTextAlignment ( TextAlignment.CENTER );
+        botonArquero.setStyle("-fx-background-color: GREEN; -fx-border-color: " + color+ "; -fx-border-width: 1px;");
         SeleccionArqueroHandler seleccionArqueroHandler = new SeleccionArqueroHandler(arquero);
         botonArquero.setOnMouseClicked(seleccionArqueroHandler);
     }
 
-    public void ubicarEspadachin(Espadachin espadachin, int x, int y, Color color) {
+    public void ubicarEspadachin(Espadachin espadachin, int x, int y, String color) {
         Button botonEspadachin;
         botonEspadachin = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
         botonEspadachin.setText("E");
-        botonEspadachin.setStyle("-fx-background-color: BROWN; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+        botonEspadachin.setTextAlignment ( TextAlignment.CENTER );
+        botonEspadachin.setStyle("-fx-background-color: BROWN; -fx-border-color: " + color + "; -fx-border-width: 1px;");
         SeleccionEspadachinHandler seleccionEspadachinHandler = new SeleccionEspadachinHandler(espadachin);
         botonEspadachin.setOnMouseClicked(seleccionEspadachinHandler);
     }
 
-    public void ubicarCastillo(Castillo castillo, Color color) {
+    public void ubicarCastillo(Castillo castillo, String color) {
         Button botonCastillo;
         Posicion posicionReal = castillo.getPosicion();
         int x;
@@ -326,13 +330,14 @@ public class MapaVistaControlador {
             y = cuadrante.getY();
             botonCastillo = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
             botonCastillo.setText("C");
-            botonCastillo.setStyle("-fx-background-color: #1E90FF; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+            botonCastillo.setTextAlignment ( TextAlignment.CENTER );
+            botonCastillo.setStyle("-fx-background-color: #1E90FF; -fx-border-color: " + color+ "; -fx-border-width: 1px;");
             SeleccionCastilloHandler seleccionCastilloHandler = new SeleccionCastilloHandler(castillo);
             botonCastillo.setOnMouseClicked(seleccionCastilloHandler);
         }
     }
 
-    public void ubicarPlaza(PlazaCentral plaza, Color color) {
+    public void ubicarPlaza(PlazaCentral plaza, String color) {
         Button botonPlaza;
         Posicion posicionReal = plaza.getPosicion();
         int x;
@@ -342,14 +347,14 @@ public class MapaVistaControlador {
             y = cuadrante.getY();
             botonPlaza = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
             botonPlaza.setText("P");
-
-            botonPlaza.setStyle("-fx-background-color: RED; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+            botonPlaza.setTextAlignment ( TextAlignment.CENTER );
+            botonPlaza.setStyle("-fx-background-color: RED; -fx-border-color: " + color + "; -fx-border-width: 1px;");
             SeleccionPlazaHandler seleccionPlazaHandler = new SeleccionPlazaHandler(plaza);
             botonPlaza.setOnMouseClicked(seleccionPlazaHandler);
         }
     }
 
-    public void ubicarCuartel(Cuartel cuartel, Color color) {
+    public void ubicarCuartel(Cuartel cuartel,String color) {
         Button botonPlaza;
         Posicion posicionReal = cuartel.getPosicion();
         int x;
@@ -360,8 +365,8 @@ public class MapaVistaControlador {
             botonPlaza = (Button) tableroView.getChildren().get((mapa.getAlto() * x - (y - 1)));
             ;
             botonPlaza.setText("C");
-
-            botonPlaza.setStyle("-fx-background-color: YELLOW; -fx-border-color: " + color.getColor() + "; -fx-border-width: 1px;");
+            botonPlaza.setTextAlignment ( TextAlignment.CENTER );
+            botonPlaza.setStyle("-fx-background-color: YELLOW; -fx-border-color: " + color + "; -fx-border-width: 1px;");
             SeleccionCuartelHandler seleccionCuartelHandler = new SeleccionCuartelHandler(cuartel);
             botonPlaza.setOnMouseClicked(seleccionCuartelHandler);
         }

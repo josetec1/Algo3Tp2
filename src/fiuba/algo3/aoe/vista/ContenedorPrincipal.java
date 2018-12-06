@@ -10,8 +10,6 @@ import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.vista.color.*;
-import fiuba.algo3.aoe.vista.MapaVistaControlador;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -19,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -61,20 +60,18 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     private void setJugadores(Jugador jugadorUno, Jugador jugadorDos) {
 
-        this.actualizarPiezas(jugadorUno,new Amarillo());
-        this.actualizarPiezas(jugadorDos, new Rojo());
+        this.actualizarPiezas(jugadorUno,"VIOLET");
+        this.actualizarPiezas(jugadorDos, "GREEN");
 
         VBox vbox2=new VBox();
         this.setRight(vbox2);
-	    JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno);
-    	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos);
+	    JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno, Color.VIOLET);
+    	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos,Color.GREEN);
     	
-    	vistaJugador1.dibujarJugador(this.juego.getJugadorActual());
-    	vistaJugador1.dibujarIformacionJugador();
-        vistaJugador1.dibujarInfoUnidades();
-        vistaJugador1.dibujarInfoEdificios();
-        vistaJugador2.dibujarJugador(this.juego.getJugadorActual());
-        vistaJugador2.dibujarIformacionJugador();
+    	vistaJugador1.dibujarJugador(this.juego.getJugadorActual(),"VIOLET");
+    	vistaJugador1.dibujarIformacionJugador("VIOLET");
+        vistaJugador2.dibujarJugador(this.juego.getJugadorActual(),"GREEN");
+        vistaJugador2.dibujarIformacionJugador("GREEN");
         vistaJugador2.dibujarInfoUnidades();
         vistaJugador2.dibujarInfoEdificios();
 
@@ -232,7 +229,7 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
 
     }
-    private void actualizarPiezas (Jugador jugador, Color color){
+    private void actualizarPiezas (Jugador jugador, String color){
 
         for(Aldeano value: jugador.getAldeanos()){
             ArrayList<Cuadrante> cuadrantes= value.getPosicion().getCasilleros();
