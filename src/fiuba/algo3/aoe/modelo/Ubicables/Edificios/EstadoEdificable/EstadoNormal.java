@@ -35,4 +35,6 @@ public class EstadoNormal implements EstadoEdificioConstruible {
     public void liberarAldeano(){
         throw new EdificioNoEstaSiendoConstruidoOReparadoException();
     }
+
+
 }

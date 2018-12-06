@@ -43,4 +43,6 @@ public class EstadoEnReparacion implements EstadoEdificioConstruible {
     public void liberarAldeano(){
         this.aldeano.cambiarARecolectando ();
     }
+
+
 }

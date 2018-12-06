@@ -14,13 +14,12 @@ public class Mapa {
     private int ancho;
     private int alto;
 
-    //TODO: validar el tamanio minimo, negativos, etc
+
     public Mapa(int anchoMaximo, int altoMaximo){
 
       this.ubicables = new ArrayList<>();
       this.ancho = anchoMaximo;
       this.alto = altoMaximo;
-
 
     }
 

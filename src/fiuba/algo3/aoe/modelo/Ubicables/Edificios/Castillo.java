@@ -63,7 +63,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
         this.estado.reparar(this,aldeano);
     }
 
-    //todo refactor
+
     @Override
     public boolean puedocrearUnidad() {
         return this.estado.puedoCrearUnidad();

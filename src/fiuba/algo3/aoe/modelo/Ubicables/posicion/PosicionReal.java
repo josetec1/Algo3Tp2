@@ -71,7 +71,7 @@ public class PosicionReal extends Posicion {
         }
         return nuevaPosicionReal;
     }
-//TODO  chequear que una posicion de dimension/tamanio mayor a uno no se pueda expandir.
+
     public Posicion expandir(int tamanio){
         Cuadrante cuadrante = this.cuadrantes.get(0);
         Posicion posicionRealNueva = new PosicionReal();

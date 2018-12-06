@@ -37,4 +37,6 @@ public class EstadoAConstruir implements EstadoEdificioConstruible {
     public void liberarAldeano(){
         throw new EdificioNoEstaSiendoConstruidoOReparadoException();
     }
+
+
 }

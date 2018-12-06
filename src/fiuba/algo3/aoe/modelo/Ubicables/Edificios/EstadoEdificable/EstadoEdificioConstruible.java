@@ -14,4 +14,5 @@ public interface EstadoEdificioConstruible {
      boolean puedoCrearUnidad();
      void liberarAldeano();
 
+
 }

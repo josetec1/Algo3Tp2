@@ -85,7 +85,7 @@ public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, 
 
     }
     private void setMapa(Juego unJuego) {
-        // TODO Auto-generated method stub
+
         GridPane grid=new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setGridLinesVisible(true);

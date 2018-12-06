@@ -25,7 +25,7 @@ import fiuba.algo3.aoe.controlador.*;
 import javafx.scene.text.TextAlignment;
 
 
-//TODO ojo el obsvador juego....
+
 public class MapaVistaControlador {
 
     private static String unidadSeleccionadaParaCrear;

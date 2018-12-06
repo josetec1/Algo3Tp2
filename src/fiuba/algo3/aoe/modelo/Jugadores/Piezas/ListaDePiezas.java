@@ -159,7 +159,6 @@ public class ListaDePiezas {
 
     public boolean existe (Atacable pieza){ //TODO REFACTOR
 
-
         if (this.aldeanos.contains(pieza))  return true;
         if (this.espadachins.contains(pieza))  return true;
         if (this.arqueros.contains(pieza))  return true;

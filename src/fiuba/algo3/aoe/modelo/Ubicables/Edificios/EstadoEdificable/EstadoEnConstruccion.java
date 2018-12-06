@@ -45,6 +45,8 @@ public class EstadoEnConstruccion implements EstadoEdificioConstruible {
         this.aldeano.cambiarARecolectando ();
     }
 
+
+
     public boolean puedoCrearUnidad(){
         return false;
     }

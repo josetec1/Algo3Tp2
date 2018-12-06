@@ -6,6 +6,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioNoPue
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,16 +23,20 @@ public class EdificiosTest {
 
     private Castillo castillo= new Castillo();
     private ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    private ArrayList<Aldeano> aldeanos2 = new ArrayList<>();
     private PlazaCentral plaza;
     private Jugador jugador;
+    private Jugador jugador2;
 
     @Before
     public void setUp(){
         plaza = new PlazaCentral();
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());
-        aldeanos.add(new Aldeano());
+        for (int i = 0; i < 3; i++) {
+            aldeanos.add(new Aldeano());
+            aldeanos2.add(new Aldeano());
+        }
         jugador = new Jugador("ElDiego",castillo,plaza,aldeanos);
+        jugador2 = new Jugador("Maradona",new Castillo(),new PlazaCentral(),aldeanos2);
     }
 
 
@@ -130,7 +135,7 @@ public class EdificiosTest {
     }
 
     @Test
-    public void test12CuartelConstruidaRepararLanzaEdificioSinDaniarException(){
+    public void test12CuartelConstruidoRepararLanzaEdificioSinDaniarException(){
         Cuartel cuartel = new Cuartel ();
         cuartel.comenzarConstruccion ( new Aldeano () ,jugador);
         cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
@@ -323,7 +328,33 @@ public class EdificiosTest {
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
     }
 
+    @Test
+    public void test30EdificioAConstruirDebeLanzarExcepcionAlIntentarCrearUnidades(){
 
+        PlazaCentral plaza= new PlazaCentral ();
+        Mapa mapa = new Mapa ( 200,200 );
+
+        jugador.sumarOro ( 100 );
+        PosicionReal posicion = new PosicionReal ( 2,2 );
+        thrown.expect( NoSePuedeCrearUnidadException.class);
+        plaza.crearAldeano (jugador,mapa,posicion);
+
+    }
+
+    @Test
+    public void test31EdificioEnConstruccionDebeLanzarExcepcionAlIntentarCrearUnidades(){
+
+        PlazaCentral plaza= new PlazaCentral ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Aldeano aldeano = new Aldeano();
+        jugador.sumarOro ( 100 );
+        jugador.agregarPieza(aldeano);
+        PosicionReal posicion = new PosicionReal ( 2,2 );
+        aldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(6,6));
+        thrown.expect( NoSePuedeCrearUnidadException.class);
+        plaza.crearAldeano (jugador,mapa,posicion);
+
+    }
 
 
 

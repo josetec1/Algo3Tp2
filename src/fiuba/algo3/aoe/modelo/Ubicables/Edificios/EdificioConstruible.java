@@ -62,6 +62,7 @@ public abstract  class EdificioConstruible extends Edificio implements Costeable
     @Override
     public void disminuirVida(int vida, Jugador miJugador, Mapa mapa) {
 
+
         int vidaAux = this.getVidaActual() - vida;
         if (vidaAux <= 0) {
             // el edificio murio
@@ -71,6 +72,7 @@ public abstract  class EdificioConstruible extends Edificio implements Costeable
 
         }
         else{
+
             this.estado = new EstadoDaniado();
         }
         this.setVida(vidaAux);

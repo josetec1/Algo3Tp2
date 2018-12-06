@@ -110,7 +110,7 @@ public class EstadoEdificiosTestConstruible {
     public void test09EstadoEdificioDaniadoPuedoConstruirUnidadTrue(){
         EstadoEdificioConstruible estado = new EstadoDaniado();
 
-        Assert.assertTrue ( estado.puedoCrearUnidad () );
+        Assert.assertFalse ( estado.puedoCrearUnidad () );
     }
 
     @Test
