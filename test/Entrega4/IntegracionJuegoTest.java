@@ -1,11 +1,11 @@
 package Entrega4;
 
-import fiuba.algo3.aoe.Juego.Juego;
-import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Edificios.Castillo;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
+import fiuba.algo3.aoe.modelo.Juego.Juego;
+import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
+import fiuba.algo3.aoe.modelo.Mapa.Mapa;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Castillo;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Test;
 

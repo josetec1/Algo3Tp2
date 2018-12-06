@@ -1,15 +1,11 @@
 package Entrega4;
 
-import fiuba.algo3.aoe.Jugadores.Jugador;
-import fiuba.algo3.aoe.Mapa.Mapa;
-import fiuba.algo3.aoe.Ubicables.Edificios.Cuartel;
-import fiuba.algo3.aoe.Ubicables.Edificios.EdificioConstruible;
-import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EstadoEnConstruccion;
-import fiuba.algo3.aoe.Ubicables.Edificios.NoSePuedeCrearUnidadException;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
-import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionNula;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
+import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
+import fiuba.algo3.aoe.modelo.Mapa.Mapa;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Cuartel;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.NoSePuedeCrearUnidadException;
+import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
 
 public class SuperCuartelFicticio extends Cuartel {
 

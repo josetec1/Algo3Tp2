@@ -1,7 +1,7 @@
 package Entrega2;
 
-import fiuba.algo3.aoe.Ubicables.posicion.Cuadrante.Cuadrante;
-import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
+import fiuba.algo3.aoe.modelo.Ubicables.posicion.Cuadrante.Cuadrante;
+import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Test;
 
