@@ -72,8 +72,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
 
     public void crearArmaDeAsedio(Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
         ArmaDeAsedio armaDeAsedio= new ArmaDeAsedio ();
-        if(!mapa.puedoColocar (posicionReal,armaDeAsedio.getTamanio ())){return;}
-        if(!jugadorActivo.puedoAgregar (armaDeAsedio)){return; }
+
 
         mapa.colocar ( armaDeAsedio, posicionReal);
         jugadorActivo.agregarPieza ( armaDeAsedio );

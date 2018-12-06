@@ -22,11 +22,11 @@ public class EstadoDaniadoCastillo implements IEstadoCastillo {
 
     @Override
     public boolean puedoCrearUnidad() {
-        return true;
+        return false;
     }
 
     @Override
     public void liberarAldeano() {
-        throw new CastilloNoEstaSiendoReparadoException();
+        //no hacer nada
     }
 }

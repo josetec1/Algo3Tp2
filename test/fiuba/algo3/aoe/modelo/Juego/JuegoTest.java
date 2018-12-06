@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.modelo.Juego;
 
 import fiuba.algo3.aoe.modelo.Juego.estadoJuego.JuegoEnCursoException;
+import fiuba.algo3.aoe.modelo.Juego.estadoJuego.JuegoFinalizadoException;
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
 import fiuba.algo3.aoe.modelo.Mapa.Mapa;
 import fiuba.algo3.aoe.modelo.Observadores.ObservadorJuego;
@@ -32,14 +33,14 @@ public class JuegoTest {
     @Test
     public void test02JuegoCrearDebeLanzarExcepcionSiSeIndicaAnchoMenorA13(){
 
-        thrown.expect(TamanioJuegoInvalidoException.class);
+        thrown.expect(TamanioDeMapaInvalidoException.class);
         Juego juego = new Juego("Maradona","Messi",11,12);
     }
 
     @Test
     public void test03JuegoCrearDebeLanzarExcepcionSiSeIndicaTamanioAltoMenorA12(){
 
-        thrown.expect(TamanioJuegoInvalidoException.class);
+        thrown.expect(TamanioDeMapaInvalidoException.class);
         Juego juego = new Juego("Maradona","Messi",13,11);
     }
 
@@ -142,5 +143,15 @@ public class JuegoTest {
         juego.castilloEliminado();
 
         verify(unObservador, times(1)).actualizar();
+    }
+
+    @Test
+    public void test14PasarJugadaDebeLanzarExcepcionSiElJuegoEstaFinalizado(){
+
+        Juego juego = new Juego("Maradona","Messi",13,15);
+        juego.castilloEliminado();
+
+       thrown.expect(JuegoFinalizadoException.class);
+        juego.pasarJugada();
     }
 }

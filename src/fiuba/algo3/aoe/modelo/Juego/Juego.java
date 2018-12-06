@@ -30,7 +30,7 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
 
     public Juego(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
 
-        if (anchoMapa<ANCHO_MINIMO || altoMapa<ALTO_MINIMO) {throw new TamanioJuegoInvalidoException();}
+        if (anchoMapa<ANCHO_MINIMO || altoMapa<ALTO_MINIMO) {throw new TamanioDeMapaInvalidoException();}
         this.jugadores = new ArrayList<>();
         this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
         this.observadores = new ArrayList<>();

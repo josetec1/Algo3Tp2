@@ -10,8 +10,4 @@ public class Arquero extends UnidadMilitarTropa {
     }
 
 
-
-    public Arquero( int vidaMaxima, int costo, int danioUnidad, int danioEdificio, int distanciaAtaque) {
-        super(new PosicionNula(), vidaMaxima, costo, danioUnidad, danioEdificio, distanciaAtaque);
-    }
 }

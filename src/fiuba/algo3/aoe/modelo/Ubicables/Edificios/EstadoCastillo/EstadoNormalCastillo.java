@@ -28,6 +28,6 @@ public class EstadoNormalCastillo implements IEstadoCastillo {
 
     @Override
     public void liberarAldeano() {
-        throw new CastilloNoEstaSiendoReparadoException();
+        //no hacer nada
     }
 }
