@@ -1,7 +1,11 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class ArqueroTest {
 
@@ -18,14 +22,13 @@ public class ArqueroTest {
         Assert.assertEquals(arquero1.getDistanciaAtaque(),3);
     }
 
-/*
     @Test
-    public void test02Disminuir50VidaArmaDeAsedioDevuelve25DeVida() {
-
+    public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
+        Mapa mapa = Mockito.mock(Mapa.class);
+        Jugador jugador =Mockito.mock(Jugador.class);
         Arquero arquero = new Arquero();
-        arquero.disminuirVida(50);
-
-        Assert.assertEquals(arquero.getVidaActual(), arquero.getVidaMaxima() - 50);
+        arquero.disminuirVida(50,jugador,mapa);
+        Assert.assertEquals(arquero.getVidaActual(), 25);
     }
-    */
+
 }

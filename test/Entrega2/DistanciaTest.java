@@ -188,14 +188,16 @@ public class DistanciaTest {
 
         Assert.assertEquals(unaPosicionReal.distancia(otraPosicionReal), 5);
     }
-/*
+
     @Test
     public void test17DistanciaEntrePosicionesUna16CuadrantesOtra1CuadranteDistanciaDeveDevolver3() {
 
-        PosicionReal posicionReal = new PosicionReal();
+        PosicionReal posicionReal = new PosicionReal(1,1);
         for(int i =1;i<9;i++){
             for(int j = 1;j<9;j++){
-                posicionReal.agregar(new Cuadrante(i,j));
+
+                if (!((i==1)&(j==1))){posicionReal.agregar(new Cuadrante(i,j));}
+
             }
         }
 
@@ -203,15 +205,15 @@ public class DistanciaTest {
         Assert.assertEquals(posicionReal.distancia(comparada), 2);
     }
 
-*//*
+
     @Test
 
     public void test18DistanciaEntrePosicionesUna9CuadrantesOtra1Devuelve4(){
 
-        PosicionReal posicionReal = new PosicionReal();
+        PosicionReal posicionReal = new PosicionReal(1,1);
         for(int i =1;i<4;i++){
             for(int j = 1;j<4;j++){
-                posicionReal.agregar(new Cuadrante(i,j));
+                if (!((i==1)&(j==1))){posicionReal.agregar(new Cuadrante(i,j));}
             }
         }
 
@@ -223,17 +225,17 @@ public class DistanciaTest {
     @Test
     public void test019DistanciaEntrePosicionesUna9CuadrantesOtra1Devuelve20(){
 
-        PosicionReal posicionReal = new PosicionReal();
+        PosicionReal posicionReal = new PosicionReal(1,1);
         for(int i =1;i<4;i++){
             for(int j = 1;j<4;j++){
-                posicionReal.agregar(new Cuadrante(i,j));
+                if (!((i==1)&(j==1))){posicionReal.agregar(new Cuadrante(i,j));}
             }
         }
 
         PosicionReal comparada = new PosicionReal(new Cuadrante(23,1));
         Assert.assertEquals(posicionReal.distancia(comparada),20);
     }
-*/
+
     @Test
     public void test20DistanciaEntrePosicionesQueContienenNueveCuadrantesCercanosCadaUno() {
 

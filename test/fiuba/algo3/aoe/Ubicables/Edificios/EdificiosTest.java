@@ -2,14 +2,18 @@ package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
 import fiuba.algo3.aoe.Mapa.Mapa;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioNoPuedeRepararseEnEsteMomentoException;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
+import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
+import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
@@ -47,14 +51,14 @@ public class EdificiosTest {
         Assert.assertFalse(cuartel.puedoReparar());
         Assert.assertTrue(cuartel.puedoConstruir());
     }
-/*
+
     @Test
     public void test03CrearCastilloNoPuedoReparar(){
         Castillo castillo = new Castillo ();
         Assert.assertFalse(castillo.puedoReparar());
 
     }
-    */
+
 
     @Test
     public void test04PlazaCentralComenzarConstruccionNoPuedoRepararNoPuedoConstruir(){
@@ -108,13 +112,13 @@ public class EdificiosTest {
         PlazaCentral plazaCentral = new PlazaCentral ();
         Assert.assertFalse ( plazaCentral.puedocrearUnidad () );
     }
-/*
+
     @Test
     public void test10CrearCastilloPuedoCrearUnidad(){
         Castillo castillo = new Castillo ();
         Assert.assertTrue ( castillo.puedocrearUnidad () );
     }
-*/
+
     @Test
     public void test11PlazaConstruidaRepararLanzaEdificioSinDaniarException(){
         PlazaCentral plazaCentral = new PlazaCentral ();
@@ -136,7 +140,7 @@ public class EdificiosTest {
         thrown.expect ( EdificioSinDaniarException.class );
         cuartel.reparar ( new Aldeano () );
     }
-/*
+
     @Test
     public void test13CastilloConstruidoRepararLanzaEdificioSinDaniarException(){
         Castillo castillo = new Castillo ();
@@ -144,32 +148,27 @@ public class EdificiosTest {
         castillo.reparar ( new Aldeano () );
     }
 
-  */
 
 
-
-
-
-
-
-
-
-
-/*
     @Test
     public void test14CuartelConstruidoDisminuirVidaPuedoRepararNoPuedoConstruir(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
-        cuartel.disminuirVida ( 30 );
+
+
+        cuartel.disminuirVida ( 30,jugador,mapa );
+
         Assert.assertTrue ( cuartel.puedoReparar () );
         Assert.assertFalse ( cuartel.puedoConstruir () );
     }
 
     @Test
     public void test15CuartelConstruidoDisminuirVidaAumentarVidaHastaTotalNoPuedoConstruirNoPuedoReparar(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
-        cuartel.disminuirVida ( 30 );
+        cuartel.disminuirVida ( 30,jugador,mapa );
         cuartel.aumentarVida ( 30 );
         Assert.assertFalse ( cuartel.puedoReparar ());
         Assert.assertFalse ( cuartel.puedoConstruir () );
@@ -178,9 +177,12 @@ public class EdificiosTest {
 
     @Test
     public void test16CuartelConstruidoDisminuirVida450DejaUnidadConVida0(){
+        Mapa mapa = Mockito.mock (Mapa.class);
+
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
-        cuartel.disminuirVida ( 430 );
+        jugador.agregarPieza(cuartel);
+        cuartel.disminuirVida ( 430,jugador,mapa );
         Assert.assertTrue (cuartel.getVidaActual ()== 0);
 
     }
@@ -192,7 +194,7 @@ public class EdificiosTest {
         Assert.assertTrue ( cuartel.getVidaMaxima () == 250 );
         Assert.assertTrue ( cuartel.getCosto () == 50);
     }
-*/
+
     @Test
     public void test18InicializarPlaza(){
         PlazaCentral plazaCentral = new PlazaCentral ();
@@ -212,7 +214,7 @@ public class EdificiosTest {
         Assert.assertFalse ( cuartel.puedoReparar () );
     }
 
-/*
+
     @Test
     public void test21CuartelConstruirRepararLanzaExcepcionEdificioNoPuedeRepararseEnEsteMomentoException(){
         Cuartel cuartel = new Cuartel ();
@@ -223,9 +225,10 @@ public class EdificiosTest {
 
     @Test
     public void test22CuartelRepararConstruirLanzaExcepcionEdificioYaConstruidoException(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
-        cuartel.disminuirVida ( 50);
+        cuartel.disminuirVida ( 50,jugador,mapa );
         cuartel.reparar ( new Aldeano () );
         thrown.expect ( EdificioYaConstruidoException.class );
         cuartel.construir (new Aldeano () ,jugador );
@@ -234,8 +237,9 @@ public class EdificiosTest {
 
     @Test
     public void test23CastilloRepararDespuesde3TurnosTieneVida645(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         Castillo castillo = new Castillo ();
-        castillo.disminuirVida ( 400 );
+        castillo.disminuirVida ( 400,jugador,mapa );
         castillo.reparar ( new Aldeano () );
         castillo.huboUnCambioDeTurno ( mock( Jugador.class ) );
         castillo.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -245,8 +249,9 @@ public class EdificiosTest {
 
     @Test
     public void test24PlazaRepararDespuesde3TurnosTieneVida245(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         PlazaCentral plazaCentral = new PlazaCentral ();
-        plazaCentral.disminuirVida ( 250 );
+        plazaCentral.disminuirVida ( 250,jugador,mapa );
         plazaCentral.reparar ( new Aldeano () );
         plazaCentral.huboUnCambioDeTurno ( mock( Jugador.class ) );
         plazaCentral.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -256,8 +261,9 @@ public class EdificiosTest {
 
     @Test
     public void test25CuartelRepararDespuesde3TurnosTieneVida245(){
+        Mapa mapa = Mockito.mock (Mapa.class);
         Cuartel cuartel = new Cuartel ();
-        cuartel.disminuirVida ( 200 );
+        cuartel.disminuirVida ( 200,jugador,mapa );
         cuartel.reparar ( new Aldeano () );
         cuartel.huboUnCambioDeTurno ( mock( Jugador.class ) );
         cuartel.huboUnCambioDeTurno ( mock(Jugador.class) );
@@ -272,9 +278,10 @@ public class EdificiosTest {
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio",castillo );
-        Posicion posicion = new Posicion ( 2,2 );
+
+        PosicionReal posicion = new PosicionReal ( 2,2 );
         cuartel.crearEspadachin ( jugador,mapa,posicion );
+
 
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
 
@@ -286,8 +293,8 @@ public class EdificiosTest {
         Cuartel cuartel = new Cuartel ();
         cuartel.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio", castillo);
-        Posicion posicion = new Posicion ( 2,2 );
+
+        PosicionReal posicion = new PosicionReal ( 2,2 );
         cuartel.crearArquero ( jugador,mapa,posicion );
 
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
@@ -299,8 +306,8 @@ public class EdificiosTest {
         PlazaCentral plazaCentral= new PlazaCentral ();
         plazaCentral.finalizarConstruccion ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio",castillo );
-        Posicion posicion = new Posicion ( 2,2 );
+
+        PosicionReal posicion = new PosicionReal ( 2,2 );
         plazaCentral.crearAldeano ( jugador,mapa,posicion);
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
     }
@@ -310,13 +317,13 @@ public class EdificiosTest {
 
         Castillo castillo= new Castillo ();
         Mapa mapa = new Mapa ( 200,200 );
-        Jugador jugador = new Jugador ( "Mauricio",castillo );
+
         jugador.sumarOro ( 100 );
-        Posicion posicion = new Posicion ( 2,2 );
+        PosicionReal posicion = new PosicionReal ( 2,2 );
         castillo.crearArmaDeAsedio (jugador,mapa,posicion);
         Assert.assertFalse (mapa.puedoColocar ( posicion,1 ) );
     }
-    */
+
 
 
 

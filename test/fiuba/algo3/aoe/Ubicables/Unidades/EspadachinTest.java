@@ -1,8 +1,11 @@
 package fiuba.algo3.aoe.Ubicables.Unidades;
 
+import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class EspadachinTest {
 
@@ -18,12 +21,14 @@ public class EspadachinTest {
         Assert.assertEquals(espadachin1.getDanioGeneradoAEdificio(),15);
         Assert.assertEquals(espadachin1.getDistanciaAtaque(),1);
     }
-/*
+
     @Test
     public void test02Disminuir50VidaEspadachinDevuelve50DeVida(){
+        Mapa mapa =Mockito.mock(Mapa.class);
+        Jugador jugador =Mockito.mock(Jugador.class);
         Espadachin espadachin = new Espadachin();
-        espadachin.disminuirVida(50);
+        espadachin.disminuirVida(50,jugador,mapa);
         Assert.assertEquals(espadachin.getVidaActual(), 50);
     }
-    */
+
 }

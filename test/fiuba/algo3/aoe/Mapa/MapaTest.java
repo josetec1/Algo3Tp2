@@ -261,9 +261,8 @@ public class MapaTest {
             mapa.moverElemento(elemento, posicionRealDestino);
         }catch (Exception e){
             //nada
+
         }
-
-
 
         Assert.assertFalse(mapa.puedoColocar(posicionRealInicial,1));
         thrown.expect(ElElementoYaExisteException.class);

@@ -9,6 +9,7 @@ import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.AldeanoOcupadoException;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.NoSePuedeConstruir;
 import fiuba.algo3.aoe.Ubicables.posicion.Posicion;
+import fiuba.algo3.aoe.Ubicables.posicion.PosicionNulaException;
 import fiuba.algo3.aoe.Ubicables.posicion.PosicionReal;
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,16 +52,16 @@ public class AldeanoTest {
         Assert.assertEquals(aldeano.getVidaActual(), 50);
         Assert.assertEquals(aldeano.getCosto(),25);
     }
-/*
+
     @Test
     public void test02AldenoDisminuir25VidaDevuelveVida25(){
         Mapa mapa = new Mapa(10,10);
-        Jugador jugador = new Jugador("Mauricio", castillo);
+
         Aldeano aldeano = new Aldeano();
-        aldeano.disminuirVida(25);
+        aldeano.disminuirVida(25,jugador,mapa);
         Assert.assertEquals(aldeano.getVidaActual(),25);
     }
-*/
+
     @Test
     public void test03AlCrearAldeanoEsteEstaDisponible(){
         Mapa mapa = new Mapa(10,10);
@@ -230,18 +231,17 @@ public class AldeanoTest {
         Pruebas de  MOVIMIENTO
     ************************************************************** */
 
-/*
-//TODO ojo, esta prueba tiene que aplicarse a todas las unidades Moviles
     @Test
     public void test13MoverAldeanoDebeLanzarExepcionSiNoTieneUnaPosicionPrevia(){
         Mapa mapa = new Mapa(10,10);
         Direccionable direccion = new DireccionDerecha();
         Aldeano aldeano = new Aldeano();
+        jugador.agregarPieza(aldeano);
+        thrown.expect(PosicionNulaException.class);
+        aldeano.mover(mapa,direccion,jugador);
 
-        thrown.expect(UnidadSinPosicionException.class);
-        aldeano.mover(mapa,direccion);
     }
-*/
+
 
 
     //Mover Con movimiento

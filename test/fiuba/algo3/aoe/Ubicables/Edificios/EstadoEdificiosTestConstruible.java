@@ -1,6 +1,7 @@
 package fiuba.algo3.aoe.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.Jugadores.Jugador;
+import fiuba.algo3.aoe.Mapa.Mapa;
 import fiuba.algo3.aoe.Ubicables.Edificios.EstadoEdificable.*;
 import fiuba.algo3.aoe.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import org.junit.Assert;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
@@ -202,18 +204,19 @@ public class EstadoEdificiosTestConstruible {
         estado.liberarAldeano ();
         Assert.assertTrue ( aldeano.estasDisponible () );
     }
-/*
+
     @Test
     public void test23EstadoEdificioEnReparacion1TurnoCambiaAEdificioNormal(){
+        Mapa mapa = Mockito.mock(Mapa.class);
         Aldeano aldeano = new Aldeano ();
-        EstadoEdificio estado = new EstadoEnReparacion (aldeano);
+        EstadoEdificioConstruible estado = new EstadoEnReparacion (aldeano);
         PlazaCentral plaza = new PlazaCentral();
         plaza.finalizarConstruccion ();
-        plaza.disminuirVida ( 25 );
+        plaza.disminuirVida ( 25 ,jugador,mapa);
         estado.nuevoTurno (plaza,25 );
         Assert.assertFalse ( plaza.puedoReparar ());
     }
-*/
+
     @Test
     public void test24EstadoEdificioReparacionPuedoConstruirUnidadDevuelveFalse(){
         EstadoEdificioConstruible estado = new EstadoEnReparacion(new Aldeano ());
