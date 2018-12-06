@@ -2,8 +2,8 @@ package fiuba.algo3.aoe.modelo.Ubicables.Edificios;
 
 
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
-import fiuba.algo3.aoe.modelo.Jugadores.ObservableCastillo;
-import fiuba.algo3.aoe.modelo.Jugadores.ObservadorCastillo;
+import fiuba.algo3.aoe.modelo.Observadores.ObservableCastillo;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorCastillo;
 import fiuba.algo3.aoe.modelo.Mapa.Mapa;
 import fiuba.algo3.aoe.modelo.Ubicables.Atacable;
 import fiuba.algo3.aoe.modelo.Ubicables.Atacante;

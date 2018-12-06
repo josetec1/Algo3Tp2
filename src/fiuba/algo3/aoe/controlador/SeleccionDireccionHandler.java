@@ -39,7 +39,7 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                     MapaVistaControlador.getAldeanoSeleccionado().mover(mapita, this.direccion, jugador);
                     MapaVistaControlador.desSeleccionarUnidades();
                     // El controlador tiene que actualizar la fiuba.algo3.aoe.vista SOLO PARA LOS MOVIMIENTOS.
-                    contenedor.update(null,null);
+                    contenedor.actualizar();
 
                 }
             }
@@ -52,7 +52,7 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                 }else {
                     MapaVistaControlador.getArmaDeAsedioSeleccionado().mover(mapita, this.direccion, jugador);
                     MapaVistaControlador.desSeleccionarUnidades();
-                    contenedor.update(null,null);
+                    contenedor.actualizar();
                 }
             }
 
@@ -66,7 +66,7 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                     MapaVistaControlador.getArqueroSeleccionado().mover(mapita, this.direccion, jugador);
                     MapaVistaControlador.desSeleccionarUnidades();
                     // El controlador tiene que actualizar la fiuba.algo3.aoe.vista SOLO PARA LOS MOVIMIENTOS.
-                    contenedor.update(null, null);
+                    contenedor.actualizar();
                     MenuInferior.getLog().appendText("\n arquero movido");
                 }
             }
@@ -80,7 +80,7 @@ public class SeleccionDireccionHandler implements EventHandler<MouseEvent> {
                     MapaVistaControlador.getEspadachinSeleccionado().mover(mapita, this.direccion, jugador);
                     MapaVistaControlador.desSeleccionarUnidades();
                     // El controlador tiene que actualizar la fiuba.algo3.aoe.vista SOLO PARA LOS MOVIMIENTOS.
-                    contenedor.update(null, null);
+                    contenedor.actualizar();
                 }
             }
             //Edificios

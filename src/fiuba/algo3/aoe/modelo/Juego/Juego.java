@@ -7,17 +7,18 @@ import fiuba.algo3.aoe.modelo.Juego.estadoJuego.Ijuego;
 
 import fiuba.algo3.aoe.modelo.Juego.estadoJuego.JuegoFinalizadoException;
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
-import fiuba.algo3.aoe.modelo.Jugadores.ObservadorCastillo;
+import fiuba.algo3.aoe.modelo.Observadores.ObservableJuego;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorCastillo;
 import fiuba.algo3.aoe.modelo.Mapa.Mapa;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorJuego;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.PlazaCentral;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
-public class Juego extends Observable implements ObservadorCastillo {
+public class Juego implements ObservadorCastillo, ObservableJuego {
 
     private final int ANCHO_MINIMO=13;
     private final int ALTO_MINIMO=12;
@@ -26,11 +27,13 @@ public class Juego extends Observable implements ObservadorCastillo {
     private Mapa mapa;
     private Turno turno;
     private Ijuego juego;
+    private ArrayList<ObservadorJuego> observadores;
 
     public Juego(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
 
         if (anchoMapa<ANCHO_MINIMO || altoMapa<ALTO_MINIMO) {throw new TamanioJuegoInvalidoException();}
         this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
+        this.observadores = new ArrayList<>();
     }
 
     private void inicializar ( String jugador1, String jugador2, int anchoMapa, int altoMapa) {
@@ -110,8 +113,7 @@ public class Juego extends Observable implements ObservadorCastillo {
         //el castillo que ataque
         this.turno.getJugadorActual().getCastillo().atacarAlJugador(this.turno.getJugadorActual(),this.turno.getJugadorInactivo(),this.mapa);
 
-        this.setChanged();
-        this.notifyObservers();
+        this.notificarObservadores();
 
     }
 
@@ -141,10 +143,23 @@ public class Juego extends Observable implements ObservadorCastillo {
         this.juego= new Finalizado(this.getJugadorActual());
 
         //notificar a observadores.
-        this.setChanged();
-        this.notifyObservers();
+
+        this.notificarObservadores();
 
     }
 
+    private void notificarObservadores(){
+
+        for (ObservadorJuego observador : this.observadores){
+            observador.actualizar();
+        }
+    }
+
     public Jugador getWinner(){return this.juego.getGanador();}
+
+    @Override
+    public void agregarObservador(ObservadorJuego unObservador) {
+        this.observadores.add(unObservador);
+
+    }
 }

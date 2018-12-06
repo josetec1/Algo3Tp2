@@ -13,7 +13,7 @@ public class SeleccionUpdateHandler implements EventHandler<MouseEvent>{
 
     @Override
     public void handle(MouseEvent event) {
-        contenedor.update(null,null);
+        contenedor.actualizar();
         MenuInferior.getLog().appendText("\n Se actualiza el Mapa");}
     }
 

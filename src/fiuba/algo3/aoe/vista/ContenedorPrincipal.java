@@ -2,7 +2,9 @@ package fiuba.algo3.aoe.vista;
 
 import fiuba.algo3.aoe.controlador.*;
 import fiuba.algo3.aoe.modelo.Juego.Juego;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorJuego;
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorJugador;
 import fiuba.algo3.aoe.modelo.Ubicables.Direccion.*;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Cuartel;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.PlazaCentral;
@@ -22,10 +24,8 @@ import javafx.stage.Stage;
 
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
-public class ContenedorPrincipal extends BorderPane implements Observer {
+public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, ObservadorJugador {
 
     private BarraDeMenu menuBar;
     private static MenuInferior menuInferior;
@@ -49,9 +49,10 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
         this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos());
 
         //suscribir observadores que tiene que ser la fiuba.algo3.aoe.vista
-        unJuego.getJugadorUno().addObserver(this);
-        unJuego.getJugadorDos().addObserver(this);
-        juego.addObserver(this);
+        unJuego.getJugadorUno().agregarObservadores(this);
+        unJuego.getJugadorDos().agregarObservadores(this);
+        juego.agregarObservador(this);
+
 	}
 
 	public static Juego getJuego(){
@@ -268,28 +269,15 @@ public class ContenedorPrincipal extends BorderPane implements Observer {
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
 
-	    //1 actualizo to do SIMPRE
+    @Override
+    public void actualizar() {
+
         this.actualizarMapa();
         this.setJugadores(this.juego.getJugadorUno(),this.juego.getJugadorDos());
 
-        //2 ahora pregunto si el juego finalizo para mostrar al ganador
         if (this.juego.finalizo()){
-            // mostrar al ganador, podriamos deshabilitar botones no?
-
-           this.vistaMapa.finalizoJuego(this.juego.getWinner());
-
+            this.vistaMapa.finalizoJuego(this.juego.getWinner());
         }
-
-
-
-
-
-
-
-
-
     }
 }

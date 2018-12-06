@@ -3,10 +3,14 @@ import fiuba.algo3.aoe.modelo.Jugadores.*;
 import fiuba.algo3.aoe.modelo.Jugadores.Piezas.NoSePuedeEliminarElCastilloException;
 import fiuba.algo3.aoe.modelo.Jugadores.Piezas.PiezaAgenaException;
 import fiuba.algo3.aoe.modelo.Jugadores.Piezas.PiezaYaAgregadaException;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorJugador;
 import fiuba.algo3.aoe.modelo.Ubicables.Atacable;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.*;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadMovil;
+import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.ArmaDeAsedio;
+import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Arquero;
+import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Espadachin;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -716,6 +720,47 @@ public class JugadorTest {
 
         thrown.expect(PiezaAgenaException.class);
         jugador1.eliminarPieza(castilloAgeno);
+    }
+
+    @Test
+    public void test50AgregarPiezaNotificaAObservadores(){
+
+        ObservadorJugador unObservador = Mockito.mock (ObservadorJugador.class);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador1.agregarObservadores(unObservador);
+
+        Aldeano aldeano = Mockito.mock(Aldeano.class);
+        Arquero arquero = Mockito.mock(Arquero.class);
+        Espadachin espadachin = Mockito.mock(Espadachin.class);
+        ArmaDeAsedio arma = Mockito.mock(ArmaDeAsedio.class);
+        PlazaCentral plaza = Mockito.mock(PlazaCentral.class);
+        Cuartel cuartel = Mockito.mock(Cuartel.class);
+
+        jugador1.agregarPieza(aldeano);
+        jugador1.agregarPieza(arquero);
+        jugador1.agregarPieza(espadachin);
+        jugador1.agregarPieza(arma);
+        jugador1.agregarPieza(plaza);
+        jugador1.agregarPieza(cuartel);
+
+        verify(unObservador, times(6)).actualizar();
+    }
+
+    @Test
+    public void test51eliminarPiezaNotificaAObservadores(){
+
+        ObservadorJugador unObservador = Mockito.mock (ObservadorJugador.class);
+        jugador1 = new Jugador("Maradona",castillo,plaza,aldeanos);
+        jugador1.agregarObservadores(unObservador);
+
+        Aldeano aldeano = Mockito.mock(Aldeano.class);
+
+
+        jugador1.agregarPieza(aldeano); //1
+        jugador1.eliminarPieza(aldeano); //2
+
+
+        verify(unObservador, times(2)).actualizar();
     }
 
 }

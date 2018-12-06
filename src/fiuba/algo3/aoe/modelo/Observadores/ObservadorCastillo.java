@@ -1,4 +1,4 @@
-package fiuba.algo3.aoe.modelo.Jugadores;
+package fiuba.algo3.aoe.modelo.Observadores;
 
 public interface ObservadorCastillo {
 

@@ -3,11 +3,16 @@ package fiuba.algo3.aoe.modelo.Juego;
 import fiuba.algo3.aoe.modelo.Juego.estadoJuego.JuegoEnCursoException;
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
 import fiuba.algo3.aoe.modelo.Mapa.Mapa;
+import fiuba.algo3.aoe.modelo.Observadores.ObservadorJuego;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
+
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 
 public class JuegoTest {
@@ -96,7 +101,7 @@ public class JuegoTest {
     }
 
     @Test
-     public void test19AlFinalizarElJuegoElGanadorEsElJugadorActivo(){
+     public void test09AlFinalizarElJuegoElGanadorEsElJugadorActivo(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
         Jugador jugador = juego.getJugadorActual();
@@ -105,4 +110,27 @@ public class JuegoTest {
         Assert.assertThat(jugador,is(juego.getWinner()));
      }
 
+    @Test
+    public void test10PasarJugadaNotificaAObservadores(){
+
+        Juego juego = new Juego("Maradona","Messi",13,15);
+
+        ObservadorJuego unObservador = Mockito.mock(ObservadorJuego.class);
+        juego.agregarObservador(unObservador);
+        juego.pasarJugada();
+
+        verify(unObservador, times(1)).actualizar();
+    }
+
+    @Test
+    public void test11CastilloEliminadoNotificaAObservadores(){
+
+        Juego juego = new Juego("Maradona","Messi",13,15);
+        ObservadorJuego unObservador = Mockito.mock(ObservadorJuego.class);
+        juego.agregarObservador(unObservador);
+
+        juego.castilloEliminado();
+
+        verify(unObservador, times(1)).actualizar();
+    }
 }
