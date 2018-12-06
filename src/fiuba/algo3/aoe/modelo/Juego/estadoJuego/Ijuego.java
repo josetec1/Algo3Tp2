@@ -8,8 +8,6 @@ public interface Ijuego {
 
     void cambiarTurno(Turno turno);
     Jugador getGanador();
-    Jugador getJugadorActivo(Turno turno);
-    Jugador getJugadorInactivo(Turno turno);
     boolean juegoTerminado();
 
 }

@@ -22,8 +22,7 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
 
     private final int ANCHO_MINIMO=13;
     private final int ALTO_MINIMO=12;
-    private Jugador jugador1;
-    private Jugador jugador2;
+    private ArrayList<Jugador> jugadores;
     private Mapa mapa;
     private Turno turno;
     private Ijuego juego;
@@ -32,6 +31,7 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
     public Juego(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
 
         if (anchoMapa<ANCHO_MINIMO || altoMapa<ALTO_MINIMO) {throw new TamanioJuegoInvalidoException();}
+        this.jugadores = new ArrayList<>();
         this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
         this.observadores = new ArrayList<>();
     }
@@ -40,13 +40,13 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
         Mapa mapa= new Mapa(anchoMapa, altoMapa);
 
         //Variables auxiliares
-        ArrayList<Jugador> jugadores= new ArrayList<>();
+
         ArrayList<Aldeano> aldeanos ;
         Aldeano aldeano;
         Castillo castillo;
         PlazaCentral plazaCentral;
-        Jugador j1;
-        Jugador j2;
+        Jugador jugador;
+
 
         //Inicializo jugador 1
         castillo = new Castillo();
@@ -67,11 +67,9 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
             aldeanos.add(aldeano);
         }
 
+        jugador= new Jugador(jugador1,castillo, plazaCentral, aldeanos);
 
-
-        j1= new Jugador(jugador1,castillo, plazaCentral, aldeanos);
-        this.jugador1 = j1;
-        jugadores.add (j1);
+        this.jugadores.add (jugador);
 
         //Inicializo jugador 2
         castillo = new Castillo();
@@ -92,12 +90,12 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
 
         }
 
-        j2= new Jugador(jugador2,castillo, plazaCentral,aldeanos);
-        this.jugador2=j2;
-        jugadores.add (j2);
+        jugador= new Jugador(jugador2,castillo, plazaCentral,aldeanos);
+
+        this.jugadores.add (jugador);
 
         this.mapa = mapa;
-        this.turno = new Turno(jugadores, new ModoInicioRandom());
+        this.turno = new Turno(this.jugadores, new ModoInicioRandom());
         this.juego = new EnCurso();
 
 
@@ -117,22 +115,16 @@ public class Juego implements ObservadorCastillo, ObservableJuego {
 
     }
 
-    public Jugador getJugadorActual() {
-        return this.juego.getJugadorActivo(this.turno);
-    }
+    public Jugador getJugadorActual() {return this.turno.getJugadorActual(); }
     public Jugador getJugadorInactivo() {
-        return this.juego.getJugadorInactivo(this.turno);
+        return this.turno.getJugadorInactivo();
     }
-    public Jugador getJugadorUno (){return this.jugador1;}  //TODO ELIMINAR
-    public   Jugador getJugadorDos (){return this.jugador2;}//TODO ELIMINAR
-    public Mapa getMapa(){
-        return mapa;
-    }
+    public ArrayList<Jugador> getJugadores(){return this.jugadores;}
+
+      public Mapa getMapa(){ return mapa;}
 
 
-    public boolean finalizo(){
-        return this.juego.juegoTerminado();
-    }
+    public boolean finalizo(){ return this.juego.juegoTerminado(); }
 
 
 

@@ -30,6 +30,8 @@ public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, 
     private BarraDeMenu menuBar;
     private static MenuInferior menuInferior;
     private MapaVistaControlador vistaMapa;
+    private Jugador jugadorUno;
+    private Jugador jugadorDos;
 
     private static Juego juego;  //OJO
 
@@ -41,16 +43,19 @@ public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, 
 
         this.setMenu(unStage,vbox1);
         this.juego = unJuego;
+        this.jugadorUno= unJuego.getJugadores().get(0);
+        this.jugadorDos= unJuego.getJugadores().get(1);
+
 
         //dibuja el mapa
         this.setMapa(unJuego);
 
         // dibujar nombres en pantalla, obtener y presentar Piezas,
-        this.setJugadores (unJuego.getJugadorUno(),unJuego.getJugadorDos());
+        this.setJugadores ();
 
-        //suscribir observadores que tiene que ser la fiuba.algo3.aoe.vista
-        unJuego.getJugadorUno().agregarObservadores(this);
-        unJuego.getJugadorDos().agregarObservadores(this);
+        //suscribir observadores que tiene que ser la
+        this.jugadorUno.agregarObservadores(this);
+        this.jugadorDos.agregarObservadores(this);
         juego.agregarObservador(this);
 
 	}
@@ -59,15 +64,15 @@ public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, 
 	    return juego;
     }
 
-    private void setJugadores(Jugador jugadorUno, Jugador jugadorDos) {
+    private void setJugadores() {
 
-        this.actualizarPiezas(jugadorUno,"VIOLET");
-        this.actualizarPiezas(jugadorDos, "GREEN");
+        this.actualizarPiezas(this.jugadorUno,"VIOLET");
+        this.actualizarPiezas(this.jugadorDos, "GREEN");
 
         VBox vbox2=new VBox();
         this.setRight(vbox2);
-	    JugadorVista vistaJugador1 = new JugadorVista(vbox2,jugadorUno, Color.VIOLET);
-    	JugadorVista vistaJugador2 = new JugadorVista(vbox2,jugadorDos,Color.GREEN);
+	    JugadorVista vistaJugador1 = new JugadorVista(vbox2,this.jugadorUno, Color.VIOLET);
+    	JugadorVista vistaJugador2 = new JugadorVista(vbox2,this.jugadorDos,Color.GREEN);
     	
     	vistaJugador1.dibujarJugador(this.juego.getJugadorActual(),"VIOLET");
     	vistaJugador1.dibujarIformacionJugador("VIOLET");
@@ -274,7 +279,7 @@ public class ContenedorPrincipal extends BorderPane implements ObservadorJuego, 
     public void actualizar() {
 
         this.actualizarMapa();
-        this.setJugadores(this.juego.getJugadorUno(),this.juego.getJugadorDos());
+        this.setJugadores();
 
         if (this.juego.finalizo()){
             this.vistaMapa.finalizoJuego(this.juego.getWinner());

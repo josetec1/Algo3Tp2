@@ -54,9 +54,19 @@ public class JuegoTest {
 
     }
 
+    @Test
+    public void test05JuegoSeCreaConDosJugadores(){
+        Juego juego = new Juego("Maradona","Messi",100,150);
+
+        Assert.assertThat(juego.getJugadores().size(),is(2));
+        Assert.assertThat(juego.getJugadores().get(0).getNombre(),is("Maradona"));
+        Assert.assertThat(juego.getJugadores().get(1).getNombre(),is("Messi"));
+
+    }
+
 
     @Test
-    public void test05JuegoNoFinalizadoDebeLanzarExcepcionSiSePideElGanador(){
+    public void test06JuegoNoFinalizadoDebeLanzarExcepcionSiSePideElGanador(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
 
@@ -65,14 +75,14 @@ public class JuegoTest {
 
     }
     @Test
-    public void test06FinalizoDebeDarFalseSiElJuegoNoFinalizo(){
+    public void test07FinalizoDebeDarFalseSiElJuegoNoFinalizo(){
         Juego juego = new Juego("Maradona","Messi",13,15);
 
         Assert.assertFalse(juego.finalizo());
 
     }
     @Test
-    public void test06FinalizoDebeDarTrueSiElJuegoFinalizo(){
+    public void test08FinalizoDebeDarTrueSiElJuegoFinalizo(){
         Juego juego = new Juego("Maradona","Messi",13,15);
         juego.castilloEliminado();
         Assert.assertTrue(juego.finalizo());
@@ -80,7 +90,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void test07PasarJugadaDevuelveUnJugadorActivoDistinto(){
+    public void test09PasarJugadaDevuelveUnJugadorActivoDistinto(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
         Jugador jugador = juego.getJugadorActual();
@@ -92,7 +102,7 @@ public class JuegoTest {
     }
 
     @Test
-     public void test08CastilloEliminadoFinalizaEljuego(){
+     public void test10CastilloEliminadoFinalizaEljuego(){
         Juego juego = new Juego("Maradona","Messi",13,15);
 
         juego.castilloEliminado();
@@ -101,7 +111,7 @@ public class JuegoTest {
     }
 
     @Test
-     public void test09AlFinalizarElJuegoElGanadorEsElJugadorActivo(){
+     public void test11AlFinalizarElJuegoElGanadorEsElJugadorActivo(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
         Jugador jugador = juego.getJugadorActual();
@@ -111,7 +121,7 @@ public class JuegoTest {
      }
 
     @Test
-    public void test10PasarJugadaNotificaAObservadores(){
+    public void test12PasarJugadaNotificaAObservadores(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
 
@@ -123,7 +133,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void test11CastilloEliminadoNotificaAObservadores(){
+    public void test13CastilloEliminadoNotificaAObservadores(){
 
         Juego juego = new Juego("Maradona","Messi",13,15);
         ObservadorJuego unObservador = Mockito.mock(ObservadorJuego.class);

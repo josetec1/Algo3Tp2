@@ -17,15 +17,6 @@ public class EnCurso implements Ijuego {
         throw new JuegoEnCursoException();
     }
 
-    @Override
-    public Jugador getJugadorActivo(Turno turno) {
-        return turno.getJugadorActual();
-    }
-
-    @Override
-    public Jugador getJugadorInactivo(Turno turno) {
-        return turno.getJugadorInactivo();
-    }
 
     @Override
     public boolean juegoTerminado() {

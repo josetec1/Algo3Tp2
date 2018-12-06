@@ -8,10 +8,9 @@ public class Finalizado  implements Ijuego{
     private Jugador win;
 
     public Finalizado (Jugador win){
-
         this.win = win;
-
     }
+
     @Override
     public void cambiarTurno(Turno turno) {
         throw new JuegoFinalizadoException();
@@ -22,15 +21,6 @@ public class Finalizado  implements Ijuego{
         return this.win;
     }
 
-    @Override
-    public Jugador getJugadorActivo(Turno turno) {
-       return turno.getJugadorActual();
-    }
-
-    @Override
-    public Jugador getJugadorInactivo(Turno turno) {
-        return turno.getJugadorInactivo();
-    }
 
     @Override
     public boolean juegoTerminado() {
