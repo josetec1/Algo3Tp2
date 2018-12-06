@@ -19,6 +19,8 @@ import java.util.Observable;
 
 public class Juego extends Observable implements ObservadorCastillo {
 
+    private final int ANCHO_MINIMO=13;
+    private final int ALTO_MINIMO=12;
     private Jugador jugador1;
     private Jugador jugador2;
     private Mapa mapa;
@@ -26,9 +28,9 @@ public class Juego extends Observable implements ObservadorCastillo {
     private Ijuego juego;
 
     public Juego(String jugador1, String jugador2, int anchoMapa, int altoMapa) {
-                //TODO chequear minimos
-        this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
 
+        if (anchoMapa<ANCHO_MINIMO || altoMapa<ALTO_MINIMO) {throw new TamanioJuegoInvalidoException();}
+        this.inicializar(jugador1, jugador2,anchoMapa,altoMapa) ;
     }
 
     private void inicializar ( String jugador1, String jugador2, int anchoMapa, int altoMapa) {
@@ -90,7 +92,6 @@ public class Juego extends Observable implements ObservadorCastillo {
         j2= new Jugador(jugador2,castillo, plazaCentral,aldeanos);
         this.jugador2=j2;
         jugadores.add (j2);
-
 
         this.mapa = mapa;
         this.turno = new Turno(jugadores, new ModoInicioRandom());
