@@ -15,7 +15,7 @@ public class OpcionPantallaCompletaHandler implements EventHandler<ActionEvent>{
     }
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
+
         if (!stage.isFullScreen()) {
             stage.hide();
             stage.setFullScreen(true);

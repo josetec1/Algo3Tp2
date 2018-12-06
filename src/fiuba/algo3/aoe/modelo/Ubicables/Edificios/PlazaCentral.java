@@ -24,9 +24,9 @@ public class PlazaCentral extends EdificioConstruible {
     public void crearAldeano( Jugador jugadorActivo, Mapa mapa, PosicionReal posicionReal){
 
          if (!this.estado.puedoCrearUnidad()){throw  new NoSePuedeCrearUnidadException();} //todo implementar esto que esta mal  refac001
-        Aldeano aldeano= new Aldeano (); //todo implementar esto que esta mal  refac001
-        if(!mapa.puedoColocar (posicionReal,aldeano.getTamanio () )){return;}//todo implementar esto que esta mal  refac001
-        if(!jugadorActivo.puedoAgregar (aldeano)){return;}//todo implementar esto que esta mal  refac001
+        Aldeano aldeano= new Aldeano ();
+        if(!mapa.puedoColocar (posicionReal,aldeano.getTamanio () )){return;}
+        if(!jugadorActivo.puedoAgregar (aldeano)){return;}
         mapa.colocar ( aldeano, posicionReal);
         jugadorActivo.agregarPieza ( aldeano );
 

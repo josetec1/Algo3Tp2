@@ -2,9 +2,7 @@ package fiuba.algo3.aoe.modelo.Ubicables.Edificios;
 
 import fiuba.algo3.aoe.modelo.Jugadores.Jugador;
 import fiuba.algo3.aoe.modelo.Mapa.Mapa;
-import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioNoPuedeRepararseEnEsteMomentoException;
-import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
-import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioYaConstruidoException;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.*;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadesMilitares.Arquero;
 import fiuba.algo3.aoe.modelo.Ubicables.posicion.PosicionReal;
@@ -353,6 +351,43 @@ public class EdificiosTest {
         aldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(6,6));
         thrown.expect( NoSePuedeCrearUnidadException.class);
         plaza.crearAldeano (jugador,mapa,posicion);
+
+    }
+
+    @Test
+    public void test32EdificioEnConstruccionDebeLanzarExcepcionSiIntentoConstruirlo(){
+
+        PlazaCentral plaza= new PlazaCentral ();
+        Mapa mapa = new Mapa ( 200,200 );
+        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano2 = new Aldeano();
+        jugador.sumarOro ( 1000 );
+        jugador.agregarPieza(aldeano);
+        jugador.agregarPieza(aldeano2);
+        PosicionReal posicion = new PosicionReal ( 2,2 );
+        aldeano.construirEdificio(plaza,mapa,jugador,new PosicionReal(6,6));
+        thrown.expect(EdificioEnConstruccionException.class);
+        plaza.construir(aldeano2,jugador2);
+
+    }
+
+    @Test
+    public void test33EdificioEnReparacionDebeLanzarExcepcionSiIntentoRepararlo(){
+
+        PlazaCentral plaza= new PlazaCentral ();
+        plaza.finalizarConstruccion();
+
+        Mapa mapa = new Mapa ( 200,200 );
+        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano2 = new Aldeano();
+        jugador.sumarOro ( 1000 );
+        jugador.agregarPieza(aldeano);
+        jugador.agregarPieza(aldeano2);
+        PosicionReal posicion = new PosicionReal ( 2,2 );
+        plaza.disminuirVida(50,jugador,mapa);
+        plaza.reparar(aldeano);
+        thrown.expect(EdificioEnReparacionException.class);
+        plaza.reparar(aldeano);
 
     }
 

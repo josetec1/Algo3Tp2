@@ -7,7 +7,7 @@ public class OpcionSalirHandler implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
+
 		System.exit(0);
 	}
 
