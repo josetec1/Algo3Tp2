@@ -5,7 +5,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioSinDaniarException;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 
-public class EstadoNormalCastillo implements IEstadoCastillo {
+public class EstadoNormalCastillo implements EstadoCastillo {
     @Override
     public void nuevoTurno(Castillo castillo, int CURACION) {
         //no hacer nada

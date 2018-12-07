@@ -5,7 +5,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoEdificable.EdificioEnReparacionException;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 
-public class EstadoEnReparacionCastillo implements IEstadoCastillo {
+public class EstadoEnReparacionCastillo implements EstadoCastillo {
 
     private Aldeano aldeano;
 

@@ -10,7 +10,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Atacante;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoCastillo.EstadoDaniadoCastillo;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoCastillo.EstadoEnReparacionCastillo;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoCastillo.EstadoNormalCastillo;
-import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoCastillo.IEstadoCastillo;
+import fiuba.algo3.aoe.modelo.Ubicables.Edificios.EstadoCastillo.EstadoCastillo;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.EnemigoSinJugadorException;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.EstoyEnDosJugadoresException;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.FuegoAmigoException;
@@ -29,7 +29,7 @@ public class Castillo extends Edificio implements Atacante, ObservableCastillo {
     private final int DANIO = 20;
     private final int CURACION = 15;
     private ArrayList<ObservadorCastillo> observadores;
-    private IEstadoCastillo estado;
+    private EstadoCastillo estado;
 
     public Castillo() {
         super(1000, new PosicionNula(), 4);

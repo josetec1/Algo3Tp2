@@ -4,7 +4,7 @@ import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Castillo;
 import fiuba.algo3.aoe.modelo.Ubicables.Edificios.Edificio;
 import fiuba.algo3.aoe.modelo.Ubicables.Unidades.UnidadAldeano.Aldeano;
 
-public interface IEstadoCastillo {
+public interface EstadoCastillo {
 
     void nuevoTurno(Castillo castillo, int CURACION);
 
